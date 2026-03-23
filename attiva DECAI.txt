@@ -1,0 +1,3 @@
+cd ~/decai-finetune
+
+source ~/decai-env/bin/activate

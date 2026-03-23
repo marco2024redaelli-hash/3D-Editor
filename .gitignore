@@ -1,0 +1,24 @@
+# Dipendenze
+node_modules/
+
+# File binari pesanti (SolidWorks, GLB, PDF, XLS)
+DATABASE1/
+public/db/
+
+# File temporanei / swap
+*.swp
+~$*
+
+# Immagini auth
+AuthGoogle.jpg
+
+# Firebase cache
+.firebase/
+
+# VS Code settings (opzionale, rimuovi se vuoi condividerli)
+.vscode/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

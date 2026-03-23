@@ -1,0 +1,192 @@
+GLB 3D Editor — DECA 3D Viewer
+================================
+
+Editor 3D professionale per file GLB/GLTF con intelligenza artificiale integrata,
+sviluppato per DECA S.r.l. Permette di visualizzare, assemblare e gestire modelli 3D
+di alimentatori vibranti, nastri trasportatori, tramogge, cappe afoniche e componenti
+industriali per l'automazione.
+
+Il cuore del progetto e' DecAI, l'assistente AI aziendale di DECA. Si tratta di un
+modello linguistico (LLM) basato su Meta Llama, addestrato (fine-tuning) sui dati
+tecnici e sul catalogo prodotti DECA per rispondere a domande specifiche di ingegneria
+meccanica e controllare la scena 3D tramite linguaggio naturale.
+
+Il modello gira in locale sulla GPU NVIDIA RTX 4000 Ada (20 GB VRAM) di questo
+computer, servito tramite LM Studio sulla porta 1234. Non dipende da servizi cloud:
+l'inferenza avviene interamente on-premise, garantendo riservatezza dei dati aziendali
+e tempi di risposta rapidi. Il fine-tuning e' stato eseguito con Unsloth + QLoRA
+in WSL2 (Ubuntu 22.04) sulla stessa GPU.
+
+L'editor web (Three.js) permette di caricare, manipolare ed esportare modelli 3D
+direttamente nel browser, con supporto per trasformazioni, materiali PBR, edge lines
+stile SolidWorks, strumenti di misura, accoppiamento superfici e libreria prodotti navigabile.
+
+Lo script CLI permette di modificare file GLB da riga di comando: scala, rotazione,
+traslazione, colori, merge di mesh e altro, senza bisogno di software 3D.
+
+Il progetto e' deployato online tramite Firebase Hosting (progetto: glb-3d-editor).
+  - https://glb-3d-editor.web.app
+  - https://glb-3d-editor.firebaseapp.com
+
+
+Funzionalita' principali
+-------------------------
+- Caricamento GLB/GLTF via file picker o drag & drop
+- Esportazione multi-formato: GLB, GLTF, OBJ, STL
+- Trasformazioni: sposta (W), ruota (E), scala (R) con snap configurabile
+- Undo/Redo (Ctrl+Z / Ctrl+Y)
+- Misura distanza 2 punti (M)
+- Accoppiamento superfici (mate a 2 fasi: sorgente + destinazione)
+- Duplicazione e specchiatura oggetti (X, Y, Z)
+- Materiali PBR: colore, emissivo, metallicita', rugosita', opacita', wireframe
+- Luci e ambiente: sfondo, luce ambiente, luce direzionale, griglia, assi
+- Bordi stile SolidWorks con angolo configurabile
+- Visualizzatore PDF integrato (disegni tecnici)
+- Visualizzatore XLS integrato (distinte base, via SheetJS)
+- Autenticazione Google / email (Firebase Auth)
+
+
+Libreria prodotti
+-----------------
+Navigazione gerarchica a cartelle basata su db_tree.json, con breadcrumb e ricerca.
+I modelli sono organizzati in due categorie principali:
+  - CMP: Componenti (organizzati per famiglia/tipo)
+  - PRD: Prodotti (organizzati per codice prodotto)
+
+Ogni modello puo' avere associati:
+  - File .glb (modello 3D)
+  - File .pdf (disegno tecnico), indicizzati in drawings_index.json
+  - File .xls (distinta base / BOM), indicizzati in distinte_index.json
+
+Il catalogo unificato (catalog.json) mappa ogni voce a nome, codice, glb, pdf, xls.
+Il database BOM (bom_database.json) contiene le distinte base estratte dagli XLS.
+
+
+DecAI — Assistente AI aziendale di DECA S.r.l.
+------------------------------------------------
+DecAI e' il cuore intelligente dell'applicazione: un LLM basato su Meta Llama,
+fine-tuned con Unsloth + QLoRA sui dati tecnici DECA (catalogo prodotti, distinte
+base, nomenclatura componenti, specifiche di ingegneria meccanica).
+
+Architettura AI:
+  - Modello base: Meta Llama 3 (8B parametri, quantizzato Q4_K_M per efficienza)
+  - Fine-tuning: QLoRA via Unsloth su WSL2 Ubuntu 22.04
+  - Training data: catalogo DECA, distinte base XLS, nomenclatura prodotti
+  - Inferenza: GPU locale NVIDIA RTX 4000 Ada (20 GB VRAM), servita da LM Studio
+  - Nessuna dipendenza cloud: dati aziendali mai esposti a servizi esterni
+  - System prompt specializzato: risponde in italiano, produce azioni JSON
+    per controllare la scena 3D (spostare, ruotare, colorare, caricare modelli)
+
+Chatbot in basso a sinistra con due modalita':
+  - Linguaggio naturale via LLM (GPU locale, porta 1234)
+  - Comandi strutturati (fallback sempre disponibile senza LLM)
+
+Backend configurabile: LM Studio locale, Cloudflare Tunnel, server DECAAI custom.
+Indicatore di stato connessione con feedback colore (verde = LLM attivo).
+
+Comandi disponibili:
+  Ricerca e libreria:
+    [nome prodotto]            Cerca per descrizione nella libreria PRD
+    aggiungi [nome]            Carica un modello .glb dalla libreria
+    disegno [nome]             Apre il disegno PDF associato
+    distinta [nome]            Apre la distinta Excel associata
+
+  Trasformazioni:
+    seleziona [nome]           Seleziona un oggetto in scena
+    sposta x y z               Sposta l'oggetto selezionato
+    ruota x y z                Ruota in gradi
+    colore [colore]            Cambia colore (nome o #hex)
+    accoppia                   Avvia il modo accoppiamento facce
+    rimuovi [nome]             Rimuovi un oggetto dalla scena
+    duplica [nome]             Duplica un oggetto
+    sistema                    Disponi tutti gli oggetti in griglia ordinata
+
+  Database:
+    search_bom [codice]        Cerca nella distinta base
+    search_drawing [codice]    Cerca disegni tecnici
+    search_distinta [codice]   Cerca fogli di assemblaggio
+
+  aiuto                        Lista comandi disponibili
+
+Azioni JSON restituite dall'LLM: select, move, rotate, color, load, remove,
+arrange, mate, search_bom, search_drawing, search_distinta, replace.
+
+
+API per automazione (serve_editor.py)
+--------------------------------------
+Server locale (porta 3000) con API REST per controllo programmatico della scena:
+  - POST /api/commands: add_primitive, set_transform, set_material, delete,
+    select, fit_camera, clear
+  - GET /api/scene-info: stato della scena (oggetti, posizioni, selezione)
+  - Primitive supportate: box, sphere, cylinder, cone, torus, plane, capsule
+  - Polling automatico ogni 3 secondi per comandi in coda
+  - Proxy verso LM Studio per richieste AI
+
+
+Scorciatoie tastiera
+---------------------
+  W              Modalita' traslazione
+  E              Modalita' rotazione
+  R              Modalita' scala
+  M              Strumento misura
+  ESC            Annulla operazione (misura, accoppiamento)
+  Delete/Backsp  Elimina oggetto selezionato
+  Ctrl+Z         Annulla
+  Ctrl+Y         Ripristina
+
+
+Struttura progetto
+------------------
+public/                        File web deployati su Firebase Hosting
+  index.html                   Pagina di ingresso (redirect all'editor)
+  glb_editor.html              Editor 3D interattivo (app principale)
+  404.html                     Pagina di errore
+  catalog.json                 Indice unificato dei modelli (nome, glb, pdf, xls, codice)
+  db_tree.json                 Struttura gerarchica cartelle per navigazione libreria
+  bom_database.json            Database distinte base (BOM) estratto dagli XLS
+  distinte_index.json          Mappatura codici prodotto -> fogli distinta
+  drawings_index.json          Mappatura codici disegno -> percorsi PDF
+  catalogo_deca.txt            Catalogo testuale prodotti
+  deca.png                     Logo DECA per DecAI
+  db/                          File serviti dal web (struttura speculare a DATABASE1)
+    CMP/                       Componenti (.glb, .pdf, .xls)
+    PRD/                       Prodotti (.glb, .pdf, .xls)
+
+DATABASE1/                     Archivio completo dei dati di progetto (sorgente unica)
+  CMP/                         Componenti (organizzati per famiglia/tipo)
+    CALM/, CAVV/, ...          Sottocartelle per famiglia componente
+      *.glb                    Modello 3D
+      *.pdf                    Disegno tecnico
+      *.xls                    Distinta base (BOM)
+      *.SLDDRW                 Disegno SolidWorks
+      *.SLDPRT / *.SLDASM      Parte/Assieme SolidWorks
+  PRD/                         Prodotti (organizzati per codice prodotto)
+    ALM01/, BLF01/, CCP/, ...  Sottocartelle per prodotto
+      *.glb, *.pdf, *.xls     File raggruppati per prodotto
+  OPT/                         Opzionali
+  PCD/                         Parti comuni di disegno
+
+tools/                         Script per uso locale
+  serve_editor.py              Server locale con API REST per Claude Code
+  glb_modifier.py              CLI per modificare file GLB da terminale
+  rebuild_catalog.py           Ricostruisce catalog.json da DATABASE1
+  build_bom_db.py              Costruisce bom_database.json dagli XLS
+  build_drawings_index.js      Indicizza i disegni tecnici
+  update_catalog_codes.js/py   Aggiorna codici prodotto nel catalogo
+  update_catalog_glbs.js       Aggiorna riferimenti GLB nel catalogo
+  create_training7.js          Generazione dati di training per AI
+  extract_cartiglio.py         Estrae metadati dai cartigli dei disegni
+
+firebase.json                  Configurazione Firebase Hosting + Firestore rules
+firestore.rules                Regole di sicurezza Firestore (sessioni chat read-only)
+.firebaserc                    Collegamento al progetto Firebase
+
+
+Note tecniche
+--------------
+- Rendering con Three.js e MeshPhysicalMaterial per materiali PBR realistici
+- CSS2DRenderer per label e overlay testuali
+- Header Cross-Origin-Opener-Policy per compatibilita' Google Auth
+- Tema scuro con CSS custom properties
+- Firestore per persistenza sessioni chat utente
+- DATABASE1 non viene deployata su Firebase (solo public/ viene servito)
