@@ -1,0 +1,276 @@
+{
+  "categoria": "Rulliere",
+  "descrizione_generale": "Le rulliere Deca Srl sono sistemi di trasporto a rulli per la movimentazione di prodotti con fondo piano (scatole, pacchi, pezzi). Disponibili in tre tipologie: folli (a gravità), motorizzate e di calibramento per la cernita dimensionale.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "RUL01",
+      "nome": "Rulliera di trasporto folli",
+      "descrizione": "Rulliera di trasporto folli (a gravità). Utilizzata per il trasporto a gravità di prodotti con fondo piano come scatole, pacchi e pezzi con fondo piano. I rulli girano liberamente sfruttando la pendenza o la spinta manuale.",
+      "tipo": "folle (a gravità)",
+      "azionamento": "gravità / spinta manuale",
+      "applicazioni": [
+        "trasporto scatole",
+        "trasporto pacchi",
+        "trasporto pezzi con fondo piano"
+      ],
+      "modello_3d": {
+        "file": "rul01.glb",
+        "path": "/models/rul/rul01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=rul01"
+      },
+      "caratteristiche_chiave": {
+        "motorizzata": false,
+        "gravita": true,
+        "calibramento": false,
+        "pneumatica": false,
+        "fondo_piano_richiesto": true
+      },
+      "keywords": [
+        "rulliera",
+        "folle",
+        "RUL01",
+        "gravità",
+        "trasporto",
+        "scatole",
+        "pacchi",
+        "fondo piano",
+        "rulli liberi"
+      ]
+    },
+    {
+      "codice": "RUL02",
+      "nome": "Rulliera di trasporto motorizzata",
+      "descrizione": "Rulliera di trasporto motorizzata per il trasporto di prodotti con fondo piano con possibilità di frizionare i rulli o inserire fermi pneumatici. Il motore garantisce un avanzamento costante e controllato.",
+      "tipo": "motorizzata",
+      "azionamento": "motore elettrico",
+      "applicazioni": [
+        "trasporto controllato",
+        "linee automatiche",
+        "accumulo con fermi pneumatici"
+      ],
+      "funzionalita_extra": [
+        "frizione rulli",
+        "fermi pneumatici"
+      ],
+      "modello_3d": {
+        "file": "rul02.glb",
+        "path": "/models/rul/rul02.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=rul02"
+      },
+      "caratteristiche_chiave": {
+        "motorizzata": true,
+        "gravita": false,
+        "calibramento": false,
+        "pneumatica": true,
+        "fondo_piano_richiesto": true,
+        "frizione_rulli": true,
+        "fermi_pneumatici": true
+      },
+      "keywords": [
+        "rulliera",
+        "motorizzata",
+        "RUL02",
+        "motore",
+        "trasporto controllato",
+        "frizione",
+        "fermi pneumatici",
+        "fondo piano",
+        "automatica"
+      ]
+    },
+    {
+      "codice": "RUL03",
+      "nome": "Rulliera di calibramento",
+      "descrizione": "Rulliera di calibramento indicata per la cernita di prodotti di diverse dimensioni. I rulli sono configurati per selezionare e separare i pezzi in base alla loro dimensione, lasciando cadere quelli più piccoli tra i rulli.",
+      "tipo": "calibramento / cernita",
+      "azionamento": "meccanico / motorizzato",
+      "applicazioni": [
+        "cernita dimensionale",
+        "selezione per dimensione",
+        "separazione prodotti"
+      ],
+      "modello_3d": {
+        "file": "rul03.glb",
+        "path": "/models/rul/rul03.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=rul03"
+      },
+      "caratteristiche_chiave": {
+        "motorizzata": false,
+        "gravita": false,
+        "calibramento": true,
+        "pneumatica": false,
+        "cernita_dimensionale": true
+      },
+      "keywords": [
+        "rulliera",
+        "calibramento",
+        "RUL03",
+        "cernita",
+        "selezione dimensionale",
+        "separazione",
+        "diverse dimensioni"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire la rulliera più adatta.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Qual è la funzione principale della rulliera?",
+        "opzioni": {
+          "trasporto_semplice": "Q2_TRASPORTO",
+          "cernita_dimensionale": "RUL03 - Rulliera di calibramento per la separazione dei prodotti per dimensione"
+        }
+      },
+      {
+        "id": "Q2_TRASPORTO",
+        "testo": "Il trasporto deve essere motorizzato (controllato, con fermi) o basta la gravità?",
+        "se_gravita": "RUL01 - Rulliera folle (economica, sfrutta pendenza o spinta manuale)",
+        "se_motorizzato": "RUL02 - Rulliera motorizzata (avanzamento controllato, frizione rulli, fermi pneumatici)"
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Codice",
+      "Nome",
+      "Azionamento",
+      "Funzione",
+      "Fermi pneumatici"
+    ],
+    "righe": [
+      [
+        "RUL01",
+        "Folle",
+        "Gravità / manuale",
+        "Trasporto semplice",
+        "No"
+      ],
+      [
+        "RUL02",
+        "Motorizzata",
+        "Motore elettrico",
+        "Trasporto controllato",
+        "Sì"
+      ],
+      [
+        "RUL03",
+        "Calibramento",
+        "Meccanico / motorizzato",
+        "Cernita dimensionale",
+        "No"
+      ]
+    ]
+  },
+  "compatibilita": {
+    "descrizione": "Le rulliere possono essere integrate con le isole di asservimento e altri sistemi Deca.",
+    "mappatura": {
+      "RUL01": {
+        "integrazione": [
+          "uscita nastri NRA/NSI/NDS",
+          "linee manuali",
+          "fine linea confezionamento"
+        ]
+      },
+      "RUL02": {
+        "integrazione": [
+          "linee automatiche",
+          "isole di asservimento IAS",
+          "stazioni robot",
+          "accumulo controllato"
+        ]
+      },
+      "RUL03": {
+        "integrazione": [
+          "IAS04 (isola con rulliera)",
+          "linee di selezione qualità",
+          "cernita pre-assemblaggio"
+        ]
+      }
+    }
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatta",
+        "fammi vedere",
+        "anteprima",
+        "rulliera",
+        "rulli",
+        "RUL",
+        "folle",
+        "motorizzata",
+        "calibramento",
+        "cernita"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere una rulliera, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve una rulliera per trasportare scatole",
+          "risposta": "Per trasportare scatole hai due opzioni: RUL01 folle (a gravità, economica) o RUL02 motorizzata (avanzamento controllato con possibilità di fermi pneumatici). Ti serve il controllo automatico dell'avanzamento?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "No, basta la gravità",
+          "risposta": "La RUL01 folle è perfetta: i rulli girano liberamente sfruttando la pendenza. Economica e senza manutenzione. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "rul01.glb"
+        },
+        {
+          "utente": "Ho bisogno di fermare i pezzi in posizioni precise sulla rulliera",
+          "risposta": "La RUL02 motorizzata è la scelta giusta: ha la possibilità di inserire fermi pneumatici e frizionare i rulli per un controllo preciso dell'avanzamento. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "rul02.glb"
+        },
+        {
+          "utente": "Devo separare pezzi di dimensioni diverse",
+          "risposta": "La RUL03 di calibramento è progettata esattamente per questo: la cernita dimensionale separa i prodotti in base alla loro dimensione. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "rul03.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra le tre rulliere?",
+          "risposta": "La RUL01 è folle (gravità, trasporto semplice). La RUL02 è motorizzata con fermi pneumatici per trasporto controllato. La RUL03 è per calibramento e cernita dimensionale dei pezzi. Ti mostro tutte e tre?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "rul01.glb",
+            "rul02.glb",
+            "rul03.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali rulliere offrite?",
+      "risposta": "Deca Srl offre tre tipi di rulliere: RUL01 folle (a gravità per trasporto semplice), RUL02 motorizzata (trasporto controllato con fermi pneumatici) e RUL03 di calibramento (cernita dimensionale). Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Che differenza c'è tra rulliera folle e motorizzata?",
+      "risposta": "La RUL01 folle sfrutta la gravità o la spinta manuale, è economica e senza manutenzione. La RUL02 motorizzata ha un motore elettrico per avanzamento costante, con possibilità di frizionare i rulli e inserire fermi pneumatici per il controllo preciso del flusso."
+    },
+    {
+      "domanda": "Come funziona la rulliera di calibramento?",
+      "risposta": "La RUL03 ha rulli configurati per selezionare i prodotti per dimensione: i pezzi più piccoli cadono tra i rulli, mentre quelli più grandi proseguono. È ideale per la cernita dimensionale e la separazione automatica dei prodotti."
+    },
+    {
+      "domanda": "Posso usare la rulliera RUL03 con l'isola IAS04?",
+      "risposta": "Sì, la RUL03 di calibramento è lo stesso principio utilizzato nell'isola IAS04 che include una rulliera di selezione e calibramento. Possono essere integrate nella stessa linea per una cernita dimensionale completa."
+    },
+    {
+      "domanda": "Le rulliere sono personalizzabili?",
+      "risposta": "Sì, tutte le rulliere Deca sono realizzabili su misura in lunghezza, larghezza, passo rulli e configurazione in base alle esigenze della linea produttiva."
+    }
+  ]
+}

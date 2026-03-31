@@ -1,0 +1,625 @@
+{
+  "categoria": "Colonne di sostegno e rivestimenti per isole di asservimento",
+  "descrizione_generale": "Le colonne di sostegno (CSO) sono un'alternativa compatta ai banchi STR per il supporto delle basi vibranti circolari. I rivestimenti (RIV) sono materiali applicati alle superfici interne dei contenitori e dei canali per ottimizzare il contatto con i particolari durante orientamento e trasporto.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "famiglie": [
+    {
+      "codice_famiglia": "CSO",
+      "nome": "Colonne di sostegno",
+      "descrizione": "Colonne di sostegno a sostegno delle basi circolari in alternativa alle strutture STR, per maggior compattezza. Realizzate in Fe (acciaio) e AISI (inox).",
+      "prodotti": [
+        {
+          "codice": "CSO01",
+          "nome": "Colonna di sostegno ad altezza fissa",
+          "descrizione": "Colonna di sostegno ad altezza fissa a sostegno delle basi circolari in alternativa alle strutture STR per maggior compattezza. Realizzata in Fe e AISI.",
+          "altezza_regolabile": false,
+          "materiali": [
+            "Fe (acciaio)",
+            "AISI (inox)"
+          ],
+          "piedini_regolabili": true,
+          "modello_3d": {
+            "file": "cso01.glb",
+            "path": "/models/cso/cso01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cso01"
+          },
+          "caratteristiche_chiave": {
+            "altezza_fissa": true,
+            "regolazione_altezza_mm": 0,
+            "compatto": true,
+            "inox_disponibile": true
+          },
+          "keywords": [
+            "colonna sostegno",
+            "CSO01",
+            "altezza fissa",
+            "compatto",
+            "base circolare",
+            "Fe",
+            "AISI",
+            "inox"
+          ]
+        },
+        {
+          "codice": "CSO02",
+          "nome": "Colonna di sostegno ad altezza regolabile",
+          "descrizione": "Colonna di sostegno ad altezza regolabile ±150mm a sostegno delle basi circolari in alternativa alle strutture STR per maggior compattezza e con possibilità di regolazione in altezza. Realizzata in Fe e AISI.",
+          "altezza_regolabile": true,
+          "regolazione_mm": 150,
+          "regolazione_label": "±150 mm",
+          "materiali": [
+            "Fe (acciaio)",
+            "AISI (inox)"
+          ],
+          "piedini_regolabili": true,
+          "modello_3d": {
+            "file": "cso02.glb",
+            "path": "/models/cso/cso02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cso02"
+          },
+          "caratteristiche_chiave": {
+            "altezza_fissa": false,
+            "regolazione_altezza_mm": 150,
+            "compatto": true,
+            "inox_disponibile": true
+          },
+          "keywords": [
+            "colonna sostegno",
+            "CSO02",
+            "altezza regolabile",
+            "±150mm",
+            "compatto",
+            "base circolare",
+            "Fe",
+            "AISI",
+            "inox"
+          ]
+        }
+      ]
+    },
+    {
+      "codice_famiglia": "RIV",
+      "nome": "Rivestimenti",
+      "descrizione": "Rivestimenti applicati alle superfici interne dei contenitori e dei canali lineari per ottimizzare il contatto, la presa e lo scivolamento dei particolari durante l'orientamento e il trasporto.",
+      "prodotti": [
+        {
+          "codice": "RIV01",
+          "nome": "Vulkollan sp.2mm liscio",
+          "materiale": "Vulkollan",
+          "spessore_mm": 2,
+          "finitura": "liscio",
+          "modello_3d": {
+            "file": "riv01.glb",
+            "path": "/models/riv/riv01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv01"
+          },
+          "keywords": [
+            "rivestimento",
+            "Vulkollan",
+            "2mm",
+            "liscio",
+            "RIV01"
+          ]
+        },
+        {
+          "codice": "RIV02",
+          "nome": "Vulkollan sp.2mm ruvido",
+          "materiale": "Vulkollan",
+          "spessore_mm": 2,
+          "finitura": "ruvido",
+          "modello_3d": {
+            "file": "riv02.glb",
+            "path": "/models/riv/riv02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv02"
+          },
+          "keywords": [
+            "rivestimento",
+            "Vulkollan",
+            "2mm",
+            "ruvido",
+            "RIV02"
+          ]
+        },
+        {
+          "codice": "RIV03",
+          "nome": "Vulkollan sp.3mm liscio",
+          "materiale": "Vulkollan",
+          "spessore_mm": 3,
+          "finitura": "liscio",
+          "modello_3d": {
+            "file": "riv03.glb",
+            "path": "/models/riv/riv03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv03"
+          },
+          "keywords": [
+            "rivestimento",
+            "Vulkollan",
+            "3mm",
+            "liscio",
+            "RIV03"
+          ]
+        },
+        {
+          "codice": "RIV04",
+          "nome": "Vulkollan sp.3mm ruvido",
+          "materiale": "Vulkollan",
+          "spessore_mm": 3,
+          "finitura": "ruvido",
+          "modello_3d": {
+            "file": "riv04.glb",
+            "path": "/models/riv/riv04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv04"
+          },
+          "keywords": [
+            "rivestimento",
+            "Vulkollan",
+            "3mm",
+            "ruvido",
+            "RIV04"
+          ]
+        },
+        {
+          "codice": "RIV07",
+          "nome": "Chiorino NA1120",
+          "materiale": "Chiorino NA1120",
+          "spessore_mm": null,
+          "finitura": "standard",
+          "modello_3d": {
+            "file": "riv07.glb",
+            "path": "/models/riv/riv07.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv07"
+          },
+          "keywords": [
+            "rivestimento",
+            "Chiorino",
+            "NA1120",
+            "RIV07"
+          ]
+        },
+        {
+          "codice": "RIV08",
+          "nome": "Chiorino contrario",
+          "materiale": "Chiorino (contrario)",
+          "spessore_mm": null,
+          "finitura": "contrario",
+          "modello_3d": {
+            "file": "riv08.glb",
+            "path": "/models/riv/riv08.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv08"
+          },
+          "keywords": [
+            "rivestimento",
+            "Chiorino",
+            "contrario",
+            "RIV08"
+          ]
+        },
+        {
+          "codice": "RIV10",
+          "nome": "Panno novu 12HC grigio",
+          "materiale": "Panno novu 12HC",
+          "colore": "grigio",
+          "spessore_mm": null,
+          "finitura": "tessuto",
+          "modello_3d": {
+            "file": "riv10.glb",
+            "path": "/models/riv/riv10.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv10"
+          },
+          "keywords": [
+            "rivestimento",
+            "panno",
+            "novu",
+            "12HC",
+            "grigio",
+            "tessuto",
+            "RIV10"
+          ]
+        },
+        {
+          "codice": "RIV12",
+          "nome": "Shram a spruzzo 1mm nero",
+          "materiale": "Shram a spruzzo",
+          "colore": "nero",
+          "spessore_mm": 1,
+          "finitura": "spruzzo",
+          "modello_3d": {
+            "file": "riv12.glb",
+            "path": "/models/riv/riv12.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv12"
+          },
+          "keywords": [
+            "rivestimento",
+            "Shram",
+            "spruzzo",
+            "1mm",
+            "nero",
+            "RIV12"
+          ]
+        },
+        {
+          "codice": "RIV13",
+          "nome": "Remathan 6mm liscio",
+          "materiale": "Remathan",
+          "spessore_mm": 6,
+          "finitura": "liscio",
+          "modello_3d": {
+            "file": "riv13.glb",
+            "path": "/models/riv/riv13.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv13"
+          },
+          "keywords": [
+            "rivestimento",
+            "Remathan",
+            "6mm",
+            "liscio",
+            "RIV13"
+          ]
+        },
+        {
+          "codice": "RIV14",
+          "nome": "Remathan 10mm liscio",
+          "materiale": "Remathan",
+          "spessore_mm": 10,
+          "finitura": "liscio",
+          "modello_3d": {
+            "file": "riv14.glb",
+            "path": "/models/riv/riv14.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv14"
+          },
+          "keywords": [
+            "rivestimento",
+            "Remathan",
+            "10mm",
+            "liscio",
+            "RIV14"
+          ]
+        },
+        {
+          "codice": "RIV15",
+          "nome": "Brushlon verde 6mm",
+          "materiale": "Brushlon",
+          "colore": "verde",
+          "spessore_mm": 6,
+          "finitura": "brushlon",
+          "modello_3d": {
+            "file": "riv15.glb",
+            "path": "/models/riv/riv15.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv15"
+          },
+          "keywords": [
+            "rivestimento",
+            "Brushlon",
+            "verde",
+            "6mm",
+            "RIV15"
+          ]
+        },
+        {
+          "codice": "RIV17",
+          "nome": "Teflon",
+          "materiale": "Teflon (PTFE)",
+          "spessore_mm": null,
+          "finitura": "antiaderente",
+          "modello_3d": {
+            "file": "riv17.glb",
+            "path": "/models/riv/riv17.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv17"
+          },
+          "keywords": [
+            "rivestimento",
+            "Teflon",
+            "PTFE",
+            "antiaderente",
+            "basso attrito",
+            "RIV17"
+          ]
+        },
+        {
+          "codice": "RIV18",
+          "nome": "Antirombo esterno",
+          "materiale": "Antirombo",
+          "spessore_mm": null,
+          "finitura": "antirombo",
+          "applicazione": "esterno",
+          "modello_3d": {
+            "file": "riv18.glb",
+            "path": "/models/riv/riv18.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv18"
+          },
+          "keywords": [
+            "rivestimento",
+            "antirombo",
+            "esterno",
+            "smorzamento",
+            "rumore",
+            "RIV18"
+          ]
+        },
+        {
+          "codice": "RIV20",
+          "nome": "Remathan 6mm ruvido",
+          "materiale": "Remathan",
+          "spessore_mm": 6,
+          "finitura": "ruvido",
+          "modello_3d": {
+            "file": "riv20.glb",
+            "path": "/models/riv/riv20.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv20"
+          },
+          "keywords": [
+            "rivestimento",
+            "Remathan",
+            "6mm",
+            "ruvido",
+            "RIV20"
+          ]
+        },
+        {
+          "codice": "RIV21",
+          "nome": "Remathan 10mm ruvido",
+          "materiale": "Remathan",
+          "spessore_mm": 10,
+          "finitura": "ruvido",
+          "modello_3d": {
+            "file": "riv21.glb",
+            "path": "/models/riv/riv21.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=riv21"
+          },
+          "keywords": [
+            "rivestimento",
+            "Remathan",
+            "10mm",
+            "ruvido",
+            "RIV21"
+          ]
+        }
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "colonne": {
+      "descrizione": "Albero decisionale per la scelta della colonna di sostegno.",
+      "domande": [
+        {
+          "id": "Q1_CSO",
+          "testo": "Hai bisogno di regolare l'altezza della base vibrante circolare?",
+          "se_si": "CSO02 - Colonna regolabile ±150mm",
+          "se_no": "CSO01 - Colonna ad altezza fissa"
+        },
+        {
+          "id": "Q2_CSO",
+          "testo": "Lavori nel settore alimentare/farmaceutico?",
+          "se_si": "Versione AISI (inox)",
+          "se_no": "Versione Fe (acciaio standard)"
+        }
+      ]
+    },
+    "rivestimenti": {
+      "descrizione": "Albero decisionale per la scelta del rivestimento.",
+      "domande": [
+        {
+          "id": "Q1_RIV",
+          "testo": "Qual è l'obiettivo principale del rivestimento?",
+          "opzioni": {
+            "grip_presa": "Q2_GRIP",
+            "scivolamento_basso_attrito": "RIV17 (Teflon)",
+            "riduzione_rumore": "RIV18 (Antirombo esterno)",
+            "protezione_particolari_delicati": "Q2_PROTEZIONE"
+          }
+        },
+        {
+          "id": "Q2_GRIP",
+          "testo": "I particolari sono pesanti o leggeri?",
+          "se_pesanti": "Remathan spessore 10mm (RIV14 liscio / RIV21 ruvido) per maggiore ammortizzazione",
+          "se_leggeri": "Vulkollan spessore 2mm (RIV01 liscio / RIV02 ruvido) o Brushlon (RIV15)"
+        },
+        {
+          "id": "Q2_PROTEZIONE",
+          "testo": "Serve una finitura liscia o ruvida?",
+          "se_liscia": "Vulkollan liscio (RIV01 2mm / RIV03 3mm) o Remathan liscio (RIV13 6mm / RIV14 10mm)",
+          "se_ruvida": "Vulkollan ruvido (RIV02 2mm / RIV04 3mm) o Remathan ruvido (RIV20 6mm / RIV21 10mm)"
+        },
+        {
+          "id": "Q3_RIV",
+          "testo": "Quale spessore ti serve?",
+          "mappa_spessori": {
+            "sottile_1mm": "RIV12 (Shram a spruzzo 1mm)",
+            "medio_2mm": "RIV01/RIV02 (Vulkollan 2mm)",
+            "medio_3mm": "RIV03/RIV04 (Vulkollan 3mm)",
+            "spesso_6mm": "RIV13/RIV20 (Remathan 6mm) o RIV15 (Brushlon 6mm)",
+            "molto_spesso_10mm": "RIV14/RIV21 (Remathan 10mm)"
+          }
+        }
+      ],
+      "tabella_rapida": {
+        "intestazione": [
+          "Codice",
+          "Materiale",
+          "Spessore",
+          "Finitura"
+        ],
+        "righe": [
+          [
+            "RIV01",
+            "Vulkollan",
+            "2mm",
+            "liscio"
+          ],
+          [
+            "RIV02",
+            "Vulkollan",
+            "2mm",
+            "ruvido"
+          ],
+          [
+            "RIV03",
+            "Vulkollan",
+            "3mm",
+            "liscio"
+          ],
+          [
+            "RIV04",
+            "Vulkollan",
+            "3mm",
+            "ruvido"
+          ],
+          [
+            "RIV07",
+            "Chiorino NA1120",
+            "-",
+            "standard"
+          ],
+          [
+            "RIV08",
+            "Chiorino",
+            "-",
+            "contrario"
+          ],
+          [
+            "RIV10",
+            "Panno novu 12HC",
+            "-",
+            "tessuto grigio"
+          ],
+          [
+            "RIV12",
+            "Shram a spruzzo",
+            "1mm",
+            "nero"
+          ],
+          [
+            "RIV13",
+            "Remathan",
+            "6mm",
+            "liscio"
+          ],
+          [
+            "RIV14",
+            "Remathan",
+            "10mm",
+            "liscio"
+          ],
+          [
+            "RIV15",
+            "Brushlon",
+            "6mm",
+            "verde"
+          ],
+          [
+            "RIV17",
+            "Teflon",
+            "-",
+            "antiaderente"
+          ],
+          [
+            "RIV18",
+            "Antirombo",
+            "-",
+            "esterno"
+          ],
+          [
+            "RIV20",
+            "Remathan",
+            "6mm",
+            "ruvido"
+          ],
+          [
+            "RIV21",
+            "Remathan",
+            "10mm",
+            "ruvido"
+          ]
+        ]
+      }
+    }
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "colonna",
+        "CSO",
+        "rivestimento",
+        "RIV",
+        "Vulkollan",
+        "Remathan",
+        "Teflon",
+        "antirombo",
+        "Brushlon",
+        "Chiorino"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere una colonna o un rivestimento, aprire il viewer 3D con il file .glb corrispondente. Per i rivestimenti, il 3D mostra una preview del materiale applicato su un campione di contenitore. Se la richiesta è generica, guidare con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve una colonna compatta per la base circolare",
+          "risposta": "Hai bisogno di regolare l'altezza? La CSO01 è ad altezza fissa, la CSO02 è regolabile di ±150mm. Entrambe disponibili in acciaio e inox. Quale preferisci?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Sì, mi serve regolabile in inox",
+          "risposta": "La CSO02 in AISI è perfetta: colonna compatta con regolazione ±150mm in acciaio inox. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cso02.glb"
+        },
+        {
+          "utente": "Che rivestimento mi consigli per pezzi pesanti in metallo?",
+          "risposta": "Per particolari pesanti ti consiglio il Remathan da 10mm che offre ottima ammortizzazione: RIV14 (liscio) se i pezzi devono scivolare bene, o RIV21 (ruvido) se serve più grip. Ti mostro il 3D?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "riv14.glb",
+            "riv21.glb"
+          ]
+        },
+        {
+          "utente": "Ho bisogno di basso attrito per lo scivolamento",
+          "risposta": "Il RIV17 in Teflon (PTFE) è il rivestimento con il più basso coefficiente di attrito, ideale per far scivolare i particolari senza resistenza. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "riv17.glb"
+        },
+        {
+          "utente": "La mia isola fa troppo rumore",
+          "risposta": "Per ridurre il rumore ti consiglio il RIV18, un rivestimento antirombo applicato all'esterno del contenitore. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "riv18.glb"
+        },
+        {
+          "utente": "Mostrami tutti i rivestimenti disponibili",
+          "risposta": "Ecco la gamma completa: Vulkollan 2-3mm (liscio/ruvido), Chiorino NA1120, Panno novu 12HC, Shram a spruzzo 1mm, Remathan 6-10mm (liscio/ruvido), Brushlon verde 6mm, Teflon e Antirombo esterno. Quale vuoi vedere in 3D?"
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Che differenza c'è tra CSO01 e CSO02?",
+      "risposta": "La CSO01 è una colonna ad altezza fissa, la CSO02 ha regolazione in altezza di ±150mm. Entrambe sono un'alternativa compatta ai banchi STR per il supporto delle basi circolari, disponibili in acciaio (Fe) e inox (AISI)."
+    },
+    {
+      "domanda": "Quando usare una colonna CSO invece di un banco STR?",
+      "risposta": "Le colonne CSO sono ideali quando serve maggiore compattezza e si monta solo una base vibrante circolare. I banchi STR sono preferibili per isole di asservimento complete con più componenti."
+    },
+    {
+      "domanda": "Quanti tipi di rivestimento avete?",
+      "risposta": "Deca offre 15 rivestimenti: Vulkollan 2-3mm (liscio/ruvido), Chiorino NA1120 e contrario, Panno novu 12HC, Shram a spruzzo 1mm, Remathan 6-10mm (liscio/ruvido), Brushlon verde 6mm, Teflon e Antirombo esterno."
+    },
+    {
+      "domanda": "Quale rivestimento per particolari delicati?",
+      "risposta": "Per particolari delicati consigliamo Vulkollan liscio (RIV01 da 2mm o RIV03 da 3mm) che offre protezione senza graffiare, oppure il Panno novu 12HC (RIV10) per superfici molto sensibili."
+    },
+    {
+      "domanda": "Come ridurre il rumore del vibratore?",
+      "risposta": "Il RIV18 (Antirombo esterno) è specificamente progettato per lo smorzamento del rumore, applicato all'esterno del contenitore. Per ridurre ulteriormente il rumore interno, un rivestimento in Remathan spesso (RIV14, 10mm) assorbe bene le vibrazioni."
+    }
+  ]
+}

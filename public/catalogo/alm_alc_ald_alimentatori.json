@@ -1,0 +1,305 @@
+{
+  "categoria": "ALM - Alimentatori meccanici / Centrifughi / Doppio disco",
+  "descrizione_generale": "Gli alimentatori meccanici sono sistemi di selezione e orientamento alternativi ai vibratori tradizionali. Comprendono alimentatori meccanici con trappole (ALM01), alimentatori meccanici magnetici (ALM02), alimentatori centrifughi (ALC) e alimentatori a doppio disco (ALD). Tutti realizzati in AISI 304, ideali per settori beverage, cosmetico e pharma.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "ALM01",
+      "nome": "Alimentatore meccanico",
+      "descrizione": "Selezione ed orientamento con aria e trappole meccaniche. Utilizzato in ambiente beverage e cosmetico. Realizzato in AISI 304.",
+      "tecnologia": "aria + trappole meccaniche",
+      "materiale": "AISI 304",
+      "settori": [
+        "beverage",
+        "cosmetico"
+      ],
+      "modello_3d": {
+        "file": "alm01.glb",
+        "path": "/models/alm/alm01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=alm01"
+      },
+      "caratteristiche_chiave": {
+        "tipo_selezione": "aria + trappole meccaniche",
+        "magnetico": false,
+        "centrifugo": false,
+        "inox": true,
+        "alta_cadenza": false,
+        "senza_aria": false
+      },
+      "keywords": [
+        "alimentatore meccanico",
+        "ALM01",
+        "trappole",
+        "aria",
+        "beverage",
+        "cosmetico",
+        "AISI 304",
+        "inox",
+        "selezione",
+        "orientamento"
+      ]
+    },
+    {
+      "codice": "ALM02",
+      "nome": "Alimentatore meccanico magnetico",
+      "descrizione": "Selezione ed orientamento senza aria ma con movimentazione magnetica. Utilizzato in ambiente pharma e cosmetico. Realizzato in AISI 304.",
+      "tecnologia": "movimentazione magnetica (senza aria)",
+      "materiale": "AISI 304",
+      "settori": [
+        "pharma",
+        "cosmetico"
+      ],
+      "modello_3d": {
+        "file": "alm02.glb",
+        "path": "/models/alm/alm02.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=alm02"
+      },
+      "caratteristiche_chiave": {
+        "tipo_selezione": "magnetica",
+        "magnetico": true,
+        "centrifugo": false,
+        "inox": true,
+        "alta_cadenza": false,
+        "senza_aria": true
+      },
+      "keywords": [
+        "alimentatore meccanico",
+        "ALM02",
+        "magnetico",
+        "senza aria",
+        "pharma",
+        "farmaceutico",
+        "cosmetico",
+        "AISI 304",
+        "inox",
+        "selezione",
+        "orientamento"
+      ]
+    },
+    {
+      "codice": "ALC",
+      "nome": "Alimentatore centrifugo",
+      "descrizione": "Orienta e alimenta garantendo un flusso continuo ad altissime cadenze. Realizzato in AISI 304. Ideale per linee ad alta produttività che richiedono cadenze elevate e flusso costante.",
+      "tecnologia": "centrifuga",
+      "materiale": "AISI 304",
+      "settori": [
+        "beverage",
+        "cosmetico",
+        "pharma",
+        "industriale"
+      ],
+      "modello_3d": {
+        "file": "alc.glb",
+        "path": "/models/alm/alc.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=alc"
+      },
+      "caratteristiche_chiave": {
+        "tipo_selezione": "centrifuga",
+        "magnetico": false,
+        "centrifugo": true,
+        "inox": true,
+        "alta_cadenza": true,
+        "senza_aria": false
+      },
+      "keywords": [
+        "alimentatore centrifugo",
+        "ALC",
+        "centrifuga",
+        "alta cadenza",
+        "flusso continuo",
+        "altissima velocità",
+        "AISI 304",
+        "inox"
+      ]
+    },
+    {
+      "codice": "ALD",
+      "nome": "Alimentatore doppio disco",
+      "descrizione": "Utilizza due dischi rotanti per sfruttare la forza centrifuga e l'equilibrio sul disco esterno. Realizzato in AISI 304. Sistema a doppio stadio per orientamento e alimentazione con elevata affidabilità.",
+      "tecnologia": "doppio disco rotante + forza centrifuga",
+      "materiale": "AISI 304",
+      "settori": [
+        "beverage",
+        "cosmetico",
+        "pharma",
+        "industriale"
+      ],
+      "modello_3d": {
+        "file": "ald.glb",
+        "path": "/models/alm/ald.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ald"
+      },
+      "caratteristiche_chiave": {
+        "tipo_selezione": "doppio disco centrifugo",
+        "magnetico": false,
+        "centrifugo": true,
+        "inox": true,
+        "alta_cadenza": true,
+        "senza_aria": false,
+        "doppio_stadio": true
+      },
+      "keywords": [
+        "alimentatore doppio disco",
+        "ALD",
+        "doppio disco",
+        "centrifuga",
+        "dischi rotanti",
+        "equilibrio",
+        "AISI 304",
+        "inox"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire l'alimentatore meccanico più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Hai bisogno di altissime cadenze (flusso continuo ad alta velocità)?",
+        "se_si": "Q2_ALTA_CADENZA",
+        "se_no": "Q2_STANDARD"
+      },
+      {
+        "id": "Q2_ALTA_CADENZA",
+        "testo": "Preferisci un sistema a singolo disco o a doppio stadio?",
+        "se_singolo": "ALC - Alimentatore centrifugo (flusso continuo altissime cadenze)",
+        "se_doppio": "ALD - Alimentatore doppio disco (doppio stadio con forza centrifuga + equilibrio)"
+      },
+      {
+        "id": "Q2_STANDARD",
+        "testo": "L'ambiente richiede l'assenza di aria compressa (es. pharma con requisiti stringenti)?",
+        "se_si": "ALM02 - Alimentatore meccanico magnetico (senza aria)",
+        "se_no": "ALM01 - Alimentatore meccanico con aria e trappole"
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Codice",
+      "Nome",
+      "Tecnologia",
+      "Aria compressa",
+      "Alta cadenza",
+      "Settori principali"
+    ],
+    "righe": [
+      [
+        "ALM01",
+        "Meccanico",
+        "Aria + trappole",
+        "Sì",
+        "No",
+        "Beverage, cosmetico"
+      ],
+      [
+        "ALM02",
+        "Meccanico magnetico",
+        "Magnetica",
+        "No",
+        "No",
+        "Pharma, cosmetico"
+      ],
+      [
+        "ALC",
+        "Centrifugo",
+        "Centrifuga",
+        "Sì",
+        "Sì",
+        "Tutti i settori"
+      ],
+      [
+        "ALD",
+        "Doppio disco",
+        "Doppio disco centrifugo",
+        "Sì",
+        "Sì",
+        "Tutti i settori"
+      ]
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "alimentatore",
+        "meccanico",
+        "centrifugo",
+        "doppio disco",
+        "magnetico",
+        "ALM",
+        "ALC",
+        "ALD"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un alimentatore, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un alimentatore per il settore beverage",
+          "risposta": "Per il beverage hai due opzioni principali: l'ALM01 con trappole meccaniche e aria per cadenze standard, oppure l'ALC centrifugo per altissime cadenze. Qual è la tua velocità di produzione richiesta?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Ho bisogno di altissime cadenze",
+          "risposta": "Per altissime cadenze ti consiglio l'ALC (alimentatore centrifugo) che garantisce un flusso continuo ad alta velocità. Se preferisci un doppio stadio, c'è anche l'ALD (doppio disco). Ti mostro entrambi:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "alc.glb",
+            "ald.glb"
+          ]
+        },
+        {
+          "utente": "Lavoro nel pharma e non posso usare aria compressa",
+          "risposta": "L'ALM02 è la soluzione perfetta: alimentatore meccanico magnetico che funziona senza aria compressa, realizzato in AISI 304 per ambiente pharma. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "alm02.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra ALC e ALD?",
+          "risposta": "Entrambi sono ad alta cadenza e usano la forza centrifuga. L'ALC ha un singolo disco centrifugo per flusso continuo. L'ALD usa due dischi rotanti dove il disco esterno sfrutta l'equilibrio per l'orientamento, offrendo un doppio stadio di selezione. Ti mostro entrambi?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "alc.glb",
+            "ald.glb"
+          ]
+        },
+        {
+          "utente": "Mostrami l'alimentatore meccanico con le trappole",
+          "risposta": "Ecco l'ALM01: alimentatore meccanico con aria e trappole meccaniche per selezione e orientamento, in AISI 304, ideale per beverage e cosmetico.",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "alm01.glb"
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali alimentatori meccanici offrite?",
+      "risposta": "Deca Srl offre quattro tipologie: ALM01 (meccanico con aria e trappole), ALM02 (meccanico magnetico senza aria), ALC (centrifugo ad altissime cadenze) e ALD (doppio disco centrifugo). Tutti realizzati in AISI 304. Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Che differenza c'è tra alimentatore meccanico e vibratore circolare?",
+      "risposta": "Il vibratore circolare (BVC + contenitore) usa la vibrazione per orientare i pezzi. Gli alimentatori meccanici usano tecnologie diverse: trappole + aria (ALM01), magnetismo (ALM02), forza centrifuga (ALC/ALD). Gli alimentatori meccanici sono preferiti in settori con requisiti igienici stringenti (beverage, pharma, cosmetico) e per altissime cadenze."
+    },
+    {
+      "domanda": "Quale alimentatore per il settore pharma?",
+      "risposta": "Per il pharma consigliamo l'ALM02 (meccanico magnetico) che funziona senza aria compressa, eliminando il rischio di contaminazione. In alternativa, se servono altissime cadenze, l'ALC e l'ALD sono disponibili anche per ambiente pharma. Tutti in AISI 304."
+    },
+    {
+      "domanda": "Qual è l'alimentatore più veloce?",
+      "risposta": "L'ALC (centrifugo) e l'ALD (doppio disco) garantiscono le cadenze più elevate grazie alla forza centrifuga. L'ALC offre un flusso continuo, l'ALD aggiunge un doppio stadio di selezione per maggiore precisione."
+    },
+    {
+      "domanda": "Tutti gli alimentatori sono in inox?",
+      "risposta": "Sì, tutti e quattro i modelli (ALM01, ALM02, ALC, ALD) sono realizzati in acciaio inossidabile AISI 304, conformi ai requisiti igienici dei settori beverage, cosmetico e farmaceutico."
+    }
+  ]
+}

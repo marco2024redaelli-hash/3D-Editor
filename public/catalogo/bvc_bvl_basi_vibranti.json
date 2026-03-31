@@ -1,0 +1,380 @@
+{
+  "categoria": "Componenti per isole di asservimento - Basi vibranti",
+  "descrizione_generale": "Le basi vibranti sono i componenti fondamentali delle isole di asservimento. Si dividono in basi vibranti circolari (BVC) per la selezione e orientamento dei particolari, e basi vibranti lineari (BVL) per il trasporto e l'incolonnamento. Disponibili in diverse taglie per adattarsi a ogni esigenza produttiva.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "famiglie": [
+    {
+      "codice_famiglia": "BVC",
+      "nome": "Base vibrante circolare",
+      "descrizione": "Base vibrante circolare: 6 taglie in base al diametro. Utilizzata per la selezione e l'orientamento dei particolari all'interno delle isole di asservimento.",
+      "numero_taglie": 6,
+      "modelli": [
+        {
+          "codice": "BVC-061",
+          "nome": "Base vibrante circolare 061",
+          "diametro_mm": 150,
+          "diametro_label": "Ø150",
+          "taglia": "XS",
+          "modello_3d": {
+            "file": "bvc_061.glb",
+            "path": "/models/bvc/bvc_061.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvc_061"
+          },
+          "keywords": [
+            "vibratore circolare",
+            "Ø150",
+            "piccolo",
+            "061"
+          ]
+        },
+        {
+          "codice": "BVC-161",
+          "nome": "Base vibrante circolare 161",
+          "diametro_mm": 200,
+          "diametro_label": "Ø200",
+          "taglia": "S",
+          "modello_3d": {
+            "file": "bvc_161.glb",
+            "path": "/models/bvc/bvc_161.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvc_161"
+          },
+          "keywords": [
+            "vibratore circolare",
+            "Ø200",
+            "161"
+          ]
+        },
+        {
+          "codice": "BVC-261",
+          "nome": "Base vibrante circolare 261",
+          "diametro_mm": 250,
+          "diametro_label": "Ø250",
+          "taglia": "M",
+          "modello_3d": {
+            "file": "bvc_261.glb",
+            "path": "/models/bvc/bvc_261.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvc_261"
+          },
+          "keywords": [
+            "vibratore circolare",
+            "Ø250",
+            "medio",
+            "261"
+          ]
+        },
+        {
+          "codice": "BVC-361",
+          "nome": "Base vibrante circolare 361",
+          "diametro_mm": 350,
+          "diametro_label": "Ø350",
+          "taglia": "L",
+          "modello_3d": {
+            "file": "bvc_361.glb",
+            "path": "/models/bvc/bvc_361.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvc_361"
+          },
+          "keywords": [
+            "vibratore circolare",
+            "Ø350",
+            "grande",
+            "361"
+          ]
+        },
+        {
+          "codice": "BVC-462",
+          "nome": "Base vibrante circolare 462",
+          "diametro_mm": 450,
+          "diametro_label": "Ø450",
+          "taglia": "XL",
+          "modello_3d": {
+            "file": "bvc_462.glb",
+            "path": "/models/bvc/bvc_462.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvc_462"
+          },
+          "keywords": [
+            "vibratore circolare",
+            "Ø450",
+            "462"
+          ]
+        },
+        {
+          "codice": "BVC-532",
+          "nome": "Base vibrante circolare 532",
+          "diametro_mm": 550,
+          "diametro_label": "Ø550",
+          "taglia": "XXL-1",
+          "modello_3d": {
+            "file": "bvc_532.glb",
+            "path": "/models/bvc/bvc_532.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvc_532"
+          },
+          "keywords": [
+            "vibratore circolare",
+            "Ø550",
+            "532"
+          ]
+        },
+        {
+          "codice": "BVC-634",
+          "nome": "Base vibrante circolare 634",
+          "diametro_mm": 650,
+          "diametro_label": "Ø650",
+          "taglia": "XXL-2",
+          "modello_3d": {
+            "file": "bvc_634.glb",
+            "path": "/models/bvc/bvc_634.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvc_634"
+          },
+          "keywords": [
+            "vibratore circolare",
+            "Ø650",
+            "massimo",
+            "634"
+          ]
+        }
+      ]
+    },
+    {
+      "codice_famiglia": "BVL",
+      "nome": "Base vibrante lineare",
+      "descrizione": "Base vibrante lineare: 7 taglie. Utilizzata per il trasporto, l'incolonnamento e la polmonatura dei particolari orientati dal vibratore circolare.",
+      "numero_taglie": 7,
+      "modelli": [
+        {
+          "codice": "BVL-101",
+          "nome": "Base vibrante lineare 101",
+          "taglia": "XS",
+          "materiale": "standard",
+          "modello_3d": {
+            "file": "bvl_101.glb",
+            "path": "/models/bvl/bvl_101.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvl_101"
+          },
+          "keywords": [
+            "vibratore lineare",
+            "101",
+            "piccolo"
+          ]
+        },
+        {
+          "codice": "BVL-201",
+          "nome": "Base vibrante lineare 201",
+          "taglia": "S",
+          "materiale": "standard",
+          "modello_3d": {
+            "file": "bvl_201.glb",
+            "path": "/models/bvl/bvl_201.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvl_201"
+          },
+          "keywords": [
+            "vibratore lineare",
+            "201"
+          ]
+        },
+        {
+          "codice": "BVL-201-INOX",
+          "nome": "Base vibrante lineare 201 Inox",
+          "taglia": "S",
+          "materiale": "inox",
+          "modello_3d": {
+            "file": "bvl_201_inox.glb",
+            "path": "/models/bvl/bvl_201_inox.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvl_201_inox"
+          },
+          "keywords": [
+            "vibratore lineare",
+            "201",
+            "inox",
+            "acciaio inossidabile",
+            "alimentare",
+            "farmaceutico"
+          ]
+        },
+        {
+          "codice": "BVL-301",
+          "nome": "Base vibrante lineare 301",
+          "taglia": "M",
+          "materiale": "standard",
+          "modello_3d": {
+            "file": "bvl_301.glb",
+            "path": "/models/bvl/bvl_301.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvl_301"
+          },
+          "keywords": [
+            "vibratore lineare",
+            "301",
+            "medio"
+          ]
+        },
+        {
+          "codice": "BVL-401",
+          "nome": "Base vibrante lineare 401",
+          "taglia": "L",
+          "materiale": "standard",
+          "modello_3d": {
+            "file": "bvl_401.glb",
+            "path": "/models/bvl/bvl_401.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvl_401"
+          },
+          "keywords": [
+            "vibratore lineare",
+            "401",
+            "grande"
+          ]
+        },
+        {
+          "codice": "BVL-401TR",
+          "nome": "Base vibrante lineare 401 TR",
+          "taglia": "L",
+          "materiale": "standard",
+          "variante": "TR",
+          "modello_3d": {
+            "file": "bvl_401tr.glb",
+            "path": "/models/bvl/bvl_401tr.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvl_401tr"
+          },
+          "keywords": [
+            "vibratore lineare",
+            "401TR",
+            "TR",
+            "grande"
+          ]
+        },
+        {
+          "codice": "BVL-501",
+          "nome": "Base vibrante lineare 501",
+          "taglia": "XL",
+          "materiale": "standard",
+          "modello_3d": {
+            "file": "bvl_501.glb",
+            "path": "/models/bvl/bvl_501.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=bvl_501"
+          },
+          "keywords": [
+            "vibratore lineare",
+            "501",
+            "massimo"
+          ]
+        }
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire la base vibrante più adatta in base alle esigenze del cliente.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Ti serve una base vibrante circolare (per selezione e orientamento) o lineare (per trasporto e incolonnamento)?",
+        "se_circolare": "Q2_BVC",
+        "se_lineare": "Q2_BVL",
+        "se_non_sa": "Spiegare: la BVC è la tazza che orienta i pezzi, la BVL è il canale che li trasporta in fila dopo l'orientamento."
+      },
+      {
+        "id": "Q2_BVC",
+        "testo": "Qual è il diametro della tazza di selezione che ti serve (o la dimensione approssimativa dei particolari)?",
+        "mappa_diametri": {
+          "particolari_molto_piccoli": "BVC-061 (Ø150) o BVC-161 (Ø200)",
+          "particolari_piccoli": "BVC-261 (Ø250)",
+          "particolari_medi": "BVC-361 (Ø350)",
+          "particolari_grandi": "BVC-462 (Ø450) o BVC-532 (Ø550)",
+          "particolari_molto_grandi": "BVC-634 (Ø650)"
+        }
+      },
+      {
+        "id": "Q2_BVL",
+        "testo": "Hai requisiti di materiale speciale (es. settore alimentare/farmaceutico)?",
+        "se_inox": "BVL-201-INOX",
+        "se_standard": "Q3_BVL"
+      },
+      {
+        "id": "Q3_BVL",
+        "testo": "Qual è la portata o la dimensione dei particolari da trasportare?",
+        "mappa_taglie": {
+          "piccoli_leggeri": "BVL-101 o BVL-201",
+          "medi": "BVL-301",
+          "grandi": "BVL-401 o BVL-401TR",
+          "molto_grandi_pesanti": "BVL-501"
+        }
+      }
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatta",
+        "come sono",
+        "fammi vedere",
+        "anteprima",
+        "base vibrante",
+        "BVC",
+        "BVL"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere una base vibrante, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, usare la logica_selezione per guidare il cliente verso il modello più adatto e poi mostrare il 3D.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Ho bisogno di una base vibrante circolare da 350mm",
+          "risposta": "Per un diametro di 350mm ti consiglio la BVC-361. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "bvc_361.glb"
+        },
+        {
+          "utente": "Mi serve un vibratore lineare per il settore alimentare",
+          "risposta": "Per il settore alimentare ti consiglio la BVL-201 Inox in acciaio inossidabile, progettata per ambienti con requisiti igienici stringenti. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "bvl_201_inox.glb"
+        },
+        {
+          "utente": "Qual è la base circolare più grande che avete?",
+          "risposta": "La base vibrante circolare più grande è la BVC-634 con diametro Ø650. Ti mostro il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "bvc_634.glb"
+        },
+        {
+          "utente": "Devo trasportare pezzi pesanti su un vibratore lineare",
+          "risposta": "Per particolari pesanti e di grandi dimensioni ti consiglio la BVL-501, la nostra base lineare di taglia massima. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "bvl_501.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra BVL-401 e BVL-401TR?",
+          "risposta": "Entrambe sono basi lineari di taglia L. La variante 401TR ha caratteristiche specifiche per determinate applicazioni di trasporto. Ti mostro entrambi i modelli 3D per confrontarli:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "bvl_401.glb",
+            "bvl_401tr.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Che differenza c'è tra BVC e BVL?",
+      "risposta": "Le BVC sono basi vibranti circolari, usate per la selezione e l'orientamento dei particolari (la 'tazza' che smista i pezzi). Le BVL sono basi vibranti lineari, usate per il trasporto e l'incolonnamento dei particolari già orientati. In un'isola di asservimento tipica si usano insieme: la BVC orienta i pezzi e la BVL li trasporta in fila. Posso mostrarti i modelli 3D di entrambe."
+    },
+    {
+      "domanda": "Quante taglie di basi vibranti circolari ci sono?",
+      "risposta": "Deca Srl offre 7 modelli di BVC con diametri da Ø150 (modello 061) fino a Ø650 (modello 634). Vuoi vedere le taglie in 3D?"
+    },
+    {
+      "domanda": "Quante taglie di basi vibranti lineari ci sono?",
+      "risposta": "Ci sono 7 modelli di BVL: dal 101 al 501, inclusa la variante 201 Inox per settore alimentare/farmaceutico e la variante 401TR. Vuoi visualizzarle in 3D?"
+    },
+    {
+      "domanda": "Avete basi vibranti in acciaio inox?",
+      "risposta": "Sì, il modello BVL-201 Inox è disponibile in acciaio inossidabile, ideale per il settore alimentare e farmaceutico. Ti mostro il modello 3D?"
+    },
+    {
+      "domanda": "Come scelgo la taglia giusta della base vibrante circolare?",
+      "risposta": "La scelta dipende dalla dimensione dei particolari da trattare e dalla capacità di accumulo richiesta. Le taglie vanno da Ø150 per pezzi molto piccoli fino a Ø650 per pezzi grandi. Dimmi le dimensioni dei tuoi particolari e ti consiglio la taglia migliore."
+    }
+  ]
+}

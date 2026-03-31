@@ -1,0 +1,315 @@
+{
+  "categoria": "Strutture e piastre di appoggio per isole di asservimento",
+  "descrizione_generale": "I banchi di sostegno (STR) e le piastre di appoggio (PST) sono le strutture portanti su cui vengono montate le isole di asservimento IAS. Disponibili in acciaio verniciato, profilato di alluminio e acciaio inox AISI 304/316, con ampia gamma di dimensioni personalizzabili.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "famiglie": [
+    {
+      "codice_famiglia": "STR",
+      "nome": "Banco di sostegno per isole di asservimento",
+      "descrizione": "Strutture portanti a tavolo con piedini regolabili per il posizionamento delle isole di asservimento IAS. Disponibili in tre versioni per materiale e settore di applicazione.",
+      "prodotti": [
+        {
+          "codice": "STR01",
+          "nome": "Banco di sostegno STR01",
+          "descrizione": "Struttura in acciaio verniciato. Ampia gamma di dimensioni per i sostegni delle IAS.",
+          "materiale": "Acciaio verniciato",
+          "settore": "industriale generico",
+          "piedini_regolabili": true,
+          "dimensioni": "ampia gamma personalizzabile",
+          "modello_3d": {
+            "file": "str01.glb",
+            "path": "/models/str/str01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=str01"
+          },
+          "caratteristiche_chiave": {
+            "materiale": "acciaio verniciato",
+            "struttura": "tubolare saldato",
+            "inox": false,
+            "alluminio": false,
+            "settore_alimentare": false
+          },
+          "keywords": [
+            "banco sostegno",
+            "STR01",
+            "acciaio verniciato",
+            "struttura",
+            "tavolo",
+            "supporto IAS"
+          ]
+        },
+        {
+          "codice": "STR02",
+          "nome": "Banco di sostegno STR02",
+          "descrizione": "Struttura in profilato di alluminio con piastra in acciaio verniciato. Ampia gamma di dimensioni per i sostegni delle IAS.",
+          "materiale": "Profilato di alluminio + piastra acciaio verniciato",
+          "settore": "industriale generico",
+          "piedini_regolabili": true,
+          "dimensioni": "ampia gamma personalizzabile",
+          "modello_3d": {
+            "file": "str02.glb",
+            "path": "/models/str/str02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=str02"
+          },
+          "caratteristiche_chiave": {
+            "materiale": "alluminio profilato + acciaio verniciato",
+            "struttura": "profilato modulare",
+            "inox": false,
+            "alluminio": true,
+            "settore_alimentare": false
+          },
+          "keywords": [
+            "banco sostegno",
+            "STR02",
+            "alluminio",
+            "profilato",
+            "modulare",
+            "piastra acciaio",
+            "supporto IAS"
+          ]
+        },
+        {
+          "codice": "STR03",
+          "nome": "Banco di sostegno STR03",
+          "descrizione": "Struttura in acciaio inox AISI 304/316. Ampia gamma di dimensioni per i sostegni delle IAS, specifica per settori alimentari e pharma.",
+          "materiale": "Acciaio inox AISI 304 / 316",
+          "settore": "alimentare, farmaceutico, pharma",
+          "piedini_regolabili": true,
+          "dimensioni": "ampia gamma personalizzabile",
+          "modello_3d": {
+            "file": "str03.glb",
+            "path": "/models/str/str03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=str03"
+          },
+          "caratteristiche_chiave": {
+            "materiale": "acciaio inox AISI 304/316",
+            "struttura": "tubolare saldato inox",
+            "inox": true,
+            "alluminio": false,
+            "settore_alimentare": true
+          },
+          "keywords": [
+            "banco sostegno",
+            "STR03",
+            "inox",
+            "AISI 304",
+            "AISI 316",
+            "alimentare",
+            "farmaceutico",
+            "pharma",
+            "supporto IAS"
+          ]
+        }
+      ]
+    },
+    {
+      "codice_famiglia": "PST",
+      "nome": "Piastre di appoggio",
+      "descrizione": "Piastre di appoggio in acciaio verniciato per il montaggio delle basi vibranti e dei componenti delle isole di asservimento. Disponibili in forma rettangolare/quadrata e sagomata.",
+      "prodotti": [
+        {
+          "codice": "PST01",
+          "nome": "Piastra di appoggio rettangolare/quadrata PST01",
+          "descrizione": "Piastra rettangolare o quadrata in acciaio verniciato per l'appoggio delle basi vibranti.",
+          "forma": "rettangolare / quadrata",
+          "materiale": "Acciaio verniciato",
+          "modello_3d": {
+            "file": "pst01.glb",
+            "path": "/models/pst/pst01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=pst01"
+          },
+          "caratteristiche_chiave": {
+            "forma": "rettangolare/quadrata",
+            "materiale": "acciaio verniciato",
+            "sagomata": false
+          },
+          "keywords": [
+            "piastra appoggio",
+            "PST01",
+            "rettangolare",
+            "quadrata",
+            "acciaio verniciato"
+          ]
+        },
+        {
+          "codice": "PST02",
+          "nome": "Piastra di appoggio sagomata PST02",
+          "descrizione": "Piastra sagomata in acciaio verniciato per l'appoggio delle basi vibranti, con profilo personalizzato per configurazioni specifiche.",
+          "forma": "sagomata",
+          "materiale": "Acciaio verniciato",
+          "modello_3d": {
+            "file": "pst02.glb",
+            "path": "/models/pst/pst02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=pst02"
+          },
+          "caratteristiche_chiave": {
+            "forma": "sagomata",
+            "materiale": "acciaio verniciato",
+            "sagomata": true
+          },
+          "keywords": [
+            "piastra appoggio",
+            "PST02",
+            "sagomata",
+            "profilo personalizzato",
+            "acciaio verniciato"
+          ]
+        }
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire la struttura e la piastra più adatte.",
+    "domande": [
+      {
+        "id": "Q1_STR",
+        "testo": "In quale settore verrà utilizzata l'isola di asservimento?",
+        "opzioni": {
+          "alimentare_farmaceutico": {
+            "suggerimento": "STR03 in acciaio inox AISI 304/316",
+            "motivo": "Requisiti igienici e certificazioni di settore"
+          },
+          "industriale_generico": "Q2_STR"
+        }
+      },
+      {
+        "id": "Q2_STR",
+        "testo": "Preferisci una struttura saldata tradizionale o modulare in profilato di alluminio?",
+        "se_saldata": "STR01 - Acciaio verniciato, robusta e economica",
+        "se_modulare": "STR02 - Profilato di alluminio, leggera e riconfigurabile"
+      },
+      {
+        "id": "Q1_PST",
+        "testo": "La piastra di appoggio deve avere una forma standard (rettangolare/quadrata) o sagomata per una configurazione specifica?",
+        "se_standard": "PST01 - Piastra rettangolare/quadrata",
+        "se_sagomata": "PST02 - Piastra sagomata su misura"
+      }
+    ]
+  },
+  "compatibilita": {
+    "descrizione": "Tabella di compatibilità tra strutture/piastre e isole di asservimento.",
+    "mappatura_str": {
+      "IAS01": [
+        "STR01",
+        "STR02",
+        "STR03"
+      ],
+      "IAS02": [
+        "STR01",
+        "STR02",
+        "STR03"
+      ],
+      "IAS03": [
+        "STR01",
+        "STR02",
+        "STR03"
+      ],
+      "IAS04": [
+        "STR01",
+        "STR02",
+        "STR03"
+      ]
+    },
+    "mappatura_pst": {
+      "IAS01": [
+        "PST01",
+        "PST02"
+      ],
+      "IAS02": [
+        "PST01",
+        "PST02"
+      ],
+      "IAS03": [
+        "PST01",
+        "PST02"
+      ],
+      "IAS04": [
+        "PST01",
+        "PST02"
+      ]
+    },
+    "nota": "Tutte le strutture e piastre sono compatibili con tutte le isole IAS. Le dimensioni vengono personalizzate in base al modello IAS scelto."
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "banco",
+        "sostegno",
+        "struttura",
+        "piastra",
+        "tavolo",
+        "supporto",
+        "STR",
+        "PST"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere una struttura o piastra, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un banco di sostegno per la mia isola",
+          "risposta": "In quale settore lavori? Per uso alimentare o farmaceutico ti consiglio l'STR03 in inox. Per uso industriale generico puoi scegliere tra STR01 (acciaio verniciato) e STR02 (alluminio profilato, più leggero e modulare). Quale situazione si avvicina di più?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Lavoro nel settore alimentare",
+          "risposta": "Per il settore alimentare la scelta giusta è l'STR03 in acciaio inox AISI 304/316, conforme ai requisiti igienici di settore. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "str03.glb"
+        },
+        {
+          "utente": "Voglio qualcosa di leggero e modulare",
+          "risposta": "L'STR02 è perfetto: struttura in profilato di alluminio con piastra in acciaio verniciato, leggera e riconfigurabile. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "str02.glb"
+        },
+        {
+          "utente": "Mi serve una piastra sagomata",
+          "risposta": "La PST02 è la piastra sagomata in acciaio verniciato, con profilo personalizzato per la tua configurazione specifica. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "pst02.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra STR01, STR02 e STR03?",
+          "risposta": "L'STR01 è in acciaio verniciato, robusto ed economico. L'STR02 usa profilati di alluminio, è più leggero e modulare. L'STR03 è in inox AISI 304/316 per settore alimentare e pharma. Ti mostro tutti e tre?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "str01.glb",
+            "str02.glb",
+            "str03.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Che tipi di banchi di sostegno offrite?",
+      "risposta": "Deca Srl offre tre modelli di banco: STR01 in acciaio verniciato, STR02 in profilato di alluminio con piastra in acciaio, e STR03 in acciaio inox AISI 304/316 per settore alimentare e pharma. Tutti con piedini regolabili e dimensioni personalizzabili. Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Qual è il banco adatto per il settore alimentare?",
+      "risposta": "L'STR03 in acciaio inox AISI 304 o 316 è specificamente progettato per i settori alimentare e farmaceutico, con materiali conformi ai requisiti igienici."
+    },
+    {
+      "domanda": "Che differenza c'è tra PST01 e PST02?",
+      "risposta": "La PST01 è una piastra rettangolare o quadrata standard in acciaio verniciato. La PST02 è una piastra sagomata con profilo personalizzato, ideale quando la configurazione dell'isola richiede una forma specifica."
+    },
+    {
+      "domanda": "Le dimensioni del banco sono personalizzabili?",
+      "risposta": "Sì, tutti i banchi STR01, STR02 e STR03 sono disponibili in un'ampia gamma di dimensioni personalizzabili in base al modello di isola IAS da sostenere."
+    },
+    {
+      "domanda": "Posso usare il banco STR02 in alluminio per il settore pharma?",
+      "risposta": "Per il settore farmaceutico consigliamo l'STR03 in acciaio inox AISI 304/316, che garantisce la conformità ai requisiti igienici. L'STR02 in alluminio è più indicato per ambienti industriali generici."
+    }
+  ]
+}

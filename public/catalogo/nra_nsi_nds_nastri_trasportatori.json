@@ -1,0 +1,364 @@
+{
+  "categoria": "Nastri trasportatori",
+  "descrizione_generale": "I nastri trasportatori Deca Srl sono impiegati nei più svariati settori per il trasporto, la copia di file prodotti e il superamento di dislivelli. Disponibili in tre configurazioni: rettilineo (NRA), a sedia inferiore (NSI) e a doppia sedia (NDS), ciascuna con 4 varianti di tappeto.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "tipologie_tappeto": {
+    "01": {
+      "nome": "Tappeto in tela",
+      "descrizione": "Nastro in tela, economico e versatile per trasporto generico"
+    },
+    "02": {
+      "nome": "Tappeto in table top",
+      "descrizione": "Nastro a catena table top, robusto per particolari pesanti e trasporto intensivo"
+    },
+    "03": {
+      "nome": "Tapparella metallica",
+      "descrizione": "Tapparella in metallo per particolari pesanti, caldi o abrasivi"
+    },
+    "04": {
+      "nome": "Tapparelle modulari plastiche",
+      "descrizione": "Tapparella modulare in plastica, facile pulizia per settori igienici"
+    }
+  },
+  "famiglie": [
+    {
+      "codice_famiglia": "NRA",
+      "nome": "Nastro trasportatore rettilineo",
+      "descrizione": "Nastro trasportatore rettilineo impiegato nei più svariati settori per il trasporto, la copia di file prodotti e il superamento di un dislivello. Configurazione piana o con leggera inclinazione.",
+      "configurazione": "rettilineo",
+      "applicazioni": [
+        "trasporto orizzontale",
+        "copia file prodotti",
+        "superamento dislivello leggero"
+      ],
+      "modelli": [
+        {
+          "codice": "NRA01",
+          "tappeto": "tela",
+          "modello_3d": {
+            "file": "nra01.glb",
+            "path": "/models/nra/nra01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nra01"
+          }
+        },
+        {
+          "codice": "NRA02",
+          "tappeto": "table top",
+          "modello_3d": {
+            "file": "nra02.glb",
+            "path": "/models/nra/nra02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nra02"
+          }
+        },
+        {
+          "codice": "NRA03",
+          "tappeto": "tapparella metallica",
+          "modello_3d": {
+            "file": "nra03.glb",
+            "path": "/models/nra/nra03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nra03"
+          }
+        },
+        {
+          "codice": "NRA04",
+          "tappeto": "tapparelle modulari plastiche",
+          "modello_3d": {
+            "file": "nra04.glb",
+            "path": "/models/nra/nra04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nra04"
+          }
+        }
+      ],
+      "caratteristiche_chiave": {
+        "sedia_inferiore": false,
+        "sedia_superiore": false,
+        "dislivello": "leggero o nullo",
+        "ingombro": "minimo"
+      },
+      "keywords": [
+        "nastro trasportatore",
+        "rettilineo",
+        "NRA",
+        "trasporto",
+        "orizzontale",
+        "piano",
+        "convogliatore"
+      ]
+    },
+    {
+      "codice_famiglia": "NSI",
+      "nome": "Nastro trasportatore a sedia inferiore",
+      "descrizione": "Nastro trasportatore a sedia inferiore impiegato nei più svariati settori per il trasporto e superamento di un dislivello. La sedia inferiore raccoglie i pezzi a livello pavimento e li trasporta in salita.",
+      "configurazione": "a sedia inferiore (inclinato con raccolta bassa)",
+      "applicazioni": [
+        "trasporto con dislivello",
+        "raccolta da pavimento",
+        "alimentazione dall'alto"
+      ],
+      "modelli": [
+        {
+          "codice": "NSI01",
+          "tappeto": "tela",
+          "modello_3d": {
+            "file": "nsi01.glb",
+            "path": "/models/nsi/nsi01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nsi01"
+          }
+        },
+        {
+          "codice": "NSI02",
+          "tappeto": "table top",
+          "modello_3d": {
+            "file": "nsi02.glb",
+            "path": "/models/nsi/nsi02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nsi02"
+          }
+        },
+        {
+          "codice": "NSI03",
+          "tappeto": "tapparella metallica",
+          "modello_3d": {
+            "file": "nsi03.glb",
+            "path": "/models/nsi/nsi03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nsi03"
+          }
+        },
+        {
+          "codice": "NSI04",
+          "tappeto": "tapparelle modulari plastiche",
+          "modello_3d": {
+            "file": "nsi04.glb",
+            "path": "/models/nsi/nsi04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nsi04"
+          }
+        }
+      ],
+      "caratteristiche_chiave": {
+        "sedia_inferiore": true,
+        "sedia_superiore": false,
+        "dislivello": "medio-alto",
+        "ingombro": "medio"
+      },
+      "keywords": [
+        "nastro trasportatore",
+        "sedia inferiore",
+        "NSI",
+        "inclinato",
+        "dislivello",
+        "raccolta bassa",
+        "salita"
+      ]
+    },
+    {
+      "codice_famiglia": "NDS",
+      "nome": "Nastro trasportatore a doppia sedia",
+      "descrizione": "Nastro trasportatore a doppia sedia impiegato nei più svariati settori per il trasporto e superamento di un dislivello. Combina sedia inferiore per la raccolta e sedia superiore per lo scarico controllato.",
+      "configurazione": "a doppia sedia (raccolta bassa + scarico controllato alto)",
+      "applicazioni": [
+        "trasporto con dislivello importante",
+        "raccolta da pavimento",
+        "scarico controllato in quota"
+      ],
+      "modelli": [
+        {
+          "codice": "NDS01",
+          "tappeto": "tela",
+          "modello_3d": {
+            "file": "nds01.glb",
+            "path": "/models/nds/nds01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nds01"
+          }
+        },
+        {
+          "codice": "NDS02",
+          "tappeto": "table top",
+          "modello_3d": {
+            "file": "nds02.glb",
+            "path": "/models/nds/nds02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nds02"
+          }
+        },
+        {
+          "codice": "NDS03",
+          "tappeto": "tapparella metallica",
+          "modello_3d": {
+            "file": "nds03.glb",
+            "path": "/models/nds/nds03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nds03"
+          }
+        },
+        {
+          "codice": "NDS04",
+          "tappeto": "tapparelle modulari plastiche",
+          "modello_3d": {
+            "file": "nds04.glb",
+            "path": "/models/nds/nds04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=nds04"
+          }
+        }
+      ],
+      "caratteristiche_chiave": {
+        "sedia_inferiore": true,
+        "sedia_superiore": true,
+        "dislivello": "alto",
+        "ingombro": "maggiore"
+      },
+      "keywords": [
+        "nastro trasportatore",
+        "doppia sedia",
+        "NDS",
+        "dislivello",
+        "raccolta bassa",
+        "scarico alto",
+        "versatile"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire il nastro trasportatore più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Il trasporto è orizzontale o deve superare un dislivello?",
+        "se_orizzontale": "NRA - Nastro rettilineo",
+        "se_dislivello": "Q2_DISLIVELLO"
+      },
+      {
+        "id": "Q2_DISLIVELLO",
+        "testo": "I pezzi vengono raccolti a livello pavimento e devono arrivare in quota?",
+        "se_solo_raccolta_bassa": "NSI - Sedia inferiore (raccolta bassa, scarico libero in alto)",
+        "se_raccolta_e_scarico_controllato": "NDS - Doppia sedia (raccolta bassa + scarico controllato in quota)"
+      },
+      {
+        "id": "Q3",
+        "testo": "Che tipo di particolari trasporti?",
+        "opzioni": {
+          "standard_leggeri": "01 - Tappeto in tela (economico, versatile)",
+          "pesanti_intensivo": "02 - Table top (robusto, durevole)",
+          "pesanti_caldi_abrasivi": "03 - Tapparella metallica",
+          "settore_igienico": "04 - Tapparelle modulari plastiche (facile pulizia)"
+        }
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Famiglia",
+      "Nome",
+      "Configurazione",
+      "Dislivello",
+      "Vantaggi"
+    ],
+    "righe": [
+      [
+        "NRA",
+        "Rettilineo",
+        "Piano / leggera inclinazione",
+        "Nullo-leggero",
+        "Compatto, trasporto orizzontale"
+      ],
+      [
+        "NSI",
+        "Sedia inferiore",
+        "Inclinato con raccolta bassa",
+        "Medio-alto",
+        "Raccolta da pavimento, salita"
+      ],
+      [
+        "NDS",
+        "Doppia sedia",
+        "Raccolta bassa + scarico alto",
+        "Alto",
+        "Massima versatilità, scarico controllato"
+      ]
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "nastro",
+        "trasportatore",
+        "convogliatore",
+        "NRA",
+        "NSI",
+        "NDS",
+        "rettilineo",
+        "sedia",
+        "doppia sedia"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un nastro trasportatore, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un nastro per trasportare pezzi in orizzontale",
+          "risposta": "Il NRA (nastro rettilineo) è la scelta ideale per il trasporto orizzontale. Che tipo di pezzi trasporti? Ti propongo il tappeto più adatto.",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Pezzi leggeri in plastica",
+          "risposta": "Per pezzi leggeri in plastica il NRA01 con tappeto in tela è perfetto: economico e versatile. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "nra01.glb"
+        },
+        {
+          "utente": "Devo portare i pezzi dal pavimento a 2 metri di altezza",
+          "risposta": "Per un dislivello importante hai due opzioni: NSI (sedia inferiore, raccolta bassa con scarico libero in alto) o NDS (doppia sedia, raccolta bassa + scarico controllato in quota). Vuoi più controllo sullo scarico?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Sì, voglio lo scarico controllato",
+          "risposta": "L'NDS (doppia sedia) è perfetto: raccoglie i pezzi in basso e li scarica in modo controllato in quota. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "nds01.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra i tre nastri trasportatori?",
+          "risposta": "L'NRA è rettilineo per trasporto orizzontale o con leggera inclinazione. L'NSI ha una sedia inferiore per raccogliere i pezzi da terra e trasportarli in salita. L'NDS ha doppia sedia per raccolta bassa e scarico controllato in alto. Ti mostro tutti e tre?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "nra01.glb",
+            "nsi01.glb",
+            "nds01.glb"
+          ]
+        },
+        {
+          "utente": "Mi serve un nastro per il settore alimentare",
+          "risposta": "Per il settore alimentare ti consiglio la variante 04 con tapparelle modulari plastiche, facili da pulire e conformi ai requisiti igienici. Disponibile su tutti e tre i nastri (NRA04, NSI04, NDS04). Quale configurazione ti serve?",
+          "azione": "ATTENDI_RISPOSTA"
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali nastri trasportatori offrite?",
+      "risposta": "Deca Srl offre tre famiglie di nastri trasportatori: NRA (rettilineo), NSI (sedia inferiore per dislivello) e NDS (doppia sedia per dislivello con scarico controllato). Ciascuna con 4 varianti di tappeto. Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Che tipi di tappeto sono disponibili?",
+      "risposta": "Quattro varianti per ogni nastro: 01 (tela, economico), 02 (table top, robusto), 03 (tapparella metallica, per pezzi pesanti/caldi/abrasivi) e 04 (tapparelle modulari plastiche, per settori igienici)."
+    },
+    {
+      "domanda": "Quando usare il nastro a doppia sedia NDS?",
+      "risposta": "L'NDS è ideale quando devi superare un dislivello importante con raccolta pezzi a livello pavimento e scarico controllato in quota. La doppia sedia garantisce il massimo controllo sul flusso in entrata e in uscita."
+    },
+    {
+      "domanda": "Che differenza c'è tra nastro trasportatore e elevatore di carico?",
+      "risposta": "Gli elevatori di carico (ELC/ESI/ESS/EDS) sono specifici per alimentare i contenitori delle isole di asservimento. I nastri trasportatori (NRA/NSI/NDS) sono più generici, usati per trasportare prodotti tra stazioni diverse della linea produttiva, anche senza isole di asservimento."
+    },
+    {
+      "domanda": "I nastri sono personalizzabili in lunghezza e larghezza?",
+      "risposta": "Sì, tutti i nastri NRA, NSI e NDS sono realizzati su misura in base alle esigenze della linea produttiva. Contatta Deca Srl per una configurazione personalizzata."
+    }
+  ]
+}

@@ -1,0 +1,332 @@
+{
+  "categoria": "Sistemi di carico e dosaggio",
+  "descrizione_generale": "I sistemi di carico e dosaggio Deca Srl comprendono canali vibranti (CVE) e tramogge chiuse (TRC) per l'alimentazione controllata e il dosaggio di particolari nelle isole di asservimento e nelle linee produttive. Indicati per la polmonatura e il dosaggio di particolari, realizzati in Fe e Inox.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "famiglie": [
+    {
+      "codice_famiglia": "CVE",
+      "nome": "Canali vibranti",
+      "descrizione": "Canali vibranti per il dosaggio e l'alimentazione controllata di particolari. Disponibili alloggiati su base vibrante lineare o con elettromagnete appeso.",
+      "prodotti": [
+        {
+          "codice": "CVE01",
+          "nome": "Canale vibrante alloggiato su base vibrante lineare",
+          "descrizione": "Canale vibrante alloggiato su base vibrante lineare per il dosaggio e l'alimentazione controllata dei particolari. Compatto e stabile, ideale per installazioni fisse.",
+          "tipo_montaggio": "su base vibrante lineare",
+          "taglie_litri": [
+            10,
+            25,
+            50,
+            80
+          ],
+          "modello_3d": {
+            "file": "cve01.glb",
+            "path": "/models/cve/cve01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cve01"
+          },
+          "caratteristiche_chiave": {
+            "montaggio": "base vibrante lineare",
+            "appeso": false,
+            "stabile": true,
+            "compatto": true
+          },
+          "keywords": [
+            "canale vibrante",
+            "CVE01",
+            "base vibrante lineare",
+            "dosaggio",
+            "alimentazione",
+            "compatto"
+          ]
+        },
+        {
+          "codice": "CVE02",
+          "nome": "Canale vibrante con elettromagnete appeso",
+          "descrizione": "Canale vibrante con elettromagnete appeso per il dosaggio e l'alimentazione controllata dei particolari. Montaggio sospeso che libera spazio a terra e permette flessibilità di posizionamento.",
+          "tipo_montaggio": "elettromagnete appeso",
+          "taglie_mm": [
+            {
+              "larghezza": 600,
+              "lunghezza": 1500
+            },
+            {
+              "larghezza": 800,
+              "lunghezza": 2500
+            },
+            {
+              "larghezza": 1000,
+              "lunghezza": 5000
+            }
+          ],
+          "modello_3d": {
+            "file": "cve02.glb",
+            "path": "/models/cve/cve02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cve02"
+          },
+          "caratteristiche_chiave": {
+            "montaggio": "elettromagnete appeso",
+            "appeso": true,
+            "stabile": false,
+            "compatto": false,
+            "libera_spazio_terra": true
+          },
+          "keywords": [
+            "canale vibrante",
+            "CVE02",
+            "elettromagnete",
+            "appeso",
+            "sospeso",
+            "dosaggio",
+            "alimentazione",
+            "grande"
+          ]
+        }
+      ]
+    },
+    {
+      "codice_famiglia": "TRC",
+      "nome": "Tramogge chiuse",
+      "descrizione": "Tramogge chiuse vibranti per la polmonatura e il dosaggio di particolari. Indicate per il dosaggio controllato e la polmonatura, realizzate in Fe e Inox.",
+      "prodotti": [
+        {
+          "codice": "TRC01",
+          "nome": "Tramoggia chiusa alloggiata su base vibrante lineare",
+          "descrizione": "Tramoggia chiusa alloggiata su base vibrante lineare. Indicata in caso di polmonatura e dosaggio particolari, realizzata in Fe e Inox. Installazione stabile a terra con vibrazione lineare per dosaggio preciso.",
+          "tipo_montaggio": "su base vibrante lineare",
+          "taglie_litri": [
+            5,
+            15,
+            30,
+            50,
+            80
+          ],
+          "materiali": [
+            "Fe (acciaio)",
+            "Inox"
+          ],
+          "modello_3d": {
+            "file": "trc01.glb",
+            "path": "/models/trc/trc01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=trc01"
+          },
+          "caratteristiche_chiave": {
+            "montaggio": "base vibrante lineare",
+            "appeso": false,
+            "chiusa": true,
+            "polmonatura": true,
+            "dosaggio": true,
+            "inox_disponibile": true
+          },
+          "keywords": [
+            "tramoggia chiusa",
+            "TRC01",
+            "base vibrante lineare",
+            "polmonatura",
+            "dosaggio",
+            "Fe",
+            "Inox"
+          ]
+        },
+        {
+          "codice": "TRC02",
+          "nome": "Tramoggia chiusa alloggiata su elettromagnete appeso",
+          "descrizione": "Tramoggia chiusa alloggiata su elettromagnete appeso. Indicata in caso di polmonatura e dosaggio particolari, realizzata in Fe e Inox. Montaggio sospeso per flessibilità e risparmio di spazio a terra.",
+          "tipo_montaggio": "elettromagnete appeso",
+          "materiali": [
+            "Fe (acciaio)",
+            "Inox"
+          ],
+          "modello_3d": {
+            "file": "trc02.glb",
+            "path": "/models/trc/trc02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=trc02"
+          },
+          "caratteristiche_chiave": {
+            "montaggio": "elettromagnete appeso",
+            "appeso": true,
+            "chiusa": true,
+            "polmonatura": true,
+            "dosaggio": true,
+            "inox_disponibile": true,
+            "libera_spazio_terra": true
+          },
+          "keywords": [
+            "tramoggia chiusa",
+            "TRC02",
+            "elettromagnete",
+            "appeso",
+            "sospeso",
+            "polmonatura",
+            "dosaggio",
+            "Fe",
+            "Inox"
+          ]
+        }
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire il sistema di carico e dosaggio più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Ti serve un canale aperto per il dosaggio o una tramoggia chiusa per polmonatura e dosaggio?",
+        "se_canale_aperto": "CVE - Canale vibrante",
+        "se_tramoggia_chiusa": "TRC - Tramoggia chiusa"
+      },
+      {
+        "id": "Q2_MONTAGGIO",
+        "testo": "Preferisci un montaggio a terra (su base vibrante lineare) o sospeso (elettromagnete appeso)?",
+        "se_a_terra": {
+          "CVE": "CVE01 - Canale vibrante su base lineare (taglie 10-80L)",
+          "TRC": "TRC01 - Tramoggia chiusa su base lineare (taglie 5-80L)"
+        },
+        "se_sospeso": {
+          "CVE": "CVE02 - Canale vibrante con elettromagnete appeso (da 600x1500 a 1000x5000mm)",
+          "TRC": "TRC02 - Tramoggia chiusa su elettromagnete appeso"
+        }
+      },
+      {
+        "id": "Q3_MATERIALE",
+        "testo": "Lavori nel settore alimentare/farmaceutico?",
+        "se_si": "Versione Inox (disponibile per TRC01 e TRC02)",
+        "se_no": "Versione Fe standard"
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Codice",
+      "Nome",
+      "Tipo",
+      "Montaggio",
+      "Taglie",
+      "Materiali"
+    ],
+    "righe": [
+      [
+        "CVE01",
+        "Canale vibrante",
+        "Aperto",
+        "Base vibrante lineare",
+        "10-25-50-80L",
+        "Standard"
+      ],
+      [
+        "CVE02",
+        "Canale vibrante",
+        "Aperto",
+        "Elettromagnete appeso",
+        "600x1500 - 1000x5000mm",
+        "Standard"
+      ],
+      [
+        "TRC01",
+        "Tramoggia chiusa",
+        "Chiusa",
+        "Base vibrante lineare",
+        "5-15-30-50-80L",
+        "Fe / Inox"
+      ],
+      [
+        "TRC02",
+        "Tramoggia chiusa",
+        "Chiusa",
+        "Elettromagnete appeso",
+        "Personalizzabile",
+        "Fe / Inox"
+      ]
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "canale vibrante",
+        "tramoggia",
+        "dosaggio",
+        "carico",
+        "polmonatura",
+        "CVE",
+        "TRC"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un sistema di carico/dosaggio, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un sistema per dosare i pezzi nel contenitore",
+          "risposta": "Per il dosaggio hai due famiglie: i canali vibranti CVE (aperti, per dosaggio diretto) e le tramogge chiuse TRC (per polmonatura e dosaggio controllato). Ti serve un sistema aperto o chiuso?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Chiuso, per la polmonatura",
+          "risposta": "Perfetto. Preferisci montaggio a terra (TRC01 su base vibrante lineare, taglie 5-80L) o sospeso (TRC02 su elettromagnete appeso, libera spazio a terra)?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "A terra, taglia 50L",
+          "risposta": "La TRC01 da 50L su base vibrante lineare è la scelta giusta. Disponibile in Fe e Inox. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "trc01.glb"
+        },
+        {
+          "utente": "Ho bisogno di un canale vibrante grande, sospeso",
+          "risposta": "Il CVE02 con elettromagnete appeso è la soluzione: disponibile nelle taglie 600x1500mm, 800x2500mm e 1000x5000mm. Montaggio sospeso che libera spazio a terra. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cve02.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra CVE e TRC?",
+          "risposta": "I CVE sono canali vibranti aperti per il dosaggio e l'alimentazione. Le TRC sono tramogge chiuse specifiche per la polmonatura e il dosaggio controllato, disponibili anche in Inox per settori alimentari e pharma. Entrambi disponibili a terra o sospesi. Ti mostro tutti e quattro?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "cve01.glb",
+            "cve02.glb",
+            "trc01.glb",
+            "trc02.glb"
+          ]
+        },
+        {
+          "utente": "Tramoggia per settore alimentare",
+          "risposta": "Le tramogge TRC01 e TRC02 sono disponibili in Inox, perfette per il settore alimentare. La TRC01 si monta a terra su base vibrante lineare, la TRC02 è sospesa su elettromagnete. Quale configurazione preferisci?",
+          "azione": "ATTENDI_RISPOSTA"
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali sistemi di carico e dosaggio offrite?",
+      "risposta": "Deca Srl offre canali vibranti (CVE01 su base lineare, CVE02 con elettromagnete appeso) e tramogge chiuse (TRC01 su base lineare, TRC02 con elettromagnete appeso). Le tramogge sono disponibili anche in Inox. Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Che differenza c'è tra montaggio a terra e appeso?",
+      "risposta": "Il montaggio a terra (CVE01, TRC01) usa una base vibrante lineare, è stabile e compatto. Il montaggio appeso (CVE02, TRC02) usa un elettromagnete sospeso, libera spazio a terra e offre più flessibilità di posizionamento."
+    },
+    {
+      "domanda": "Le tramogge sono disponibili in inox?",
+      "risposta": "Sì, le tramogge TRC01 e TRC02 sono realizzabili sia in Fe (acciaio standard) che in Inox per settori alimentare e farmaceutico."
+    },
+    {
+      "domanda": "Quali taglie sono disponibili per il canale vibrante CVE01?",
+      "risposta": "Il CVE01 è disponibile nelle taglie 10L, 25L, 50L e 80L."
+    },
+    {
+      "domanda": "Quali taglie sono disponibili per il canale vibrante CVE02?",
+      "risposta": "Il CVE02 con elettromagnete appeso è disponibile nelle taglie 600x1500mm, 800x2500mm e 1000x5000mm (larghezza x lunghezza)."
+    },
+    {
+      "domanda": "Quando serve una tramoggia chiusa invece di un canale aperto?",
+      "risposta": "La tramoggia chiusa TRC è indicata quando serve polmonatura controllata e dosaggio preciso, quando i particolari devono essere contenuti (polveri, granuli, pezzi molto piccoli) o in ambienti che richiedono contenimento (pharma, alimentare). Il canale aperto CVE è sufficiente per dosaggio di pezzi standard."
+    }
+  ]
+}

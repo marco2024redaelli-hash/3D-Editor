@@ -1,0 +1,250 @@
+{
+  "categoria": "Vibrovagli e canali vibranti a masse eccentriche",
+  "descrizione_generale": "I canali vibranti a masse eccentriche (CVM) e i vibrovagli sono sistemi di trasporto e vagliatura ad alta capacità azionati da motori con masse eccentriche. Disponibili in configurazione unidirezionale, bidirezionale e vibrovaglio per la separazione dimensionale dei prodotti.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "CVM01",
+      "nome": "Canale vibrante unidirezionale",
+      "descrizione": "Canale vibrante unidirezionale a masse eccentriche. Trasporta i pezzi in una sola direzione con motori a masse eccentriche ad alta capacità.",
+      "tipo": "unidirezionale",
+      "azionamento": "masse eccentriche",
+      "taglie": [
+        {
+          "capacita_litri": 200,
+          "dimensioni_mm": "1600x600x200"
+        },
+        {
+          "capacita_litri": 500,
+          "dimensioni_mm": "2500x800x250"
+        },
+        {
+          "capacita_litri": 1800,
+          "dimensioni_mm": "4500x1000x400"
+        }
+      ],
+      "modello_3d": {
+        "file": "cvm01.glb",
+        "path": "/models/cvm/cvm01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=cvm01"
+      },
+      "caratteristiche_chiave": {
+        "direzione": "unidirezionale",
+        "bidirezionale": false,
+        "vagliatura": false,
+        "alta_capacita": true,
+        "masse_eccentriche": true
+      },
+      "keywords": [
+        "canale vibrante",
+        "CVM01",
+        "unidirezionale",
+        "masse eccentriche",
+        "alta capacità",
+        "trasporto"
+      ]
+    },
+    {
+      "codice": "CVM02",
+      "nome": "Canale vibrante bidirezionale",
+      "descrizione": "Canale vibrante bidirezionale a masse eccentriche. Utilizzato per il trasferimento bidirezionale di pezzi di varie tipologie. Permette di invertire la direzione di trasporto per alimentare stazioni diverse.",
+      "tipo": "bidirezionale",
+      "azionamento": "masse eccentriche",
+      "modello_3d": {
+        "file": "cvm02.glb",
+        "path": "/models/cvm/cvm02.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=cvm02"
+      },
+      "caratteristiche_chiave": {
+        "direzione": "bidirezionale",
+        "bidirezionale": true,
+        "vagliatura": false,
+        "alta_capacita": true,
+        "masse_eccentriche": true,
+        "inversione_direzione": true
+      },
+      "keywords": [
+        "canale vibrante",
+        "CVM02",
+        "bidirezionale",
+        "masse eccentriche",
+        "trasferimento",
+        "inversione",
+        "due direzioni"
+      ]
+    },
+    {
+      "codice": "CVM03",
+      "nome": "Vibrovaglio",
+      "descrizione": "Vibrovaglio a masse eccentriche indicato per la vagliatura di prodotti di dimensioni differenti. Separa i prodotti tramite reti o griglie vibranti che lasciano passare i pezzi più piccoli trattenendo quelli più grandi.",
+      "tipo": "vibrovaglio",
+      "azionamento": "masse eccentriche",
+      "modello_3d": {
+        "file": "cvm03.glb",
+        "path": "/models/cvm/cvm03.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=cvm03"
+      },
+      "caratteristiche_chiave": {
+        "direzione": "unidirezionale",
+        "bidirezionale": false,
+        "vagliatura": true,
+        "alta_capacita": true,
+        "masse_eccentriche": true,
+        "separazione_dimensionale": true
+      },
+      "keywords": [
+        "vibrovaglio",
+        "CVM03",
+        "vagliatura",
+        "masse eccentriche",
+        "separazione",
+        "cernita",
+        "dimensioni differenti",
+        "griglia",
+        "setaccio"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire il canale vibrante o vibrovaglio più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Qual è la funzione principale?",
+        "opzioni": {
+          "trasporto_una_direzione": "CVM01 - Canale vibrante unidirezionale",
+          "trasporto_due_direzioni": "CVM02 - Canale vibrante bidirezionale",
+          "vagliatura_separazione": "CVM03 - Vibrovaglio per separazione dimensionale"
+        }
+      },
+      {
+        "id": "Q2_CVM01",
+        "testo": "Quale capacità ti serve?",
+        "opzioni": {
+          "piccola": "200L (1600x600x200mm)",
+          "media": "500L (2500x800x250mm)",
+          "grande": "1800L (4500x1000x400mm)"
+        }
+      },
+      {
+        "id": "Q2_CVM02",
+        "testo": "Devi alimentare stazioni su lati opposti o invertire il flusso?",
+        "nota": "Il CVM02 bidirezionale permette di cambiare la direzione di trasporto, ideale per linee flessibili con più punti di scarico."
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Codice",
+      "Nome",
+      "Direzione",
+      "Funzione",
+      "Taglie disponibili"
+    ],
+    "righe": [
+      [
+        "CVM01",
+        "Canale unidirezionale",
+        "Una direzione",
+        "Trasporto",
+        "200L - 500L - 1800L"
+      ],
+      [
+        "CVM02",
+        "Canale bidirezionale",
+        "Due direzioni",
+        "Trasporto/trasferimento",
+        "Personalizzabile"
+      ],
+      [
+        "CVM03",
+        "Vibrovaglio",
+        "Una direzione",
+        "Vagliatura/separazione",
+        "Personalizzabile"
+      ]
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "canale vibrante",
+        "masse eccentriche",
+        "vibrovaglio",
+        "vagliatura",
+        "CVM",
+        "bidirezionale",
+        "unidirezionale"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un canale vibrante a masse eccentriche o un vibrovaglio, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un canale vibrante ad alta capacità",
+          "risposta": "I canali vibranti a masse eccentriche CVM sono ideali per alta capacità. Il trasporto è solo in una direzione o devi poter invertire il flusso?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Una sola direzione, capacità grande",
+          "risposta": "Il CVM01 da 1800L (4500x1000x400mm) è il più grande: canale vibrante unidirezionale a masse eccentriche. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cvm01.glb"
+        },
+        {
+          "utente": "Devo trasferire pezzi in due direzioni diverse",
+          "risposta": "Il CVM02 bidirezionale è perfetto: permette di invertire la direzione di trasporto per alimentare stazioni su lati opposti. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cvm02.glb"
+        },
+        {
+          "utente": "Devo separare pezzi di dimensioni diverse con un setaccio vibrante",
+          "risposta": "Il CVM03 vibrovaglio è progettato esattamente per questo: vagliatura e separazione dimensionale tramite griglia vibrante a masse eccentriche. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cvm03.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra i tre CVM?",
+          "risposta": "Il CVM01 è unidirezionale per trasporto in una direzione. Il CVM02 è bidirezionale per invertire il flusso e alimentare più stazioni. Il CVM03 è un vibrovaglio per separare prodotti di dimensioni diverse. Tutti a masse eccentriche per alta capacità. Ti mostro tutti e tre?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "cvm01.glb",
+            "cvm02.glb",
+            "cvm03.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali canali vibranti a masse eccentriche offrite?",
+      "risposta": "Deca Srl offre tre modelli: CVM01 (unidirezionale, taglie 200-500-1800L), CVM02 (bidirezionale, per trasferimento in due direzioni) e CVM03 (vibrovaglio per vagliatura e separazione dimensionale). Tutti azionati da motori a masse eccentriche. Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Che differenza c'è tra canale vibrante CVE e CVM?",
+      "risposta": "I CVE sono canali vibranti azionati da elettromagnete o base vibrante lineare, adatti per dosaggio e alimentazione di precisione. I CVM sono azionati da masse eccentriche (motori vibranti), progettati per alta capacità e grandi portate. I CVM sono la scelta per volumi elevati."
+    },
+    {
+      "domanda": "Quando serve il canale bidirezionale CVM02?",
+      "risposta": "Il CVM02 è ideale quando devi alimentare stazioni su lati opposti della linea o quando il flusso di produzione deve poter essere invertito in base alle necessità. Permette di trasferire pezzi di varie tipologie in entrambe le direzioni."
+    },
+    {
+      "domanda": "Come funziona il vibrovaglio CVM03?",
+      "risposta": "Il CVM03 utilizza griglie o reti vibranti azionate da masse eccentriche: i prodotti più piccoli passano attraverso la griglia mentre quelli più grandi proseguono sul piano. È indicato per la vagliatura di prodotti di dimensioni differenti."
+    },
+    {
+      "domanda": "Qual è la capacità massima del canale vibrante CVM01?",
+      "risposta": "Il CVM01 è disponibile fino alla taglia 1800L con dimensioni 4500x1000x400mm. Le taglie più piccole sono 200L (1600x600x200mm) e 500L (2500x800x250mm)."
+    }
+  ]
+}

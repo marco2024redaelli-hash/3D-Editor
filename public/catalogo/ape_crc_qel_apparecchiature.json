@@ -1,0 +1,249 @@
+{
+  "categoria": "Apparecchiature elettriche",
+  "descrizione_generale": "Le apparecchiature elettriche Deca Srl gestiscono il controllo e la regolazione delle isole di asservimento. Comprendono apparecchiature di controllo vibrazione (APE), circuiti di controllo vibrazione (CRC) e quadri elettrici completi (QEL) per impianti stand-alone.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "APE",
+      "nome": "Apparecchiatura di controllo vibrazione",
+      "descrizione": "Apparecchiatura elettrica per la gestione delle isole di asservimento con possibilità di controllo da PLC, gestione delle frequenze e delle ampiezze. Associate talvolta ad accelerometri.",
+      "funzionalita": [
+        "Controllo da PLC",
+        "Gestione delle frequenze",
+        "Gestione delle ampiezze",
+        "Compatibilità con accelerometri"
+      ],
+      "tipo": "controller_esterno",
+      "interfaccia": "display digitale con tastierino",
+      "modello_3d": {
+        "file": "ape.glb",
+        "path": "/models/apparecchiature/ape.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ape"
+      },
+      "caratteristiche_chiave": {
+        "controllo_plc": true,
+        "gestione_frequenze": true,
+        "gestione_ampiezze": true,
+        "accelerometri": "opzionale",
+        "livello": "avanzato",
+        "stand_alone": false
+      },
+      "keywords": [
+        "apparecchiatura controllo",
+        "APE",
+        "controllo vibrazione",
+        "PLC",
+        "frequenza",
+        "ampiezza",
+        "accelerometro",
+        "display"
+      ]
+    },
+    {
+      "codice": "CRC",
+      "nome": "Circuito di controllo vibrazione",
+      "descrizione": "Circuito elettrico base per la gestione delle isole di asservimento con possibilità di controllo da PLC, gestione delle frequenze e delle ampiezze. Associati talvolta ad accelerometri.",
+      "funzionalita": [
+        "Controllo da PLC",
+        "Gestione delle frequenze",
+        "Gestione delle ampiezze",
+        "Compatibilità con accelerometri"
+      ],
+      "tipo": "circuito_base",
+      "interfaccia": "scheda elettronica (PCB)",
+      "modello_3d": {
+        "file": "crc.glb",
+        "path": "/models/apparecchiature/crc.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=crc"
+      },
+      "caratteristiche_chiave": {
+        "controllo_plc": true,
+        "gestione_frequenze": true,
+        "gestione_ampiezze": true,
+        "accelerometri": "opzionale",
+        "livello": "base",
+        "stand_alone": false
+      },
+      "keywords": [
+        "circuito controllo",
+        "CRC",
+        "scheda",
+        "PCB",
+        "controllo vibrazione",
+        "PLC",
+        "frequenza",
+        "ampiezza",
+        "accelerometro"
+      ]
+    },
+    {
+      "codice": "QEL",
+      "nome": "Quadro elettrico per isole di asservimento complete",
+      "descrizione": "Quadro elettrico completo per il controllo e la gestione di isole di asservimento. Integrano PLC, touch screen e logiche complesse per rendere gli impianti stand-alone, garantendo un'interfaccia intuitiva.",
+      "funzionalita": [
+        "PLC integrato",
+        "Touch screen",
+        "Logiche complesse",
+        "Impianto stand-alone",
+        "Interfaccia intuitiva"
+      ],
+      "tipo": "quadro_completo",
+      "interfaccia": "touch screen con PLC integrato",
+      "modello_3d": {
+        "file": "qel.glb",
+        "path": "/models/apparecchiature/qel.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=qel"
+      },
+      "caratteristiche_chiave": {
+        "controllo_plc": true,
+        "gestione_frequenze": true,
+        "gestione_ampiezze": true,
+        "accelerometri": true,
+        "livello": "completo",
+        "stand_alone": true,
+        "touch_screen": true,
+        "logiche_complesse": true
+      },
+      "keywords": [
+        "quadro elettrico",
+        "QEL",
+        "PLC",
+        "touch screen",
+        "stand-alone",
+        "isola completa",
+        "automazione",
+        "interfaccia"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire l'apparecchiatura elettrica più adatta.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "L'isola di asservimento deve funzionare in modo stand-alone (autonomo) o sarà integrata in una linea controllata da un PLC esterno?",
+        "se_stand_alone": "QEL - Quadro elettrico completo con PLC e touch screen integrati",
+        "se_integrata_plc": "Q2"
+      },
+      {
+        "id": "Q2",
+        "testo": "Ti serve un'apparecchiatura con display e tastierino per la regolazione diretta, oppure basta un circuito base da integrare nel tuo quadro esistente?",
+        "se_display": "APE - Apparecchiatura di controllo con display digitale",
+        "se_circuito_base": "CRC - Circuito di controllo base (scheda PCB)"
+      },
+      {
+        "id": "Q3",
+        "testo": "Hai bisogno di monitoraggio con accelerometri?",
+        "nota": "Tutti e tre i prodotti (APE, CRC, QEL) supportano accelerometri. Per APE e CRC sono opzionali, per QEL sono integrabili nel sistema completo."
+      }
+    ]
+  },
+  "compatibilita": {
+    "descrizione": "Tabella di compatibilità tra apparecchiature e isole di asservimento.",
+    "mappatura": {
+      "IAS01": [
+        "APE",
+        "CRC",
+        "QEL"
+      ],
+      "IAS02": [
+        "APE",
+        "CRC",
+        "QEL"
+      ],
+      "IAS03": [
+        "APE",
+        "CRC",
+        "QEL"
+      ],
+      "IAS04": [
+        "APE",
+        "CRC",
+        "QEL"
+      ]
+    },
+    "nota": "Tutte le apparecchiature sono compatibili con tutte le isole IAS. La scelta dipende dal livello di automazione e autonomia richiesto."
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "apparecchiatura",
+        "controllo",
+        "quadro",
+        "PLC",
+        "APE",
+        "CRC",
+        "QEL"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un'apparecchiatura elettrica, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un controllo per la mia isola di asservimento",
+          "risposta": "Dipende dal tuo setup! Se l'isola deve funzionare in autonomia, ti consiglio il QEL con PLC e touch screen integrati. Se invece hai già un PLC esterno, puoi scegliere tra l'APE (con display per regolazione diretta) o il CRC (circuito base da integrare nel tuo quadro). Quale situazione si avvicina di più alla tua?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Ho bisogno di un impianto stand-alone completo",
+          "risposta": "Il QEL è la soluzione perfetta: quadro elettrico completo con PLC integrato, touch screen e logiche complesse per rendere la tua isola completamente autonoma. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "qel.glb"
+        },
+        {
+          "utente": "Ho già un PLC e mi serve solo un regolatore con display",
+          "risposta": "L'APE è quello che fa per te: apparecchiatura di controllo vibrazione con display digitale e tastierino, controllabile da PLC esterno. Gestisce frequenze e ampiezze. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ape.glb"
+        },
+        {
+          "utente": "Mi serve solo la scheda elettronica da integrare nel mio quadro",
+          "risposta": "Il CRC è il circuito di controllo vibrazione base, una scheda PCB compatta da integrare nel tuo quadro esistente. Controlla frequenze e ampiezze con possibilità di interfaccia PLC. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "crc.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra APE, CRC e QEL?",
+          "risposta": "Il CRC è il circuito base (scheda PCB) da integrare in un quadro esistente. L'APE aggiunge un display digitale con tastierino per la regolazione diretta. Il QEL è il quadro completo con PLC, touch screen e logiche complesse per impianti stand-alone. Ti mostro tutti e tre in 3D?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "crc.glb",
+            "ape.glb",
+            "qel.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Che apparecchiature elettriche offrite per le isole di asservimento?",
+      "risposta": "Deca Srl offre tre livelli di controllo: CRC (circuito base su scheda PCB), APE (apparecchiatura con display e tastierino) e QEL (quadro elettrico completo con PLC e touch screen per impianti stand-alone). Posso mostrarti i modelli 3D di ciascuno."
+    },
+    {
+      "domanda": "Posso controllare l'isola di asservimento da PLC?",
+      "risposta": "Sì, tutti e tre i prodotti (APE, CRC e QEL) supportano il controllo da PLC. L'APE e il CRC si interfacciano con un PLC esterno, mentre il QEL ha un PLC già integrato al suo interno."
+    },
+    {
+      "domanda": "Cos'è il QEL?",
+      "risposta": "Il QEL è un quadro elettrico completo per isole di asservimento. Integra PLC, touch screen e logiche complesse per rendere l'impianto completamente stand-alone con un'interfaccia intuitiva. È la soluzione ideale quando l'isola deve funzionare in modo autonomo."
+    },
+    {
+      "domanda": "Che differenza c'è tra APE e CRC?",
+      "risposta": "Entrambi controllano frequenze e ampiezze della vibrazione e si interfacciano con PLC. L'APE è un'apparecchiatura completa con display digitale e tastierino per la regolazione diretta. Il CRC è un circuito base su scheda PCB, più compatto e pensato per essere integrato in un quadro elettrico esistente."
+    },
+    {
+      "domanda": "Serve un accelerometro?",
+      "risposta": "L'accelerometro è opzionale per APE e CRC, e integrabile nel QEL. Permette il monitoraggio preciso della vibrazione e il feedback in tempo reale per ottimizzare le prestazioni dell'isola di asservimento."
+    }
+  ]
+}

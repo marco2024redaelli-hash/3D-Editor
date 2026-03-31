@@ -1,0 +1,532 @@
+{
+  "categoria": "Componenti per isole di asservimento - Contenitori",
+  "descrizione_generale": "I contenitori sono le tazze che vengono montate sulle basi vibranti circolari (BVC) per la selezione e l'orientamento dei particolari. Disponibili in tre tipologie: cilindrico (CCI), conico (CCO) e a gradini (CGR), tutti disponibili anche in acciaio inox AISI 304 e 316.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "famiglie": [
+    {
+      "codice_famiglia": "CCI",
+      "nome": "Contenitore cilindrico",
+      "descrizione": "Contenitore cilindrico per basi vibranti circolari. Forma a pareti dritte verticali, ideale per particolari di forma regolare e simmetrica.",
+      "diametri_disponibili_mm": [
+        150,
+        200,
+        250,
+        300,
+        350,
+        450,
+        500,
+        550,
+        600,
+        650,
+        700,
+        750
+      ],
+      "materiali": [
+        "Standard",
+        "Inox AISI 304",
+        "Inox AISI 316"
+      ],
+      "modello_3d": {
+        "file_base": "cci_{diametro}.glb",
+        "path": "/models/cci/",
+        "url_base": "https://glb-3d-editor.web.app/viewer?model=cci_{diametro}"
+      },
+      "varianti": [
+        {
+          "codice": "CCI-150",
+          "diametro_mm": 150,
+          "modello_3d": {
+            "file": "cci_150.glb",
+            "path": "/models/cci/cci_150.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_150"
+          }
+        },
+        {
+          "codice": "CCI-200",
+          "diametro_mm": 200,
+          "modello_3d": {
+            "file": "cci_200.glb",
+            "path": "/models/cci/cci_200.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_200"
+          }
+        },
+        {
+          "codice": "CCI-250",
+          "diametro_mm": 250,
+          "modello_3d": {
+            "file": "cci_250.glb",
+            "path": "/models/cci/cci_250.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_250"
+          }
+        },
+        {
+          "codice": "CCI-300",
+          "diametro_mm": 300,
+          "modello_3d": {
+            "file": "cci_300.glb",
+            "path": "/models/cci/cci_300.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_300"
+          }
+        },
+        {
+          "codice": "CCI-350",
+          "diametro_mm": 350,
+          "modello_3d": {
+            "file": "cci_350.glb",
+            "path": "/models/cci/cci_350.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_350"
+          }
+        },
+        {
+          "codice": "CCI-450",
+          "diametro_mm": 450,
+          "modello_3d": {
+            "file": "cci_450.glb",
+            "path": "/models/cci/cci_450.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_450"
+          }
+        },
+        {
+          "codice": "CCI-500",
+          "diametro_mm": 500,
+          "modello_3d": {
+            "file": "cci_500.glb",
+            "path": "/models/cci/cci_500.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_500"
+          }
+        },
+        {
+          "codice": "CCI-550",
+          "diametro_mm": 550,
+          "modello_3d": {
+            "file": "cci_550.glb",
+            "path": "/models/cci/cci_550.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_550"
+          }
+        },
+        {
+          "codice": "CCI-600",
+          "diametro_mm": 600,
+          "modello_3d": {
+            "file": "cci_600.glb",
+            "path": "/models/cci/cci_600.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_600"
+          }
+        },
+        {
+          "codice": "CCI-650",
+          "diametro_mm": 650,
+          "modello_3d": {
+            "file": "cci_650.glb",
+            "path": "/models/cci/cci_650.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_650"
+          }
+        },
+        {
+          "codice": "CCI-700",
+          "diametro_mm": 700,
+          "modello_3d": {
+            "file": "cci_700.glb",
+            "path": "/models/cci/cci_700.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_700"
+          }
+        },
+        {
+          "codice": "CCI-750",
+          "diametro_mm": 750,
+          "modello_3d": {
+            "file": "cci_750.glb",
+            "path": "/models/cci/cci_750.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cci_750"
+          }
+        }
+      ],
+      "keywords": [
+        "contenitore cilindrico",
+        "tazza cilindrica",
+        "CCI",
+        "pareti dritte",
+        "inox"
+      ]
+    },
+    {
+      "codice_famiglia": "CCO",
+      "nome": "Contenitore conico",
+      "descrizione": "Contenitore conico per basi vibranti circolari. Forma a tronco di cono con pareti inclinate, ideale per particolari che necessitano di scivolare verso il centro o per facilitare l'accumulo. Il diametro è espresso come coppia interno/esterno.",
+      "diametri_disponibili": [
+        {
+          "label": "200/300",
+          "interno_mm": 200,
+          "esterno_mm": 300
+        },
+        {
+          "label": "250/350",
+          "interno_mm": 250,
+          "esterno_mm": 350
+        },
+        {
+          "label": "300/450",
+          "interno_mm": 300,
+          "esterno_mm": 450
+        },
+        {
+          "label": "350/500",
+          "interno_mm": 350,
+          "esterno_mm": 500
+        },
+        {
+          "label": "400/600",
+          "interno_mm": 400,
+          "esterno_mm": 600
+        },
+        {
+          "label": "450/650",
+          "interno_mm": 450,
+          "esterno_mm": 650
+        },
+        {
+          "label": "450/700",
+          "interno_mm": 450,
+          "esterno_mm": 700
+        },
+        {
+          "label": "450/750",
+          "interno_mm": 450,
+          "esterno_mm": 750
+        },
+        {
+          "label": "500/750",
+          "interno_mm": 500,
+          "esterno_mm": 750
+        },
+        {
+          "label": "600/900",
+          "interno_mm": 600,
+          "esterno_mm": 900
+        },
+        {
+          "label": "600/1000",
+          "interno_mm": 600,
+          "esterno_mm": 1000
+        }
+      ],
+      "materiali": [
+        "Standard",
+        "Inox AISI 304",
+        "Inox AISI 316"
+      ],
+      "varianti": [
+        {
+          "codice": "CCO-200-300",
+          "interno_mm": 200,
+          "esterno_mm": 300,
+          "modello_3d": {
+            "file": "cco_200_300.glb",
+            "path": "/models/cco/cco_200_300.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_200_300"
+          }
+        },
+        {
+          "codice": "CCO-250-350",
+          "interno_mm": 250,
+          "esterno_mm": 350,
+          "modello_3d": {
+            "file": "cco_250_350.glb",
+            "path": "/models/cco/cco_250_350.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_250_350"
+          }
+        },
+        {
+          "codice": "CCO-300-450",
+          "interno_mm": 300,
+          "esterno_mm": 450,
+          "modello_3d": {
+            "file": "cco_300_450.glb",
+            "path": "/models/cco/cco_300_450.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_300_450"
+          }
+        },
+        {
+          "codice": "CCO-350-500",
+          "interno_mm": 350,
+          "esterno_mm": 500,
+          "modello_3d": {
+            "file": "cco_350_500.glb",
+            "path": "/models/cco/cco_350_500.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_350_500"
+          }
+        },
+        {
+          "codice": "CCO-400-600",
+          "interno_mm": 400,
+          "esterno_mm": 600,
+          "modello_3d": {
+            "file": "cco_400_600.glb",
+            "path": "/models/cco/cco_400_600.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_400_600"
+          }
+        },
+        {
+          "codice": "CCO-450-650",
+          "interno_mm": 450,
+          "esterno_mm": 650,
+          "modello_3d": {
+            "file": "cco_450_650.glb",
+            "path": "/models/cco/cco_450_650.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_450_650"
+          }
+        },
+        {
+          "codice": "CCO-450-700",
+          "interno_mm": 450,
+          "esterno_mm": 700,
+          "modello_3d": {
+            "file": "cco_450_700.glb",
+            "path": "/models/cco/cco_450_700.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_450_700"
+          }
+        },
+        {
+          "codice": "CCO-450-750",
+          "interno_mm": 450,
+          "esterno_mm": 750,
+          "modello_3d": {
+            "file": "cco_450_750.glb",
+            "path": "/models/cco/cco_450_750.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_450_750"
+          }
+        },
+        {
+          "codice": "CCO-500-750",
+          "interno_mm": 500,
+          "esterno_mm": 750,
+          "modello_3d": {
+            "file": "cco_500_750.glb",
+            "path": "/models/cco/cco_500_750.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_500_750"
+          }
+        },
+        {
+          "codice": "CCO-600-900",
+          "interno_mm": 600,
+          "esterno_mm": 900,
+          "modello_3d": {
+            "file": "cco_600_900.glb",
+            "path": "/models/cco/cco_600_900.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_600_900"
+          }
+        },
+        {
+          "codice": "CCO-600-1000",
+          "interno_mm": 600,
+          "esterno_mm": 1000,
+          "modello_3d": {
+            "file": "cco_600_1000.glb",
+            "path": "/models/cco/cco_600_1000.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cco_600_1000"
+          }
+        }
+      ],
+      "keywords": [
+        "contenitore conico",
+        "tazza conica",
+        "CCO",
+        "tronco di cono",
+        "pareti inclinate",
+        "inox"
+      ]
+    },
+    {
+      "codice_famiglia": "CGR",
+      "nome": "Contenitore a gradini",
+      "descrizione": "Contenitore a gradini per basi vibranti circolari. Forma con pareti a scalini interni, ideale per particolari che richiedono una selezione progressiva durante la salita lungo la spirale. Il diametro è espresso come coppia interno/esterno.",
+      "diametri_disponibili": [
+        {
+          "label": "200/300",
+          "interno_mm": 200,
+          "esterno_mm": 300
+        },
+        {
+          "label": "450/600",
+          "interno_mm": 450,
+          "esterno_mm": 600
+        },
+        {
+          "label": "450/650",
+          "interno_mm": 450,
+          "esterno_mm": 650
+        },
+        {
+          "label": "550/800",
+          "interno_mm": 550,
+          "esterno_mm": 800
+        }
+      ],
+      "materiali": [
+        "Standard",
+        "Inox AISI 304",
+        "Inox AISI 316"
+      ],
+      "varianti": [
+        {
+          "codice": "CGR-200-300",
+          "interno_mm": 200,
+          "esterno_mm": 300,
+          "modello_3d": {
+            "file": "cgr_200_300.glb",
+            "path": "/models/cgr/cgr_200_300.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cgr_200_300"
+          }
+        },
+        {
+          "codice": "CGR-450-600",
+          "interno_mm": 450,
+          "esterno_mm": 600,
+          "modello_3d": {
+            "file": "cgr_450_600.glb",
+            "path": "/models/cgr/cgr_450_600.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cgr_450_600"
+          }
+        },
+        {
+          "codice": "CGR-450-650",
+          "interno_mm": 450,
+          "esterno_mm": 650,
+          "modello_3d": {
+            "file": "cgr_450_650.glb",
+            "path": "/models/cgr/cgr_450_650.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cgr_450_650"
+          }
+        },
+        {
+          "codice": "CGR-550-800",
+          "interno_mm": 550,
+          "esterno_mm": 800,
+          "modello_3d": {
+            "file": "cgr_550_800.glb",
+            "path": "/models/cgr/cgr_550_800.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cgr_550_800"
+          }
+        }
+      ],
+      "keywords": [
+        "contenitore a gradini",
+        "tazza a gradini",
+        "CGR",
+        "scalini",
+        "selezione progressiva",
+        "inox"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire il contenitore più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Che tipo di particolari devi orientare?",
+        "opzioni": {
+          "regolari_simmetrici": {
+            "suggerimento": "CCI - Contenitore cilindrico",
+            "vai_a": "Q2_CCI"
+          },
+          "necessitano_scivolo_centro": {
+            "suggerimento": "CCO - Contenitore conico",
+            "vai_a": "Q2_CCO"
+          },
+          "selezione_progressiva": {
+            "suggerimento": "CGR - Contenitore a gradini",
+            "vai_a": "Q2_CGR"
+          }
+        }
+      },
+      {
+        "id": "Q1B",
+        "testo": "Il settore è alimentare, farmaceutico o richiede materiali certificati?",
+        "se_si": "Proporre versione Inox AISI 304 o 316",
+        "se_no": "Versione standard"
+      },
+      {
+        "id": "Q2_CCI",
+        "testo": "Quale diametro ti serve? (disponibili da 150 a 750 mm)",
+        "azione": "Mostrare il 3D del CCI nella taglia scelta"
+      },
+      {
+        "id": "Q2_CCO",
+        "testo": "Quale combinazione diametro interno/esterno ti serve? (da 200/300 fino a 600/1000)",
+        "azione": "Mostrare il 3D del CCO nella taglia scelta"
+      },
+      {
+        "id": "Q2_CGR",
+        "testo": "Quale combinazione diametro interno/esterno ti serve? (200/300, 450/600, 450/650, 550/800)",
+        "azione": "Mostrare il 3D del CGR nella taglia scelta"
+      }
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "come sono",
+        "fammi vedere",
+        "anteprima",
+        "contenitore",
+        "tazza",
+        "CCI",
+        "CCO",
+        "CGR"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un contenitore, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve una tazza cilindrica da 500mm",
+          "risposta": "Ecco il contenitore cilindrico CCI-500 con diametro Ø500. Disponibile anche in Inox AISI 304 e 316. Ti mostro il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cci_500.glb"
+        },
+        {
+          "utente": "Ho bisogno di un contenitore conico grande per il settore alimentare",
+          "risposta": "Per il settore alimentare ti consiglio il CCO-600-1000 in Inox AISI 316, il nostro contenitore conico più grande con diametro interno 600mm ed esterno 1000mm. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cco_600_1000.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra cilindrico, conico e a gradini?",
+          "risposta": "Il CCI cilindrico ha pareti dritte ed è ideale per particolari regolari. Il CCO conico ha pareti inclinate che facilitano lo scivolamento verso il centro. Il CGR a gradini ha scalini interni per la selezione progressiva dei particolari. Ti mostro tutti e tre?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "cci_300.glb",
+            "cco_300_450.glb",
+            "cgr_200_300.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Che tipi di contenitori offrite?",
+      "risposta": "Deca Srl offre tre tipologie di contenitori per basi vibranti circolari: CCI (cilindrico, pareti dritte), CCO (conico, pareti inclinate) e CGR (a gradini, con scalini interni). Tutti disponibili anche in Inox AISI 304 e 316. Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Quali materiali sono disponibili per i contenitori?",
+      "risposta": "Tutti i contenitori CCI, CCO e CGR sono disponibili in versione standard e in acciaio inossidabile Inox AISI 304 e AISI 316, ideali per settore alimentare e farmaceutico."
+    },
+    {
+      "domanda": "Qual è il contenitore più grande disponibile?",
+      "risposta": "Il contenitore cilindrico CCI arriva fino a Ø750mm. Il conico CCO arriva fino a 600/1000mm (interno/esterno). Il contenitore a gradini CGR arriva fino a 550/800mm."
+    },
+    {
+      "domanda": "Come scelgo tra cilindrico, conico e a gradini?",
+      "risposta": "Il CCI cilindrico è la scelta standard per particolari regolari. Il CCO conico facilita l'accumulo e lo scivolamento al centro, utile per pezzi che tendono a incastrarsi. Il CGR a gradini è specifico per la selezione progressiva durante la salita dei particolari sulla spirale. Dimmi il tipo di pezzo e ti consiglio la forma migliore."
+    }
+  ]
+}

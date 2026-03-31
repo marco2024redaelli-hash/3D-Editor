@@ -1,0 +1,353 @@
+{
+  "categoria": "Mototramogge ed Elevatori a piastre",
+  "descrizione_generale": "Le mototramogge (MTR) e gli elevatori a piastre (ELP) sono sistemi di alimentazione e sollevamento per particolari piatti e sottili. Le mototramogge sono elevatori compatti a bocca semplice per piccole-medie capacità. Gli elevatori a piastre sono specifici per il sollevamento di pezzi piatti (piastre, rondelle, lamierini) con azionamento pneumatico o elettrico.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "famiglie": [
+    {
+      "codice_famiglia": "MTR",
+      "nome": "Mototramoggia a bocca semplice",
+      "descrizione": "Mototramoggia a bocca semplice per il caricamento dei particolari. Versione compatta degli elevatori di carico, con taglie da 60L a 120L e altezze di scarico da 1100 a 1600mm.",
+      "tipo_ingresso": "bocca semplice",
+      "taglie": [
+        "60L",
+        "90L",
+        "120L"
+      ],
+      "altezze_scarico_mm": [
+        1100,
+        1350,
+        1600
+      ],
+      "modelli": [
+        {
+          "codice": "MTR01",
+          "tappeto": "tela",
+          "modello_3d": {
+            "file": "mtr01.glb",
+            "path": "/models/mtr/mtr01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=mtr01"
+          }
+        },
+        {
+          "codice": "MTR02",
+          "tappeto": "table top",
+          "modello_3d": {
+            "file": "mtr02.glb",
+            "path": "/models/mtr/mtr02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=mtr02"
+          }
+        },
+        {
+          "codice": "MTR03",
+          "tappeto": "tapparella stampata",
+          "modello_3d": {
+            "file": "mtr03.glb",
+            "path": "/models/mtr/mtr03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=mtr03"
+          }
+        },
+        {
+          "codice": "MTR04",
+          "tappeto": "tapparella mod. plastica",
+          "modello_3d": {
+            "file": "mtr04.glb",
+            "path": "/models/mtr/mtr04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=mtr04"
+          }
+        }
+      ],
+      "caratteristiche_chiave": {
+        "compatta": true,
+        "bocca_semplice": true,
+        "adatta_spazi_ridotti": true
+      },
+      "keywords": [
+        "mototramoggia",
+        "MTR",
+        "bocca semplice",
+        "compatta",
+        "caricamento",
+        "tramoggia motorizzata"
+      ]
+    },
+    {
+      "codice_famiglia": "ELP",
+      "nome": "Elevatori a piastre",
+      "descrizione": "Elevatori specifici per il sollevamento di particolari piatti (piastre, rondelle, lamierini, guarnizioni). Disponibili con azionamento pneumatico (ELP01) ed elettrico (ELP02).",
+      "specifiche_comuni": {
+        "larghezza_utile_piastre_mm": [
+          300,
+          500,
+          700
+        ],
+        "spessore_piastre_mm": [
+          20,
+          40
+        ],
+        "capacita_litri": [
+          30,
+          60,
+          90,
+          120
+        ],
+        "altezza_scarico_mm": 1000
+      },
+      "prodotti": [
+        {
+          "codice": "ELP01",
+          "nome": "Elevatore a piastre pneumatico",
+          "descrizione": "Elevatore a piastre con azionamento pneumatico. Larghezza utile piastre 300-500-700mm, spessore piastre 20-40mm, capacità 30-60-90-120L, altezza di scarico 1000mm.",
+          "azionamento": "pneumatico",
+          "larghezza_utile_piastre_mm": [
+            300,
+            500,
+            700
+          ],
+          "spessore_piastre_mm": [
+            20,
+            40
+          ],
+          "capacita_litri": [
+            30,
+            60,
+            90,
+            120
+          ],
+          "altezza_scarico_mm": 1000,
+          "modello_3d": {
+            "file": "elp01.glb",
+            "path": "/models/elp/elp01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=elp01"
+          },
+          "caratteristiche_chiave": {
+            "azionamento": "pneumatico",
+            "aria_compressa_richiesta": true,
+            "controllo_velocita": "tramite regolatore flusso aria",
+            "manutenzione": "bassa"
+          },
+          "keywords": [
+            "elevatore piastre",
+            "ELP01",
+            "pneumatico",
+            "piastre",
+            "piatti",
+            "rondelle",
+            "lamierini",
+            "aria compressa"
+          ]
+        },
+        {
+          "codice": "ELP02",
+          "nome": "Elevatore a piastre elettrico",
+          "descrizione": "Elevatore a piastre con azionamento elettrico. Larghezza utile piastre 300-500-700mm, spessore piastre 20-40mm, capacità 30-60-90-120L, altezza di scarico 1000mm.",
+          "azionamento": "elettrico",
+          "larghezza_utile_piastre_mm": [
+            300,
+            500,
+            700
+          ],
+          "spessore_piastre_mm": [
+            20,
+            40
+          ],
+          "capacita_litri": [
+            30,
+            60,
+            90,
+            120
+          ],
+          "altezza_scarico_mm": 1000,
+          "modello_3d": {
+            "file": "elp02.glb",
+            "path": "/models/elp/elp02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=elp02"
+          },
+          "caratteristiche_chiave": {
+            "azionamento": "elettrico",
+            "aria_compressa_richiesta": false,
+            "controllo_velocita": "tramite inverter/motore elettrico",
+            "manutenzione": "bassa"
+          },
+          "keywords": [
+            "elevatore piastre",
+            "ELP02",
+            "elettrico",
+            "piastre",
+            "piatti",
+            "rondelle",
+            "lamierini",
+            "motore elettrico"
+          ]
+        }
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire mototramoggia o elevatore a piastre.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "I particolari da sollevare sono piatti e sottili (piastre, rondelle, lamierini, guarnizioni)?",
+        "se_si": "ELP - Elevatore a piastre",
+        "se_no": "Q2_MTR"
+      },
+      {
+        "id": "Q2_MTR",
+        "testo": "Hai bisogno di un elevatore compatto con capacità fino a 120L e altezza scarico fino a 1600mm?",
+        "se_si": "MTR - Mototramoggia (più compatta degli ELC/ESI/ESS/EDS)",
+        "se_no": "Valutare gli elevatori di carico ELC/ESI/ESS/EDS per capacità e altezze maggiori"
+      },
+      {
+        "id": "Q3_MTR",
+        "testo": "Che tipo di tappeto serve?",
+        "opzioni": {
+          "standard_leggeri": "MTR01 - Tappeto in tela",
+          "pesanti_robusti": "MTR02 - Tappeto in table top",
+          "scivolosi": "MTR03 - Tapparella stampata",
+          "igienico": "MTR04 - Tapparella mod. plastica"
+        }
+      },
+      {
+        "id": "Q3_ELP",
+        "testo": "Hai aria compressa disponibile in impianto?",
+        "se_si": "ELP01 - Pneumatico (semplice, affidabile)",
+        "se_no": "ELP02 - Elettrico (non richiede aria compressa)"
+      },
+      {
+        "id": "Q4_ELP",
+        "testo": "Quale larghezza utile piastre ti serve?",
+        "opzioni": {
+          "piccola": "300mm",
+          "media": "500mm",
+          "grande": "700mm"
+        }
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Codice",
+      "Nome",
+      "Tipo",
+      "Taglie",
+      "Altezza scarico",
+      "Particolari"
+    ],
+    "righe": [
+      [
+        "MTR01-04",
+        "Mototramoggia",
+        "Elevatore compatto",
+        "60-90-120L",
+        "1100-1600mm",
+        "Sfusi generici"
+      ],
+      [
+        "ELP01",
+        "Elevatore piastre pneumatico",
+        "A piastre",
+        "30-60-90-120L",
+        "1000mm",
+        "Piatti/sottili"
+      ],
+      [
+        "ELP02",
+        "Elevatore piastre elettrico",
+        "A piastre",
+        "30-60-90-120L",
+        "1000mm",
+        "Piatti/sottili"
+      ]
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "mototramoggia",
+        "tramoggia",
+        "elevatore piastre",
+        "MTR",
+        "ELP",
+        "piastre",
+        "pneumatico",
+        "elettrico"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere una mototramoggia o un elevatore a piastre, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un elevatore compatto, non ho molto spazio",
+          "risposta": "La mototramoggia MTR è la soluzione più compatta: taglie da 60 a 120L con altezza scarico da 1100 a 1600mm. Che tipo di tappeto ti serve? Tela, table top, tapparella stampata o plastica?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Tappeto in tela va bene",
+          "risposta": "Ecco la MTR01 con tappeto in tela, la soluzione più compatta ed economica. Ti mostro il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "mtr01.glb"
+        },
+        {
+          "utente": "Devo sollevare delle rondelle piatte",
+          "risposta": "Per particolari piatti come rondelle ti serve un elevatore a piastre. Hai aria compressa in impianto? Se sì, l'ELP01 pneumatico; se no, l'ELP02 elettrico. Entrambi con larghezze utili da 300 a 700mm.",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Sì, ho l'aria compressa",
+          "risposta": "L'ELP01 pneumatico è perfetto per le tue rondelle. Disponibile con larghezza utile 300, 500 o 700mm e capacità da 30 a 120L. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "elp01.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra ELP01 e ELP02?",
+          "risposta": "Stesse dimensioni e capacità. L'ELP01 è pneumatico (serve aria compressa, regolazione velocità tramite flusso aria). L'ELP02 è elettrico (non serve aria, regolazione tramite inverter). Ti mostro entrambi?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "elp01.glb",
+            "elp02.glb"
+          ]
+        },
+        {
+          "utente": "Quando scegliere la mototramoggia invece dell'elevatore ELC?",
+          "risposta": "La mototramoggia MTR è più compatta (taglie 60-120L, altezza max 1600mm), ideale per spazi ridotti. Gli elevatori ELC vanno fino a 200L e 3000mm di altezza. Se hai bisogno di più capacità o altezza, scegli l'ELC. Ti mostro il confronto in 3D?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "mtr01.glb",
+            "elc01.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Che differenza c'è tra mototramoggia e elevatore di carico?",
+      "risposta": "La mototramoggia MTR è una versione compatta dell'elevatore di carico, con taglie da 60 a 120L e altezze scarico da 1100 a 1600mm. Gli elevatori ELC/ESI/ESS/EDS arrivano fino a 200L e 3000mm. La MTR è ideale quando lo spazio è limitato."
+    },
+    {
+      "domanda": "Quando serve un elevatore a piastre?",
+      "risposta": "L'elevatore a piastre ELP è specifico per particolari piatti e sottili come piastre, rondelle, lamierini e guarnizioni, che non possono essere trasportati efficacemente con tappeti convenzionali."
+    },
+    {
+      "domanda": "Che larghezze sono disponibili per gli elevatori a piastre?",
+      "risposta": "Gli elevatori ELP01 e ELP02 sono disponibili con larghezza utile piastre di 300, 500 e 700mm, spessore piastre 20-40mm, capacità da 30 a 120L e altezza di scarico 1000mm."
+    },
+    {
+      "domanda": "Meglio elevatore a piastre pneumatico o elettrico?",
+      "risposta": "L'ELP01 pneumatico è più semplice e affidabile se hai già aria compressa in impianto. L'ELP02 elettrico è la scelta migliore se non hai aria compressa disponibile o se preferisci un controllo velocità più preciso tramite inverter."
+    },
+    {
+      "domanda": "Quali tappeti sono disponibili per la mototramoggia?",
+      "risposta": "La MTR è disponibile con 4 tappeti: MTR01 (tela, economico), MTR02 (table top, robusto), MTR03 (tapparella stampata, per pezzi scivolosi) e MTR04 (tapparella mod. plastica, per settori igienici)."
+    }
+  ]
+}

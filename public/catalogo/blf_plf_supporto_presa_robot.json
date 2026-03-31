@@ -1,0 +1,239 @@
+{
+  "categoria": "Dispositivi di supporto alla presa robotizzata",
+  "descrizione_generale": "I dispositivi di supporto alla presa robotizzata favoriscono la presa del robot tramite sistema di visione, presentando i pezzi in posizione ottimale per il prelievo. Disponibili come nastro vibrante (BLF01) e piano vibrante (PLF01).",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "BLF01",
+      "nome": "Nastro vibrante",
+      "descrizione": "Favorisce la presa del robot tramite sistema di visione. All'occorrenza scarica su nastro di rientro. Nastro vibrante lineare che distende e separa i pezzi per permettere alla telecamera di identificarli e al robot di prelevarli singolarmente.",
+      "funzione": "Presentazione pezzi per presa robot con visione + rientro pezzi non prelevati",
+      "tipo": "nastro vibrante lineare",
+      "dimensioni": {
+        "larghezza_mm": {
+          "min": 300,
+          "max": 500
+        },
+        "lunghezza_mm": {
+          "min": 900,
+          "max": 1200
+        }
+      },
+      "nastro_rientro": true,
+      "modello_3d": {
+        "file": "blf01.glb",
+        "path": "/models/blf/blf01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=blf01"
+      },
+      "caratteristiche_chiave": {
+        "tipo": "nastro vibrante",
+        "visione": true,
+        "rientro_pezzi": true,
+        "forma_presentazione": "lineare",
+        "larghezza_min_mm": 300,
+        "larghezza_max_mm": 500,
+        "lunghezza_min_mm": 900,
+        "lunghezza_max_mm": 1200
+      },
+      "keywords": [
+        "nastro vibrante",
+        "BLF01",
+        "presa robot",
+        "visione",
+        "rientro",
+        "supporto robot",
+        "lineare",
+        "separazione pezzi"
+      ]
+    },
+    {
+      "codice": "PLF01",
+      "nome": "Piano vibrante",
+      "descrizione": "Favorisce la presa del robot tramite sistema di visione. Piano vibrante compatto che distribuisce i pezzi su una superficie piana retroilluminata per il riconoscimento ottimale da parte della telecamera e la presa precisa del robot.",
+      "funzione": "Presentazione pezzi su piano per presa robot con visione",
+      "tipo": "piano vibrante",
+      "dimensioni": {
+        "dimensioni_esterne_mm": "750x450",
+        "piano_presa_mm": "550x250"
+      },
+      "nastro_rientro": false,
+      "modello_3d": {
+        "file": "plf01.glb",
+        "path": "/models/plf/plf01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=plf01"
+      },
+      "caratteristiche_chiave": {
+        "tipo": "piano vibrante",
+        "visione": true,
+        "rientro_pezzi": false,
+        "forma_presentazione": "piano/superficie",
+        "dimensioni_esterne": "750x450mm",
+        "piano_presa": "550x250mm",
+        "compatto": true
+      },
+      "keywords": [
+        "piano vibrante",
+        "PLF01",
+        "presa robot",
+        "visione",
+        "superficie",
+        "compatto",
+        "supporto robot",
+        "retroilluminato"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per scegliere tra nastro vibrante e piano vibrante.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Hai bisogno di un flusso continuo di pezzi (nastro) o di presentarli su una superficie fissa (piano)?",
+        "se_flusso_continuo": "BLF01 - Nastro vibrante (larghezza 300-500mm, lunghezza 900-1200mm, con rientro pezzi)",
+        "se_superficie_fissa": "PLF01 - Piano vibrante (750x450mm, piano di presa 550x250mm, compatto)"
+      },
+      {
+        "id": "Q2",
+        "testo": "Ti serve il rientro automatico dei pezzi non prelevati dal robot?",
+        "se_si": "BLF01 - Il nastro vibrante scarica i pezzi non prelevati sul nastro di rientro",
+        "se_no": "PLF01 - Il piano vibrante è sufficiente, più compatto e semplice"
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Codice",
+      "Nome",
+      "Forma",
+      "Dimensioni",
+      "Rientro pezzi",
+      "Vantaggi"
+    ],
+    "righe": [
+      [
+        "BLF01",
+        "Nastro vibrante",
+        "Lineare",
+        "300-500 x 900-1200mm",
+        "Sì",
+        "Flusso continuo, rientro automatico"
+      ],
+      [
+        "PLF01",
+        "Piano vibrante",
+        "Piano/superficie",
+        "750x450mm (presa 550x250mm)",
+        "No",
+        "Compatto, visione ottimale su piano"
+      ]
+    ]
+  },
+  "compatibilita": {
+    "descrizione": "I dispositivi di supporto alla presa si integrano con le isole robotizzate e i sistemi di visione.",
+    "mappatura": {
+      "BLF01": {
+        "usato_con": [
+          "ISR01",
+          "ISR02",
+          "BPK01"
+        ],
+        "a_monte": [
+          "isole IAS",
+          "elevatori",
+          "vibratori circolari"
+        ],
+        "a_valle": [
+          "robot + sistema visione"
+        ],
+        "nota": "Il nastro di rientro ricircola i pezzi non prelevati"
+      },
+      "PLF01": {
+        "usato_con": [
+          "ISR01",
+          "ISR02",
+          "BPK01"
+        ],
+        "a_monte": [
+          "isole IAS",
+          "elevatori",
+          "vibratori circolari"
+        ],
+        "a_valle": [
+          "robot + sistema visione"
+        ],
+        "nota": "Ideale per pezzi piccoli che devono essere distribuiti su piano per visione dall'alto"
+      }
+    }
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "nastro vibrante",
+        "piano vibrante",
+        "supporto presa",
+        "robot presa",
+        "BLF",
+        "PLF",
+        "presentazione pezzi"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un dispositivo di supporto alla presa robotizzata, aprire il viewer 3D con il file .glb corrispondente.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un sistema per presentare i pezzi al robot",
+          "risposta": "Hai due opzioni: il BLF01 (nastro vibrante lineare, con rientro pezzi non prelevati, larghezza 300-500mm) o il PLF01 (piano vibrante compatto 750x450mm, visione ottimale dall'alto). Ti serve il rientro automatico dei pezzi?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Sì, mi serve il rientro",
+          "risposta": "Il BLF01 è perfetto: nastro vibrante che presenta i pezzi alla telecamera e all'occorrenza scarica quelli non prelevati sul nastro di rientro. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "blf01.glb"
+        },
+        {
+          "utente": "Ho pezzi piccoli e poco spazio, mi serve qualcosa di compatto",
+          "risposta": "Il PLF01 è ideale: piano vibrante compatto (750x450mm) con piano di presa 550x250mm che distribuisce i pezzi per la visione e la presa del robot. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "plf01.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra BLF01 e PLF01?",
+          "risposta": "Il BLF01 è un nastro vibrante lineare che crea un flusso continuo di pezzi con rientro automatico di quelli non prelevati. Il PLF01 è un piano vibrante compatto che distribuisce i pezzi su una superficie per la visione dall'alto. Ti mostro entrambi?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "blf01.glb",
+            "plf01.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali dispositivi di supporto alla presa robotizzata offrite?",
+      "risposta": "Deca Srl offre due dispositivi: BLF01 (nastro vibrante lineare con rientro pezzi, larghezza 300-500mm, lunghezza 900-1200mm) e PLF01 (piano vibrante compatto 750x450mm con piano di presa 550x250mm). Entrambi favoriscono la presa del robot tramite sistema di visione. Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Quando usare il nastro vibrante BLF01?",
+      "risposta": "Il BLF01 è ideale quando serve un flusso continuo di pezzi e il rientro automatico dei pezzi non prelevati dal robot. La forma lineare permette di gestire pezzi di diverse dimensioni con larghezze da 300 a 500mm."
+    },
+    {
+      "domanda": "Quando usare il piano vibrante PLF01?",
+      "risposta": "Il PLF01 è la scelta migliore per pezzi piccoli che necessitano di essere distribuiti su una superficie piana per una visione ottimale dall'alto. È più compatto del BLF01 e ideale quando lo spazio è limitato."
+    },
+    {
+      "domanda": "Questi dispositivi funzionano con qualsiasi robot?",
+      "risposta": "Sì, BLF01 e PLF01 sono compatibili con qualsiasi robot industriale dotato di sistema di visione. Si integrano perfettamente con le isole robotizzate ISR01, ISR02 e il sistema BPK01 di Deca Srl."
+    }
+  ]
+}

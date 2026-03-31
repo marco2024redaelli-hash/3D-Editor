@@ -1,0 +1,503 @@
+{
+  "categoria": "Impianti speciali",
+  "descrizione_generale": "Gli impianti speciali Deca Srl sono sistemi complessi progettati su misura per applicazioni specifiche. Comprendono isole di controllo e marcatura, isole di asservimento multiplo, isole di controllo guarnizioni, elevatori selezionatori, magazzini verticali, isole di controllo con visione e correnti indotte, impianti di conteggio e insacchettamento, sistemi di riempimento automatico, caricatori a barre per trancia e elevatori multivia.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "IMS01",
+      "nome": "Isola di controllo e marcatura",
+      "descrizione": "All'interno di un processo produttivo o logistico è destinata alla verifica, identificazione e gestione dei prodotti. La sua funzione è migliorare la qualità e ridurre gli errori per garantire che ogni elemento sia correttamente identificato e marcato.",
+      "funzione": "Controllo qualità + marcatura/identificazione prodotti",
+      "tipo": "isola automatica",
+      "modello_3d": {
+        "file": "ims01.glb",
+        "path": "/models/ims/ims01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ims01"
+      },
+      "caratteristiche_chiave": {
+        "controllo_qualita": true,
+        "marcatura": true,
+        "identificazione": true,
+        "tracciabilita": true,
+        "custom": true
+      },
+      "keywords": [
+        "controllo",
+        "marcatura",
+        "IMS01",
+        "identificazione",
+        "qualità",
+        "tracciabilità",
+        "verifica",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "IMS03",
+      "nome": "Isola di asservimento multiplo",
+      "descrizione": "Isola di asservimento multiplo che integra più vibratori e sistemi di alimentazione in un'unica stazione compatta. Progettata per gestire simultaneamente più tipologie di particolari nella stessa linea produttiva.",
+      "funzione": "Asservimento multiplo con più vibratori integrati",
+      "tipo": "isola multipla",
+      "modello_3d": {
+        "file": "ims03.glb",
+        "path": "/models/ims/ims03.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ims03"
+      },
+      "caratteristiche_chiave": {
+        "multiplo": true,
+        "piu_vibratori": true,
+        "compatto": true,
+        "custom": true
+      },
+      "keywords": [
+        "asservimento multiplo",
+        "IMS03",
+        "più vibratori",
+        "multi-prodotto",
+        "isola speciale",
+        "simultaneo"
+      ]
+    },
+    {
+      "codice": "IMS04",
+      "nome": "Isola di controllo guarnizioni",
+      "descrizione": "Realizzata con telecamere in serie per il controllo dimensionale di pezzi in movimento anche di piccolissima dimensione. Specifica per il controllo qualità di guarnizioni e o-ring.",
+      "funzione": "Controllo dimensionale guarnizioni con visione artificiale in serie",
+      "tipo": "isola di controllo visione",
+      "modello_3d": {
+        "file": "ims04.glb",
+        "path": "/models/ims/ims04.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ims04"
+      },
+      "caratteristiche_chiave": {
+        "visione_artificiale": true,
+        "telecamere_serie": true,
+        "controllo_dimensionale": true,
+        "pezzi_in_movimento": true,
+        "piccolissime_dimensioni": true,
+        "custom": true
+      },
+      "keywords": [
+        "controllo guarnizioni",
+        "IMS04",
+        "telecamera",
+        "visione artificiale",
+        "dimensionale",
+        "o-ring",
+        "piccolissimi",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "IMS06",
+      "nome": "Elevatore selezionatore",
+      "descrizione": "Permette la selezione e l'orientamento con un vibratore lineare. Adatto per forme facilmente orientabili e stabili. Combina la funzione di elevazione con la selezione dei pezzi.",
+      "funzione": "Elevazione + selezione e orientamento con vibratore lineare",
+      "tipo": "elevatore con selezione",
+      "modello_3d": {
+        "file": "ims06.glb",
+        "path": "/models/ims/ims06.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ims06"
+      },
+      "caratteristiche_chiave": {
+        "elevazione": true,
+        "selezione": true,
+        "orientamento": true,
+        "vibratore_lineare": true,
+        "forme_stabili": true,
+        "custom": true
+      },
+      "keywords": [
+        "elevatore selezionatore",
+        "IMS06",
+        "selezione",
+        "orientamento",
+        "vibratore lineare",
+        "forme stabili",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "IMS07",
+      "nome": "Impianto di conteggio automatico di particolari assortiti per insacchettamento automatico",
+      "descrizione": "La composizione è gestita da un software dedicato che regola i vibratori e i nastri in base alla ricetta di composizione stabilita dal cliente. Sistema completo per il conteggio e l'insacchettamento automatico di kit di particolari assortiti.",
+      "funzione": "Conteggio automatico + insacchettamento di kit assortiti gestito da software",
+      "tipo": "impianto di conteggio e confezionamento",
+      "modello_3d": {
+        "file": "ims07.glb",
+        "path": "/models/ims/ims07.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ims07"
+      },
+      "caratteristiche_chiave": {
+        "conteggio_automatico": true,
+        "insacchettamento": true,
+        "software_dedicato": true,
+        "ricette_personalizzabili": true,
+        "kit_assortiti": true,
+        "custom": true
+      },
+      "keywords": [
+        "conteggio",
+        "IMS07",
+        "insacchettamento",
+        "kit assortiti",
+        "software",
+        "ricetta",
+        "confezionamento",
+        "automatico",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "IMS08",
+      "nome": "Nastro + rulliera per riempimento automatico",
+      "descrizione": "Sistema di nastro e rulliera folle per gestire opportunamente una polmonatura a valle di un macchinario di produzione in linea. Permette il riempimento automatico e il buffer tra stazioni.",
+      "funzione": "Polmonatura e riempimento automatico a valle della produzione",
+      "tipo": "sistema nastro + rulliera",
+      "modello_3d": {
+        "file": "ims08.glb",
+        "path": "/models/ims/ims08.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ims08"
+      },
+      "caratteristiche_chiave": {
+        "nastro": true,
+        "rulliera": true,
+        "polmonatura": true,
+        "buffer": true,
+        "riempimento_automatico": true,
+        "custom": true
+      },
+      "keywords": [
+        "nastro rulliera",
+        "IMS08",
+        "riempimento automatico",
+        "polmonatura",
+        "buffer",
+        "produzione in linea",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "IMS09",
+      "nome": "Caricatore a barre per trancia",
+      "descrizione": "Gestione e caricamento di barre a sezione rettangolare per asservimento di una trancia. Sistema automatico per l'alimentazione ordinata di barre metalliche alla macchina di trancia.",
+      "funzione": "Caricamento automatico barre rettangolari per trancia",
+      "tipo": "caricatore barre",
+      "modello_3d": {
+        "file": "ims09.glb",
+        "path": "/models/ims/ims09.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ims09"
+      },
+      "caratteristiche_chiave": {
+        "barre": true,
+        "sezione_rettangolare": true,
+        "trancia": true,
+        "caricamento_automatico": true,
+        "custom": true
+      },
+      "keywords": [
+        "caricatore barre",
+        "IMS09",
+        "trancia",
+        "barre rettangolari",
+        "caricamento automatico",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "ELV1200G",
+      "nome": "Elevatore selezionatore viti e bulloni",
+      "descrizione": "Permette di appendere i pezzi per poterli incanalare in un macchinario a valle. Le facili regolazioni lo rendono particolarmente flessibile. Specifico per viti e bulloni.",
+      "funzione": "Elevazione e selezione di viti e bulloni per appendimento",
+      "tipo": "elevatore selezionatore specializzato",
+      "modello_3d": {
+        "file": "elv1200g.glb",
+        "path": "/models/ims/elv1200g.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=elv1200g"
+      },
+      "caratteristiche_chiave": {
+        "viti_bulloni": true,
+        "appendimento": true,
+        "regolazione_facile": true,
+        "flessibile": true,
+        "custom": true
+      },
+      "keywords": [
+        "elevatore selezionatore",
+        "ELV1200G",
+        "viti",
+        "bulloni",
+        "appendere",
+        "flessibile",
+        "regolazione",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "MGV01",
+      "nome": "Magazzino verticale",
+      "descrizione": "Permette lo stoccaggio di 36 scatoloni 40x60cm a valle di un impianto di produzione. Lo smistamento è automatico. Sistema di buffer verticale per lo stoccaggio temporaneo dei prodotti confezionati.",
+      "funzione": "Stoccaggio verticale automatico di 36 scatoloni a valle della produzione",
+      "tipo": "magazzino verticale automatico",
+      "capacita": "36 scatoloni 40x60cm",
+      "modello_3d": {
+        "file": "mgv01.glb",
+        "path": "/models/ims/mgv01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=mgv01"
+      },
+      "caratteristiche_chiave": {
+        "stoccaggio_verticale": true,
+        "automatico": true,
+        "smistamento": true,
+        "capacita_scatoloni": 36,
+        "dimensione_scatoloni": "40x60cm",
+        "custom": true
+      },
+      "keywords": [
+        "magazzino verticale",
+        "MGV01",
+        "stoccaggio",
+        "scatoloni",
+        "automatico",
+        "smistamento",
+        "buffer",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "ASK01",
+      "nome": "Isola universale di controllo pezzi con selezione mediante sistema di visione",
+      "descrizione": "Pensata per un settaggio manuale semplice da parte del cliente con selezione mediante telecamera. Isola flessibile e universale per il controllo qualità visivo di diverse tipologie di pezzi.",
+      "funzione": "Controllo qualità universale con selezione visione artificiale e settaggio semplice",
+      "tipo": "isola di controllo universale con visione",
+      "modello_3d": {
+        "file": "ask01.glb",
+        "path": "/models/ims/ask01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ask01"
+      },
+      "caratteristiche_chiave": {
+        "visione_artificiale": true,
+        "universale": true,
+        "settaggio_semplice": true,
+        "settaggio_manuale_cliente": true,
+        "flessibile": true,
+        "custom": false
+      },
+      "keywords": [
+        "controllo universale",
+        "ASK01",
+        "visione artificiale",
+        "telecamera",
+        "selezione",
+        "settaggio semplice",
+        "flessibile",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "MAESTRALE",
+      "nome": "Isola di controllo pezzi con correnti indotte",
+      "descrizione": "La tecnologia a correnti parassite (correnti indotte) assicura alta precisione nel controllo del trattamento termico, cricche e bruciature da rettifica. Sistema di controllo non distruttivo per la verifica della qualità metallurgica dei pezzi.",
+      "funzione": "Controllo non distruttivo con correnti indotte (eddy current) per trattamento termico, cricche e bruciature",
+      "tipo": "isola di controllo non distruttivo",
+      "modello_3d": {
+        "file": "maestrale.glb",
+        "path": "/models/ims/maestrale.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=maestrale"
+      },
+      "caratteristiche_chiave": {
+        "correnti_indotte": true,
+        "eddy_current": true,
+        "controllo_non_distruttivo": true,
+        "trattamento_termico": true,
+        "cricche": true,
+        "bruciature_rettifica": true,
+        "alta_precisione": true,
+        "custom": true
+      },
+      "keywords": [
+        "correnti indotte",
+        "MAESTRALE",
+        "eddy current",
+        "correnti parassite",
+        "controllo non distruttivo",
+        "trattamento termico",
+        "cricche",
+        "bruciature",
+        "rettifica",
+        "isola speciale"
+      ]
+    },
+    {
+      "codice": "EL.MS.",
+      "nome": "Elevatore multivia",
+      "descrizione": "Garantisce alte prestazioni di asservimento. Adatto a pezzi semplici e per grandi volumi. Elevatore con più vie di uscita per alimentare simultaneamente diverse stazioni.",
+      "funzione": "Elevazione multivia ad alta prestazione per grandi volumi",
+      "tipo": "elevatore multivia",
+      "modello_3d": {
+        "file": "elms.glb",
+        "path": "/models/ims/elms.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=elms"
+      },
+      "caratteristiche_chiave": {
+        "multivia": true,
+        "alte_prestazioni": true,
+        "grandi_volumi": true,
+        "pezzi_semplici": true,
+        "custom": true
+      },
+      "keywords": [
+        "elevatore multivia",
+        "EL.MS.",
+        "multivia",
+        "alte prestazioni",
+        "grandi volumi",
+        "pezzi semplici",
+        "isola speciale"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per gli impianti speciali. Essendo soluzioni custom, la selezione si basa sulla funzione richiesta.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Qual è la funzione principale che ti serve?",
+        "opzioni": {
+          "controllo_marcatura": "IMS01 - Isola di controllo e marcatura",
+          "asservimento_multiplo": "IMS03 - Isola di asservimento multiplo",
+          "controllo_guarnizioni": "IMS04 - Isola di controllo guarnizioni con telecamere",
+          "elevazione_selezione": "Q2_ELEVAZIONE",
+          "conteggio_insacchettamento": "IMS07 - Impianto conteggio e insacchettamento automatico",
+          "polmonatura_buffer": "IMS08 - Nastro + rulliera per riempimento automatico",
+          "caricamento_barre": "IMS09 - Caricatore barre per trancia",
+          "stoccaggio_automatico": "MGV01 - Magazzino verticale",
+          "controllo_visione_universale": "ASK01 - Isola universale con visione",
+          "controllo_non_distruttivo": "MAESTRALE - Controllo con correnti indotte"
+        }
+      },
+      {
+        "id": "Q2_ELEVAZIONE",
+        "testo": "Che tipo di pezzi devi elevare e selezionare?",
+        "opzioni": {
+          "viti_bulloni": "ELV1200G - Elevatore selezionatore viti e bulloni",
+          "pezzi_semplici_grandi_volumi": "EL.MS. - Elevatore multivia ad alte prestazioni",
+          "forme_stabili_orientabili": "IMS06 - Elevatore selezionatore con vibratore lineare"
+        }
+      }
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "impianto speciale",
+        "IMS",
+        "ASK",
+        "MAESTRALE",
+        "ELV",
+        "MGV",
+        "EL.MS",
+        "controllo",
+        "marcatura",
+        "guarnizioni",
+        "conteggio",
+        "insacchettamento",
+        "correnti indotte",
+        "multivia",
+        "magazzino"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un impianto speciale, aprire il viewer 3D con il file .glb corrispondente. Essendo impianti custom, suggerire sempre di contattare Deca Srl per la progettazione su misura.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Devo controllare e marcare i prodotti nella mia linea",
+          "risposta": "L'IMS01 è un'isola di controllo e marcatura che verifica, identifica e marca ogni prodotto garantendo la tracciabilità. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ims01.glb"
+        },
+        {
+          "utente": "Ho bisogno di controllare guarnizioni molto piccole",
+          "risposta": "L'IMS04 è specifico per il controllo dimensionale di guarnizioni e o-ring, anche di piccolissima dimensione, con telecamere in serie che controllano i pezzi in movimento. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ims04.glb"
+        },
+        {
+          "utente": "Mi serve un sistema per contare e insacchettare kit di viti e bulloni",
+          "risposta": "L'IMS07 è un impianto di conteggio automatico con insacchettamento, gestito da software che regola vibratori e nastri in base alla ricetta di composizione del tuo kit. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ims07.glb"
+        },
+        {
+          "utente": "Devo verificare il trattamento termico dei pezzi senza distruggerli",
+          "risposta": "Il MAESTRALE usa la tecnologia a correnti indotte (eddy current) per il controllo non distruttivo di trattamento termico, cricche e bruciature da rettifica con alta precisione. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "maestrale.glb"
+        },
+        {
+          "utente": "Mi serve un elevatore per viti e bulloni",
+          "risposta": "L'ELV1200G è un elevatore selezionatore specifico per viti e bulloni: li appende e li incanalare verso il macchinario a valle. Facile da regolare e molto flessibile. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "elv1200g.glb"
+        },
+        {
+          "utente": "Ho bisogno di un magazzino automatico a valle della produzione",
+          "risposta": "Il MGV01 è un magazzino verticale che stocca fino a 36 scatoloni 40x60cm con smistamento automatico. Perfetto come buffer a valle della produzione. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "mgv01.glb"
+        },
+        {
+          "utente": "Voglio un sistema di controllo qualità flessibile con telecamera, settabile dal mio operatore",
+          "risposta": "L'ASK01 è l'isola universale di controllo con selezione mediante sistema di visione, pensata per un settaggio manuale semplice da parte del cliente. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ask01.glb"
+        },
+        {
+          "utente": "Devo alimentare grandi volumi di pezzi semplici su più stazioni",
+          "risposta": "L'EL.MS. (elevatore multivia) garantisce alte prestazioni di asservimento per grandi volumi, con più vie di uscita per alimentare diverse stazioni simultaneamente. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "elms.glb"
+        },
+        {
+          "utente": "Quali impianti speciali avete?",
+          "risposta": "Deca Srl offre 12 impianti speciali: IMS01 (controllo e marcatura), IMS03 (asservimento multiplo), IMS04 (controllo guarnizioni), IMS06 (elevatore selezionatore), IMS07 (conteggio e insacchettamento), IMS08 (nastro + rulliera per riempimento), IMS09 (caricatore barre per trancia), ELV1200G (elevatore viti/bulloni), MGV01 (magazzino verticale), ASK01 (controllo visione universale), MAESTRALE (correnti indotte) e EL.MS. (elevatore multivia). Quale ti interessa vedere in 3D?"
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali impianti speciali offrite?",
+      "risposta": "Deca Srl offre 12 impianti speciali custom: isole di controllo e marcatura (IMS01), asservimento multiplo (IMS03), controllo guarnizioni con visione (IMS04), elevatore selezionatore (IMS06), conteggio e insacchettamento (IMS07), riempimento automatico (IMS08), caricatore barre (IMS09), elevatore viti/bulloni (ELV1200G), magazzino verticale (MGV01), controllo visione universale (ASK01), controllo correnti indotte (MAESTRALE) e elevatore multivia (EL.MS.). Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Gli impianti speciali sono standard o custom?",
+      "risposta": "La maggior parte degli impianti speciali sono progettati e realizzati custom in base alle esigenze specifiche del cliente. L'ASK01 è l'eccezione: è un'isola universale con settaggio semplice da parte del cliente. Contatta Deca Srl per una progettazione dedicata."
+    },
+    {
+      "domanda": "Come funziona il controllo a correnti indotte MAESTRALE?",
+      "risposta": "Il MAESTRALE utilizza la tecnologia a correnti parassite (eddy current) per il controllo non distruttivo dei pezzi metallici. Rileva con alta precisione difetti nel trattamento termico, cricche e bruciature da rettifica senza danneggiare il pezzo."
+    },
+    {
+      "domanda": "Che differenza c'è tra IMS04 e ASK01 per il controllo visivo?",
+      "risposta": "L'IMS04 è specifico per guarnizioni e pezzi piccolissimi con telecamere in serie per controllo dimensionale in movimento. L'ASK01 è universale e flessibile, pensato per diverse tipologie di pezzi con settaggio semplice da parte dell'operatore."
+    },
+    {
+      "domanda": "Qual è l'impianto adatto per il confezionamento automatico di kit?",
+      "risposta": "L'IMS07 è l'impianto di conteggio automatico per l'insacchettamento di particolari assortiti. Un software dedicato gestisce la composizione del kit regolando vibratori e nastri in base alla ricetta stabilita dal cliente."
+    },
+    {
+      "domanda": "Che differenza c'è tra ELV1200G, IMS06 e EL.MS.?",
+      "risposta": "L'ELV1200G è specifico per viti e bulloni che vengono appesi. L'IMS06 usa un vibratore lineare per selezionare e orientare forme stabili. L'EL.MS. è un elevatore multivia per grandi volumi di pezzi semplici su più uscite simultanee."
+    }
+  ]
+}

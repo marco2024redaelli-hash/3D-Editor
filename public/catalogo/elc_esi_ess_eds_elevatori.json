@@ -1,0 +1,463 @@
+{
+  "categoria": "Elevatori di carico",
+  "descrizione_generale": "Gli elevatori di carico trasportano i particolari sfusi dal livello del pavimento o dalla tramoggia fino al contenitore dell'isola di asservimento. Disponibili in quattro tipologie (bocca semplice, sedia inferiore, sedia superiore, doppia sedia) e quattro varianti di tappeto per ogni tipologia. Taglie da 70L a 200L con altezze di scarico da 1350 a 3000mm.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "taglie_comuni": {
+    "capacita_litri": [
+      "70L",
+      "90L",
+      "150L",
+      "200L"
+    ],
+    "altezze_scarico_mm": [
+      1350,
+      1600,
+      2000,
+      2500,
+      3000
+    ]
+  },
+  "tipologie_tappeto": {
+    "01": {
+      "nome": "Tappeto in tela",
+      "descrizione": "Nastro in tela, soluzione economica per particolari standard"
+    },
+    "02": {
+      "nome": "Tappeto in table top",
+      "descrizione": "Nastro a catena table top, robusto e durevole per particolari pesanti"
+    },
+    "03": {
+      "nome": "Tapparella stampata",
+      "descrizione": "Tapparella con profilo stampato per trattenere i pezzi durante la salita"
+    },
+    "04": {
+      "nome": "Tapparella mod. plastica",
+      "descrizione": "Tapparella modulare in plastica, ideale per settori con requisiti igienici"
+    }
+  },
+  "famiglie": [
+    {
+      "codice_famiglia": "ELC",
+      "nome": "Elevatore di carico a bocca semplice",
+      "descrizione": "Elevatore di carico con bocca di ingresso semplice, aperta. Soluzione base per il caricamento dei particolari nel contenitore dell'isola di asservimento.",
+      "tipo_ingresso": "bocca semplice (aperta)",
+      "taglie": [
+        "70L",
+        "90L",
+        "150L",
+        "200L"
+      ],
+      "altezze_scarico_mm": [
+        1350,
+        1600,
+        2000,
+        2500,
+        3000
+      ],
+      "modelli": [
+        {
+          "codice": "ELC01",
+          "tappeto": "tela",
+          "modello_3d": {
+            "file": "elc01.glb",
+            "path": "/models/elc/elc01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=elc01"
+          }
+        },
+        {
+          "codice": "ELC02",
+          "tappeto": "table top",
+          "modello_3d": {
+            "file": "elc02.glb",
+            "path": "/models/elc/elc02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=elc02"
+          }
+        },
+        {
+          "codice": "ELC03",
+          "tappeto": "tapparella stampata",
+          "modello_3d": {
+            "file": "elc03.glb",
+            "path": "/models/elc/elc03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=elc03"
+          }
+        },
+        {
+          "codice": "ELC04",
+          "tappeto": "tapparella mod. plastica",
+          "modello_3d": {
+            "file": "elc04.glb",
+            "path": "/models/elc/elc04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=elc04"
+          }
+        }
+      ],
+      "keywords": [
+        "elevatore",
+        "carico",
+        "ELC",
+        "bocca semplice",
+        "aperta",
+        "caricamento"
+      ]
+    },
+    {
+      "codice_famiglia": "ESI",
+      "nome": "Elevatore di carico a sedia inferiore",
+      "descrizione": "Elevatore di carico con sedia di raccolta nella parte inferiore. La tramoggia/sedia bassa facilita il caricamento manuale o da cassone a livello pavimento.",
+      "tipo_ingresso": "sedia inferiore",
+      "taglie": [
+        "70L",
+        "90L",
+        "150L",
+        "200L"
+      ],
+      "altezze_scarico_mm": [
+        1350,
+        1600,
+        2000,
+        2500,
+        3000
+      ],
+      "modelli": [
+        {
+          "codice": "ESI01",
+          "tappeto": "tela",
+          "modello_3d": {
+            "file": "esi01.glb",
+            "path": "/models/esi/esi01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=esi01"
+          }
+        },
+        {
+          "codice": "ESI02",
+          "tappeto": "table top",
+          "modello_3d": {
+            "file": "esi02.glb",
+            "path": "/models/esi/esi02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=esi02"
+          }
+        },
+        {
+          "codice": "ESI03",
+          "tappeto": "tapparella stampata",
+          "modello_3d": {
+            "file": "esi03.glb",
+            "path": "/models/esi/esi03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=esi03"
+          }
+        },
+        {
+          "codice": "ESI04",
+          "tappeto": "tapparella mod. plastica",
+          "modello_3d": {
+            "file": "esi04.glb",
+            "path": "/models/esi/esi04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=esi04"
+          }
+        }
+      ],
+      "keywords": [
+        "elevatore",
+        "carico",
+        "ESI",
+        "sedia inferiore",
+        "tramoggia bassa",
+        "caricamento manuale"
+      ]
+    },
+    {
+      "codice_famiglia": "ESS",
+      "nome": "Elevatore di carico a sedia superiore",
+      "descrizione": "Elevatore di carico con sedia di raccolta nella parte superiore. La sedia alta permette lo scarico diretto nel contenitore dall'alto con maggiore controllo del flusso.",
+      "tipo_ingresso": "sedia superiore",
+      "taglie": [
+        "70L",
+        "90L",
+        "150L",
+        "200L"
+      ],
+      "altezze_scarico_mm": [
+        1350,
+        1600,
+        2000,
+        2500,
+        3000
+      ],
+      "modelli": [
+        {
+          "codice": "ESS01",
+          "tappeto": "tela",
+          "modello_3d": {
+            "file": "ess01.glb",
+            "path": "/models/ess/ess01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=ess01"
+          }
+        },
+        {
+          "codice": "ESS02",
+          "tappeto": "table top",
+          "modello_3d": {
+            "file": "ess02.glb",
+            "path": "/models/ess/ess02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=ess02"
+          }
+        },
+        {
+          "codice": "ESS03",
+          "tappeto": "tapparella metallica",
+          "modello_3d": {
+            "file": "ess03.glb",
+            "path": "/models/ess/ess03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=ess03"
+          }
+        },
+        {
+          "codice": "ESS04",
+          "tappeto": "tapparella mod. plastica",
+          "modello_3d": {
+            "file": "ess04.glb",
+            "path": "/models/ess/ess04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=ess04"
+          }
+        }
+      ],
+      "keywords": [
+        "elevatore",
+        "carico",
+        "ESS",
+        "sedia superiore",
+        "scarico dall'alto",
+        "controllo flusso"
+      ]
+    },
+    {
+      "codice_famiglia": "EDS",
+      "nome": "Elevatore a doppia sedia",
+      "descrizione": "Elevatore di carico con doppia sedia (inferiore e superiore). Combina i vantaggi della raccolta bassa e dello scarico controllato dall'alto per la massima versatilità.",
+      "tipo_ingresso": "doppia sedia (inferiore + superiore)",
+      "taglie": [
+        "70L",
+        "90L",
+        "150L",
+        "200L"
+      ],
+      "altezze_scarico_mm": [
+        1350,
+        1600,
+        2000,
+        2500,
+        3000
+      ],
+      "modelli": [
+        {
+          "codice": "EDS01",
+          "tappeto": "tela",
+          "modello_3d": {
+            "file": "eds01.glb",
+            "path": "/models/eds/eds01.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=eds01"
+          }
+        },
+        {
+          "codice": "EDS02",
+          "tappeto": "table top",
+          "modello_3d": {
+            "file": "eds02.glb",
+            "path": "/models/eds/eds02.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=eds02"
+          }
+        },
+        {
+          "codice": "EDS03",
+          "tappeto": "tapparella stampata",
+          "modello_3d": {
+            "file": "eds03.glb",
+            "path": "/models/eds/eds03.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=eds03"
+          }
+        },
+        {
+          "codice": "EDS04",
+          "tappeto": "tapparella mod. plastica",
+          "modello_3d": {
+            "file": "eds04.glb",
+            "path": "/models/eds/eds04.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=eds04"
+          }
+        }
+      ],
+      "keywords": [
+        "elevatore",
+        "carico",
+        "EDS",
+        "doppia sedia",
+        "versatile",
+        "inferiore",
+        "superiore"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire l'elevatore di carico più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Come vengono caricati i pezzi nell'elevatore?",
+        "opzioni": {
+          "versati_direttamente": "ELC - Bocca semplice (ingresso aperto)",
+          "da_cassone_a_terra": "ESI - Sedia inferiore (tramoggia bassa, facile da caricare)",
+          "scarico_controllato_alto": "ESS - Sedia superiore (controllo flusso dall'alto)",
+          "massima_versatilita": "EDS - Doppia sedia (raccolta bassa + scarico controllato alto)"
+        }
+      },
+      {
+        "id": "Q2",
+        "testo": "Qual è la capacità richiesta?",
+        "opzioni": {
+          "piccola": "70L",
+          "media": "90L",
+          "grande": "150L",
+          "molto_grande": "200L"
+        }
+      },
+      {
+        "id": "Q3",
+        "testo": "A che altezza deve scaricare l'elevatore?",
+        "opzioni": {
+          "bassa": "1350mm",
+          "media_bassa": "1600mm",
+          "media": "2000mm",
+          "alta": "2500mm",
+          "molto_alta": "3000mm"
+        }
+      },
+      {
+        "id": "Q4",
+        "testo": "Che tipo di tappeto serve in base ai particolari?",
+        "opzioni": {
+          "particolari_standard_leggeri": "01 - Tappeto in tela (economico)",
+          "particolari_pesanti_robusti": "02 - Tappeto in table top (durevole)",
+          "particolari_scivolosi": "03 - Tapparella stampata (trattiene i pezzi)",
+          "settore_igienico": "04 - Tapparella mod. plastica (facile pulizia)"
+        }
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Famiglia",
+      "Nome",
+      "Tipo ingresso",
+      "Vantaggi principali"
+    ],
+    "righe": [
+      [
+        "ELC",
+        "Bocca semplice",
+        "Aperto",
+        "Soluzione base, versatile, economica"
+      ],
+      [
+        "ESI",
+        "Sedia inferiore",
+        "Tramoggia bassa",
+        "Facile caricamento manuale o da cassone a terra"
+      ],
+      [
+        "ESS",
+        "Sedia superiore",
+        "Sedia alta",
+        "Scarico controllato dall'alto nel contenitore"
+      ],
+      [
+        "EDS",
+        "Doppia sedia",
+        "Inferiore + superiore",
+        "Massima versatilità, raccolta bassa + scarico controllato"
+      ]
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "elevatore",
+        "carico",
+        "ELC",
+        "ESI",
+        "ESS",
+        "EDS",
+        "tappeto",
+        "sedia",
+        "bocca"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un elevatore, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione partendo dal tipo di ingresso, poi taglia, altezza e tappeto.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un elevatore per caricare l'isola di asservimento",
+          "risposta": "Come vengono caricati i pezzi? Direttamente versati (ELC bocca semplice), da un cassone a terra (ESI sedia inferiore), con scarico controllato dall'alto (ESS sedia superiore) o con massima flessibilità (EDS doppia sedia)?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "I pezzi arrivano in cassoni a livello pavimento",
+          "risposta": "L'ESI (sedia inferiore) è perfetto: la tramoggia bassa facilita il caricamento da cassone a terra. Che tipo di tappeto ti serve? Tela (standard), table top (pezzi pesanti), tapparella stampata (pezzi scivolosi) o tapparella plastica (igienico)?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Tappeto in table top, pezzi pesanti, altezza 2000mm",
+          "risposta": "Ti consiglio l'ESI02 con tappeto in table top, robusto e durevole per particolari pesanti, con scarico a 2000mm. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "esi02.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra i quattro tipi di elevatore?",
+          "risposta": "L'ELC ha una bocca aperta semplice. L'ESI ha una tramoggia bassa per caricamento da terra. L'ESS ha una sedia in alto per scarico controllato. L'EDS combina entrambe le sedie per massima versatilità. Ti mostro tutti e quattro?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "elc01.glb",
+            "esi01.glb",
+            "ess01.glb",
+            "eds01.glb"
+          ]
+        },
+        {
+          "utente": "Qual è l'elevatore più grande?",
+          "risposta": "Tutti e quattro i tipi (ELC, ESI, ESS, EDS) sono disponibili nella taglia massima da 200L con altezza di scarico fino a 3000mm. Quale tipo di ingresso preferisci?"
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali elevatori di carico offrite?",
+      "risposta": "Deca Srl offre quattro famiglie di elevatori: ELC (bocca semplice), ESI (sedia inferiore), ESS (sedia superiore) e EDS (doppia sedia). Ciascuna disponibile con 4 tipi di tappeto, 4 taglie (70-200L) e 5 altezze di scarico (1350-3000mm). Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Che tipi di tappeto sono disponibili?",
+      "risposta": "Quattro opzioni: 01 (tela, economico per pezzi standard), 02 (table top a catena, robusto per pezzi pesanti), 03 (tapparella stampata, trattiene pezzi scivolosi) e 04 (tapparella modulare in plastica, ideale per settori igienici)."
+    },
+    {
+      "domanda": "Che differenza c'è tra ESI e ESS?",
+      "risposta": "L'ESI ha la sedia/tramoggia nella parte inferiore, facilitando il caricamento da cassone o manuale a livello pavimento. L'ESS ha la sedia nella parte superiore per uno scarico controllato dall'alto nel contenitore. L'EDS combina entrambe."
+    },
+    {
+      "domanda": "Fino a che altezza può scaricare l'elevatore?",
+      "risposta": "Tutti gli elevatori Deca sono disponibili con altezze di scarico da 1350mm fino a 3000mm, per adattarsi a qualsiasi configurazione di linea."
+    },
+    {
+      "domanda": "Quale tappeto per il settore alimentare?",
+      "risposta": "Per il settore alimentare consigliamo la variante 04 con tapparella modulare in plastica, facile da pulire e conforme ai requisiti igienici. In alternativa, il table top (02) offre robustezza con buona pulibilità."
+    }
+  ]
+}

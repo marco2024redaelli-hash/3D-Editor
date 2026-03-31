@@ -1,0 +1,215 @@
+{
+  "categoria": "IAS - Isola di asservimento",
+  "descrizione_generale": "Le isole di asservimento IAS sono sistemi compatti progettati per l'orientamento, la selezione e l'incolonnamento di particolari, utilizzate in linee di assemblaggio e confezionamento automatizzate.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "IAS01",
+      "nome": "Isola di asservimento IAS01",
+      "composizione": [
+        "Vibratore circolare di selezione ed orientamento",
+        "Vibratore lineare di polmonatura",
+        "Piastra di accumulo e polmonatura",
+        "Piastra di sostegno impianto"
+      ],
+      "descrizione": "Isola di asservimento utilizzata per l'orientamento e incolonnamento in accumulo di svariate quantità di particolari.",
+      "modello_3d": {
+        "file": "ias01.glb",
+        "path": "/models/ias/ias01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ias01"
+      },
+      "caratteristiche_chiave": {
+        "tipo_trasporto": "vibratore lineare",
+        "modalita_accumulo": true,
+        "tipo_particolari": "standard",
+        "selezione_dimensionale": false
+      },
+      "keywords": [
+        "vibratore circolare",
+        "vibratore lineare",
+        "polmonatura",
+        "accumulo",
+        "orientamento",
+        "incolonnamento"
+      ]
+    },
+    {
+      "codice": "IAS02",
+      "nome": "Isola di asservimento IAS02",
+      "composizione": [
+        "Vibratore circolare di selezione ed orientamento",
+        "Nastro trasportatore di accumulo e polmonatura",
+        "Piastra di sostegno impianto"
+      ],
+      "descrizione": "Isola di asservimento utilizzata per l'orientamento e incolonnamento non in accumulo di svariate quantità di particolari.",
+      "modello_3d": {
+        "file": "ias02.glb",
+        "path": "/models/ias/ias02.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ias02"
+      },
+      "caratteristiche_chiave": {
+        "tipo_trasporto": "nastro trasportatore",
+        "modalita_accumulo": false,
+        "tipo_particolari": "standard",
+        "selezione_dimensionale": false
+      },
+      "keywords": [
+        "vibratore circolare",
+        "nastro trasportatore",
+        "polmonatura",
+        "orientamento",
+        "incolonnamento",
+        "non in accumulo"
+      ]
+    },
+    {
+      "codice": "IAS03",
+      "nome": "Isola di asservimento IAS03",
+      "composizione": [
+        "Vibratore circolare di selezione ed orientamento",
+        "Canale ad aria di spinta",
+        "Piastra di sostegno impianto"
+      ],
+      "descrizione": "Isola di asservimento utilizzata per l'orientamento e incolonnamento in accumulo di particolari leggeri.",
+      "modello_3d": {
+        "file": "ias03.glb",
+        "path": "/models/ias/ias03.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ias03"
+      },
+      "caratteristiche_chiave": {
+        "tipo_trasporto": "canale ad aria",
+        "modalita_accumulo": true,
+        "tipo_particolari": "leggeri",
+        "selezione_dimensionale": false
+      },
+      "keywords": [
+        "vibratore circolare",
+        "canale ad aria",
+        "aria di spinta",
+        "particolari leggeri",
+        "orientamento",
+        "incolonnamento",
+        "accumulo"
+      ]
+    },
+    {
+      "codice": "IAS04",
+      "nome": "Isola di asservimento IAS04",
+      "composizione": [
+        "Vibratore circolare di selezione ed orientamento",
+        "Rulliera di selezione e calibramento",
+        "Piastra di sostegno impianto"
+      ],
+      "descrizione": "Isola di asservimento utilizzata per l'orientamento e la cernita di prodotti di diverse dimensioni selezionati dalla rulliera a valle.",
+      "modello_3d": {
+        "file": "ias04.glb",
+        "path": "/models/ias/ias04.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=ias04"
+      },
+      "caratteristiche_chiave": {
+        "tipo_trasporto": "rulliera",
+        "modalita_accumulo": false,
+        "tipo_particolari": "diverse dimensioni",
+        "selezione_dimensionale": true
+      },
+      "keywords": [
+        "vibratore circolare",
+        "rulliera",
+        "selezione",
+        "calibramento",
+        "cernita",
+        "diverse dimensioni"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire il modello IAS più adatto in base alle esigenze del cliente.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "I particolari da trattare sono leggeri (es. plastica sottile, guarnizioni, o-ring)?",
+        "se_si": "IAS03",
+        "se_no": "Q2"
+      },
+      {
+        "id": "Q2",
+        "testo": "È necessaria la selezione e cernita per dimensione?",
+        "se_si": "IAS04",
+        "se_no": "Q3"
+      },
+      {
+        "id": "Q3",
+        "testo": "Serve accumulo/polmonatura dei particolari in uscita?",
+        "se_si": "IAS01",
+        "se_no": "IAS02"
+      }
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatta",
+        "come sono",
+        "fammi vedere",
+        "anteprima"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un prodotto IAS, aprire il viewer 3D con il file .glb corrispondente dal campo 'modello_3d.url'. Se la richiesta è generica, usare la logica_selezione per guidare il cliente verso il modello più adatto e poi mostrare il 3D.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Ho bisogno di orientare dei pezzi leggeri in plastica",
+          "risposta": "Per particolari leggeri ti consiglio la IAS03, dotata di canale ad aria di spinta. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ias03.glb"
+        },
+        {
+          "utente": "Devo selezionare pezzi di diverse dimensioni",
+          "risposta": "La IAS04 con rulliera di selezione e calibramento è la soluzione ideale per la cernita dimensionale. Ti mostro il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ias04.glb"
+        },
+        {
+          "utente": "Mi serve un sistema con accumulo",
+          "risposta": "La IAS01 con vibratore lineare di polmonatura lavora in modalità accumulo. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ias01.glb"
+        },
+        {
+          "utente": "Mostrami la IAS02",
+          "risposta": "Ecco la IAS02: isola con nastro trasportatore, ideale per lavorazioni senza accumulo.",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "ias02.glb"
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali sono le isole di asservimento disponibili?",
+      "risposta": "Deca Srl offre 4 modelli di isole di asservimento: IAS01 (con vibratore lineare per accumulo), IAS02 (con nastro trasportatore, senza accumulo), IAS03 (con canale ad aria per particolari leggeri) e IAS04 (con rulliera per selezione e calibramento). Posso mostrarti il modello 3D di ciascuna."
+    },
+    {
+      "domanda": "Qual è la differenza tra IAS01 e IAS02?",
+      "risposta": "La IAS01 utilizza un vibratore lineare di polmonatura e lavora in accumulo, mentre la IAS02 utilizza un nastro trasportatore e lavora non in accumulo. Entrambe hanno un vibratore circolare di selezione ed orientamento. Vuoi vedere i modelli 3D a confronto?"
+    },
+    {
+      "domanda": "Quale isola è adatta per particolari leggeri?",
+      "risposta": "La IAS03 è specificamente progettata per particolari leggeri, utilizzando un canale ad aria di spinta per il trasporto e l'incolonnamento. Ti mostro il modello 3D?"
+    },
+    {
+      "domanda": "Quale isola permette la selezione per dimensione?",
+      "risposta": "La IAS04 è dotata di una rulliera di selezione e calibramento che permette la cernita di prodotti di diverse dimensioni. Vuoi visualizzarla in 3D?"
+    },
+    {
+      "domanda": "Cos'è un'isola di asservimento?",
+      "risposta": "Un'isola di asservimento è un sistema compatto che combina un vibratore circolare di selezione con un sistema di trasporto e accumulo, progettato per orientare, selezionare e incolonnare particolari in modo automatico all'interno di linee produttive."
+    }
+  ]
+}

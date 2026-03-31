@@ -1,0 +1,321 @@
+{
+  "categoria": "Dispositivi di singolarizzazione",
+  "descrizione_generale": "I dispositivi di singolarizzazione gestiscono il passaggio dei pezzi dall'uscita dell'isola di asservimento alla stazione successiva (assemblaggio, confezionamento, robot, ecc.), garantendo il corretto posizionamento, la cadenza e la separazione singola dei particolari.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "SCS01",
+      "nome": "Scassettatore",
+      "descrizione": "Sposta il pezzo da un punto A ad un punto B cambiando la direzione di avanzamento e mandando il pezzo in posizione. Utilizzato per trasferire il pezzo dall'uscita del canale lineare a una posizione laterale o perpendicolare.",
+      "funzione": "Spostamento pezzo da punto A a punto B con cambio direzione e posizionamento",
+      "tipo_movimento": "cambio direzione + posizionamento",
+      "modello_3d": {
+        "file": "scs01.glb",
+        "path": "/models/singolarizzazione/scs01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=scs01"
+      },
+      "caratteristiche_chiave": {
+        "cambio_direzione": true,
+        "mantiene_orientamento": true,
+        "posizionamento_finale": true,
+        "tipo_attuazione": "pneumatica",
+        "cadenzamento": false
+      },
+      "keywords": [
+        "scassettatore",
+        "SCS01",
+        "cambio direzione",
+        "posizionamento",
+        "spostamento",
+        "punto A",
+        "punto B",
+        "singolarizzazione"
+      ]
+    },
+    {
+      "codice": "TRA01",
+      "nome": "Traslatore",
+      "descrizione": "Sposta il pezzo da un punto A ad un punto B cambiando la direzione di avanzamento non mantenendo il pezzo in posizione. Simile allo scassettatore ma senza il mantenimento della posizione finale.",
+      "funzione": "Spostamento pezzo da punto A a punto B con cambio direzione senza mantenimento posizione",
+      "tipo_movimento": "cambio direzione senza posizionamento",
+      "modello_3d": {
+        "file": "tra01.glb",
+        "path": "/models/singolarizzazione/tra01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=tra01"
+      },
+      "caratteristiche_chiave": {
+        "cambio_direzione": true,
+        "mantiene_orientamento": false,
+        "posizionamento_finale": false,
+        "tipo_attuazione": "pneumatica",
+        "cadenzamento": false
+      },
+      "keywords": [
+        "traslatore",
+        "TRA01",
+        "cambio direzione",
+        "spostamento",
+        "traslazione",
+        "punto A",
+        "punto B",
+        "singolarizzazione"
+      ]
+    },
+    {
+      "codice": "CDZ01",
+      "nome": "Cadenzatore",
+      "descrizione": "Cadenza i pezzi con cilindri pneumatici, mantenendoli sulla stessa direzione di avanzamento. Regola il flusso dei pezzi separandoli uno alla volta per garantire una cadenza costante verso la stazione successiva.",
+      "funzione": "Cadenzamento pezzi con mantenimento direzione di avanzamento",
+      "tipo_movimento": "cadenzamento sulla stessa direzione",
+      "modello_3d": {
+        "file": "cdz01.glb",
+        "path": "/models/singolarizzazione/cdz01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=cdz01"
+      },
+      "caratteristiche_chiave": {
+        "cambio_direzione": false,
+        "mantiene_orientamento": true,
+        "posizionamento_finale": false,
+        "tipo_attuazione": "cilindri pneumatici",
+        "cadenzamento": true
+      },
+      "keywords": [
+        "cadenzatore",
+        "CDZ01",
+        "cadenza",
+        "pneumatico",
+        "cilindri",
+        "separazione",
+        "flusso",
+        "stessa direzione",
+        "singolarizzazione"
+      ]
+    },
+    {
+      "codice": "SFP01",
+      "nome": "Stazione fissa di prelievo",
+      "descrizione": "Dispone il pezzo in posizione su una stazione non vibrante pronto per essere prelevato singolarmente. Il pezzo viene fermato e posizionato in un punto fisso stabile, ideale per il prelievo da robot o pick-and-place.",
+      "funzione": "Posizionamento pezzo su stazione fissa per prelievo singolo",
+      "tipo_movimento": "posizionamento fisso stabile",
+      "modello_3d": {
+        "file": "sfp01.glb",
+        "path": "/models/singolarizzazione/sfp01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=sfp01"
+      },
+      "caratteristiche_chiave": {
+        "cambio_direzione": false,
+        "mantiene_orientamento": true,
+        "posizionamento_finale": true,
+        "tipo_attuazione": "meccanica",
+        "cadenzamento": false,
+        "stazione_fissa": true,
+        "prelievo_robot": true
+      },
+      "keywords": [
+        "stazione fissa",
+        "prelievo",
+        "SFP01",
+        "robot",
+        "pick-and-place",
+        "posizionamento",
+        "non vibrante",
+        "singolarizzazione"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire il dispositivo di singolarizzazione più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Cosa devi fare con il pezzo all'uscita dell'isola?",
+        "opzioni": {
+          "spostare_cambiando_direzione": "Q2_SPOSTAMENTO",
+          "cadenzare_stessa_direzione": "CDZ01 - Cadenzatore pneumatico",
+          "fermare_per_prelievo_robot": "SFP01 - Stazione fissa di prelievo"
+        }
+      },
+      {
+        "id": "Q2_SPOSTAMENTO",
+        "testo": "Il pezzo deve rimanere in posizione precisa dopo lo spostamento?",
+        "se_si": "SCS01 - Scassettatore (cambio direzione + posizionamento preciso)",
+        "se_no": "TRA01 - Traslatore (cambio direzione senza posizionamento)"
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Codice",
+      "Nome",
+      "Cambio direzione",
+      "Posizionamento",
+      "Cadenzamento",
+      "Prelievo robot"
+    ],
+    "righe": [
+      [
+        "SCS01",
+        "Scassettatore",
+        "Sì",
+        "Sì",
+        "No",
+        "No"
+      ],
+      [
+        "TRA01",
+        "Traslatore",
+        "Sì",
+        "No",
+        "No",
+        "No"
+      ],
+      [
+        "CDZ01",
+        "Cadenzatore",
+        "No",
+        "No",
+        "Sì",
+        "No"
+      ],
+      [
+        "SFP01",
+        "Stazione fissa prelievo",
+        "No",
+        "Sì",
+        "No",
+        "Sì"
+      ]
+    ]
+  },
+  "compatibilita": {
+    "descrizione": "I dispositivi di singolarizzazione si installano a valle dell'isola di asservimento, tipicamente dopo il canale lineare (CNL/CNA).",
+    "mappatura": {
+      "SCS01": {
+        "a_valle_di": [
+          "CNL",
+          "CNA"
+        ],
+        "a_monte_di": [
+          "stazione assemblaggio",
+          "confezionamento"
+        ]
+      },
+      "TRA01": {
+        "a_valle_di": [
+          "CNL",
+          "CNA"
+        ],
+        "a_monte_di": [
+          "stazione assemblaggio",
+          "nastro trasportatore"
+        ]
+      },
+      "CDZ01": {
+        "a_valle_di": [
+          "CNL",
+          "CNA"
+        ],
+        "a_monte_di": [
+          "stazione assemblaggio",
+          "confezionamento",
+          "avvitatore AVV01"
+        ]
+      },
+      "SFP01": {
+        "a_valle_di": [
+          "CNL",
+          "CNA"
+        ],
+        "a_monte_di": [
+          "robot",
+          "pick-and-place",
+          "manipolatore"
+        ]
+      }
+    }
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "singolarizzazione",
+        "scassettatore",
+        "traslatore",
+        "cadenzatore",
+        "stazione prelievo",
+        "SCS",
+        "TRA",
+        "CDZ",
+        "SFP"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un dispositivo di singolarizzazione, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Devo spostare i pezzi dall'uscita del canale in una posizione laterale precisa",
+          "risposta": "Lo SCS01 (scassettatore) è perfetto: sposta il pezzo cambiando direzione e lo mantiene in posizione precisa. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "scs01.glb"
+        },
+        {
+          "utente": "Mi serve solo un cambio di direzione senza posizionamento",
+          "risposta": "Il TRA01 (traslatore) fa al caso tuo: sposta il pezzo da un punto all'altro cambiando direzione, senza il vincolo del posizionamento finale. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "tra01.glb"
+        },
+        {
+          "utente": "Devo separare i pezzi uno alla volta mantenendo la stessa direzione",
+          "risposta": "Il CDZ01 (cadenzatore) è la soluzione: cilindri pneumatici che cadenzano i pezzi separandoli singolarmente sulla stessa direzione di avanzamento. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cdz01.glb"
+        },
+        {
+          "utente": "Il robot deve prelevare i pezzi uno alla volta da un punto fisso",
+          "risposta": "La SFP01 (stazione fissa di prelievo) è ideale: posiziona il pezzo su una stazione stabile non vibrante, pronto per il prelievo da robot o pick-and-place. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "sfp01.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra scassettatore e traslatore?",
+          "risposta": "Entrambi spostano il pezzo cambiando direzione. Lo SCS01 (scassettatore) mantiene il pezzo in posizione precisa dopo lo spostamento, il TRA01 (traslatore) no. Scegli lo SCS01 se serve precisione di posizionamento. Ti mostro entrambi?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "scs01.glb",
+            "tra01.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali dispositivi di singolarizzazione offrite?",
+      "risposta": "Deca Srl offre quattro dispositivi: SCS01 (scassettatore, cambio direzione con posizionamento), TRA01 (traslatore, cambio direzione senza posizionamento), CDZ01 (cadenzatore pneumatico sulla stessa direzione) e SFP01 (stazione fissa di prelievo per robot). Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Che differenza c'è tra scassettatore e traslatore?",
+      "risposta": "Entrambi spostano il pezzo da un punto A a un punto B cambiando direzione. Lo SCS01 mantiene il pezzo in posizione precisa dopo lo spostamento, ideale per stazioni che richiedono posizionamento esatto. Il TRA01 non mantiene la posizione, adatto per trasferimenti semplici."
+    },
+    {
+      "domanda": "Quale dispositivo serve per interfacciarsi con un robot?",
+      "risposta": "La SFP01 (stazione fissa di prelievo) è specificamente progettata per il prelievo robotizzato: posiziona il pezzo su una stazione stabile non vibrante dove il robot o il pick-and-place può prelevarlo singolarmente con precisione."
+    },
+    {
+      "domanda": "Come funziona il cadenzatore CDZ01?",
+      "risposta": "Il CDZ01 utilizza cilindri pneumatici per separare e cadenzare i pezzi uno alla volta, mantenendoli sulla stessa direzione di avanzamento. Garantisce una cadenza costante verso la stazione successiva, ideale prima di assemblaggio o confezionamento."
+    },
+    {
+      "domanda": "Posso usare più dispositivi di singolarizzazione insieme?",
+      "risposta": "Sì, è comune combinare un CDZ01 (per cadenzare il flusso) con un SCS01 o SFP01 (per posizionare il pezzo nella stazione finale). La configurazione dipende dal layout della linea e dal tipo di stazione a valle."
+    }
+  ]
+}

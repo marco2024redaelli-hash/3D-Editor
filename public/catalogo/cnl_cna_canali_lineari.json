@@ -1,0 +1,231 @@
+{
+  "categoria": "Componenti per isole di asservimento - Canali lineari",
+  "descrizione_generale": "I canali lineari sono componenti montati sulle basi vibranti lineari (BVL) per il trasporto, l'incolonnamento e la polmonatura dei particolari orientati. Si dividono in canali di polmonatura (CNL) e canali ad aria (CNA).",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "famiglie": [
+    {
+      "codice_famiglia": "CNL",
+      "nome": "Canale lineare di polmonatura",
+      "descrizione": "Canale lineare di polmonatura montato su base vibrante lineare BVL. Utilizzato per il trasporto e l'incolonnamento in accumulo dei particolari orientati dal vibratore circolare. Disponibile in lunghezze standard e speciali, con sezioni personalizzabili.",
+      "lunghezze_standard_mm": [
+        300,
+        400,
+        500,
+        600,
+        700,
+        900,
+        1000
+      ],
+      "personalizzazione": "Disponibili sezioni e lunghezze speciali su richiesta",
+      "varianti": [
+        {
+          "codice": "CNL-300",
+          "lunghezza_mm": 300,
+          "modello_3d": {
+            "file": "cnl_300.glb",
+            "path": "/models/cnl/cnl_300.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cnl_300"
+          }
+        },
+        {
+          "codice": "CNL-400",
+          "lunghezza_mm": 400,
+          "modello_3d": {
+            "file": "cnl_400.glb",
+            "path": "/models/cnl/cnl_400.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cnl_400"
+          }
+        },
+        {
+          "codice": "CNL-500",
+          "lunghezza_mm": 500,
+          "modello_3d": {
+            "file": "cnl_500.glb",
+            "path": "/models/cnl/cnl_500.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cnl_500"
+          }
+        },
+        {
+          "codice": "CNL-600",
+          "lunghezza_mm": 600,
+          "modello_3d": {
+            "file": "cnl_600.glb",
+            "path": "/models/cnl/cnl_600.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cnl_600"
+          }
+        },
+        {
+          "codice": "CNL-700",
+          "lunghezza_mm": 700,
+          "modello_3d": {
+            "file": "cnl_700.glb",
+            "path": "/models/cnl/cnl_700.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cnl_700"
+          }
+        },
+        {
+          "codice": "CNL-900",
+          "lunghezza_mm": 900,
+          "modello_3d": {
+            "file": "cnl_900.glb",
+            "path": "/models/cnl/cnl_900.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cnl_900"
+          }
+        },
+        {
+          "codice": "CNL-1000",
+          "lunghezza_mm": 1000,
+          "modello_3d": {
+            "file": "cnl_1000.glb",
+            "path": "/models/cnl/cnl_1000.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cnl_1000"
+          }
+        }
+      ],
+      "keywords": [
+        "canale lineare",
+        "polmonatura",
+        "CNL",
+        "trasporto",
+        "incolonnamento",
+        "accumulo"
+      ]
+    },
+    {
+      "codice_famiglia": "CNA",
+      "nome": "Canale lineare ad aria",
+      "descrizione": "Canale lineare ad aria per il trasporto di particolari leggeri mediante spinta pneumatica. Disponibile in profili lineari e curvilinei, con sezioni e lunghezze da definire in base all'applicazione specifica del cliente.",
+      "tipologie_profilo": [
+        "lineare",
+        "curvilineo"
+      ],
+      "personalizzazione": "Sezioni e lunghezze completamente personalizzabili in base all'applicazione",
+      "modello_3d": {
+        "file": "cna_standard.glb",
+        "path": "/models/cna/cna_standard.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=cna_standard"
+      },
+      "varianti": [
+        {
+          "codice": "CNA-LIN",
+          "profilo": "lineare",
+          "descrizione": "Canale ad aria con profilo rettilineo",
+          "modello_3d": {
+            "file": "cna_lineare.glb",
+            "path": "/models/cna/cna_lineare.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cna_lineare"
+          }
+        },
+        {
+          "codice": "CNA-CUR",
+          "profilo": "curvilineo",
+          "descrizione": "Canale ad aria con profilo curvilineo per percorsi non rettilinei",
+          "modello_3d": {
+            "file": "cna_curvilineo.glb",
+            "path": "/models/cna/cna_curvilineo.glb",
+            "url": "https://glb-3d-editor.web.app/viewer?model=cna_curvilineo"
+          }
+        }
+      ],
+      "keywords": [
+        "canale ad aria",
+        "aria di spinta",
+        "CNA",
+        "particolari leggeri",
+        "pneumatico",
+        "lineare",
+        "curvilineo"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire il canale lineare più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "I particolari da trasportare sono leggeri (es. plastica sottile, guarnizioni, o-ring) o standard/pesanti?",
+        "se_leggeri": "CNA - Canale ad aria",
+        "se_standard_pesanti": "CNL - Canale di polmonatura"
+      },
+      {
+        "id": "Q2_CNL",
+        "testo": "Quale lunghezza di canale ti serve? (standard: 300, 400, 500, 600, 700, 900, 1000 mm — oppure lunghezza speciale su richiesta)",
+        "azione": "Mostrare il 3D del CNL nella lunghezza scelta"
+      },
+      {
+        "id": "Q2_CNA",
+        "testo": "Il percorso è rettilineo o necessita di curve?",
+        "se_rettilineo": "CNA-LIN (profilo lineare)",
+        "se_curve": "CNA-CUR (profilo curvilineo)"
+      }
+    ]
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "canale",
+        "polmonatura",
+        "aria",
+        "CNL",
+        "CNA"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un canale lineare, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Mi serve un canale di polmonatura da 600mm",
+          "risposta": "Ecco il canale lineare di polmonatura CNL-600, lungo 600mm. Ti mostro il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cnl_600.glb"
+        },
+        {
+          "utente": "Devo trasportare pezzi leggeri su un percorso curvo",
+          "risposta": "Per particolari leggeri con percorso curvilineo ti consiglio il CNA-CUR, canale ad aria con profilo curvilineo. Le sezioni e lunghezze saranno definite in base alla tua applicazione. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cna_curvilineo.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra CNL e CNA?",
+          "risposta": "Il CNL è un canale di polmonatura classico che trasporta i pezzi per vibrazione, ideale per particolari standard e pesanti. Il CNA usa una spinta ad aria compressa, perfetto per particolari leggeri. Il CNA è anche disponibile in profilo curvilineo per percorsi non rettilinei. Ti mostro entrambi?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "cnl_500.glb",
+            "cna_lineare.glb"
+          ]
+        },
+        {
+          "utente": "Avete canali con lunghezze speciali?",
+          "risposta": "Sì, i canali CNL sono disponibili in lunghezze standard da 300 a 1000mm, ma possiamo realizzare lunghezze e sezioni speciali su richiesta. Anche i canali CNA ad aria sono completamente personalizzabili. Contattaci per una configurazione su misura."
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Che tipi di canali lineari offrite?",
+      "risposta": "Deca Srl offre due tipologie di canali lineari: CNL (canale di polmonatura, per trasporto a vibrazione di particolari standard) e CNA (canale ad aria, per particolari leggeri con spinta pneumatica). Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Quali lunghezze sono disponibili per i canali CNL?",
+      "risposta": "I canali di polmonatura CNL sono disponibili in 7 lunghezze standard: 300, 400, 500, 600, 700, 900 e 1000mm. Sono disponibili anche sezioni e lunghezze speciali su richiesta."
+    },
+    {
+      "domanda": "Il canale ad aria CNA può fare delle curve?",
+      "risposta": "Sì, il CNA è disponibile sia in profilo lineare (rettilineo) che curvilineo per percorsi non rettilinei. Le sezioni e lunghezze sono completamente personalizzabili in base all'applicazione."
+    },
+    {
+      "domanda": "Quando usare il canale ad aria invece di quello di polmonatura?",
+      "risposta": "Il canale ad aria CNA è la scelta migliore per particolari leggeri come guarnizioni, o-ring o componenti in plastica sottile, che rispondono meglio alla spinta pneumatica. Il CNL di polmonatura è preferibile per particolari più pesanti e robusti che richiedono il trasporto per vibrazione."
+    }
+  ]
+}

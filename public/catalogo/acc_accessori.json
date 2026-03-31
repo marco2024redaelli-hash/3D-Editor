@@ -1,0 +1,239 @@
+{
+  "categoria": "ACC - Accessori per isole di asservimento",
+  "descrizione_generale": "Gli accessori ACC completano le isole di asservimento con funzionalità aggiuntive: rilevamento livello dei pezzi nei contenitori, controllo orientamento tramite visione artificiale e sistemi di avvitatura a valle dell'isola.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "TLM01",
+      "nome": "Tastatore di livello meccanico",
+      "descrizione": "Utilizzato per il rilevamento della quantità di pezzi contenuta nei contenitori. Sensore meccanico a contatto che monitora il livello di riempimento della tazza vibrante per gestire il caricamento automatico.",
+      "funzione": "Rilevamento livello pezzi nei contenitori",
+      "tipo_sensore": "meccanico a contatto",
+      "modello_3d": {
+        "file": "tlm01.glb",
+        "path": "/models/acc/tlm01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=tlm01"
+      },
+      "caratteristiche_chiave": {
+        "tipo": "sensore livello",
+        "tecnologia": "meccanica",
+        "installazione": "sul contenitore",
+        "funzione_principale": "controllo riempimento",
+        "automazione_carico": true
+      },
+      "keywords": [
+        "tastatore livello",
+        "TLM01",
+        "meccanico",
+        "riempimento",
+        "contenitore",
+        "caricamento automatico",
+        "sensore livello"
+      ]
+    },
+    {
+      "codice": "SVI01",
+      "nome": "Sensore di visione semplice per controllo orientamento su contenitore",
+      "descrizione": "Soluzione consigliata quando non ci sono possibilità di orientare i pezzi meccanicamente. Sensore di visione semplice montato sul contenitore per il controllo dell'orientamento dei particolari, con capacità di riconoscere la posizione corretta e scartare i pezzi mal orientati.",
+      "funzione": "Controllo orientamento pezzi tramite visione artificiale",
+      "tipo_sensore": "visione artificiale (camera)",
+      "modello_3d": {
+        "file": "svi01.glb",
+        "path": "/models/acc/svi01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=svi01"
+      },
+      "caratteristiche_chiave": {
+        "tipo": "sensore visione",
+        "tecnologia": "camera/visione artificiale",
+        "installazione": "sul contenitore circolare",
+        "funzione_principale": "controllo orientamento",
+        "alternativa_a": "orientamento meccanico",
+        "scarto_automatico": true
+      },
+      "keywords": [
+        "sensore visione",
+        "SVI01",
+        "camera",
+        "visione artificiale",
+        "orientamento",
+        "controllo qualità",
+        "scarto",
+        "contenitore"
+      ]
+    },
+    {
+      "codice": "AVV01",
+      "nome": "Avvitatore doppio",
+      "descrizione": "Sistemi completi di avvitatura posti a valle di isole di asservimento. Realizzazione custom ed a progetto. Avvitatore doppio per operazioni di assemblaggio automatizzate a valle della selezione e orientamento dei particolari.",
+      "funzione": "Avvitatura automatica a valle dell'isola di asservimento",
+      "tipo_sistema": "avvitatore doppio custom",
+      "modello_3d": {
+        "file": "avv01.glb",
+        "path": "/models/acc/avv01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=avv01"
+      },
+      "caratteristiche_chiave": {
+        "tipo": "avvitatore",
+        "configurazione": "doppio",
+        "installazione": "a valle dell'isola",
+        "funzione_principale": "avvitatura automatica",
+        "custom": true,
+        "progettazione_dedicata": true
+      },
+      "keywords": [
+        "avvitatore",
+        "AVV01",
+        "doppio",
+        "avvitatura",
+        "assemblaggio",
+        "custom",
+        "a valle",
+        "automazione"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire l'accessorio più adatto.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Qual è l'esigenza principale?",
+        "opzioni": {
+          "controllo_livello_pezzi": {
+            "suggerimento": "TLM01 - Tastatore di livello meccanico",
+            "motivo": "Monitora il riempimento del contenitore per gestire il caricamento automatico"
+          },
+          "orientamento_pezzi_complessi": {
+            "suggerimento": "SVI01 - Sensore di visione",
+            "motivo": "Quando i pezzi non possono essere orientati meccanicamente, la visione artificiale controlla e scarta quelli mal orientati"
+          },
+          "avvitatura_assemblaggio": {
+            "suggerimento": "AVV01 - Avvitatore doppio",
+            "motivo": "Sistema custom di avvitatura automatica a valle dell'isola"
+          }
+        }
+      },
+      {
+        "id": "Q2_SVI",
+        "testo": "I pezzi possono essere orientati meccanicamente con la spirale del contenitore?",
+        "se_si": "L'orientamento meccanico è sufficiente, il sensore SVI01 non è necessario",
+        "se_no": "SVI01 - Il sensore di visione è la soluzione ideale per controllare e scartare pezzi mal orientati"
+      },
+      {
+        "id": "Q2_AVV",
+        "testo": "Quante stazioni di avvitatura servono e quali specifiche ha l'assemblaggio?",
+        "nota": "L'AVV01 è un sistema custom progettato su misura. Contattare Deca Srl per una progettazione dedicata in base alle specifiche dell'applicazione."
+      }
+    ]
+  },
+  "compatibilita": {
+    "descrizione": "Tabella di compatibilità tra accessori e isole/componenti.",
+    "mappatura": {
+      "TLM01": {
+        "compatibile_con": [
+          "CCI",
+          "CCO",
+          "CGR"
+        ],
+        "nota": "Si monta su qualsiasi contenitore circolare per monitorarne il livello"
+      },
+      "SVI01": {
+        "compatibile_con": [
+          "CCI",
+          "CCO",
+          "CGR"
+        ],
+        "nota": "Si monta sul contenitore circolare quando l'orientamento meccanico non è possibile"
+      },
+      "AVV01": {
+        "compatibile_con": [
+          "IAS01",
+          "IAS02",
+          "IAS03",
+          "IAS04"
+        ],
+        "nota": "Si installa a valle di qualsiasi isola di asservimento, progettazione custom"
+      }
+    }
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "accessorio",
+        "tastatore",
+        "livello",
+        "sensore",
+        "visione",
+        "camera",
+        "avvitatore",
+        "TLM",
+        "SVI",
+        "AVV"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un accessorio, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Come faccio a sapere quando il contenitore è pieno?",
+          "risposta": "Il TLM01 è un tastatore di livello meccanico che rileva la quantità di pezzi nel contenitore e gestisce il caricamento automatico. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "tlm01.glb"
+        },
+        {
+          "utente": "I miei pezzi non si riescono a orientare con la spirale",
+          "risposta": "In questo caso ti consiglio il SVI01, un sensore di visione montato sul contenitore che controlla l'orientamento dei pezzi e scarta automaticamente quelli mal posizionati. È la soluzione ideale quando l'orientamento meccanico non è possibile. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "svi01.glb"
+        },
+        {
+          "utente": "Dopo l'orientamento devo avvitare i pezzi insieme",
+          "risposta": "L'AVV01 è un avvitatore doppio progettato custom per operazioni di assemblaggio a valle dell'isola di asservimento. Ogni sistema è realizzato su misura per la tua applicazione. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "avv01.glb"
+        },
+        {
+          "utente": "Quali accessori avete per le isole?",
+          "risposta": "Deca offre tre accessori: TLM01 (tastatore di livello per monitorare il riempimento), SVI01 (sensore di visione per controllare l'orientamento quando non è possibile meccanicamente) e AVV01 (avvitatore doppio custom a valle dell'isola). Ti mostro tutti e tre?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "tlm01.glb",
+            "svi01.glb",
+            "avv01.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali accessori offrite per le isole di asservimento?",
+      "risposta": "Deca Srl offre tre accessori: TLM01 (tastatore di livello meccanico per monitorare il riempimento), SVI01 (sensore di visione per il controllo dell'orientamento) e AVV01 (avvitatore doppio custom per assemblaggio a valle). Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Quando serve il sensore di visione SVI01?",
+      "risposta": "Il SVI01 è consigliato quando i particolari non possono essere orientati meccanicamente tramite la spirale del contenitore. Il sensore di visione controlla l'orientamento e scarta automaticamente i pezzi mal posizionati."
+    },
+    {
+      "domanda": "L'avvitatore AVV01 è standard o custom?",
+      "risposta": "L'AVV01 è un sistema completamente custom, progettato e realizzato su misura in base alle specifiche dell'applicazione del cliente. Contatta Deca Srl per una progettazione dedicata."
+    },
+    {
+      "domanda": "Come funziona il tastatore di livello TLM01?",
+      "risposta": "Il TLM01 è un tastatore meccanico a contatto montato sul contenitore che rileva la quantità di pezzi presenti. Quando il livello scende sotto una soglia, segnala la necessità di ricaricare il contenitore, permettendo la gestione automatica del caricamento."
+    },
+    {
+      "domanda": "Posso combinare il sensore di visione con il tastatore di livello?",
+      "risposta": "Sì, TLM01 e SVI01 possono essere usati insieme sullo stesso contenitore: il TLM01 gestisce il livello di riempimento mentre il SVI01 controlla l'orientamento dei pezzi. Questa combinazione massimizza l'automazione dell'isola."
+    }
+  ]
+}

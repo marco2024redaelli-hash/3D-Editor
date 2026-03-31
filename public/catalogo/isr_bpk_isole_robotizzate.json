@@ -1,0 +1,327 @@
+{
+  "categoria": "ISR - Isole robotizzate",
+  "descrizione_generale": "Le isole robotizzate Deca Srl integrano robot industriali con sistemi di visione, nastri vibranti e alimentazione per l'asservimento automatico, il controllo dimensionale e il bin picking. Soluzioni avanzate per l'automazione completa delle linee produttive.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "ISR01",
+      "nome": "Isola robotizzata per controllo dimensionale",
+      "descrizione": "Garantisce il controllo dimensionale di ogni singolo pezzo sfruttando due sistemi di visione per raggiungere un controllo qualità del 100%. Isola robotizzata con doppia visione per ispezione completa.",
+      "funzione": "Controllo dimensionale 100% con doppio sistema di visione e robot",
+      "tipo": "isola robotizzata di controllo",
+      "modello_3d": {
+        "file": "isr01.glb",
+        "path": "/models/isr/isr01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=isr01"
+      },
+      "caratteristiche_chiave": {
+        "robot": true,
+        "visione_artificiale": true,
+        "numero_sistemi_visione": 2,
+        "controllo_dimensionale": true,
+        "controllo_100_percento": true,
+        "asservimento": false,
+        "bin_picking": false
+      },
+      "keywords": [
+        "isola robotizzata",
+        "ISR01",
+        "controllo dimensionale",
+        "visione artificiale",
+        "doppia visione",
+        "100%",
+        "qualità",
+        "robot",
+        "ispezione"
+      ]
+    },
+    {
+      "codice": "ISR02",
+      "nome": "Isola robotizzata per asservimento generico",
+      "descrizione": "Isola robotizzata per asservimento generico per varie tipologie di pezzi. Impianto composto da un nastro vibrante per permettere la presa del robot con sistema visione ed un nastro di rientro per pezzi non orientati. Flessibile e adattabile a diverse produzioni.",
+      "funzione": "Asservimento robotizzato generico con nastro vibrante, visione e rientro pezzi",
+      "tipo": "isola robotizzata di asservimento",
+      "modello_3d": {
+        "file": "isr02.glb",
+        "path": "/models/isr/isr02.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=isr02"
+      },
+      "caratteristiche_chiave": {
+        "robot": true,
+        "visione_artificiale": true,
+        "nastro_vibrante": true,
+        "nastro_rientro": true,
+        "controllo_dimensionale": false,
+        "asservimento": true,
+        "generico": true,
+        "bin_picking": false
+      },
+      "keywords": [
+        "isola robotizzata",
+        "ISR02",
+        "asservimento generico",
+        "nastro vibrante",
+        "visione",
+        "rientro pezzi",
+        "robot",
+        "flessibile",
+        "varie tipologie"
+      ]
+    },
+    {
+      "codice": "ISR03",
+      "nome": "Isola robotizzata per asservimento trancia",
+      "descrizione": "Il sistema permette asservimento automatizzato in sicurezza e con posizionamenti precisi in fase di tranciatura. Isola robotizzata dedicata all'alimentazione sicura e precisa di presse e trance.",
+      "funzione": "Asservimento automatico trancia con posizionamento preciso e sicurezza",
+      "tipo": "isola robotizzata per trancia",
+      "modello_3d": {
+        "file": "isr03.glb",
+        "path": "/models/isr/isr03.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=isr03"
+      },
+      "caratteristiche_chiave": {
+        "robot": true,
+        "visione_artificiale": false,
+        "trancia": true,
+        "sicurezza": true,
+        "posizionamento_preciso": true,
+        "asservimento": true,
+        "bin_picking": false
+      },
+      "keywords": [
+        "isola robotizzata",
+        "ISR03",
+        "trancia",
+        "tranciatura",
+        "asservimento",
+        "sicurezza",
+        "posizionamento preciso",
+        "robot",
+        "pressa"
+      ]
+    },
+    {
+      "codice": "BPK01",
+      "nome": "Bin picking (presa diretta da cassone)",
+      "descrizione": "Impianto robotizzato con visione 3D e presa diretta da cassone di pezzi disposti in modo casuale. Il robot identifica e preleva i pezzi direttamente dal cassone senza necessità di pre-orientamento, grazie alla visione tridimensionale.",
+      "funzione": "Presa robotizzata diretta da cassone con visione 3D (bin picking)",
+      "tipo": "sistema bin picking",
+      "modello_3d": {
+        "file": "bpk01.glb",
+        "path": "/models/isr/bpk01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=bpk01"
+      },
+      "caratteristiche_chiave": {
+        "robot": true,
+        "visione_artificiale": true,
+        "visione_3d": true,
+        "bin_picking": true,
+        "presa_da_cassone": true,
+        "pezzi_casuali": true,
+        "pre_orientamento": false,
+        "asservimento": true
+      },
+      "keywords": [
+        "bin picking",
+        "BPK01",
+        "presa da cassone",
+        "visione 3D",
+        "robot",
+        "pezzi casuali",
+        "presa diretta",
+        "senza orientamento"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire l'isola robotizzata più adatta.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Qual è la funzione principale che ti serve?",
+        "opzioni": {
+          "controllo_qualita_dimensionale": "ISR01 - Controllo dimensionale 100% con doppia visione",
+          "asservimento_generico": "ISR02 - Asservimento generico con nastro vibrante e rientro",
+          "asservimento_trancia": "ISR03 - Asservimento trancia con sicurezza e precisione",
+          "presa_da_cassone": "BPK01 - Bin picking con visione 3D"
+        }
+      },
+      {
+        "id": "Q2",
+        "testo": "I pezzi arrivano già orientati o sono alla rinfusa in un cassone?",
+        "se_orientati": "ISR01 (controllo) o ISR02/ISR03 (asservimento) — i pezzi vengono pre-orientati dal vibratore",
+        "se_alla_rinfusa": "BPK01 - Bin picking con visione 3D, preleva direttamente dal cassone senza pre-orientamento"
+      }
+    ]
+  },
+  "confronto_rapido": {
+    "intestazione": [
+      "Codice",
+      "Nome",
+      "Funzione",
+      "Visione",
+      "Pre-orientamento richiesto"
+    ],
+    "righe": [
+      [
+        "ISR01",
+        "Controllo dimensionale",
+        "Controllo qualità 100%",
+        "Doppia visione 2D",
+        "Sì"
+      ],
+      [
+        "ISR02",
+        "Asservimento generico",
+        "Alimentazione robot",
+        "Visione 2D + nastro rientro",
+        "Sì (con rientro automatico)"
+      ],
+      [
+        "ISR03",
+        "Asservimento trancia",
+        "Alimentazione trancia",
+        "No",
+        "Sì"
+      ],
+      [
+        "BPK01",
+        "Bin picking",
+        "Presa da cassone",
+        "Visione 3D",
+        "No"
+      ]
+    ]
+  },
+  "compatibilita": {
+    "descrizione": "Le isole robotizzate si integrano con gli altri sistemi Deca.",
+    "mappatura": {
+      "ISR01": {
+        "a_monte": [
+          "isole IAS",
+          "elevatori ELC/ESI/ESS/EDS",
+          "nastri NRA/NSI/NDS"
+        ],
+        "funzione_monte": "alimentazione pezzi orientati"
+      },
+      "ISR02": {
+        "integrato": [
+          "nastro vibrante",
+          "sistema visione",
+          "nastro rientro"
+        ],
+        "a_valle": [
+          "stazioni assemblaggio",
+          "confezionamento"
+        ]
+      },
+      "ISR03": {
+        "a_valle": [
+          "trancia",
+          "pressa"
+        ],
+        "integrato": [
+          "sistema sicurezza",
+          "posizionamento"
+        ]
+      },
+      "BPK01": {
+        "a_monte": [
+          "cassone pezzi sfusi"
+        ],
+        "a_valle": [
+          "stazioni assemblaggio",
+          "isole IAS",
+          "nastri trasportatori"
+        ]
+      }
+    }
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatto",
+        "fammi vedere",
+        "anteprima",
+        "isola robotizzata",
+        "robot",
+        "ISR",
+        "BPK",
+        "bin picking",
+        "controllo dimensionale",
+        "asservimento robot",
+        "trancia robot",
+        "visione 3D",
+        "presa cassone"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere un'isola robotizzata, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "Ho bisogno di controllare il 100% dei pezzi con un robot",
+          "risposta": "L'ISR01 è l'isola robotizzata per controllo dimensionale con doppio sistema di visione che garantisce il controllo qualità del 100%. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "isr01.glb"
+        },
+        {
+          "utente": "Mi serve un robot per alimentare diverse macchine con vari pezzi",
+          "risposta": "L'ISR02 è perfetta: isola robotizzata per asservimento generico con nastro vibrante per la presa, sistema di visione e nastro di rientro per i pezzi non orientati. Flessibile per varie tipologie di pezzi. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "isr02.glb"
+        },
+        {
+          "utente": "Devo asservire una trancia con un robot in sicurezza",
+          "risposta": "L'ISR03 è progettata specificamente per l'asservimento automatizzato di trance con posizionamenti precisi e sicurezza integrata. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "isr03.glb"
+        },
+        {
+          "utente": "I miei pezzi sono alla rinfusa in un cassone, il robot può prenderli direttamente?",
+          "risposta": "Il BPK01 (bin picking) è esattamente quello che ti serve: un robot con visione 3D che preleva i pezzi direttamente dal cassone, anche se disposti in modo casuale, senza bisogno di pre-orientamento. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "bpk01.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra le isole robotizzate?",
+          "risposta": "L'ISR01 fa controllo dimensionale al 100% con doppia visione. L'ISR02 è per asservimento generico con nastro vibrante e rientro pezzi. L'ISR03 è specifica per trance con sicurezza integrata. Il BPK01 è bin picking con visione 3D per presa diretta da cassone. Ti mostro tutte?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "isr01.glb",
+            "isr02.glb",
+            "isr03.glb",
+            "bpk01.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Quali isole robotizzate offrite?",
+      "risposta": "Deca Srl offre quattro soluzioni robotizzate: ISR01 (controllo dimensionale 100% con doppia visione), ISR02 (asservimento generico con nastro vibrante e rientro), ISR03 (asservimento trancia in sicurezza) e BPK01 (bin picking con visione 3D per presa da cassone). Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Cos'è il bin picking?",
+      "risposta": "Il bin picking (BPK01) è un sistema robotizzato con visione 3D che preleva pezzi direttamente da un cassone dove sono disposti in modo casuale. Il robot identifica ogni pezzo nello spazio tridimensionale e lo afferra senza necessità di pre-orientamento. È la soluzione più avanzata per l'asservimento automatico."
+    },
+    {
+      "domanda": "Che differenza c'è tra ISR02 e BPK01?",
+      "risposta": "L'ISR02 usa un nastro vibrante per pre-orientare i pezzi prima che il robot li prenda con visione 2D (i pezzi non orientati tornano indietro sul nastro di rientro). Il BPK01 elimina il pre-orientamento: la visione 3D permette al robot di prendere i pezzi direttamente dal cassone alla rinfusa."
+    },
+    {
+      "domanda": "L'ISR03 è sicura per l'asservimento della trancia?",
+      "risposta": "Sì, l'ISR03 è specificamente progettata per l'asservimento automatizzato di trance e presse con sicurezza integrata e posizionamenti precisi in fase di tranciatura, eliminando il rischio per l'operatore."
+    },
+    {
+      "domanda": "Posso combinare il bin picking con un'isola di asservimento?",
+      "risposta": "Sì, il BPK01 può essere posizionato a monte di un'isola IAS o di un nastro trasportatore. Il robot preleva dal cassone e alimenta la linea a valle. È anche possibile integrarlo con i sistemi di controllo qualità ISR01."
+    }
+  ]
+}

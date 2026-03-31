@@ -2290,8 +2290,14 @@
     "IAS": {
       "_files": [
         "cdz-027-af001-m5_solo_per_ias.glb",
-        "cdz-027-af001-m5_sx_solo_per_ias.glb"
+        "cdz-027-af001-m5_sx_solo_per_ias.glb",
+        "ias01.glb"
       ],
+      "0001": {
+        "_files": [
+          "isole_di_asservimentoiasp0500260.glb"
+        ]
+      },
       "IAL": {
         "_files": [
           "ial-001.glb",
@@ -2365,7 +2371,8 @@
           "Costruttivi": {
             "_files": [
               "prd-mtr01-050-0001-ac001-x.glb",
-              "prd-mtr01-050-0001-sa001-x.glb"
+              "prd-mtr01-050-0001-sa001-x.glb",
+              "prd-mtr01-050-0001_capienza.glb"
             ]
           }
         },
@@ -2373,30 +2380,112 @@
           "_files": [
             "prd-mtr01-050-0002-a0001-x.glb"
           ]
+        },
+        "Condivisibili 50 litri": {
+          "_files": [
+            "prd-mtr-050-300-1400-a0001-x.glb"
+          ]
+        },
+        "Costruttivi 50 litri": {}
+      },
+      "060": {
+        "0001": {
+          "Costruttivi": {}
+        },
+        "0002": {
+          "Costruttivi": {}
+        },
+        "0004": {},
+        "0005 SISTEMARE DESCRIZIONI": {},
+        "0006": {
+          "Costruttivi": {}
         }
       },
       "090": {
-        "Condivisibili 90 litri": {}
+        "Condivisibili 90 litri": {},
+        "Costruttivi 90 litri": {}
       }
     },
-    "MTR03": {},
+    "MTR03": {
+      "060": {
+        "0001": {
+          "_files": [
+            "prd-mtr-060-284-1770-a0001-x.glb",
+            "prd-mtr-060-284-1770-sa001-x.glb",
+            "prd-mtr-060-284_capienza.glb"
+          ]
+        }
+      }
+    },
     "NCA": {
       "0001": {},
-      "0002": {},
+      "0002": {
+        "_files": [
+          "prd-nca-0002-ac0001.glb"
+        ]
+      },
       "0003": {
+        "_files": [
+          "prd-nca-0003-a0001.glb"
+        ],
         "Costruttivi": {}
       },
       "0004": {
+        "_files": [
+          "prd-nca-0004-a0001.glb"
+        ],
         "Costruttivi": {}
       }
     },
     "NCI": {},
     "NDS01": {
-      "0001": {},
+      "0001": {
+        "Condivisibili": {
+          "_files": [
+            "prd-nds01-0001-a0001-x.glb"
+          ]
+        },
+        "Costruttivi": {
+          "_files": [
+            "prd-nds01-0001-ac001-x.glb"
+          ]
+        }
+      },
       "0002": {}
     },
     "NDS03": {
+      "0001": {
+        "Condivisibili": {
+          "_files": [
+            "prd-nds03-0001-a0001-x.glb"
+          ]
+        },
+        "Costruttivi": {
+          "_files": [
+            "prd-nds03-0001-ac001-x.glb",
+            "prd-nds03-0001-sa001-x.glb"
+          ]
+        }
+      },
+      "0002": {
+        "Condivisibili": {
+          "_files": [
+            "prd-nds03-0002-a0001-x.glb"
+          ]
+        },
+        "Costruttivi": {
+          "_files": [
+            "prd-nds03-0002-ac001-x.glb",
+            "prd-nds03-0002-sa001-x.glb"
+          ]
+        }
+      },
       "0003": {
+        "Condivisibili": {
+          "_files": [
+            "prd-nds03-0003-a0001-x.glb"
+          ]
+        },
         "Costruttivi": {}
       },
       "0004": {
@@ -2404,12 +2493,101 @@
       }
     },
     "NDS04": {
-      "0001": {}
+      "0001": {},
+      "0002": {
+        "Condivisibili": {},
+        "Costruttivi": {}
+      }
     },
-    "NRA01": {},
-    "NRC01": {},
-    "NRC03": {},
-    "NRC04": {},
+    "NRA01": {
+      "0001": {
+        "Componenti": {}
+      },
+      "0002": {
+        "Componenti": {}
+      },
+      "0003": {
+        "Componenti": {}
+      },
+      "0004": {
+        "Componenti": {}
+      },
+      "0005": {
+        "Componenti": {}
+      },
+      "0006": {
+        "Componenti": {}
+      },
+      "0007": {},
+      "0008": {
+        "Componenti": {}
+      },
+      "0009": {
+        "Componenti": {}
+      },
+      "0010": {
+        "Componenti": {}
+      },
+      "0011": {
+        "Componenti": {}
+      },
+      "0012": {
+        "Condivisibili": {},
+        "Costruttivi": {}
+      },
+      "0013": {},
+      "0014": {
+        "Componenti": {}
+      },
+      "0015": {
+        "Componenti": {}
+      },
+      "C": {
+        "200": {},
+        "060": {},
+        "090": {}
+      },
+      "F": {
+        "060": {
+          "Costruttivi prof. La.60": {}
+        },
+        "090": {}
+      }
+    },
+    "NRC01": {
+      "0001": {},
+      "0002": {
+        "Condivisibili": {},
+        "Costruttivi": {}
+      },
+      "0003": {},
+      "0004": {},
+      "0005": {
+        "Costruttivi": {}
+      },
+      "0006": {},
+      "0007": {},
+      "0008": {},
+      "R (NON SALVARE QUI I NUOVI FILE)": {
+        "C": {
+          "Costruttivi Lg. 132": {}
+        }
+      }
+    },
+    "NRC03": {
+      "0001": {
+        "Condivisibili": {},
+        "Costruttivi": {}
+      },
+      "0002": {
+        "Condivisibili": {},
+        "Costruttivi": {}
+      }
+    },
+    "NRC04": {
+      "0001": {},
+      "0002": {}
+    },
     "PEP": {
       "0001": {},
       "0002": {},

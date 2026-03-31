@@ -3,10 +3,8 @@ Convert STEP files to GLB using CadQuery + trimesh.
 Usage: python convert_step_to_glb.py --input "O:/EXPORT_PDM/STEP" --output "DATABASE1/exportPDMdaO" [--max 20]
 """
 import os
-import sys
 import time
 import argparse
-import glob
 
 def convert_step_to_glb(step_path, glb_path):
     """Convert a single STEP file to GLB."""

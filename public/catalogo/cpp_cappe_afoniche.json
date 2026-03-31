@@ -1,0 +1,224 @@
+{
+  "categoria": "CPP - Cappe afoniche per isole di asservimento",
+  "descrizione_generale": "Le cappe afoniche CPP sono involucri insonorizzanti progettati per ridurre il rumore generato dalle isole di asservimento durante il funzionamento. Realizzate in profilato di alluminio con pannelli in Dbond e materiale fonoassorbente, disponibili in tre forme per adattarsi a ogni configurazione e spazio disponibile.",
+  "produttore": "Deca Srl",
+  "sede": "Monte Marenzo (LC), Italia",
+  "prodotti": [
+    {
+      "codice": "CPP01",
+      "nome": "Cappa afonica a parallelepipedo",
+      "descrizione": "Cappa afonica a parallelepipedo in profilato di alluminio e pannelli in Dbond + fonoassorbente. Realizzata in una grande gamma di conformazioni e dimensioni.",
+      "forma": "parallelepipedo",
+      "struttura": "Profilato di alluminio",
+      "pannelli": "Dbond + fonoassorbente",
+      "dimensioni": "grande gamma personalizzabile",
+      "modello_3d": {
+        "file": "cpp01.glb",
+        "path": "/models/cpp/cpp01.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=cpp01"
+      },
+      "caratteristiche_chiave": {
+        "forma": "parallelepipedo",
+        "ingombro": "standard",
+        "adatta_spazi_ridotti": false,
+        "copertura": "isola completa"
+      },
+      "keywords": [
+        "cappa afonica",
+        "CPP01",
+        "parallelepipedo",
+        "rettangolare",
+        "insonorizzazione",
+        "Dbond",
+        "fonoassorbente",
+        "rumore"
+      ]
+    },
+    {
+      "codice": "CPP02",
+      "nome": "Cappa afonica tonda",
+      "descrizione": "Cappa afonica tonda in profilato di alluminio e pannelli in Dbond + fonoassorbente. Realizzata in una grande gamma di conformazioni e dimensioni, ideale in presenza di problemi di spazio.",
+      "forma": "tonda (cilindrica)",
+      "struttura": "Profilato di alluminio",
+      "pannelli": "Dbond + fonoassorbente",
+      "dimensioni": "grande gamma personalizzabile",
+      "modello_3d": {
+        "file": "cpp02.glb",
+        "path": "/models/cpp/cpp02.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=cpp02"
+      },
+      "caratteristiche_chiave": {
+        "forma": "tonda/cilindrica",
+        "ingombro": "ridotto",
+        "adatta_spazi_ridotti": true,
+        "copertura": "vibratore circolare"
+      },
+      "keywords": [
+        "cappa afonica",
+        "CPP02",
+        "tonda",
+        "cilindrica",
+        "rotonda",
+        "spazio ridotto",
+        "compatta",
+        "insonorizzazione",
+        "Dbond",
+        "fonoassorbente",
+        "rumore"
+      ]
+    },
+    {
+      "codice": "CPP03",
+      "nome": "Cappa afonica a goccia",
+      "descrizione": "Cappa afonica a goccia in profilato di alluminio e pannelli in Dbond + fonoassorbente. Realizzata in una grande gamma di conformazioni e dimensioni.",
+      "forma": "a goccia",
+      "struttura": "Profilato di alluminio",
+      "pannelli": "Dbond + fonoassorbente",
+      "dimensioni": "grande gamma personalizzabile",
+      "modello_3d": {
+        "file": "cpp03.glb",
+        "path": "/models/cpp/cpp03.glb",
+        "url": "https://glb-3d-editor.web.app/viewer?model=cpp03"
+      },
+      "caratteristiche_chiave": {
+        "forma": "a goccia",
+        "ingombro": "ottimizzato",
+        "adatta_spazi_ridotti": false,
+        "copertura": "vibratore circolare + uscita canale"
+      },
+      "keywords": [
+        "cappa afonica",
+        "CPP03",
+        "goccia",
+        "sagomata",
+        "insonorizzazione",
+        "Dbond",
+        "fonoassorbente",
+        "rumore"
+      ]
+    }
+  ],
+  "logica_selezione": {
+    "descrizione": "Albero decisionale per suggerire la cappa afonica più adatta.",
+    "domande": [
+      {
+        "id": "Q1",
+        "testo": "Qual è la forma dell'isola di asservimento da coprire?",
+        "opzioni": {
+          "isola_completa_rettangolare": "CPP01 - Parallelepipedo, copre tutta l'isola",
+          "solo_vibratore_circolare": "Q2",
+          "vibratore_con_uscita_canale": "CPP03 - A goccia, copre vibratore + zona uscita"
+        }
+      },
+      {
+        "id": "Q2",
+        "testo": "Hai problemi di spazio intorno all'isola?",
+        "se_si": "CPP02 - Tonda, ingombro ridotto, ideale per spazi limitati",
+        "se_no": "CPP01 - Parallelepipedo o CPP03 - A goccia in base alla configurazione"
+      }
+    ]
+  },
+  "compatibilita": {
+    "descrizione": "Tabella di compatibilità tra cappe afoniche e isole di asservimento.",
+    "mappatura": {
+      "IAS01": [
+        "CPP01",
+        "CPP03"
+      ],
+      "IAS02": [
+        "CPP01",
+        "CPP03"
+      ],
+      "IAS03": [
+        "CPP01",
+        "CPP02",
+        "CPP03"
+      ],
+      "IAS04": [
+        "CPP01",
+        "CPP03"
+      ]
+    },
+    "nota": "La CPP02 tonda è particolarmente adatta quando si copre solo il vibratore circolare e lo spazio è limitato. La CPP01 e CPP03 sono compatibili con tutte le configurazioni. Le dimensioni vengono personalizzate in base all'isola IAS."
+  },
+  "chat_actions": {
+    "mostra_modello_3d": {
+      "trigger_keywords": [
+        "mostra",
+        "vedi",
+        "3D",
+        "modello",
+        "visualizza",
+        "come è fatta",
+        "fammi vedere",
+        "anteprima",
+        "cappa",
+        "afonica",
+        "insonorizzazione",
+        "rumore",
+        "CPP",
+        "silenziamento"
+      ],
+      "istruzioni": "Quando l'utente chiede di vedere una cappa afonica, aprire il viewer 3D con il file .glb corrispondente. Se la richiesta è generica, guidare il cliente con la logica_selezione.",
+      "azione": "APRI_VIEWER_3D",
+      "parametro": "modello_3d.url",
+      "esempio_interazioni": [
+        {
+          "utente": "La mia isola fa troppo rumore, avete una soluzione?",
+          "risposta": "Sì, le cappe afoniche CPP riducono significativamente il rumore. Abbiamo tre forme: CPP01 (parallelepipedo, per coprire tutta l'isola), CPP02 (tonda, compatta per spazi ridotti) e CPP03 (a goccia, copre vibratore + uscita canale). Com'è il tuo spazio disponibile?",
+          "azione": "ATTENDI_RISPOSTA"
+        },
+        {
+          "utente": "Ho poco spazio, mi serve qualcosa di compatto",
+          "risposta": "La CPP02 tonda è perfetta per spazi ridotti: forma cilindrica con ingombro minimo, in profilato di alluminio con pannelli Dbond + fonoassorbente. Ecco il modello 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cpp02.glb"
+        },
+        {
+          "utente": "Devo coprire tutta l'isola di asservimento",
+          "risposta": "La CPP01 a parallelepipedo è la scelta ideale: copre l'intera isola con una grande gamma di dimensioni personalizzabili. Ecco il 3D:",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cpp01.glb"
+        },
+        {
+          "utente": "Mostrami la cappa a goccia",
+          "risposta": "Ecco la CPP03: cappa afonica a goccia in profilato di alluminio e pannelli Dbond + fonoassorbente, con forma ottimizzata per coprire il vibratore circolare e la zona di uscita del canale.",
+          "azione": "APRI_VIEWER_3D",
+          "modello": "cpp03.glb"
+        },
+        {
+          "utente": "Che differenza c'è tra le tre cappe?",
+          "risposta": "Tutte e tre usano profilato di alluminio con pannelli Dbond e fonoassorbente. La CPP01 è rettangolare e copre tutta l'isola. La CPP02 è tonda e compatta, ideale per spazi ridotti. La CPP03 a goccia è sagomata per coprire vibratore + uscita canale con ingombro ottimizzato. Ti mostro tutte e tre?",
+          "azione": "APRI_VIEWER_3D",
+          "modello": [
+            "cpp01.glb",
+            "cpp02.glb",
+            "cpp03.glb"
+          ]
+        }
+      ]
+    }
+  },
+  "faq": [
+    {
+      "domanda": "Che tipi di cappe afoniche offrite?",
+      "risposta": "Deca Srl offre tre modelli di cappe afoniche: CPP01 (parallelepipedo), CPP02 (tonda, per spazi ridotti) e CPP03 (a goccia). Tutte in profilato di alluminio con pannelli Dbond e fonoassorbente, personalizzabili nelle dimensioni. Posso mostrarti i modelli 3D."
+    },
+    {
+      "domanda": "Di che materiale sono le cappe afoniche?",
+      "risposta": "Le cappe CPP sono realizzate con struttura in profilato di alluminio e pannelli in Dbond accoppiato a materiale fonoassorbente per il massimo assorbimento acustico."
+    },
+    {
+      "domanda": "Quale cappa è adatta per spazi ridotti?",
+      "risposta": "La CPP02 tonda è specificamente progettata per situazioni con problemi di spazio: la forma cilindrica minimizza l'ingombro rispetto alla CPP01 rettangolare."
+    },
+    {
+      "domanda": "Le dimensioni delle cappe sono personalizzabili?",
+      "risposta": "Sì, tutte e tre le cappe CPP01, CPP02 e CPP03 sono realizzate in una grande gamma di conformazioni e dimensioni, personalizzabili in base all'isola di asservimento e allo spazio disponibile."
+    },
+    {
+      "domanda": "Posso combinare cappa afonica e rivestimento antirombo?",
+      "risposta": "Sì, per la massima riduzione del rumore puoi combinare una cappa afonica CPP esterna con il rivestimento antirombo RIV18 applicato all'esterno del contenitore. Questa combinazione offre il massimo abbattimento acustico."
+    }
+  ]
+}

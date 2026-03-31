@@ -48,19 +48,48 @@ function scanGlbs(dir, relBase) {
     const glb = relBase + e.name;
     const name = path.basename(e.name, '.glb');
     const folder = relBase.replace(/\/$/, '');
+    const glbBase = name.replace(/-x$/, '').toUpperCase();
 
-    // Cerca PDF nella stessa cartella
-    let pdf = null;
-    const pdfs = entries.filter(f => f.isFile() && f.name.toLowerCase().endsWith('.pdf'));
-    if (pdfs.length > 0) pdf = relBase + pdfs[0].name;
+    // Cerca PDF e XLS: stessa cartella, sottocartelle e cartella padre
+    function findFiles(searchDir, searchRel, ext) {
+      const results = [];
+      try {
+        const items = fs.readdirSync(searchDir, { withFileTypes: true });
+        items.filter(f => f.isFile() && f.name.toLowerCase().endsWith(ext)).forEach(f => {
+          results.push(searchRel + f.name);
+        });
+        items.filter(f => f.isDirectory()).forEach(f => {
+          results.push(...findFiles(path.join(searchDir, f.name), searchRel + f.name + '/', ext));
+        });
+      } catch {}
+      return results;
+    }
+
+    // Cerca nella cartella corrente + sottocartelle
+    let pdfs = findFiles(dir, relBase, '.pdf');
+    let xlss = findFiles(dir, relBase, '.xls').filter(f => !f.toLowerCase().includes('dettagliata'));
+
+    // Se non trovati, cerca nella cartella padre
+    if (pdfs.length === 0 || xlss.length === 0) {
+      const parentDir = path.dirname(dir);
+      const parentRel = relBase.replace(/[^/]+\/$/, '');
+      if (parentDir !== dir) {
+        if (pdfs.length === 0) pdfs = findFiles(parentDir, parentRel, '.pdf');
+        if (xlss.length === 0) xlss = findFiles(parentDir, parentRel, '.xls').filter(f => !f.toLowerCase().includes('dettagliata'));
+      }
+    }
+
+    // Match migliore: preferisci file il cui nome contiene il codice del GLB
+    const bestPdf = pdfs.find(f => f.toUpperCase().includes(glbBase.split('-').slice(0,4).join('-'))) || pdfs[0] || null;
+    const bestXls = xlss.find(f => f.toUpperCase().includes(glbBase.split('-').slice(0,4).join('-'))) || xlss[0] || null;
 
     const old = oldByGlb[glb] || {};
     newCatalog.push({
       name: old.name || name,
       glb,
       folder,
-      pdf: old.pdf || pdf,
-      xls: old.xls || null,
+      pdf: old.pdf || bestPdf,
+      xls: old.xls || bestXls,
       code: old.code || null
     });
   });
