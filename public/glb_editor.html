@@ -87,8 +87,8 @@
             position: fixed;
             top: 48px;
             left: calc(var(--left-w) + 80px);
-            width: 440px;
-            max-height: 420px;
+            width: 680px;
+            max-height: 80vh;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 0 0 var(--radius-lg) var(--radius-lg);
@@ -98,6 +98,10 @@
             flex-direction: column;
         }
         #library-panel.hidden { display: none; }
+        #library-top-bar {
+            display: flex; align-items: center; gap: 6px; padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+        }
         #library-breadcrumb {
             display: flex;
             align-items: center;
@@ -130,11 +134,37 @@
             font-weight: 500;
         }
         .library-folder:hover { background: var(--accent-dim); }
-        .library-folder .folder-icon { font-size: 16px; opacity: 0.7; }
-        .library-folder .folder-count { font-size: 10px; color: var(--text-muted); margin-left: auto; }
+        /* Macro-category card */
+        .macro-cat {
+            background: var(--bg-tertiary); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); cursor: pointer; overflow: hidden;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            padding: 18px 16px; display: flex; align-items: center; gap: 14px;
+        }
+        .macro-cat:hover {
+            border-color: var(--accent); transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78,204,163,0.12);
+        }
+        .macro-cat .mc-icon {
+            font-size: 28px; min-width: 40px; text-align: center;
+            filter: grayscale(0.3);
+        }
+        .macro-cat .mc-body { flex: 1; min-width: 0; }
+        .macro-cat .mc-label {
+            font-size: 14px; font-weight: 600; color: var(--text-primary);
+            line-height: 1.3;
+        }
+        .macro-cat .mc-sub {
+            font-size: 11px; color: var(--text-muted); margin-top: 3px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .macro-cat .mc-count {
+            font-size: 11px; color: var(--accent); font-weight: 600;
+            white-space: nowrap;
+        }
         #library-search {
-            margin: 8px;
-            padding: 8px 12px;
+            flex: 1;
+            padding: 7px 12px;
             background: var(--bg-primary);
             border: 1px solid var(--border);
             color: var(--text-primary);
@@ -147,23 +177,56 @@
         #library-search:focus { border-color: var(--accent); }
         #library-list {
             overflow-y: auto;
-            max-height: 340px;
-            padding: 0 4px 8px;
+            flex: 1;
+            padding: 8px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 10px;
+            align-content: start;
         }
-        .library-item {
+        /* Folder item in grid */
+        .library-folder {
             padding: 8px 12px;
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-primary);
             cursor: pointer;
             border-radius: var(--radius);
-            margin: 2px 4px;
+            margin: 0;
             display: flex;
-            justify-content: space-between;
             align-items: center;
             gap: 8px;
             transition: background 0.12s;
+            font-weight: 500;
+            grid-column: 1 / -1;
         }
-        .library-item:hover { background: var(--accent-dim); }
+        /* Grid card with large 3D preview */
+        .library-card {
+            background: var(--bg-tertiary); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); cursor: pointer; overflow: hidden;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            display: flex; flex-direction: column;
+        }
+        .library-card:hover {
+            border-color: var(--accent); transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(78,204,163,0.15);
+        }
+        .card-thumb {
+            width: 100%; height: 180px; background: var(--bg-primary);
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .card-thumb model-viewer {
+            width: 100%; height: 100%;
+            --poster-color: transparent;
+        }
+        .card-info { padding: 10px 12px; }
+        .card-name {
+            font-size: 12px; font-weight: 600; color: var(--text-primary);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3;
+        }
+        .card-code {
+            font-size: 10px; color: var(--accent); margin-top: 3px;
+            font-family: 'JetBrains Mono', monospace; opacity: 0.85;
+        }
         .lib-name { flex: 1; font-weight: 500; }
         .lib-code { color: var(--accent); font-size: 10px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; opacity: 0.85; }
         #btn-library.active {
@@ -1055,6 +1118,140 @@
             border-radius: var(--radius); padding: 6px 12px; font-size: 12px;
             font-weight: 600; font-family: var(--font); cursor: pointer;
         }
+
+        /* ===== Feedback Panel (flottante) ===== */
+        #feedback-panel {
+            position: fixed; top: 48px; right: 0; width: 380px; bottom: 0;
+            background: var(--bg-secondary); border-left: 2px solid var(--border);
+            z-index: 150; display: none; flex-direction: column;
+            box-shadow: -4px 0 24px rgba(0,0,0,0.4);
+        }
+        #feedback-panel.open { display: flex; }
+        #feedback-panel .fp-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 16px; border-bottom: 1px solid var(--border);
+            background: var(--bg-tertiary);
+        }
+        #feedback-panel .fp-header h3 {
+            margin: 0; font-size: 14px; color: var(--accent); font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        #feedback-panel .fp-close {
+            background: none; border: none; color: var(--text-secondary);
+            font-size: 20px; cursor: pointer; padding: 0 4px; transition: color 0.15s;
+        }
+        #feedback-panel .fp-close:hover { color: var(--danger); }
+
+        /* Stats bar */
+        .fp-stats {
+            display: flex; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--border);
+            background: var(--bg-primary);
+        }
+        .fp-stat-card {
+            flex: 1; text-align: center; padding: 8px 4px;
+            border-radius: var(--radius); border: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+        .fp-stat-card .stat-num {
+            font-size: 20px; font-weight: 700; line-height: 1.2;
+        }
+        .fp-stat-card .stat-label {
+            font-size: 9px; text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--text-muted); margin-top: 2px;
+        }
+        .fp-stat-card.positive .stat-num { color: #27ae60; }
+        .fp-stat-card.negative .stat-num { color: var(--danger); }
+        .fp-stat-card.suggestion .stat-num { color: var(--blue); }
+
+        /* Tabs */
+        .fp-tabs {
+            display: flex; border-bottom: 1px solid var(--border);
+        }
+        .fp-tab {
+            flex: 1; padding: 10px; text-align: center; font-size: 12px;
+            font-weight: 500; color: var(--text-muted); cursor: pointer;
+            border-bottom: 2px solid transparent; transition: all 0.15s;
+            background: none; border-top: none; border-left: none; border-right: none;
+            font-family: var(--font);
+        }
+        .fp-tab:hover { color: var(--text-primary); background: var(--bg-primary); }
+        .fp-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+        .fp-tab-content { flex: 1; overflow-y: auto; padding: 12px 16px; }
+        .fp-tab-content.hidden { display: none; }
+
+        /* Annotation item enhanced */
+        .ann-item-enhanced {
+            background: var(--bg-tertiary); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 10px 12px; margin-bottom: 8px;
+            cursor: pointer; transition: border-color 0.15s;
+        }
+        .ann-item-enhanced:hover { border-color: var(--accent); }
+        .ann-item-enhanced .ann-meta {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 6px;
+        }
+        .ann-item-enhanced .ann-meta-left {
+            display: flex; align-items: center; gap: 6px;
+        }
+        .ann-item-enhanced .ann-num {
+            background: var(--warning); color: var(--bg-primary); font-size: 10px;
+            font-weight: 700; padding: 2px 6px; border-radius: 10px;
+        }
+        .ann-item-enhanced .ann-part {
+            font-size: 10px; color: var(--accent); font-family: 'JetBrains Mono', monospace;
+        }
+        .ann-item-enhanced .ann-body {
+            font-size: 12px; color: var(--text-primary); line-height: 1.5; margin-bottom: 6px;
+        }
+        .ann-item-enhanced .ann-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 10px; color: var(--text-muted);
+        }
+        .ann-item-enhanced .ann-author { font-weight: 500; }
+        .ann-item-enhanced .ann-time { opacity: 0.7; }
+        .ann-item-enhanced .ann-del-btn {
+            background: none; border: none; color: var(--text-muted); cursor: pointer;
+            font-size: 14px; padding: 0 2px; transition: color 0.15s;
+        }
+        .ann-item-enhanced .ann-del-btn:hover { color: var(--danger); }
+
+        /* Annotation popup enhanced */
+        #annotation-popup .ann-target-label {
+            font-size: 11px; color: var(--accent); margin-bottom: 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        #annotation-popup .ann-sentiment-preview {
+            font-size: 11px; margin-top: 6px; min-height: 20px;
+        }
+
+        /* Feature item enhanced */
+        .feat-item-enhanced {
+            background: var(--bg-tertiary); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 10px 12px; margin-bottom: 8px;
+            display: flex; gap: 10px; align-items: flex-start;
+        }
+        .feat-item-enhanced:hover { border-color: var(--text-muted); }
+        .feat-vote-col {
+            display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 36px;
+        }
+        .feat-vote-col .vote-btn-sm {
+            background: none; border: 1px solid var(--border); border-radius: 4px;
+            padding: 2px 6px; cursor: pointer; font-size: 12px; color: var(--text-muted);
+            transition: all 0.15s; width: 28px; text-align: center;
+        }
+        .feat-vote-col .vote-btn-sm:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+        .feat-vote-col .vote-btn-sm.voted-up { border-color: #27ae60; color: #27ae60; background: rgba(39,174,96,0.1); }
+        .feat-vote-col .vote-btn-sm.voted-down { border-color: var(--danger); color: var(--danger); background: rgba(233,69,96,0.1); }
+        .feat-vote-col .score { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+        .feat-body { flex: 1; }
+        .feat-body .feat-title { font-size: 12px; color: var(--text-primary); line-height: 1.5; margin-bottom: 4px; }
+        .feat-body .feat-meta { display: flex; gap: 6px; align-items: center; font-size: 10px; color: var(--text-muted); }
+
+        /* Toolbar feedback button active state */
+        #btn-feedback-panel.active {
+            background: var(--blue); border-color: var(--blue);
+            color: var(--bg-primary); font-weight: 600;
+        }
     </style>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -1252,6 +1449,7 @@
         <button id="btn-measure" title="Misura (M)">Misura</button>
         <button id="btn-edges" class="active" title="Mostra/nascondi bordi (stile SolidWorks)">Bordi</button>
         <button id="btn-annotate" title="Annota sul modello 3D (N)">Annota</button>
+        <button id="btn-feedback-panel" title="Pannello Feedback & Annotazioni">Feedback</button>
         <div class="separator"></div>
         <select id="export-format" style="margin-left: auto;" title="Formato esportazione">
             <option value="glb">GLB</option>
@@ -1271,8 +1469,10 @@
     </div>
 
     <div id="library-panel" class="hidden">
+        <div id="library-top-bar">
+            <input type="text" id="library-search" placeholder="Cerca modello..." autocomplete="off">
+        </div>
         <div id="library-breadcrumb"></div>
-        <input type="text" id="library-search" placeholder="Cerca modello..." autocomplete="off">
         <div id="library-list"></div>
     </div>
 
@@ -1394,6 +1594,48 @@
             <button onclick="addFeatureRequest()">+</button>
         </div>
 
+    </div>
+
+    <!-- ===== FEEDBACK PANEL (flottante a destra) ===== -->
+    <div id="feedback-panel">
+        <div class="fp-header">
+            <h3>Feedback & Annotazioni</h3>
+            <button class="fp-close" id="fp-close-btn" title="Chiudi">&times;</button>
+        </div>
+        <!-- Stats -->
+        <div class="fp-stats">
+            <div class="fp-stat-card positive">
+                <div class="stat-num" id="fp-stat-pos">0</div>
+                <div class="stat-label">Positivi</div>
+            </div>
+            <div class="fp-stat-card negative">
+                <div class="stat-num" id="fp-stat-neg">0</div>
+                <div class="stat-label">Problemi</div>
+            </div>
+            <div class="fp-stat-card suggestion">
+                <div class="stat-num" id="fp-stat-sug">0</div>
+                <div class="stat-label">Suggerimenti</div>
+            </div>
+        </div>
+        <!-- Tabs -->
+        <div class="fp-tabs">
+            <button class="fp-tab active" data-tab="fp-annotations">Annotazioni 3D</button>
+            <button class="fp-tab" data-tab="fp-features">Miglioramenti</button>
+        </div>
+        <!-- Tab: Annotazioni -->
+        <div class="fp-tab-content" id="fp-annotations">
+            <div id="fp-annotation-list">
+                <em style="color:var(--text-muted);font-size:12px;">Nessuna annotazione. Clicca "Annota" nella toolbar e poi un punto del modello 3D.</em>
+            </div>
+        </div>
+        <!-- Tab: Feature Requests -->
+        <div class="fp-tab-content hidden" id="fp-features">
+            <div id="fp-feature-list"></div>
+            <div style="display:flex;gap:6px;margin-top:10px;">
+                <input type="text" id="fp-feature-input" placeholder="Suggerisci un miglioramento..." style="flex:1;background:var(--bg-primary);border:1px solid var(--border);color:var(--text-primary);border-radius:var(--radius);padding:8px 10px;font-size:12px;font-family:var(--font);outline:none;">
+                <button onclick="addFeatureRequest()" style="background:var(--accent);color:var(--bg-primary);border:none;border-radius:var(--radius);padding:8px 14px;font-size:12px;font-weight:600;font-family:var(--font);cursor:pointer;">+ Aggiungi</button>
+            </div>
+        </div>
     </div>
 
     <!-- Pannello BOM Distinta 3D -->
@@ -1635,6 +1877,7 @@ python train.py</pre></div>
         let annotationCounter = 0;
         let pendingAnnotationPoint = null;
         let pendingAnnotationNormal = null;
+        let pendingAnnotationPartName = '';
         let featureRequests = [];
         let featureIdCounter = 0;
 
@@ -1977,12 +2220,18 @@ python train.py</pre></div>
                     if (aHits.length > 0) {
                         pendingAnnotationPoint = aHits[0].point.clone();
                         pendingAnnotationNormal = aHits[0].face ? aHits[0].face.normal.clone().transformDirection(aHits[0].object.matrixWorld).normalize() : new THREE.Vector3(0,1,0);
+                        // Trova il nome della parte cliccata
+                        let hitTarget = aHits[0].object;
+                        while (hitTarget.parent && !loadedObjects.includes(hitTarget)) hitTarget = hitTarget.parent;
+                        pendingAnnotationPartName = hitTarget.name || aHits[0].object.name || 'Parte';
                         // Mostra popup vicino al click
                         const popup = document.getElementById('annotation-popup');
                         popup.style.left = Math.min(e.clientX + 10, window.innerWidth - 340) + 'px';
                         popup.style.top = Math.min(e.clientY - 30, window.innerHeight - 200) + 'px';
                         popup.style.display = 'block';
                         document.getElementById('annotation-text').value = '';
+                        document.getElementById('ann-target-label').textContent = 'Parte: ' + pendingAnnotationPartName;
+                        document.getElementById('ann-sentiment-preview').innerHTML = '';
                         document.getElementById('annotation-text').focus();
                     }
                     return;
@@ -2709,60 +2958,54 @@ python train.py</pre></div>
                 reader.readAsArrayBuffer(file);
             });
 
-            // Descrizioni cartelle PRD
+            // Descrizioni singole cartelle PRD
             window.PRD_DESCRIPTIONS = {
-                'ALM01': 'Alimentatore meccanico',
-                'CDZ01': 'Cadenzatore',
-                'CNL': 'Canale lineare su VL',
-                'CVM02': 'Canale vibrante bidirezionale',
-                'CVE01': 'Canale vibrante elettromagnetico',
-                'CVE02': 'Canale vibrante elettromagnetico',
-                'CVM01': 'Canale vibrante unidirezionale',
-                'CPP03': 'Cappe afoniche a goccia',
-                'CPP01': 'Cappe afoniche a parallelepipedo',
-                'CPP02': 'Cappe afoniche tonde',
-                'CSO02': 'Colonna di sostegno ad altezza',
-                'CSO01': 'Colonna di sostegno ad altezza fissa',
-                'COL': 'Colonna sostegno',
-                'CGP': 'Contenitori a gradini personalizzato',
-                'CCI': 'Contenitori cilindrici',
-                'CCP': 'Contenitori cilindrici personalizzati',
-                'CCO': 'Contenitori conici',
-                'CCOP': 'Contenitori conici personalizzati',
-                'ELP01': 'Elevatore a piastre pneumatico',
-                'ELC': 'Elevatore di carico',
-                'ELC02': 'Elevatore di carico',
-                'ESS01': 'Elevatore sedia superiore',
-                'FCC': 'Ferma colonna / centratore',
-                'IAS': 'Isole di asservimento',
-                'MNR': 'Manipolatore rotante',
-                'MTR01': 'Mototramoggia',
-                'MTR03': 'Mototramoggia',
-                'NDS01': 'Nastro a doppia sedia',
-                'NDS03': 'Nastro a doppia sedia',
-                'NDS04': 'Nastro a doppia sedia',
-                'NCA': 'Nastro a passo a catena',
-                'NCI': 'Nastro a passo con cinghia dentata',
-                'NRA01': 'Nastro trasportatore rettilineo',
-                'NRC01': 'Nastro trasportatore rettilineo',
-                'NRC03': 'Nastro trasportatore rettilineo',
-                'NRC04': 'Nastro trasportatore rettilineo',
-                'BLF01': 'Nastro vibrante',
-                'PEP': 'Pick and place',
-                'PRT': 'Protezioni',
-                'RUL-01': 'Rulliera di trasporto folle',
-                'RUL-02': 'Rulliera di trasporto motorizzata',
-                'SCS': 'Scassettatori',
-                'SFP': 'Stazione fissa di prelievo',
-                'STR': 'Strutture di sostegno',
-                'TL02': 'Tastatore di livello elettronico',
-                'TL01': 'Tastatore di livello meccanico',
-                'TRC01': 'Tramoggia chiusa',
-                'TRC02': 'Tramoggia chiusa',
-                'TRA01': 'Traslatore',
-                'CVM03': 'Vibrovagli',
-                'AVV-02': 'Avvitatore'
+                'ALM01': 'Alimentatore meccanico', 'CDZ01': 'Cadenzatore',
+                'CNL': 'Canale lineare su VL', 'CVM02': 'Canale vibrante bidirezionale',
+                'CVE01': 'Canale vibrante elettromagnetico', 'CVE02': 'Canale vibrante elettromagnetico',
+                'CVM01': 'Canale vibrante unidirezionale', 'CPP03': 'Cappe afoniche a goccia',
+                'CPP01': 'Cappe afoniche a parallelepipedo', 'CPP02': 'Cappe afoniche tonde',
+                'CSO02': 'Colonna di sostegno ad altezza', 'CSO01': 'Colonna di sostegno ad altezza fissa',
+                'COL': 'Colonna sostegno', 'CGP': 'Contenitori a gradini personalizzato',
+                'CCI': 'Contenitori cilindrici', 'CCP': 'Contenitori cilindrici personalizzati',
+                'CCO': 'Contenitori conici', 'CCOP': 'Contenitori conici personalizzati',
+                'ELP01': 'Elevatore a piastre pneumatico', 'ELC': 'Elevatore di carico',
+                'ELC02': 'Elevatore di carico', 'ESS01': 'Elevatore sedia superiore',
+                'FCC': 'Ferma colonna / centratore', 'IAS': 'Isole di asservimento',
+                'MNR': 'Manipolatore rotante', 'MTR01': 'Mototramoggia', 'MTR03': 'Mototramoggia',
+                'NDS01': 'Nastro a doppia sedia', 'NDS03': 'Nastro a doppia sedia', 'NDS04': 'Nastro a doppia sedia',
+                'NCA': 'Nastro a passo a catena', 'NCI': 'Nastro a passo con cinghia dentata',
+                'NRA01': 'Nastro trasp. rettilineo', 'NRC01': 'Nastro trasp. rettilineo',
+                'NRC03': 'Nastro trasp. rettilineo', 'NRC04': 'Nastro trasp. rettilineo',
+                'BLF01': 'Nastro vibrante', 'PEP': 'Pick and place', 'PRT': 'Protezioni',
+                'RUL-01': 'Rulliera folle', 'RUL-02': 'Rulliera motorizzata',
+                'SCS': 'Scassettatori', 'SFP': 'Stazione fissa di prelievo',
+                'STR': 'Strutture di sostegno', 'TL02': 'Tastatore di livello elettronico',
+                'TL01': 'Tastatore di livello meccanico', 'TRC01': 'Tramoggia chiusa',
+                'TRC02': 'Tramoggia chiusa', 'TRA01': 'Traslatore', 'CVM03': 'Vibrovagli',
+                'AVV-02': 'Avvitatore', 'BVC': 'Base vibrante circolare', 'BVL': 'Base vibrante lineare',
+                'TLM01': 'Telaio motore'
             };
+
+            // Macro-categorie per raggruppare le famiglie PRD
+            window.PRD_MACRO = [
+                { id: 'alimentazione', label: 'Alimentazione e Vibrazione', icon: '&#9881;',
+                  families: ['ALM01','BVC','BVL','CDZ01','CVM01','CVM02','CVM03','CVE01','CVE02','CNL'] },
+                { id: 'nastri', label: 'Nastri Trasportatori', icon: '&#10132;',
+                  families: ['NDS01','NDS03','NDS04','NRA01','NRC01','NRC03','NRC04','NCA','NCI','BLF01'] },
+                { id: 'contenitori', label: 'Contenitori e Tramogge', icon: '&#9645;',
+                  families: ['CCI','CCP','CCO','CCOP','CGP','TRC01','TRC02','MTR01','MTR03'] },
+                { id: 'elevatori', label: 'Elevatori', icon: '&#8679;',
+                  families: ['ELP01','ELC','ELC02','ESS01'] },
+                { id: 'cappe', label: 'Cappe Afoniche', icon: '&#9678;',
+                  families: ['CPP01','CPP02','CPP03'] },
+                { id: 'strutture', label: 'Strutture e Supporti', icon: '&#9638;',
+                  families: ['COL','CSO01','CSO02','STR','FCC'] },
+                { id: 'automazione', label: 'Automazione e Handling', icon: '&#9883;',
+                  families: ['IAS','PEP','MNR','SFP','SCS','TRA01','AVV-02'] },
+                { id: 'accessori', label: 'Accessori', icon: '&#9850;',
+                  families: ['RUL-01','RUL-02','TL01','TL02','PRT','TLM01'] }
+            ];
 
             // Library panel — navigazione a cartelle (usa db_tree.json per struttura + catalog.json per metadati)
             libraryCatalog = [];
@@ -2774,6 +3017,8 @@ python train.py</pre></div>
             window.dbTree = {};        // struttura cartelle da db_tree.json
             window.catalogByGlb = {};  // lookup rapido glb -> metadati da catalog.json
             let libraryCurrentPath = [];
+            // Cartelle visibili al livello root della libreria
+            const LIBRARY_ROOT_FOLDERS = ['PRD', 'COMMESSE'];
 
             // Carica entrambi i file in parallelo
             Promise.all([
@@ -2784,7 +3029,7 @@ python train.py</pre></div>
                 libraryCatalog = catalog;
                 // Indice per lookup veloce: path glb -> item catalogo
                 catalog.forEach(item => {
-                    if (item.glb) window.window.catalogByGlb[item.glb] = item;
+                    if (item.glb) window.catalogByGlb[item.glb] = item;
                 });
                 console.log('[DecAI] Catalogo caricato:', catalog.length, 'modelli');
                 renderLibraryFolder();
@@ -2823,7 +3068,7 @@ python train.py</pre></div>
                 const root = document.createElement('span');
                 root.className = 'breadcrumb-item';
                 root.textContent = 'Libreria';
-                root.addEventListener('click', () => { libraryCurrentPath = []; renderLibraryFolder(); });
+                root.addEventListener('click', () => { libraryCurrentPath = []; currentMacroCategory = null; renderLibraryFolder(); });
                 libraryBreadcrumb.appendChild(root);
                 libraryCurrentPath.forEach((seg, i) => {
                     const sep = document.createElement('span');
@@ -2835,43 +3080,148 @@ python train.py</pre></div>
                     item.textContent = seg;
                     item.addEventListener('click', () => {
                         libraryCurrentPath = libraryCurrentPath.slice(0, i + 1);
+                        currentMacroCategory = null;
                         renderLibraryFolder();
                     });
                     libraryBreadcrumb.appendChild(item);
                 });
             }
 
+            // Trova il primo GLB ricorsivamente in un nodo (per anteprima cartella)
+            function findFirstGlb(node, basePath) {
+                if (!node || typeof node !== 'object') return null;
+                if (Array.isArray(node._files) && node._files.length > 0) {
+                    return basePath + '/' + node._files[0];
+                }
+                for (const key of Object.keys(node)) {
+                    if (key === '_files') continue;
+                    const result = findFirstGlb(node[key], basePath + '/' + key);
+                    if (result) return result;
+                }
+                return null;
+            }
+
+            // Stato speciale: navigazione in macro-categoria PRD
+            let currentMacroCategory = null; // null o oggetto macro
+
             function renderLibraryFolder() {
                 renderBreadcrumb();
                 libraryListEl.innerHTML = '';
                 librarySearch.value = '';
 
-                const currentNode = libraryCurrentPath.length === 0 ? window.dbTree : getDbTreeNode(libraryCurrentPath);
-
-                if (!currentNode) {
-                    libraryListEl.innerHTML = '<div style="padding:10px;color:var(--text-muted);font-size:12px;text-align:center">Cartella vuota</div>';
+                // === LIVELLO ROOT: mostra Prodotti e Commesse ===
+                if (libraryCurrentPath.length === 0) {
+                    currentMacroCategory = null;
+                    libraryListEl.style.gridTemplateColumns = '1fr'; // una colonna per root
+                    ['PRD', 'COMMESSE'].forEach(name => {
+                        if (!window.dbTree[name]) return;
+                        const count = countFilesDeep(window.dbTree[name]);
+                        const div = document.createElement('div');
+                        div.className = 'macro-cat';
+                        div.innerHTML = `
+                            <div class="mc-icon">${name === 'PRD' ? '&#9881;' : '&#128221;'}</div>
+                            <div class="mc-body">
+                                <div class="mc-label">${name === 'PRD' ? 'Prodotti' : 'Commesse'}</div>
+                                <div class="mc-sub">${name === 'PRD' ? 'Catalogo prodotti DECA organizzato per categoria' : 'Progetti e commesse cliente'}</div>
+                            </div>
+                            <div class="mc-count">${count} modelli</div>`;
+                        div.addEventListener('click', () => {
+                            libraryCurrentPath.push(name);
+                            renderLibraryFolder();
+                        });
+                        libraryListEl.appendChild(div);
+                    });
                     return;
                 }
 
-                // Sottocartelle (escludi _files)
-                const folderNames = Object.keys(currentNode).filter(k => k !== '_files').sort();
-                folderNames.forEach(name => {
-                    const subNode = currentNode[name];
-                    const count = countFilesDeep(subNode);
-                    const div = document.createElement('div');
-                    div.className = 'library-folder';
-                    // Descrizione per cartelle PRD di primo livello
-                    const desc = (libraryCurrentPath.length === 1 && libraryCurrentPath[0] === 'PRD' && window.PRD_DESCRIPTIONS[name])
-                        ? `<span style="font-size:10px;color:var(--text-muted);font-weight:400;margin-left:6px;">${window.PRD_DESCRIPTIONS[name]}</span>` : '';
-                    div.innerHTML = `<span class="folder-icon">&#128193;</span><span>${name}${desc}</span><span class="folder-count">${count || ''}</span>`;
-                    div.addEventListener('click', () => {
-                        libraryCurrentPath.push(name);
-                        renderLibraryFolder();
-                    });
-                    libraryListEl.appendChild(div);
-                });
+                // === LIVELLO PRD: mostra macro-categorie ===
+                if (libraryCurrentPath.length === 1 && libraryCurrentPath[0] === 'PRD' && !currentMacroCategory) {
+                    libraryListEl.style.gridTemplateColumns = '1fr'; // una colonna
+                    const prdNode = window.dbTree.PRD || {};
+                    window.PRD_MACRO.forEach(macro => {
+                        // Conta modelli in questa macro-categoria
+                        let total = 0;
+                        const existingFamilies = macro.families.filter(f => prdNode[f]);
+                        existingFamilies.forEach(f => { total += countFilesDeep(prdNode[f]); });
+                        if (total === 0) return;
+                        const familyLabels = existingFamilies.slice(0, 4).map(f =>
+                            window.PRD_DESCRIPTIONS[f] || f
+                        ).join(', ') + (existingFamilies.length > 4 ? '...' : '');
 
-                // File GLB nella cartella corrente
+                        const div = document.createElement('div');
+                        div.className = 'macro-cat';
+                        div.innerHTML = `
+                            <div class="mc-icon">${macro.icon}</div>
+                            <div class="mc-body">
+                                <div class="mc-label">${macro.label}</div>
+                                <div class="mc-sub">${familyLabels}</div>
+                            </div>
+                            <div class="mc-count">${total} modelli</div>`;
+                        div.addEventListener('click', () => {
+                            currentMacroCategory = macro;
+                            renderLibraryFolder();
+                        });
+                        libraryListEl.appendChild(div);
+                    });
+                    return;
+                }
+
+                // === LIVELLO MACRO-CATEGORIA: mostra le famiglie come card con anteprima 3D ===
+                if (libraryCurrentPath.length === 1 && libraryCurrentPath[0] === 'PRD' && currentMacroCategory) {
+                    libraryListEl.style.gridTemplateColumns = 'repeat(auto-fill, minmax(190px, 1fr))';
+                    // Aggiorna breadcrumb per macro
+                    const mcSpan = document.createElement('span');
+                    mcSpan.className = 'breadcrumb-sep'; mcSpan.textContent = ' / ';
+                    libraryBreadcrumb.appendChild(mcSpan);
+                    const mcItem = document.createElement('span');
+                    mcItem.className = 'breadcrumb-item';
+                    mcItem.textContent = currentMacroCategory.label;
+                    mcItem.addEventListener('click', () => { currentMacroCategory = currentMacroCategory; renderLibraryFolder(); });
+                    libraryBreadcrumb.appendChild(mcItem);
+
+                    const prdNode = window.dbTree.PRD || {};
+                    currentMacroCategory.families.forEach(famName => {
+                        const famNode = prdNode[famName];
+                        if (!famNode) return;
+                        const count = countFilesDeep(famNode);
+                        if (count === 0) return;
+                        const desc = window.PRD_DESCRIPTIONS[famName] || famName;
+                        const previewGlb = findFirstGlb(famNode, 'PRD/' + famName);
+                        const div = document.createElement('div');
+                        div.className = 'library-card';
+                        const thumbHtml = previewGlb
+                            ? `<model-viewer src="db/${previewGlb}" auto-rotate interaction-prompt="none" environment-image="neutral"></model-viewer>`
+                            : `<div style="font-size:40px;opacity:0.3;">&#9881;</div>`;
+                        div.innerHTML = `
+                            <div class="card-thumb">${thumbHtml}</div>
+                            <div class="card-info">
+                                <div class="card-name" title="${desc}">${famName}</div>
+                                <div class="card-code">${desc} (${count})</div>
+                            </div>`;
+                        div.addEventListener('click', () => {
+                            currentMacroCategory = null;
+                            libraryCurrentPath = ['PRD', famName];
+                            renderLibraryFolder();
+                        });
+                        libraryListEl.appendChild(div);
+                    });
+                    if (libraryListEl.children.length === 0) {
+                        libraryListEl.innerHTML = '<div style="padding:20px;color:var(--text-muted);font-size:13px;text-align:center;grid-column:1/-1;">Nessun modello in questa categoria</div>';
+                    }
+                    return;
+                }
+
+                // === NAVIGAZIONE STANDARD: sottocartelle e file GLB con anteprime grandi ===
+                libraryListEl.style.gridTemplateColumns = 'repeat(auto-fill, minmax(190px, 1fr))';
+                currentMacroCategory = null;
+                const currentNode = getDbTreeNode(libraryCurrentPath);
+
+                if (!currentNode) {
+                    libraryListEl.innerHTML = '<div style="padding:20px;color:var(--text-muted);font-size:13px;text-align:center;grid-column:1/-1;">Cartella vuota</div>';
+                    return;
+                }
+
+                // File GLB come card con anteprime grandi
                 const files = currentNode._files || [];
                 const folderPath = libraryCurrentPath.join('/');
                 files.forEach(filename => {
@@ -2879,22 +3229,56 @@ python train.py</pre></div>
                     const catItem = window.catalogByGlb[glbRelPath];
                     const displayName = catItem ? catItem.name : filename.replace('.glb', '');
                     const code = catItem ? (catItem.code || '') : '';
-                    const div = document.createElement('div');
-                    div.className = 'library-item';
                     const codeDisplay = code === '__PDF_NO_CODE__'
                         ? '<span style="color:#e8a838;">pdf senza codice</span>'
                         : (code || '');
-                    div.innerHTML = `<span class="lib-name">${displayName}</span><span class="lib-code">${codeDisplay}</span>`;
+                    const glbUrl = 'db/' + glbRelPath;
+                    const div = document.createElement('div');
+                    div.className = 'library-card';
+                    div.innerHTML = `
+                        <div class="card-thumb">
+                            <model-viewer src="${glbUrl}" auto-rotate interaction-prompt="none" environment-image="neutral" camera-controls></model-viewer>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-name" title="${displayName}">${displayName}</div>
+                            <div class="card-code">${codeDisplay}</div>
+                        </div>`;
                     div.addEventListener('click', () => {
-                        loadGLBFromURL('db/' + glbRelPath, displayName, code);
+                        loadGLBFromURL(glbUrl, displayName, code);
                         libraryPanel.classList.add('hidden');
                         libraryBtn.classList.remove('active');
                     });
                     libraryListEl.appendChild(div);
                 });
 
-                if (folderNames.length === 0 && items.length === 0) {
-                    libraryListEl.innerHTML = '<div style="padding:10px;color:var(--text-muted);font-size:12px;text-align:center">Nessun modello trovato</div>';
+                // Sottocartelle con anteprima
+                const folderNames = Object.keys(currentNode).filter(k => k !== '_files').sort();
+                folderNames.forEach(name => {
+                    const subNode = currentNode[name];
+                    const count = countFilesDeep(subNode);
+                    if (count === 0) return;
+                    const desc = window.PRD_DESCRIPTIONS[name] || '';
+                    const previewGlb = findFirstGlb(subNode, libraryCurrentPath.concat(name).join('/'));
+                    const div = document.createElement('div');
+                    div.className = 'library-card';
+                    const thumbHtml = previewGlb
+                        ? `<model-viewer src="db/${previewGlb}" auto-rotate interaction-prompt="none" environment-image="neutral"></model-viewer>`
+                        : `<div style="font-size:40px;opacity:0.3;">&#128193;</div>`;
+                    div.innerHTML = `
+                        <div class="card-thumb">${thumbHtml}</div>
+                        <div class="card-info">
+                            <div class="card-name" title="${name}${desc ? ' - ' + desc : ''}">&#128193; ${name}</div>
+                            <div class="card-code">${desc || count + ' modelli'}</div>
+                        </div>`;
+                    div.addEventListener('click', () => {
+                        libraryCurrentPath.push(name);
+                        renderLibraryFolder();
+                    });
+                    libraryListEl.appendChild(div);
+                });
+
+                if (files.length === 0 && folderNames.length === 0) {
+                    libraryListEl.innerHTML = '<div style="padding:20px;color:var(--text-muted);font-size:13px;text-align:center;grid-column:1/-1;">Nessun modello trovato</div>';
                 }
             }
 
@@ -2902,25 +3286,36 @@ python train.py</pre></div>
                 if (!filter) { renderLibraryFolder(); return; }
                 libraryListEl.innerHTML = '';
                 const f = filter.toLowerCase();
+                let count = 0;
                 libraryCatalog.forEach(item => {
+                    if (count >= 30) return; // Limita per performance
                     const code = item.code || '';
                     if (!item.name.toLowerCase().includes(f) && !code.toLowerCase().includes(f) && !(item.folder || '').toLowerCase().includes(f)) return;
-                    const div = document.createElement('div');
-                    div.className = 'library-item';
+                    if (!item.glb) return;
+                    count++;
                     const codeDisplay = code === '__PDF_NO_CODE__'
                         ? '<span style="color:#e8a838;">pdf senza codice</span>'
                         : (code || '');
-                    const folderLabel = item.folder ? `<span style="font-size:9px;color:var(--text-muted);margin-left:4px;">${item.folder}</span>` : '';
-                    div.innerHTML = `<span class="lib-name">${item.name}${folderLabel}</span><span class="lib-code">${codeDisplay}</span>`;
+                    const glbUrl = 'db/' + item.glb;
+                    const div = document.createElement('div');
+                    div.className = 'library-card';
+                    div.innerHTML = `
+                        <div class="card-thumb">
+                            <model-viewer src="${glbUrl}" auto-rotate interaction-prompt="none" environment-image="neutral" camera-controls></model-viewer>
+                        </div>
+                        <div class="card-info">
+                            <div class="card-name" title="${item.name}">${item.name}</div>
+                            <div class="card-code">${codeDisplay}</div>
+                        </div>`;
                     div.addEventListener('click', () => {
-                        loadGLBFromURL('db/' + item.glb, item.name, code);
+                        loadGLBFromURL(glbUrl, item.name, code);
                         libraryPanel.classList.add('hidden');
                         libraryBtn.classList.remove('active');
                     });
                     libraryListEl.appendChild(div);
                 });
                 if (libraryListEl.children.length === 0) {
-                    libraryListEl.innerHTML = '<div style="padding:10px;color:var(--text-muted);font-size:12px;text-align:center">Nessun modello trovato</div>';
+                    libraryListEl.innerHTML = '<div style="padding:20px;color:var(--text-muted);font-size:13px;text-align:center">Nessun modello trovato</div>';
                 }
             }
 
@@ -2930,6 +3325,7 @@ python train.py</pre></div>
                     libraryPanel.classList.remove('hidden');
                     libraryBtn.classList.add('active');
                     libraryCurrentPath = [];
+                    currentMacroCategory = null;
                     renderLibraryFolder();
                 } else {
                     libraryPanel.classList.add('hidden');
@@ -6740,9 +7136,9 @@ CATALOGO PRODOTTI DECA 2025:
         // --- Sentiment Analysis (keyword-based) ---
         function analyzeSentiment(text) {
             const t = text.toLowerCase();
-            const negWords = ['problema', 'errore', 'bug', 'rotto', 'brutto', 'male', 'non funziona', 'difetto', 'sbagliato', 'pessimo', 'orribile', 'no', 'negativo', 'manca', 'mancante', 'troppo', 'lento', 'scarso'];
-            const posWords = ['bello', 'perfetto', 'ottimo', 'eccellente', 'fantastico', 'buono', 'bravo', 'funziona', 'preciso', 'comodo', 'elegante', 'ok', 'piace', 'adoro', 'meraviglioso', 'positivo'];
-            const sugWords = ['vorrei', 'sarebbe', 'potrebbe', 'suggerisco', 'propongo', 'meglio se', 'aggiungere', 'cambiare', 'modificare', 'provare', 'magari', 'forse', 'idea', 'migliorare', 'opzione', 'alternativa'];
+            const negWords = ['problema', 'errore', 'bug', 'rotto', 'brutto', 'male', 'non funziona', 'difetto', 'sbagliato', 'pessimo', 'orribile', 'negativo', 'manca', 'mancante', 'troppo', 'lento', 'scarso', 'difficile', 'scomodo', 'fragile', 'debole'];
+            const posWords = ['bello', 'perfetto', 'ottimo', 'eccellente', 'fantastico', 'buono', 'bravo', 'funziona', 'preciso', 'comodo', 'elegante', 'ok', 'piace', 'adoro', 'meraviglioso', 'positivo', 'robusto', 'solido', 'pratico'];
+            const sugWords = ['vorrei', 'sarebbe', 'potrebbe', 'suggerisco', 'propongo', 'meglio se', 'aggiungere', 'cambiare', 'modificare', 'provare', 'magari', 'forse', 'idea', 'migliorare', 'opzione', 'alternativa', 'preferirei', 'sostituire', 'invece'];
             let neg = 0, pos = 0, sug = 0;
             negWords.forEach(w => { if (t.includes(w)) neg++; });
             posWords.forEach(w => { if (t.includes(w)) pos++; });
@@ -6754,9 +7150,17 @@ CATALOGO PRODOTTI DECA 2025:
         }
 
         function sentimentLabel(s) {
-            if (s === 'positive') return '<span class="sentiment-badge positive">✓ Positivo</span>';
-            if (s === 'negative') return '<span class="sentiment-badge negative">✗ Problema</span>';
-            return '<span class="sentiment-badge suggestion">💡 Suggerimento</span>';
+            if (s === 'positive') return '<span class="sentiment-badge positive">Positivo</span>';
+            if (s === 'negative') return '<span class="sentiment-badge negative">Problema</span>';
+            return '<span class="sentiment-badge suggestion">Suggerimento</span>';
+        }
+
+        // --- Real-time sentiment preview while typing ---
+        function previewSentiment(text) {
+            const el = document.getElementById('ann-sentiment-preview');
+            if (!text || text.trim().length < 4) { el.innerHTML = ''; return; }
+            const s = analyzeSentiment(text);
+            el.innerHTML = 'Sentiment rilevato: ' + sentimentLabel(s);
         }
 
         // --- Annotation Mode Toggle ---
@@ -6766,7 +7170,6 @@ CATALOGO PRODOTTI DECA 2025:
             btn.classList.toggle('active', annotateMode);
             renderer.domElement.style.cursor = annotateMode ? 'crosshair' : '';
             if (annotateMode) {
-                // Disabilita altre modalità
                 if (measureMode) { measureMode = false; document.getElementById('btn-measure').classList.remove('active'); }
                 if (mateMode) { mateMode = false; }
             }
@@ -6777,6 +7180,21 @@ CATALOGO PRODOTTI DECA 2025:
             document.getElementById('annotation-popup').style.display = 'none';
             pendingAnnotationPoint = null;
             pendingAnnotationNormal = null;
+            pendingAnnotationPartName = '';
+        }
+
+        // --- Helper: create 3D pin for annotation ---
+        function createAnnotationPin(ann) {
+            const pinDiv = document.createElement('div');
+            pinDiv.className = 'annotation-pin sentiment-' + ann.sentiment;
+            pinDiv.innerHTML = '<span>' + ann.id + '</span>';
+            pinDiv.title = ann.text + (ann.partName ? ' [' + ann.partName + ']' : '') + (ann.userName ? ' — ' + ann.userName : '');
+            pinDiv.onclick = () => flyToAnnotation(ann);
+            const pinLabel = new CSS2DObject(pinDiv);
+            const offset = ann.normal ? ann.normal.clone().multiplyScalar(0.03) : new THREE.Vector3(0, 0.03, 0);
+            pinLabel.position.copy(ann.point).add(offset);
+            scene.add(pinLabel);
+            ann.marker = pinLabel;
         }
 
         // --- Save Annotation ---
@@ -6786,34 +7204,26 @@ CATALOGO PRODOTTI DECA 2025:
 
             annotationCounter++;
             const sentiment = analyzeSentiment(text);
+            const userName = currentUser ? (currentUser.displayName || currentUser.email) : 'Anonimo';
             const ann = {
                 id: annotationCounter,
                 point: pendingAnnotationPoint.clone(),
                 normal: pendingAnnotationNormal ? pendingAnnotationNormal.clone() : null,
                 text: text,
                 sentiment: sentiment,
+                partName: pendingAnnotationPartName || 'Parte',
+                userName: userName,
+                modelFile: currentFileName || '',
                 timestamp: new Date().toISOString(),
-                marker: null
+                marker: null,
+                firestoreId: null
             };
 
-            // Crea pin 3D con CSS2DObject
-            const pinDiv = document.createElement('div');
-            pinDiv.className = 'annotation-pin sentiment-' + sentiment;
-            pinDiv.innerHTML = '<span>' + ann.id + '</span>';
-            pinDiv.title = text;
-            pinDiv.onclick = () => flyToAnnotation(ann);
-            const pinLabel = new CSS2DObject(pinDiv);
-            // Posiziona leggermente offset dalla superficie
-            const offset = ann.normal ? ann.normal.clone().multiplyScalar(0.03) : new THREE.Vector3(0, 0.03, 0);
-            pinLabel.position.copy(pendingAnnotationPoint).add(offset);
-            scene.add(pinLabel);
-            ann.marker = pinLabel;
-
+            createAnnotationPin(ann);
             annotations.push(ann);
             renderAnnotationList();
+            updateFeedbackStats();
             closeAnnotationPopup();
-
-            // Salva su Firestore
             saveAnnotationToFirestore(ann);
         }
 
@@ -6822,14 +7232,13 @@ CATALOGO PRODOTTI DECA 2025:
             const target = ann.point.clone();
             const camOffset = ann.normal ? ann.normal.clone().multiplyScalar(0.5) : new THREE.Vector3(0, 0.3, 0.5);
             const newCamPos = target.clone().add(camOffset);
-            // Smooth animation
             const startPos = camera.position.clone();
             const startTarget = orbitControls.target.clone();
             let t = 0;
             function animFly() {
                 t += 0.04;
                 if (t > 1) t = 1;
-                const ease = t * t * (3 - 2 * t); // smoothstep
+                const ease = t * t * (3 - 2 * t);
                 camera.position.lerpVectors(startPos, newCamPos, ease);
                 orbitControls.target.lerpVectors(startTarget, target, ease);
                 orbitControls.update();
@@ -6838,23 +7247,51 @@ CATALOGO PRODOTTI DECA 2025:
             animFly();
         }
 
-        // --- Render annotation list in sidebar ---
+        // --- Render annotation list (sidebar + feedback panel) ---
         function renderAnnotationList() {
+            // Sidebar compact list
             const container = document.getElementById('annotation-list');
             if (annotations.length === 0) {
                 container.innerHTML = '<em style="color:var(--text-muted);font-size:12px;">Clicca "Annota" e poi un punto del modello</em>';
+            } else {
+                container.innerHTML = annotations.map(a => `
+                    <div class="annotation-item" onclick="flyToAnnotation(annotations[${annotations.indexOf(a)}])">
+                        <div class="ann-header">
+                            <span class="ann-id">#${a.id}</span>
+                            ${sentimentLabel(a.sentiment)}
+                            <button class="ann-delete" onclick="event.stopPropagation();deleteAnnotation(${a.id})" title="Elimina">&times;</button>
+                        </div>
+                        <div class="ann-text">${a.text}</div>
+                    </div>
+                `).join('');
+            }
+
+            // Feedback panel enhanced list
+            const fpContainer = document.getElementById('fp-annotation-list');
+            if (!fpContainer) return;
+            if (annotations.length === 0) {
+                fpContainer.innerHTML = '<em style="color:var(--text-muted);font-size:12px;">Nessuna annotazione. Clicca "Annota" nella toolbar e poi un punto del modello 3D.</em>';
                 return;
             }
-            container.innerHTML = annotations.map(a => `
-                <div class="annotation-item" onclick="flyToAnnotation(annotations[${annotations.indexOf(a)}])">
-                    <div class="ann-header">
-                        <span class="ann-id">#${a.id}</span>
-                        ${sentimentLabel(a.sentiment)}
-                        <button class="ann-delete" onclick="event.stopPropagation();deleteAnnotation(${a.id})" title="Elimina">×</button>
+            fpContainer.innerHTML = annotations.map((a, idx) => {
+                const timeStr = a.timestamp ? new Date(a.timestamp).toLocaleString('it-IT', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+                return `
+                <div class="ann-item-enhanced" onclick="flyToAnnotation(annotations[${idx}])">
+                    <div class="ann-meta">
+                        <div class="ann-meta-left">
+                            <span class="ann-num">#${a.id}</span>
+                            <span class="ann-part">${a.partName || 'Parte'}</span>
+                            ${sentimentLabel(a.sentiment)}
+                        </div>
+                        <button class="ann-del-btn" onclick="event.stopPropagation();deleteAnnotation(${a.id})" title="Elimina">&times;</button>
                     </div>
-                    <div class="ann-text">${a.text}</div>
-                </div>
-            `).join('');
+                    <div class="ann-body">${a.text}</div>
+                    <div class="ann-footer">
+                        <span class="ann-author">${a.userName || 'Anonimo'}</span>
+                        <span class="ann-time">${timeStr}</span>
+                    </div>
+                </div>`;
+            }).join('');
         }
 
         // --- Delete annotation ---
@@ -6865,10 +7302,30 @@ CATALOGO PRODOTTI DECA 2025:
             if (ann.marker) scene.remove(ann.marker);
             annotations.splice(idx, 1);
             renderAnnotationList();
-            // Rimuovi da Firestore
+            updateFeedbackStats();
             if (ann.firestoreId) {
                 db.collection('annotations').doc(ann.firestoreId).delete().catch(e => console.warn('[Annotation] Delete error:', e));
             }
+        }
+
+        // --- Update sentiment stats in feedback panel ---
+        function updateFeedbackStats() {
+            const allSentiments = [
+                ...annotations.map(a => a.sentiment),
+                ...featureRequests.map(f => f.sentiment)
+            ];
+            let pos = 0, neg = 0, sug = 0;
+            allSentiments.forEach(s => {
+                if (s === 'positive') pos++;
+                else if (s === 'negative') neg++;
+                else sug++;
+            });
+            const posEl = document.getElementById('fp-stat-pos');
+            const negEl = document.getElementById('fp-stat-neg');
+            const sugEl = document.getElementById('fp-stat-sug');
+            if (posEl) posEl.textContent = pos;
+            if (negEl) negEl.textContent = neg;
+            if (sugEl) sugEl.textContent = sug;
         }
 
         // --- Firestore persistence for annotations ---
@@ -6877,6 +7334,8 @@ CATALOGO PRODOTTI DECA 2025:
                 const docRef = await db.collection('annotations').add({
                     text: ann.text,
                     sentiment: ann.sentiment,
+                    partName: ann.partName || '',
+                    modelFile: ann.modelFile || '',
                     point: { x: ann.point.x, y: ann.point.y, z: ann.point.z },
                     normal: ann.normal ? { x: ann.normal.x, y: ann.normal.y, z: ann.normal.z } : null,
                     timestamp: ann.timestamp,
@@ -6892,7 +7351,7 @@ CATALOGO PRODOTTI DECA 2025:
 
         async function loadAnnotationsFromFirestore() {
             try {
-                const snapshot = await db.collection('annotations').orderBy('timestamp', 'desc').limit(50).get();
+                const snapshot = await db.collection('annotations').orderBy('timestamp', 'desc').limit(100).get();
                 snapshot.forEach(doc => {
                     const data = doc.data();
                     annotationCounter++;
@@ -6904,23 +7363,18 @@ CATALOGO PRODOTTI DECA 2025:
                         normal: nm,
                         text: data.text,
                         sentiment: data.sentiment || 'suggestion',
+                        partName: data.partName || '',
+                        userName: data.userName || 'Anonimo',
+                        modelFile: data.modelFile || '',
                         timestamp: data.timestamp,
                         firestoreId: doc.id,
                         marker: null
                     };
-                    const pinDiv = document.createElement('div');
-                    pinDiv.className = 'annotation-pin sentiment-' + ann.sentiment;
-                    pinDiv.innerHTML = '<span>' + ann.id + '</span>';
-                    pinDiv.title = ann.text + (data.userName ? ' — ' + data.userName : '');
-                    pinDiv.onclick = () => flyToAnnotation(ann);
-                    const pinLabel = new CSS2DObject(pinDiv);
-                    const offset = nm ? nm.clone().multiplyScalar(0.03) : new THREE.Vector3(0, 0.03, 0);
-                    pinLabel.position.copy(pt).add(offset);
-                    scene.add(pinLabel);
-                    ann.marker = pinLabel;
+                    createAnnotationPin(ann);
                     annotations.push(ann);
                 });
                 renderAnnotationList();
+                updateFeedbackStats();
                 console.log('[Annotation] Caricate', annotations.length, 'annotazioni');
             } catch (e) {
                 console.warn('[Annotation] Errore caricamento:', e);
@@ -6930,24 +7384,39 @@ CATALOGO PRODOTTI DECA 2025:
         // ===== FEATURE REQUEST VOTING =====
 
         function addFeatureRequest(text) {
-            const input = document.getElementById('feature-input');
-            const t = text || input.value.trim();
+            // Leggi da entrambi gli input (sidebar e panel)
+            const sidebarInput = document.getElementById('feature-input');
+            const panelInput = document.getElementById('fp-feature-input');
+            let t = text;
+            if (!t && panelInput && panelInput.value.trim()) {
+                t = panelInput.value.trim();
+                panelInput.value = '';
+            }
+            if (!t && sidebarInput && sidebarInput.value.trim()) {
+                t = sidebarInput.value.trim();
+                sidebarInput.value = '';
+            }
             if (!t) return;
-            input.value = '';
+            if (sidebarInput) sidebarInput.value = '';
+            if (panelInput) panelInput.value = '';
 
             featureIdCounter++;
             const sentiment = analyzeSentiment(t);
+            const userName = currentUser ? (currentUser.displayName || currentUser.email) : 'Anonimo';
             const feat = {
                 id: featureIdCounter,
                 text: t,
                 sentiment: sentiment,
-                upvotes: 0,
+                upvotes: 1,
                 downvotes: 0,
-                myVote: null, // 'up' | 'down' | null
+                myVote: 'up',
+                userName: userName,
+                timestamp: new Date().toISOString(),
                 firestoreId: null
             };
             featureRequests.push(feat);
             renderFeatureList();
+            updateFeedbackStats();
             saveFeatureToFirestore(feat);
         }
 
@@ -6955,15 +7424,12 @@ CATALOGO PRODOTTI DECA 2025:
             const feat = featureRequests.find(f => f.id === id);
             if (!feat) return;
             if (feat.myVote === direction) {
-                // Annulla voto
                 if (direction === 'up') feat.upvotes--;
                 else feat.downvotes--;
                 feat.myVote = null;
             } else {
-                // Rimuovi voto precedente
                 if (feat.myVote === 'up') feat.upvotes--;
                 if (feat.myVote === 'down') feat.downvotes--;
-                // Aggiungi nuovo voto
                 if (direction === 'up') feat.upvotes++;
                 else feat.downvotes++;
                 feat.myVote = direction;
@@ -6973,26 +7439,53 @@ CATALOGO PRODOTTI DECA 2025:
         }
 
         function renderFeatureList() {
+            // Sidebar compact
             const container = document.getElementById('feature-list');
             if (featureRequests.length === 0) {
                 container.innerHTML = '<em style="color:var(--text-muted);font-size:12px;">Nessun suggerimento ancora</em>';
+            } else {
+                const sorted = [...featureRequests].sort((a, b) => (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes));
+                container.innerHTML = sorted.map(f => `
+                    <div class="feature-item">
+                        <div class="feat-text">${f.text} ${sentimentLabel(f.sentiment)}</div>
+                        <div class="feature-vote-row">
+                            <button class="vote-btn ${f.myVote === 'up' ? 'voted-up' : ''}" onclick="voteFeature(${f.id},'up')">&#9650;</button>
+                            <span class="vote-count">${f.upvotes - f.downvotes}</span>
+                            <button class="vote-btn ${f.myVote === 'down' ? 'voted-down' : ''}" onclick="voteFeature(${f.id},'down')">&#9660;</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Feedback panel enhanced
+            const fpContainer = document.getElementById('fp-feature-list');
+            if (!fpContainer) return;
+            if (featureRequests.length === 0) {
+                fpContainer.innerHTML = '<em style="color:var(--text-muted);font-size:12px;">Nessuna richiesta. Usa il campo sotto per suggerire miglioramenti.</em>';
                 return;
             }
-            // Ordina per score (upvotes - downvotes) decrescente
-            const sorted = [...featureRequests].sort((a, b) => (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes));
-            container.innerHTML = sorted.map(f => `
-                <div class="feature-item">
-                    <div class="feat-text">${f.text} ${sentimentLabel(f.sentiment)}</div>
-                    <div class="feature-vote-row">
-                        <button class="vote-btn ${f.myVote === 'up' ? 'voted-up' : ''}" onclick="voteFeature(${f.id},'up')">▲</button>
-                        <span class="vote-count">${f.upvotes - f.downvotes}</span>
-                        <button class="vote-btn ${f.myVote === 'down' ? 'voted-down' : ''}" onclick="voteFeature(${f.id},'down')">▼</button>
+            const sorted2 = [...featureRequests].sort((a, b) => (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes));
+            fpContainer.innerHTML = sorted2.map(f => {
+                const score = f.upvotes - f.downvotes;
+                return `
+                <div class="feat-item-enhanced">
+                    <div class="feat-vote-col">
+                        <button class="vote-btn-sm ${f.myVote === 'up' ? 'voted-up' : ''}" onclick="voteFeature(${f.id},'up')">&#9650;</button>
+                        <span class="score">${score}</span>
+                        <button class="vote-btn-sm ${f.myVote === 'down' ? 'voted-down' : ''}" onclick="voteFeature(${f.id},'down')">&#9660;</button>
                     </div>
-                </div>
-            `).join('');
+                    <div class="feat-body">
+                        <div class="feat-title">${f.text}</div>
+                        <div class="feat-meta">
+                            ${sentimentLabel(f.sentiment)}
+                            <span>${f.userName || 'Anonimo'}</span>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
         }
 
-        // Enter key per feature input
+        // Enter key per feature input (sidebar)
         document.getElementById('feature-input').addEventListener('keydown', e => {
             if (e.key === 'Enter') addFeatureRequest();
         });
@@ -7005,7 +7498,7 @@ CATALOGO PRODOTTI DECA 2025:
                     sentiment: feat.sentiment,
                     upvotes: feat.upvotes,
                     downvotes: feat.downvotes,
-                    timestamp: new Date().toISOString(),
+                    timestamp: feat.timestamp,
                     userId: currentUser ? currentUser.uid : 'anonymous',
                     userName: currentUser ? (currentUser.displayName || currentUser.email) : 'Anonimo'
                 });
@@ -7030,7 +7523,7 @@ CATALOGO PRODOTTI DECA 2025:
 
         async function loadFeatureRequestsFromFirestore() {
             try {
-                const snapshot = await db.collection('feature_requests').orderBy('timestamp', 'desc').limit(50).get();
+                const snapshot = await db.collection('feature_requests').orderBy('timestamp', 'desc').limit(100).get();
                 snapshot.forEach(doc => {
                     const data = doc.data();
                     featureIdCounter++;
@@ -7041,10 +7534,13 @@ CATALOGO PRODOTTI DECA 2025:
                         upvotes: data.upvotes || 0,
                         downvotes: data.downvotes || 0,
                         myVote: null,
+                        userName: data.userName || 'Anonimo',
+                        timestamp: data.timestamp,
                         firestoreId: doc.id
                     });
                 });
                 renderFeatureList();
+                updateFeedbackStats();
                 console.log('[Feature] Caricate', featureRequests.length, 'richieste');
             } catch (e) {
                 console.warn('[Feature] Errore caricamento:', e);
@@ -7053,6 +7549,38 @@ CATALOGO PRODOTTI DECA 2025:
 
         // --- Annotate button & keyboard shortcut ---
         document.getElementById('btn-annotate').addEventListener('click', toggleAnnotateMode);
+
+        // --- Feedback Panel toggle ---
+        document.getElementById('btn-feedback-panel').addEventListener('click', () => {
+            const panel = document.getElementById('feedback-panel');
+            const btn = document.getElementById('btn-feedback-panel');
+            const isOpen = panel.classList.contains('open');
+            panel.classList.toggle('open', !isOpen);
+            btn.classList.toggle('active', !isOpen);
+        });
+        document.getElementById('fp-close-btn').addEventListener('click', () => {
+            document.getElementById('feedback-panel').classList.remove('open');
+            document.getElementById('btn-feedback-panel').classList.remove('active');
+        });
+
+        // Feedback panel tabs
+        document.querySelectorAll('.fp-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.fp-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const target = tab.dataset.tab;
+                document.querySelectorAll('.fp-tab-content').forEach(c => c.classList.add('hidden'));
+                document.getElementById(target).classList.remove('hidden');
+            });
+        });
+
+        // Enter key per feature input (panel)
+        const fpInput = document.getElementById('fp-feature-input');
+        if (fpInput) {
+            fpInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') addFeatureRequest();
+            });
+        }
 
         // ---- Start ----
         init();
@@ -7064,13 +7592,14 @@ CATALOGO PRODOTTI DECA 2025:
         // Carica dati da Firestore dopo init
         loadAnnotationsFromFirestore();
         loadFeatureRequestsFromFirestore();
-        renderFeatureList();
     </script>
 
     <!-- Annotation Popup -->
     <div id="annotation-popup">
         <h4>📌 Annotazione 3D</h4>
-        <textarea id="annotation-text" placeholder="Scrivi il tuo commento su questa parte del modello..."></textarea>
+        <div class="ann-target-label" id="ann-target-label">Parte: -</div>
+        <textarea id="annotation-text" placeholder="Es: Vorrei che questa parte fosse in metallo anziché plastica..." oninput="previewSentiment(this.value)"></textarea>
+        <div class="ann-sentiment-preview" id="ann-sentiment-preview"></div>
         <div class="popup-actions">
             <button class="btn-cancel" onclick="closeAnnotationPopup()">Annulla</button>
             <button class="btn-save" onclick="saveAnnotation()">Salva</button>

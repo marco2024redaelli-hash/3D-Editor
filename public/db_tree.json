@@ -1166,6 +1166,10 @@
       }
     },
     "CDZ01": {
+      "_files": [
+        "cdz-027-af001-m5_solo_per_ias.glb",
+        "cdz-027-af001-m5_sx_solo_per_ias.glb"
+      ],
       "0001": {
         "_files": [
           "prd-cdz01-0001-p0001-x.glb",
@@ -2372,8 +2376,6 @@
     },
     "IAS": {
       "_files": [
-        "cdz-027-af001-m5_solo_per_ias.glb",
-        "cdz-027-af001-m5_sx_solo_per_ias.glb",
         "ias01.glb"
       ],
       "0001": {

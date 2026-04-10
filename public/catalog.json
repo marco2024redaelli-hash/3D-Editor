@@ -2625,8 +2625,8 @@
   },
   {
     "name": "cdz-027-af001-m5_solo_per_ias",
-    "glb": "PRD/IAS/cdz-027-af001-m5_solo_per_ias.glb",
-    "folder": "PRD/IAS",
+    "glb": "PRD/CDZ01/cdz-027-af001-m5_solo_per_ias.glb",
+    "folder": "PRD/CDZ01",
     "pdf": "PRD/ALM01/M/0001/PRD-ALM01-M-0001-AC001-A.pdf",
     "xls": "PRD/ALM01/M/0001/PRD-ALM01-M-0001-AC001-A solo parti.xls",
     "code": "050201036",
@@ -2634,8 +2634,8 @@
   },
   {
     "name": "cdz-027-af001-m5_sx_solo_per_ias",
-    "glb": "PRD/IAS/cdz-027-af001-m5_sx_solo_per_ias.glb",
-    "folder": "PRD/IAS",
+    "glb": "PRD/CDZ01/cdz-027-af001-m5_sx_solo_per_ias.glb",
+    "folder": "PRD/CDZ01",
     "pdf": "PRD/ALM01/M/0001/PRD-ALM01-M-0001-AC001-A.pdf",
     "xls": "PRD/ALM01/M/0001/PRD-ALM01-M-0001-AC001-A solo parti.xls",
     "code": "050201036",

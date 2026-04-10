@@ -14,5 +14,13 @@ service cloud.firestore {
       allow read: if true;
       allow write: if true;
     }
+    match /annotations/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    match /feature_requests/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
   }
 }
