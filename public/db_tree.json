@@ -194,6 +194,89 @@
         ]
       }
     },
+    "BVC": {
+      "BC": {
+        "BA": {},
+        "BL": {}
+      },
+      "CC": {
+        "CA": {}
+      },
+      "TIPO_0": {
+        "_files": [
+          "bvc-061-dx-a000.glb"
+        ]
+      },
+      "TIPO_1": {
+        "_files": [
+          "bvc-161e-18-dx-a000.glb"
+        ]
+      },
+      "TIPO_2": {
+        "_files": [
+          "bvc-261e-dx-a000.glb"
+        ]
+      },
+      "TIPO_3": {
+        "_files": [
+          "bvc-331-dx-a000.glb",
+          "bvc-361-dx-a000.glb",
+          "bvc-361-sx-a000.glb"
+        ]
+      },
+      "TIPO_4a": {
+        "_files": [
+          "bvc-431-dx-a000.glb",
+          "bvc-431-sx-a000.glb",
+          "bvc-462-dx-a000.glb",
+          "bvc-462-sx-a000.glb"
+        ]
+      },
+      "TIPO_5a": {
+        "_files": [
+          "bvc-531-dx-a000.glb",
+          "bvc-531-sx-a000.glb",
+          "bvc-532-dx-a000.glb"
+        ]
+      }
+    },
+    "BVL": {
+      "VL101": {
+        "_files": [
+          "bvl-vl101-xx-a000.glb"
+        ]
+      },
+      "VL201": {
+        "_files": [
+          "bvl-vl201-xx-a000.glb"
+        ]
+      },
+      "VL301": {
+        "_files": [
+          "bvl-vl301-xx-a000.glb"
+        ]
+      },
+      "VL401": {
+        "_files": [
+          "bvl-vl401-xx-a000.glb"
+        ]
+      },
+      "VL401 TR": {
+        "_files": [
+          "bvl-vl401tr-xx-a000-x.glb"
+        ]
+      },
+      "VL501": {
+        "_files": [
+          "bvl-vl501-xx-a000.glb"
+        ]
+      },
+      "VL601": {
+        "_files": [
+          "bvl-vl601-xx-a000.glb"
+        ]
+      }
+    },
     "CCI": {
       "DV Contenitori 2 vie": {
         "Ø250": {
@@ -2493,214 +2576,1268 @@
       }
     },
     "NDS04": {
-      "0001": {},
+      "0001": {
+        "_files": [
+          "prd-nds04-0001-ac001-x.glb"
+        ]
+      },
       "0002": {
         "Condivisibili": {},
-        "Costruttivi": {}
+        "Costruttivi": {
+          "_files": [
+            "prd-nds04-0002-ac001-x.glb"
+          ]
+        }
       }
     },
     "NRA01": {
       "0001": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0001-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0001-s0001-x.glb",
+            "prd-nra01-0001-sa001-x.glb",
+            "prd-nra01-0001-sa002.glb"
+          ]
+        }
       },
       "0002": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0002-ac001.glb",
+          "prd-nra01-0002-ac002.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0002-s0001-x.glb",
+            "prd-nra01-0002-s0002-x.glb",
+            "prd-nra01-0002-s0003-x.glb"
+          ]
+        }
       },
       "0003": {
+        "_files": [
+          "prd-nra01-0003-ac001.glb"
+        ],
         "Componenti": {}
       },
       "0004": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0004-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0004-pv005-x.glb",
+            "prd-nra01-0004-s0001.glb"
+          ]
+        }
       },
       "0005": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0005-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0005-s0002-x.glb",
+            "prd-nra01-0005-sa002-x.glb"
+          ]
+        }
       },
       "0006": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0006-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0006-sa001.glb"
+          ]
+        }
       },
-      "0007": {},
+      "0007": {
+        "_files": [
+          "prd-nra01-0007-ac001.glb"
+        ]
+      },
       "0008": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0008-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0008-sa001-x.glb",
+            "prd-nra01-0008-sa002.glb"
+          ]
+        }
       },
       "0009": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0009-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0009-sa001-x.glb"
+          ]
+        }
       },
       "0010": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0010-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0010-sa001-x.glb"
+          ]
+        }
       },
       "0011": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0011-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0011-sa001-x.glb"
+          ]
+        }
       },
       "0012": {
-        "Condivisibili": {},
-        "Costruttivi": {}
+        "Condivisibili": {
+          "_files": [
+            "prd-nra01-0012-a0001-x.glb"
+          ]
+        },
+        "Costruttivi": {
+          "_files": [
+            "prd-nra01-0012-ac001-x.glb",
+            "prd-nra01-0012-sa001-x.glb"
+          ]
+        }
       },
-      "0013": {},
+      "0013": {
+        "_files": [
+          "prd-nra-f-090-ac001.glb"
+        ]
+      },
       "0014": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0014-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0014-sa001-x.glb"
+          ]
+        }
       },
       "0015": {
-        "Componenti": {}
+        "_files": [
+          "prd-nra01-0015-ac001.glb"
+        ],
+        "Componenti": {
+          "_files": [
+            "prd-nra01-0015-pv001-x.glb",
+            "prd-nra01-0015-pv002-x.glb",
+            "prd-nra01-0015-sa001-x.glb",
+            "prd-nra01-0015-sa002.glb"
+          ]
+        }
       },
       "C": {
-        "200": {},
-        "060": {},
-        "090": {}
+        "200": {
+          "_files": [
+            "prd-nra-c-0200-sa001-x.glb",
+            "prd-nra-c-0200-sa002-x.glb"
+          ]
+        },
+        "060": {
+          "_files": [
+            "prd-nra-c-060-sa001.glb",
+            "prd-nra-c-060-sa002.glb"
+          ]
+        },
+        "090": {
+          "_files": [
+            "prd-nra-c-090-sa001.glb",
+            "prd-nra-c-090-sa002.glb",
+            "prd-nra-c-090-sa003.glb"
+          ]
+        }
       },
       "F": {
         "060": {
-          "Costruttivi prof. La.60": {}
+          "_files": [
+            "prd-nra-f-060-sa001.glb",
+            "prd-nra-f-060-sa002.glb",
+            "prd-nra-f-060-sa003.glb",
+            "prd-nra-f-060-sa004.glb"
+          ],
+          "Costruttivi prof. La.60": {
+            "_files": [
+              "prd-nra-f-060-sa001.glb"
+            ]
+          }
         },
-        "090": {}
+        "090": {
+          "_files": [
+            "prd-nra-f-090-sa001.glb",
+            "prd-nra-f-090-sa002.glb"
+          ]
+        }
       }
     },
     "NRC01": {
-      "0001": {},
+      "0001": {
+        "_files": [
+          "prd-nrc01-0001-ac001-x.glb",
+          "prd-nrc01-0001-sa001-x.glb"
+        ]
+      },
       "0002": {
-        "Condivisibili": {},
-        "Costruttivi": {}
+        "Condivisibili": {
+          "_files": [
+            "prd-nrc01-0002-a0001-x.glb"
+          ]
+        },
+        "Costruttivi": {
+          "_files": [
+            "prd-nrc01-0002-ac001-x.glb"
+          ]
+        }
       },
-      "0003": {},
-      "0004": {},
+      "0003": {
+        "_files": [
+          "prd-nrc01-0003-ac001-x.glb"
+        ]
+      },
+      "0004": {
+        "_files": [
+          "prd-nrc01-0004-ac001.glb"
+        ]
+      },
       "0005": {
-        "Costruttivi": {}
+        "Costruttivi": {
+          "_files": [
+            "prd-nrc01-0005-ac001-x.glb"
+          ]
+        }
       },
-      "0006": {},
-      "0007": {},
+      "0006": {
+        "_files": [
+          "prd-nrc01-0006-ac001-x.glb"
+        ]
+      },
+      "0007": {
+        "_files": [
+          "prd-nrc01-0007-ac001-x.glb"
+        ]
+      },
       "0008": {},
       "R (NON SALVARE QUI I NUOVI FILE)": {
         "C": {
-          "Costruttivi Lg. 132": {}
+          "Costruttivi Lg. 132": {
+            "_files": [
+              "prd-nrc-r-c-132-ac001.glb",
+              "prd-nrc-r-c-132-ac002.glb"
+            ]
+          }
         }
       }
     },
     "NRC03": {
       "0001": {
         "Condivisibili": {},
-        "Costruttivi": {}
+        "Costruttivi": {
+          "_files": [
+            "prd-nrc03-0001-ac001-x.glb"
+          ]
+        }
       },
       "0002": {
         "Condivisibili": {},
-        "Costruttivi": {}
-      }
-    },
-    "NRC04": {
-      "0001": {},
-      "0002": {}
-    },
-    "PEP": {
-      "0001": {},
-      "0002": {},
-      "0003": {},
-      "0004": {},
-      "0008": {}
-    },
-    "PRT": {},
-    "RUL-01": {},
-    "RUL-02": {},
-    "SCS": {
-      "0003": {},
-      "0004": {},
-      "0005": {},
-      "0006": {},
-      "0007": {},
-      "0008": {},
-      "0009": {},
-      "0010": {},
-      "0011": {},
-      "0012": {},
-      "0013": {},
-      "0014": {},
-      "0016": {},
-      "0017": {},
-      "0018": {}
-    },
-    "SFP": {},
-    "STR": {
-      "0002": {},
-      "0004": {},
-      "0005": {},
-      "0006": {},
-      "0007": {},
-      "0008": {},
-      "0009": {},
-      "0010": {},
-      "0011": {},
-      "0012": {},
-      "0013": {},
-      "0014": {},
-      "0015": {},
-      "0016": {},
-      "0017": {},
-      "0018": {},
-      "0019": {},
-      "0021": {},
-      "0022": {},
-      "0023": {},
-      "0024": {},
-      "0025": {},
-      "0026": {},
-      "0028": {},
-      "0029": {},
-      "0030": {},
-      "0031": {},
-      "0032": {},
-      "0034": {},
-      "0035": {},
-      "0036": {},
-      "0038": {},
-      "0039": {},
-      "0040": {},
-      "0041": {},
-      "0042": {},
-      "0043": {},
-      "0044": {},
-      "0046": {},
-      "0047": {},
-      "0048": {},
-      "0049": {},
-      "0050": {},
-      "0051": {},
-      "0052": {},
-      "0053": {},
-      "0054": {},
-      "0055": {},
-      "0057": {},
-      "0058": {},
-      "0059": {},
-      "0060": {},
-      "0061": {},
-      "0062": {},
-      "0063": {},
-      "0064": {},
-      "0065": {},
-      "0066": {},
-      "0067": {},
-      "0068": {},
-      "0070": {},
-      "0072": {},
-      "0074": {},
-      "0075": {},
-      "0076": {},
-      "0077": {},
-      "0078": {}
-    },
-    "TL01": {},
-    "TL02": {},
-    "TRA01": {
-      "0002": {},
-      "0003": {}
-    },
-    "TRC01": {
-      "050": {
-        "0001": {}
-      },
-      "080": {
-        "0001": {
-          "Condivisibili": {}
+        "Costruttivi": {
+          "_files": [
+            "prd-nrc03-0002-ac001-x.glb"
+          ]
         }
       }
     },
-    "TRC02": {}
+    "NRC04": {
+      "0001": {
+        "_files": [
+          "prd-nrc04-0001-ac001.glb"
+        ]
+      },
+      "0002": {
+        "_files": [
+          "prd-nrc04-0002-ac001.glb"
+        ]
+      }
+    },
+    "PEP": {
+      "0001": {
+        "_files": [
+          "prd-pep-0001-ac0001.glb"
+        ]
+      },
+      "0002": {
+        "_files": [
+          "prd-pep-0002-ac0001.glb"
+        ]
+      },
+      "0003": {
+        "_files": [
+          "prd-pep-0003-ac0001.glb"
+        ]
+      },
+      "0004": {
+        "_files": [
+          "prd-pep-0004-ac0001.glb"
+        ]
+      },
+      "0005": {
+        "_files": [
+          "prd-pep-0005-ac0001.glb"
+        ]
+      },
+      "0006": {
+        "_files": [
+          "prd-pep-0006-ac0001.glb"
+        ]
+      },
+      "0007": {
+        "_files": [
+          "prd-pep-0007-ac0001 sinistro.glb",
+          "prd-pep-0007-ac0001.glb"
+        ]
+      },
+      "0008": {
+        "_files": [
+          "prd-pep-0008-ac001.glb"
+        ]
+      }
+    },
+    "PRT": {},
+    "RUL-01": {
+      "0001": {
+        "_files": [
+          "prd-rul-01-0001-ac003.glb"
+        ]
+      },
+      "_files": [
+        "prd-rul-01-0001-ac003.glb",
+        "pdm-rul-01-0001-p0010.glb",
+        "pdm-rul-01-0001-p0011.glb",
+        "pdm-rul-01-0001-p0012.glb",
+        "pdm-rul-01-0001-p0013.glb",
+        "pdm-rul-01-0001-p0014.glb",
+        "prd-rul-01-0001-ac003.glb",
+        "prd-rul-01-0001-sa021.glb",
+        "prd-rul-01-0001-sa022.glb",
+        "prd-rul-01-0001-sa023.glb",
+        "prd-rul-01-0001-sa024-c.glb",
+        "prd-rul-01-0001-sa025.glb",
+        "prd-rul-01-0001-sa026-c.glb",
+        "prd-rul-01-0001-sa027-c.glb"
+      ]
+    },
+    "RUL-02": {
+      "0001": {
+        "Costruttivi": {
+          "_files": [
+            "prd-rul-02-0001-ac001.glb"
+          ]
+        }
+      },
+      "0002 VEDI NOTE": {
+        "_files": [
+          "prd-rul-02-0002-ac000.glb",
+          "prd-rul-02-0002-ac001.glb",
+          "prd-rul-02-0002-ac002.glb"
+        ]
+      },
+      "_files": [
+        "prd-rul-02-0001-ac001.glb",
+        "prd-rul-02-0002-ac000.glb",
+        "prd-rul-02-0002-ac001.glb",
+        "prd-rul-02-0002-ac002.glb",
+        "pdm-rul-02-0002-p0002.glb",
+        "pdm-rul-02-0002-p0003.glb",
+        "pdm-rul-02-0002-p0004.glb",
+        "pdm-rul-02-0002-p0005.glb",
+        "pdm-rul-02-0002-p0006.glb",
+        "pdm-rul-02-0002-p0007.glb",
+        "pdm-rul-02-0002-p0008.glb",
+        "pdm-rul-02-0002-p0009.glb",
+        "prd-rul-02-0001-a0001.glb",
+        "prd-rul-02-0001-ac001.glb",
+        "prd-rul-02-0002-ac000.glb",
+        "prd-rul-02-0002-ac001.glb",
+        "prd-rul-02-0002-ac002.glb",
+        "prd-rul-02-0002-p0001.glb",
+        "prd-rul-02-0002-p0010.glb",
+        "prd-rul-02-0002-p0011.glb",
+        "prd-rul-02-0002-p0012.glb",
+        "prd-rul-02-0002-p0013.glb",
+        "prd-rul-02-0002-p0014.glb",
+        "prd-rul-02-0002-p0015.glb",
+        "prd-rul-02-0002-p0016.glb",
+        "prd-rul-02-0002-p0017.glb",
+        "prd-rul-02-0002-sa001.glb",
+        "prd-rul-02-0002-sa002.glb",
+        "prd-rul-02-0002-sa003.glb",
+        "prd-rul-02-0002-sa004.glb",
+        "prd-rul-02-0002-sa005.glb",
+        "prd-rul-02-0002-sa006.glb",
+        "prd-rul-02-0002-sa007.glb",
+        "prd-rul-02-0002-sa008.glb",
+        "prd-rul-02-0002-sa009.glb",
+        "prd-rul-02-0002-sa010.glb",
+        "prd-rul-02-0002-sa011.glb",
+        "prd-rul-02-0002-sa012.glb",
+        "prd-rul-02-0002-sa013.glb",
+        "prd-rul-02-0002-sa014.glb",
+        "prd-rul-02-0002-sa015.glb",
+        "prd-rul-02-0002-sa016.glb",
+        "prd-rul-02-0002-sa017.glb",
+        "prd-rul-02-0002-sa018.glb",
+        "prd-rul-02-0002-sa019.glb",
+        "prd-rul-02-0002-sa020.glb",
+        "prd-rul-02-0002-sa028.glb",
+        "prd-rul-02-0002-sa029.glb",
+        "prd-rul-02-0002-sa030.glb",
+        "prd-rul-02-0002-sa031.glb"
+      ]
+    },
+    "SCS": {
+      "0003": {
+        "_files": [
+          "prd-scs-0003-ac001.glb"
+        ]
+      },
+      "0004": {
+        "_files": [
+          "prd-scs-0004-ac001-x.glb"
+        ]
+      },
+      "0005": {
+        "_files": [
+          "prd-scs-0005-ac000-x.glb"
+        ]
+      },
+      "0006": {
+        "_files": [
+          "prd-scs-0006-ac001-x.glb"
+        ]
+      },
+      "0007": {
+        "_files": [
+          "prd-scs-0007-ac001-x.glb"
+        ]
+      },
+      "0008": {
+        "_files": [
+          "prd-scs-0008-ac001-x.glb"
+        ]
+      },
+      "0009": {
+        "_files": [
+          "prd-scs-0009-ac001-x.glb"
+        ]
+      },
+      "0010": {
+        "_files": [
+          "prd-scs-0010-ac001-x.glb"
+        ]
+      },
+      "0011": {
+        "_files": [
+          "prd-scs-0011-ac001-x.glb"
+        ]
+      },
+      "0012": {
+        "_files": [
+          "prd-scs-0012-ac001-x.glb"
+        ]
+      },
+      "0013": {
+        "_files": [
+          "prd-scs-0013-ac001-x.glb"
+        ]
+      },
+      "0014": {
+        "_files": [
+          "prd-scs-0014-ac001.glb"
+        ]
+      },
+      "0015": {
+        "_files": [
+          "prd-scs-0015-ac002.glb"
+        ]
+      },
+      "0016": {
+        "_files": [
+          "prd-scs-0016-ac001.glb"
+        ]
+      },
+      "0017": {
+        "_files": [
+          "prd-scs-0017-ac001.glb"
+        ]
+      },
+      "0018": {
+        "_files": [
+          "prd-scs-0018-ac001-x.glb"
+        ]
+      },
+      "0019": {
+        "_files": [
+          "prd-scs-0019-ac001.glb"
+        ]
+      },
+      "0020": {
+        "_files": [
+          "prd-scs-0020-ac001.glb"
+        ]
+      },
+      "_files": [
+        "prd-scs-0003-ac001.glb",
+        "prd-scs-0004-ac001-x.glb",
+        "prd-scs-0005-ac000-x.glb",
+        "prd-scs-0006-ac001-x.glb",
+        "prd-scs-0007-ac001-x.glb",
+        "prd-scs-0008-ac001-x.glb",
+        "prd-scs-0009-ac001-x.glb",
+        "prd-scs-0010-ac001-x.glb",
+        "prd-scs-0011-ac001-x.glb",
+        "prd-scs-0012-ac001-x.glb",
+        "prd-scs-0013-ac001-x.glb",
+        "prd-scs-0014-ac001.glb",
+        "prd-scs-0015-ac002.glb",
+        "prd-scs-0016-ac001.glb",
+        "prd-scs-0017-ac001.glb",
+        "prd-scs-0018-ac001-x.glb",
+        "prd-scs-0019-ac001.glb",
+        "prd-scs-0020-ac001.glb",
+        "50125034-000.glb",
+        "prd-scs-0001-a000.glb",
+        "prd-scs-0002-a0001.glb",
+        "prd-scs-0003-ac001.glb",
+        "prd-scs-0003-c0001.glb",
+        "prd-scs-0004-ac001-x.glb",
+        "prd-scs-0004-c0001-x.glb",
+        "prd-scs-0005-ac000-x.glb",
+        "prd-scs-0005-p0002-a.glb",
+        "prd-scs-0005-p0003-c40.glb",
+        "prd-scs-0005-p0004-al.glb",
+        "prd-scs-0005-p0005-al.glb",
+        "prd-scs-0005-p0006-al.glb",
+        "prd-scs-0005-p0007-a.glb",
+        "prd-scs-0005-p0008-a.glb",
+        "prd-scs-0005-sa001-al.glb",
+        "prd-scs-0006-ac001-x.glb",
+        "prd-scs-0006-p0002-x.glb",
+        "prd-scs-0006-p0003-x.glb",
+        "prd-scs-0006-p0004-x.glb",
+        "prd-scs-0006-p0005-x.glb",
+        "prd-scs-0006-p0007-x.glb",
+        "prd-scs-0006-p0008-x.glb",
+        "prd-scs-0006-p0010-x.glb",
+        "prd-scs-0006-p0011-x.glb",
+        "prd-scs-0006-p0012-x.glb",
+        "prd-scs-0006-s0001-a.glb",
+        "prd-scs-0006-sa001-x.glb",
+        "prd-scs-0007-ac001-x.glb",
+        "prd-scs-0007-p0002-x.glb",
+        "prd-scs-0007-p0003-x.glb",
+        "prd-scs-0007-p0004-x.glb",
+        "prd-scs-0007-p0005-x.glb",
+        "prd-scs-0007-p0007-x.glb",
+        "prd-scs-0007-p0008-x.glb",
+        "prd-scs-0007-p0010-x.glb",
+        "prd-scs-0007-p0011-x.glb",
+        "prd-scs-0007-p0012-x.glb",
+        "prd-scs-0007-s0001-a.glb",
+        "prd-scs-0007-sa001-x.glb",
+        "prd-scs-0008-ac001-x.glb",
+        "prd-scs-0008-p0002-x.glb",
+        "prd-scs-0008-p0003-x.glb",
+        "prd-scs-0008-p0004-x.glb",
+        "prd-scs-0008-p0005-x.glb",
+        "prd-scs-0008-p0007-x.glb",
+        "prd-scs-0008-p0008-x.glb",
+        "prd-scs-0008-p0010-x.glb",
+        "prd-scs-0008-p0011-x.glb",
+        "prd-scs-0008-p0012-x.glb",
+        "prd-scs-0008-s0001-a.glb",
+        "prd-scs-0008-sa001-x.glb",
+        "prd-scs-0009-ac001-x.glb",
+        "prd-scs-0009-sa001-x.glb",
+        "prd-scs-0010-ac001-x.glb",
+        "prd-scs-0010-c0001.glb",
+        "prd-scs-0010-p0001-x.glb",
+        "prd-scs-0010-p0002-x.glb",
+        "prd-scs-0010-p0003-x.glb",
+        "prd-scs-0010-p0004-x.glb",
+        "prd-scs-0010-p0005-x.glb",
+        "prd-scs-0010-p0006-x.glb",
+        "prd-scs-0010-p0007-x.glb",
+        "prd-scs-0010-s0001-x.glb",
+        "prd-scs-0010-sa001-x.glb",
+        "prd-scs-0011-ac001-x.glb",
+        "prd-scs-0011-p0001-x.glb",
+        "prd-scs-0011-p0002-x.glb",
+        "prd-scs-0011-p0003-x.glb",
+        "prd-scs-0011-p0004-x.glb",
+        "prd-scs-0011-p0005-x.glb",
+        "prd-scs-0011-p0006-x.glb",
+        "prd-scs-0011-p0007-x.glb",
+        "prd-scs-0011-p0008-x.glb",
+        "prd-scs-0011-p0009-x.glb",
+        "prd-scs-0011-p0010-x.glb",
+        "prd-scs-0011-p0011-x.glb",
+        "prd-scs-0011-p0012-x.glb",
+        "prd-scs-0011-p0013-x.glb",
+        "prd-scs-0011-p0014-x.glb",
+        "prd-scs-0011-p0015-x.glb",
+        "prd-scs-0011-p0016-x.glb",
+        "prd-scs-0011-p0017-x.glb",
+        "prd-scs-0012-ac001-x.glb",
+        "prd-scs-0012-p0001-x.glb",
+        "prd-scs-0012-p0002-x.glb",
+        "prd-scs-0012-p0003-x.glb",
+        "prd-scs-0012-p0004-x.glb",
+        "prd-scs-0012-p0005-x.glb",
+        "prd-scs-0012-p0006-x.glb",
+        "prd-scs-0012-p0007-x.glb",
+        "prd-scs-0012-p0008-x.glb",
+        "prd-scs-0012-p0009-x.glb",
+        "prd-scs-0012-sa001-x.glb",
+        "prd-scs-0013-ac001-x.glb",
+        "prd-scs-0013-sa001-x.glb",
+        "prd-scs-0014-ac001.glb",
+        "prd-scs-0014-p0001-x.glb",
+        "prd-scs-0014-p0003-x.glb",
+        "prd-scs-0014-p0004-x.glb",
+        "prd-scs-0014-p0005-x.glb",
+        "prd-scs-0014-p0006-x.glb",
+        "prd-scs-0014-p0007-x.glb",
+        "prd-scs-0014-p0008-x.glb",
+        "prd-scs-0014-p0009-x.glb",
+        "prd-scs-0014-p0010-x.glb",
+        "prd-scs-0014-p0012-x.glb",
+        "prd-scs-0015-ac002.glb",
+        "prd-scs-0015-p0001-x.glb",
+        "prd-scs-0015-p0002-x.glb",
+        "prd-scs-0016-ac001.glb",
+        "prd-scs-0016-p0001-x.glb",
+        "prd-scs-0016-p0002-x.glb",
+        "prd-scs-0016-p0003-x.glb",
+        "prd-scs-0016-p0004-x.glb",
+        "prd-scs-0016-p0005-x.glb",
+        "prd-scs-0016-p0006-x.glb",
+        "prd-scs-0016-p0007-x.glb",
+        "prd-scs-0016-p0008-x.glb",
+        "prd-scs-0016-p0009-x.glb",
+        "prd-scs-0016-p0010-x.glb",
+        "prd-scs-0016-p0011-x.glb",
+        "prd-scs-0016-p0012-x.glb",
+        "prd-scs-0016-sa001.glb",
+        "prd-scs-0017-ac001.glb",
+        "prd-scs-0017-p0001-x.glb",
+        "prd-scs-0017-p0002-x.glb",
+        "prd-scs-0017-p0003-x.glb",
+        "prd-scs-0017-p0004-x.glb",
+        "prd-scs-0017-p0005-x.glb",
+        "prd-scs-0017-p0006-x.glb",
+        "prd-scs-0017-p0007-x.glb",
+        "prd-scs-0017-p0008-x.glb",
+        "prd-scs-0017-p0009-x.glb",
+        "prd-scs-0017-sa001.glb",
+        "prd-scs-0018-ac001-x.glb",
+        "prd-scs-0018-p0002-x.glb",
+        "prd-scs-0018-p0003-x.glb",
+        "prd-scs-0018-p0005-x.glb",
+        "prd-scs-0018-p0010-x.glb",
+        "prd-scs-0018-p0011-x.glb",
+        "prd-scs-0018-p0012-x.glb",
+        "prd-scs-0018-s0001-a.glb",
+        "prd-scs-0018-sa001-x.glb",
+        "prd-scs-0019-ac001.glb",
+        "prd-scs-0019-p0001-x.glb",
+        "prd-scs-0019-p0002-x.glb",
+        "prd-scs-0019-p0003-x.glb",
+        "prd-scs-0019-p0004-x.glb",
+        "prd-scs-0019-p0005-x.glb",
+        "prd-scs-0019-p0006.glb",
+        "prd-scs-0019-p0007-x.glb",
+        "prd-scs-0019-p0008-x.glb",
+        "prd-scs-0020-ac001.glb",
+        "prd-scs-0020-p0001-x.glb",
+        "prd-scs-0020-p0002-x.glb",
+        "prd-scs-0020-p0003-x.glb",
+        "prd-scs-0020-p0004-x.glb",
+        "prd-scs-0020-sa001.glb"
+      ]
+    },
+    "SFP": {
+      "0001": {
+        "_files": [
+          "prd-sfp-0001-ac001.glb"
+        ]
+      },
+      "0002": {
+        "_files": [
+          "prd-sfp-0002-ac001.glb"
+        ]
+      }
+    },
+    "STR": {
+      "0001": {
+        "_files": [
+          "prd-str-0001-ac001-x.glb"
+        ]
+      },
+      "0002": {
+        "_files": [
+          "prd-str-0002-ac001-x.glb"
+        ]
+      },
+      "0003": {
+        "_files": [
+          "prd-str-0003-ac001-x.glb"
+        ]
+      },
+      "0004": {
+        "_files": [
+          "prd-str-0004-ac001-x.glb"
+        ]
+      },
+      "0005": {
+        "_files": [
+          "prd-str-0005-ac001-x.glb"
+        ]
+      },
+      "0006": {
+        "_files": [
+          "prd-str-0006-ac001-x.glb"
+        ]
+      },
+      "0007": {
+        "_files": [
+          "prd-str-0007-ac001-x.glb"
+        ]
+      },
+      "0008": {
+        "_files": [
+          "prd-str-0008-ac001-x.glb"
+        ]
+      },
+      "0009": {
+        "_files": [
+          "prd-str-0009-ac001-x.glb"
+        ]
+      },
+      "0010": {
+        "_files": [
+          "prd-str-0010-ac001-x.glb"
+        ]
+      },
+      "0011": {
+        "_files": [
+          "prd-str-0011-ac001-x.glb"
+        ]
+      },
+      "0012": {
+        "_files": [
+          "prd-str-0012-ac001-x.glb"
+        ]
+      },
+      "0013": {
+        "_files": [
+          "prd-str-0013-ac001-x.glb"
+        ]
+      },
+      "0014": {
+        "_files": [
+          "prd-str-0014-ac001-x.glb"
+        ]
+      },
+      "0015": {
+        "_files": [
+          "prd-str-0015-ac001-x.glb"
+        ]
+      },
+      "0016": {
+        "_files": [
+          "prd-str-0016-ac001-x.glb"
+        ]
+      },
+      "0017": {
+        "_files": [
+          "prd-str-0017-ac001-x.glb"
+        ]
+      },
+      "0018": {
+        "_files": [
+          "prd-str-0018-ac001-x.glb"
+        ]
+      },
+      "0019": {
+        "_files": [
+          "pdr-str-0019-ac001-x.glb"
+        ]
+      },
+      "0020": {
+        "_files": [
+          "prd-str-0020-ac001-x.glb"
+        ]
+      },
+      "0021": {
+        "_files": [
+          "prd-str-0021-ac001-x.glb"
+        ]
+      },
+      "0022": {
+        "_files": [
+          "prd-str-0022-ac001-x.glb"
+        ]
+      },
+      "0023": {
+        "_files": [
+          "prd-str-0023-ac001-x.glb"
+        ]
+      },
+      "0024": {
+        "_files": [
+          "prd-str-0024-ac001-x.glb"
+        ]
+      },
+      "0025": {
+        "_files": [
+          "prd-str-0025-ac001-x.glb"
+        ]
+      },
+      "0026": {
+        "_files": [
+          "prd-str-0026-ac001-x.glb"
+        ]
+      },
+      "0028": {
+        "_files": [
+          "prd-str-0028-ac001-x.glb"
+        ]
+      },
+      "0029": {
+        "_files": [
+          "prd-str-0029-ac001-x.glb"
+        ]
+      },
+      "0030": {
+        "_files": [
+          "prd-str-0030-ac001-x.glb"
+        ]
+      },
+      "0031": {
+        "_files": [
+          "prd-str-0031-ac001-x.glb"
+        ]
+      },
+      "0032": {
+        "_files": [
+          "prd-str-0032-ac001-x.glb"
+        ]
+      },
+      "0033": {
+        "_files": [
+          "prd-str-0033-ac001-x.glb"
+        ]
+      },
+      "0034": {
+        "_files": [
+          "prd-str-0034-ac001-x.glb"
+        ]
+      },
+      "0035": {
+        "_files": [
+          "prd-str-0035-ac001-x.glb"
+        ]
+      },
+      "0036": {
+        "_files": [
+          "prd-str-0036-ac001-x.glb"
+        ]
+      },
+      "0037": {
+        "_files": [
+          "prd-str-0037-ac001-x.glb",
+          "prd-str-0037-ac002-x.glb"
+        ]
+      },
+      "0038": {
+        "_files": [
+          "prd-str-0038-ac001-x.glb"
+        ]
+      },
+      "0039": {
+        "_files": [
+          "prd-str-0039-ac001-x.glb"
+        ]
+      },
+      "0040": {
+        "_files": [
+          "prd-str-0040-ac001-x.glb"
+        ]
+      },
+      "0041": {
+        "_files": [
+          "prd-str-0041-ac001-x.glb"
+        ]
+      },
+      "0042": {
+        "_files": [
+          "prd-str-0042-ac001-x.glb"
+        ]
+      },
+      "0043": {
+        "_files": [
+          "prd-str-0043-ac001-x.glb"
+        ]
+      },
+      "0044": {
+        "_files": [
+          "prd-str-0044-ac001-x.glb"
+        ]
+      },
+      "0045": {
+        "_files": [
+          "prd-str-0045-ac001-x.glb"
+        ]
+      },
+      "0046": {
+        "_files": [
+          "prd-str-0046-ac001-x.glb"
+        ]
+      },
+      "0047": {
+        "_files": [
+          "prd-str-0047-ac001-x.glb"
+        ]
+      },
+      "0048": {
+        "_files": [
+          "prd-str-0048-ac001-x.glb"
+        ]
+      },
+      "0049": {
+        "_files": [
+          "prd-str-0049-ac001-x.glb"
+        ]
+      },
+      "0050": {
+        "_files": [
+          "prd-str-0050-ac001-x.glb"
+        ]
+      },
+      "0051": {
+        "_files": [
+          "prd-str-0051-ac001-x.glb"
+        ]
+      },
+      "0052": {
+        "_files": [
+          "prd-str-0052-ac001-x.glb"
+        ]
+      },
+      "0053": {
+        "_files": [
+          "prd-str-0053-ac001-x.glb"
+        ]
+      },
+      "0054": {
+        "_files": [
+          "prd-str-0054-ac001.glb"
+        ]
+      },
+      "0055": {
+        "_files": [
+          "prd-str-0055-ac001-x.glb"
+        ]
+      },
+      "0056": {
+        "_files": [
+          "prd-str-0056-ac001-x.glb"
+        ]
+      },
+      "0057": {
+        "_files": [
+          "prd-str-0057-ac001-x.glb"
+        ]
+      },
+      "0058": {
+        "_files": [
+          "prd-str-0058-ac001-x.glb"
+        ]
+      },
+      "0059": {
+        "_files": [
+          "prd-str-0059-ac001-x.glb"
+        ]
+      },
+      "0060": {
+        "_files": [
+          "prd-str-0060-ac001-x.glb"
+        ]
+      },
+      "0061": {
+        "_files": [
+          "prd-str-0061-ac001-x.glb"
+        ]
+      },
+      "0062": {
+        "_files": [
+          "prd-str-0062-ac001-x.glb"
+        ]
+      },
+      "0063": {
+        "_files": [
+          "prd-str-0063-ac001-x.glb"
+        ]
+      },
+      "0064": {
+        "_files": [
+          "prd-str-0064-ac001-x.glb"
+        ]
+      },
+      "0065": {
+        "_files": [
+          "prd-str-0065-ac001-x.glb"
+        ]
+      },
+      "0066": {
+        "_files": [
+          "prd-str-0066-ac001-x.glb"
+        ]
+      },
+      "0067": {
+        "_files": [
+          "prd-str-0067-ac001-x.glb"
+        ]
+      },
+      "0068": {
+        "_files": [
+          "prd-str-0068-ac001-x.glb"
+        ]
+      },
+      "0069": {
+        "_files": [
+          "prd-str-0069-ac001-x.glb"
+        ]
+      },
+      "0070": {
+        "_files": [
+          "prd-str-0070-ac001-x.glb"
+        ]
+      },
+      "0071": {
+        "_files": [
+          "prd-str-0071-ac001-x.glb"
+        ]
+      },
+      "0072": {
+        "_files": [
+          "prd-str-0072-ac001-x.glb"
+        ]
+      },
+      "0073": {
+        "_files": [
+          "prd-str-0073-ac001-x.glb"
+        ]
+      },
+      "0074": {
+        "_files": [
+          "prd-str-0074-ac001-x.glb"
+        ]
+      },
+      "0075": {
+        "_files": [
+          "prd-str-0075-ac001-x.glb"
+        ]
+      },
+      "0076": {
+        "_files": [
+          "prd-str-0076-ac001-x.glb"
+        ]
+      },
+      "0077": {
+        "_files": [
+          "prd-str-0077-ac001-x.glb"
+        ]
+      },
+      "0078": {
+        "_files": [
+          "prd-str-0078-ac001-x.glb"
+        ]
+      },
+      "0079": {
+        "_files": [
+          "prd-str-0079-ac001-x.glb"
+        ]
+      },
+      "0080": {
+        "_files": [
+          "prd-str-0080-ac001-x.glb"
+        ]
+      },
+      "0081": {
+        "_files": [
+          "prd-str-0081-ac001-x.glb"
+        ]
+      },
+      "0082": {
+        "_files": [
+          "prd-str-0082-ac001-x.glb"
+        ]
+      },
+      "0083": {
+        "_files": [
+          "prd-str-0083-ac001-x.glb"
+        ]
+      },
+      "0084": {
+        "_files": [
+          "prd-str-00084-ac001-x.glb"
+        ]
+      },
+      "0085": {
+        "_files": [
+          "prd-str-0085-ac001-x.glb"
+        ]
+      },
+      "0086": {
+        "_files": [
+          "prd-str-0086-ac001-x.glb"
+        ]
+      },
+      "0087": {
+        "_files": [
+          "prd-str-0087-ac001-x.glb"
+        ]
+      },
+      "0089": {
+        "_files": [
+          "prd-str-0089-ac001-x.glb"
+        ]
+      },
+      "0090": {
+        "_files": [
+          "prd-str-0090-ac001-x.glb"
+        ]
+      },
+      "0091": {
+        "_files": [
+          "prd-str-0091-ac001-x.glb"
+        ]
+      },
+      "0092": {
+        "_files": [
+          "prd-str-0092-ac001-x.glb"
+        ]
+      }
+    },
+    "TL01": {},
+    "TL02": {},
+    "TLM01": {
+      "01": {
+        "_files": [
+          "prd-tlm-01-sa001.glb"
+        ]
+      },
+      "02": {
+        "_files": [
+          "prd-tlm-02-sa001.glb"
+        ]
+      }
+    },
+    "TRA01": {
+      "0002": {
+        "_files": [
+          "prd-tra01-0002-ac001.glb"
+        ]
+      },
+      "0003": {
+        "_files": [
+          "prd-tra01-0003-ac001.glb"
+        ]
+      },
+      "_files": [
+        "prd-tra01-0002-ac001.glb",
+        "prd-tra01-0003-ac001.glb",
+        "prd-tra01-0001-sa001.glb",
+        "prd-tra01-0002-ac001.glb",
+        "prd-tra01-0002-p0001-x.sldasm.glb",
+        "prd-tra01-0003-ac001.glb",
+        "prd-tra01-0003-p0001.glb",
+        "prd-tra01-0003-p0002.glb",
+        "prd-tra01-0003-p0003.glb",
+        "prd-tra01-0003-p0004.glb",
+        "prd-tra01-0003-p0005.glb",
+        "prd-tra01-0003-p0006.glb",
+        "prd-tra01-0003-p0007.glb",
+        "prd-tra01-0003-p0008.glb",
+        "prd-tra01-0003-p0009.glb",
+        "prd-tra01-0003-p0010.glb",
+        "prd-tra01-0003-p0011.glb"
+      ]
+    },
+    "TRC01": {
+      "150": {
+        "0001": {
+          "Costruttivi": {
+            "_files": [
+              "prd-trc01-150-0001-ac001-x.glb"
+            ]
+          }
+        }
+      },
+      "035": {
+        "0001": {
+          "Costruttivi": {
+            "_files": [
+              "prd-trc01-035-0001-ac001-x.glb"
+            ]
+          }
+        },
+        "0002": {
+          "Costruttivi": {
+            "_files": [
+              "prd-trc01-035-0002-ac001-x.glb"
+            ]
+          }
+        }
+      },
+      "050": {
+        "0001": {
+          "_files": [
+            "prd-trc01-050-0001-ac001.glb"
+          ]
+        }
+      },
+      "080": {
+        "0001": {
+          "Condivisibili": {},
+          "Costruttivi": {
+            "_files": [
+              "prd-trc01-080-0001-ac001-x.glb"
+            ]
+          }
+        }
+      }
+    },
+    "TRC02": {
+      "0001": {
+        "_files": [
+          "prd-trc02-0001-ac001-x.glb"
+        ]
+      }
+    }
   }
 }

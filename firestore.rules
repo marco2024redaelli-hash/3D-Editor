@@ -6,5 +6,13 @@ service cloud.firestore {
       allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
       allow read: if false;
     }
+    match /analytics_sessions/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+    match /model_feedback/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
   }
 }

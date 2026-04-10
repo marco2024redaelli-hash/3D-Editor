@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat DecAI — DECA 3D Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0c0e14; --bg2: #141620; --bg3: #1c1f2e; --bg4: #232738;
+            --border: #2a2e42; --accent: #4ecca3; --accent-hover: #3ba88c;
+            --accent-dim: rgba(78,204,163,0.12);
+            --text: #eaedf3; --text2: #8b90a0; --text3: #555a6e;
+            --font: 'Inter', system-ui, sans-serif;
+        }
+        body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; display: flex; }
+
+        /* Sidebar */
+        .sidebar { width: 280px; background: var(--bg2); border-right: 1px solid var(--border); display: flex; flex-direction: column; height: 100vh; position: fixed; left: 0; top: 0; }
+        .sidebar-header { padding: 16px; border-bottom: 1px solid var(--border); }
+        .sidebar-header a { display: flex; align-items: center; gap: 8px; color: var(--text2); text-decoration: none; font-size: 12px; margin-bottom: 12px; }
+        .sidebar-header a:hover { color: var(--text); }
+        .sidebar-header h2 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .sidebar-header h2 span { color: var(--accent); }
+        .btn-new-chat { width: 100%; padding: 10px; background: var(--accent); color: #0c0e14; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; font-family: var(--font); margin-top: 12px; transition: background .15s; }
+        .btn-new-chat:hover { background: var(--accent-hover); }
+
+        .sidebar-section { padding: 12px 16px 4px; font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+        .chat-list { flex: 1; overflow-y: auto; padding: 4px 8px; }
+        .chat-list::-webkit-scrollbar { width: 4px; }
+        .chat-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        .chat-item { padding: 10px 12px; border-radius: 8px; cursor: pointer; transition: background .12s; margin-bottom: 2px; }
+        .chat-item:hover { background: var(--bg3); }
+        .chat-item.active { background: var(--bg4); }
+        .chat-item .title { font-size: 13px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .chat-item .meta { font-size: 10px; color: var(--text3); margin-top: 3px; display: flex; gap: 8px; }
+
+        /* Main content */
+        .main { margin-left: 280px; flex: 1; display: flex; flex-direction: column; height: 100vh; }
+
+        /* Chat view */
+        .chat-view { flex: 1; overflow-y: auto; padding: 32px; max-width: 800px; margin: 0 auto; width: 100%; }
+        .chat-view::-webkit-scrollbar { width: 5px; }
+        .chat-view::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text2); }
+        .empty-state .logo { width: 64px; height: 64px; margin-bottom: 16px; opacity: .6; }
+        .empty-state h3 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
+        .empty-state p { font-size: 13px; max-width: 400px; text-align: center; line-height: 1.5; }
+
+        .msg { margin-bottom: 20px; display: flex; gap: 12px; }
+        .msg .avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; flex-shrink: 0; }
+        .msg .avatar.user { background: var(--accent-dim); color: var(--accent); }
+        .msg .avatar.bot { background: var(--bg4); color: var(--text2); }
+        .msg .content { flex: 1; }
+        .msg .sender { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+        .msg .sender.user { color: var(--accent); }
+        .msg .sender.bot { color: var(--text2); }
+        .msg .text { font-size: 13px; line-height: 1.6; color: var(--text); }
+        .msg .text b, .msg .text strong { color: var(--accent); }
+        .msg .time { font-size: 10px; color: var(--text3); margin-top: 4px; }
+
+        .chat-date-divider { text-align: center; margin: 20px 0; font-size: 11px; color: var(--text3); position: relative; }
+        .chat-date-divider::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--border); }
+        .chat-date-divider span { background: var(--bg); padding: 0 12px; position: relative; }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; position: relative; height: auto; max-height: 40vh; }
+            .main { margin-left: 0; }
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<aside class="sidebar">
+    <div class="sidebar-header">
+        <a href="index.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            Home
+        </a>
+        <h2><span>&#10024;</span> DecAI Chat</h2>
+        <button class="btn-new-chat" onclick="window.location.href='glb_editor.html'">+ Nuova conversazione</button>
+    </div>
+    <div class="sidebar-section">Recenti</div>
+    <div class="chat-list" id="chat-list">
+        <div style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">Caricamento...</div>
+    </div>
+</aside>
+
+<main class="main">
+    <div class="chat-view" id="chat-view">
+        <div class="empty-state">
+            <img src="deca.png" class="logo" alt="DECA" onerror="this.style.display='none'">
+            <h3>DecAI Chat</h3>
+            <p>Seleziona una conversazione dalla lista a sinistra oppure avvia una nuova conversazione nell'editor 3D.</p>
+        </div>
+    </div>
+</main>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyCnkVGMJi4bBErfG0pPTqLRNMfmIEBweFs",
+        authDomain: "glb-3d-editor.firebaseapp.com",
+        projectId: "glb-3d-editor",
+        storageBucket: "glb-3d-editor.firebasestorage.app",
+        messagingSenderId: "487865876061",
+        appId: "1:487865876061:web:50ce498a6083cf13d24a62"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    let sessions = [];
+    let activeId = null;
+
+    auth.onAuthStateChanged(async user => {
+        if (user) {
+            await loadSessions(user.uid);
+        } else {
+            loadLocalSessions();
+        }
+    });
+
+    function loadLocalSessions() {
+        try {
+            sessions = JSON.parse(localStorage.getItem('deca_chat_sessions') || '[]');
+        } catch { sessions = []; }
+        renderList();
+    }
+
+    async function loadSessions(uid) {
+        try {
+            const snap = await db.collection('chat_sessions')
+                .where('userId', '==', uid)
+                .orderBy('startedAt', 'desc')
+                .limit(50)
+                .get();
+            sessions = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        } catch (e) {
+            console.warn('Errore caricamento sessioni:', e);
+            sessions = [];
+        }
+        renderList();
+    }
+
+    function renderList() {
+        const list = document.getElementById('chat-list');
+        if (sessions.length === 0) {
+            list.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text3);font-size:12px;">Nessuna conversazione. Apri l\'editor e chatta con DecAI.</div>';
+            return;
+        }
+
+        // Raggruppa per data
+        const today = new Date().toDateString();
+        const yesterday = new Date(Date.now() - 86400000).toDateString();
+        const groups = { 'Oggi': [], 'Ieri': [], 'Questa settimana': [], 'Precedenti': [] };
+
+        sessions.forEach(s => {
+            const d = s.startedAt?.toDate ? s.startedAt.toDate() : new Date(s.startedAt || 0);
+            const ds = d.toDateString();
+            if (ds === today) groups['Oggi'].push(s);
+            else if (ds === yesterday) groups['Ieri'].push(s);
+            else if (Date.now() - d.getTime() < 7 * 86400000) groups['Questa settimana'].push(s);
+            else groups['Precedenti'].push(s);
+        });
+
+        let html = '';
+        for (const [label, items] of Object.entries(groups)) {
+            if (items.length === 0) continue;
+            html += `<div class="sidebar-section" style="padding:8px 12px 4px;">${label}</div>`;
+            items.forEach(s => {
+                // Estrai titolo dal primo messaggio utente
+                const firstUserMsg = (s.messages || []).find(m => m.role === 'user');
+                const title = firstUserMsg ? firstUserMsg.text.substring(0, 60) : 'Conversazione';
+                const msgCount = (s.messages || []).length;
+                const d = s.startedAt?.toDate ? s.startedAt.toDate() : new Date(s.startedAt || 0);
+                const time = d.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+
+                html += `<div class="chat-item ${s.id === activeId ? 'active' : ''}" onclick="showChat('${s.id}')">
+                    <div class="title">${title}</div>
+                    <div class="meta"><span>${time}</span><span>${msgCount} msg</span></div>
+                </div>`;
+            });
+        }
+        list.innerHTML = html;
+    }
+
+    function showChat(id) {
+        activeId = id;
+        renderList();
+        const session = sessions.find(s => s.id === id);
+        if (!session) return;
+
+        const view = document.getElementById('chat-view');
+        const messages = session.messages || [];
+
+        if (messages.length === 0) {
+            view.innerHTML = '<div class="empty-state"><h3>Conversazione vuota</h3></div>';
+            return;
+        }
+
+        let html = '';
+        let lastDate = '';
+
+        messages.forEach(m => {
+            const d = new Date(m.time || 0);
+            const dateStr = d.toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
+            if (dateStr !== lastDate) {
+                html += `<div class="chat-date-divider"><span>${dateStr}</span></div>`;
+                lastDate = dateStr;
+            }
+
+            const isUser = m.role === 'user';
+            const time = d.toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+            const avatar = isUser ? '<div class="avatar user">Tu</div>' : '<div class="avatar bot">AI</div>';
+            const senderClass = isUser ? 'user' : 'bot';
+            const senderName = isUser ? 'Tu' : 'DecAI';
+            const text = (m.text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+
+            html += `<div class="msg">
+                ${avatar}
+                <div class="content">
+                    <div class="sender ${senderClass}">${senderName}</div>
+                    <div class="text">${text}</div>
+                    <div class="time">${time}</div>
+                </div>
+            </div>`;
+        });
+
+        view.innerHTML = html;
+        view.scrollTop = 0;
+    }
+</script>
+</body>
+</html>

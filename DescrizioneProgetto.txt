@@ -36,6 +36,7 @@ Funzionalita' principali
 - Trasformazioni: sposta (W), ruota (E), scala (R) con snap configurabile
 - Undo/Redo (Ctrl+Z / Ctrl+Y)
 - Misura distanza 2 punti (M)
+- Quotatura tecnica (Q): bounding box wireframe, quote ingombri in mm, sfondo neutro, linee di estensione e frecce
 - Accoppiamento superfici (mate a 2 fasi: sorgente + destinazione)
 - Duplicazione e specchiatura oggetti (X, Y, Z)
 - Materiali PBR: colore, emissivo, metallicita', rugosita', opacita', wireframe
@@ -44,6 +45,11 @@ Funzionalita' principali
 - Visualizzatore PDF integrato (disegni tecnici)
 - Visualizzatore XLS integrato (distinte base, via SheetJS)
 - Autenticazione Google / email (Firebase Auth)
+- Rendering markdown nei messaggi DecAI (headings, liste, code blocks, blockquote)
+- Sistema di annotazioni e feedback con pin sulla scena 3D
+- Badge di sentiment (positivo/problema/suggerimento) e sorgente (AI/locale)
+- Feedback thumbs up/down sui messaggi del chatbot
+- Toast notification per caricamento modelli
 
 
 Libreria prodotti
@@ -84,6 +90,12 @@ Chatbot in basso a sinistra con due modalita':
 Backend configurabile: LM Studio locale, Cloudflare Tunnel, server DECAAI custom.
 Indicatore di stato connessione con feedback colore (verde = LLM attivo).
 
+System prompt potenziato con:
+  - Informazioni ufficiali DECA S.r.l. (descrizione, sito https://www.decasrl.biz)
+  - Contatti aziendali (+39 0341 63 20 80)
+  - Guardrail piu' rigidi (niente URL inventati, niente nomi prodotto fabbricati)
+  - Regola esplicita: DECA produce molti prodotti diversificati (non solo una categoria)
+
 Comandi disponibili:
   Ricerca e libreria:
     [nome prodotto]            Cerca per descrizione nella libreria PRD
@@ -112,6 +124,34 @@ Azioni JSON restituite dall'LLM: select, move, rotate, color, load, remove,
 arrange, mate, search_bom, search_drawing, search_distinta, replace.
 
 
+Pagine aggiuntive
+------------------
+index.html — Dashboard principale (non piu' semplice redirect):
+  - Griglia KPI con statistiche progetto
+  - Quick actions: nuovo editor, DecAI Chat, catalogo
+  - Griglia progetti con badge di stato (Approvato/In revisione/Bozza)
+  - Modale per creazione nuovi progetti
+  - Integrazione Firebase per dati in tempo reale
+
+catalog_page.html — Pagina catalogo prodotti navigabile:
+  - 15 macrofamiglie prodotto DECA (IAS, BVC, BVL, elevatori, nastri, ecc.)
+  - Famiglie espandibili con ricerca full-text su 300+ SKU
+  - Anteprima 3D interattiva dei modelli tramite model-viewer
+  - Navigazione gerarchica con breadcrumb
+
+analytics_dashboard.html — Dashboard analitica:
+  - Metriche in tempo reale e KPI con stat card
+  - Grafici di performance tramite Chart.js
+  - Viste di business intelligence con filtri e raggruppamenti
+  - Tema scuro coerente con il resto dell'applicazione
+
+chat_history.html — Visualizzatore storico conversazioni DecAI:
+  - Persistenza sessioni su Firebase/localStorage
+  - Cronologia raggruppata per data (Oggi/Ieri/Questa settimana/Precedenti)
+  - Conteggio messaggi per sessione
+  - Sidebar con snippet dell'ultimo messaggio utente
+
+
 API per automazione (serve_editor.py)
 --------------------------------------
 Server locale (porta 3000) con API REST per controllo programmatico della scena:
@@ -138,8 +178,11 @@ Scorciatoie tastiera
 Struttura progetto
 ------------------
 public/                        File web deployati su Firebase Hosting
-  index.html                   Pagina di ingresso (redirect all'editor)
+  index.html                   Dashboard principale con KPI, quick actions e progetti
   glb_editor.html              Editor 3D interattivo (app principale)
+  catalog_page.html            Pagina catalogo prodotti navigabile con anteprima 3D
+  analytics_dashboard.html     Dashboard analitica con grafici Chart.js
+  chat_history.html            Visualizzatore storico conversazioni DecAI
   404.html                     Pagina di errore
   catalog.json                 Indice unificato dei modelli (nome, glb, pdf, xls, codice)
   db_tree.json                 Struttura gerarchica cartelle per navigazione libreria
@@ -176,6 +219,8 @@ tools/                         Script per uso locale
   update_catalog_glbs.js       Aggiorna riferimenti GLB nel catalogo
   create_training7.js          Generazione dati di training per AI
   extract_cartiglio.py         Estrae metadati dai cartigli dei disegni
+  convert_bvl.py               Convertitore automatico BVL: SLDASM->GLB e SLDDRW->PDF
+  ExportBVL_GLB.swp.bas        Macro VBA SolidWorks per export batch BVL in GLB
 
 firebase.json                  Configurazione Firebase Hosting + Firestore rules
 firestore.rules                Regole di sicurezza Firestore (sessioni chat read-only)
@@ -190,3 +235,5 @@ Note tecniche
 - Tema scuro con CSS custom properties
 - Firestore per persistenza sessioni chat utente
 - DATABASE1 non viene deployata su Firebase (solo public/ viene servito)
+- Catalogo arricchito con famiglie BVC (6 tipi di basi vibranti circolari)
+- db_tree.json ampliato con struttura BVC e nuovi riferimenti GLB per famiglie esistenti

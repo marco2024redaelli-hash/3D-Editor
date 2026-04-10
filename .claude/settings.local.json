@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(firebase deploy:*)"
+      "Bash(firebase deploy:*)",
+      "Bash(firebase hosting:clone glb-3d-editor:live glb-3d-editor:live)",
+      "Bash(firebase hosting:channel:list)"
     ]
   }
 }

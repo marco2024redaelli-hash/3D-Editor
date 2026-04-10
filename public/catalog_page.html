@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo Prodotti — DECA 3D Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0c0e14; --bg2: #141620; --bg3: #1c1f2e; --bg4: #232738;
+            --border: #2a2e42; --accent: #4ecca3; --accent-hover: #3ba88c;
+            --accent-dim: rgba(78,204,163,0.12);
+            --text: #eaedf3; --text2: #8b90a0; --text3: #555a6e;
+            --font: 'Inter', system-ui, sans-serif;
+        }
+        body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+        .header { display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border-bottom: 1px solid var(--border); background: var(--bg2); position: sticky; top: 0; z-index: 100; }
+        .header-left { display: flex; align-items: center; gap: 16px; }
+        .header-left a { display: flex; align-items: center; gap: 6px; color: var(--text2); text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 6px; transition: all .15s; }
+        .header-left a:hover { color: var(--text); background: var(--bg3); }
+        .header-left h1 { font-size: 18px; font-weight: 700; }
+        .search-bar { display: flex; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 0 12px; width: 320px; }
+        .search-bar input { flex: 1; background: none; border: none; color: var(--text); font-family: var(--font); font-size: 13px; padding: 10px 8px; outline: none; }
+        .search-bar input::placeholder { color: var(--text3); }
+        .search-bar svg { width: 16px; height: 16px; color: var(--text3); }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 24px 32px; }
+
+        /* Breadcrumb */
+        .breadcrumb { display: flex; align-items: center; gap: 6px; margin-bottom: 20px; font-size: 13px; }
+        .breadcrumb a { color: var(--accent); text-decoration: none; cursor: pointer; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .sep { color: var(--text3); }
+        .breadcrumb .current { color: var(--text); font-weight: 600; }
+
+        .results-count { font-size: 13px; color: var(--text2); margin-bottom: 16px; }
+
+        /* Macro-family cards (vista iniziale) */
+        .macro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .macro-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color .2s, transform .2s, box-shadow .2s;
+            position: relative;
+        }
+        .macro-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        }
+        .macro-thumb {
+            height: 200px;
+            background: var(--bg3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .macro-thumb model-viewer {
+            width: 100%; height: 100%;
+            background: transparent;
+            --poster-color: transparent;
+        }
+        .macro-count {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+        }
+        .macro-body {
+            padding: 16px 18px;
+        }
+        .macro-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .macro-subtitle {
+            font-size: 12px;
+            color: var(--text2);
+            line-height: 1.5;
+        }
+        .macro-families-tags {
+            margin-top: 10px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .macro-fam-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--bg3);
+            border: 1px solid var(--border);
+            color: var(--text2);
+            font-weight: 500;
+        }
+
+        /* Product view (dopo click macro) */
+        .family-section { margin-bottom: 32px; }
+        .family-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; cursor: pointer; }
+        .family-header h2 { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .family-header h2 .count { font-size: 11px; color: var(--text3); font-weight: 400; }
+        .family-header .toggle { color: var(--text3); font-size: 18px; transition: transform .2s; }
+        .family-header .toggle.collapsed { transform: rotate(-90deg); }
+        .family-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+        .family-grid.collapsed { display: none; }
+
+        .product-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color .15s, transform .15s; }
+        .product-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .product-thumb { height: 180px; background: var(--bg3); display: flex; align-items: center; justify-content: center; }
+        .product-thumb model-viewer { width: 100%; height: 100%; background: transparent; --poster-color: transparent; }
+        .product-body { padding: 12px 14px; }
+        .product-name { font-size: 12px; font-weight: 600; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .product-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+        .product-code { font-size: 10px; color: var(--accent); }
+        .product-badge { font-size: 9px; padding: 1px 6px; border-radius: 3px; font-weight: 500; }
+        .product-badge.pdf { background: rgba(74,158,255,0.15); color: #4a9eff; }
+        .product-badge.xls { background: rgba(232,168,56,0.15); color: #e8a838; }
+
+        @media (max-width: 768px) {
+            .macro-grid { grid-template-columns: repeat(2, 1fr); }
+            .family-grid { grid-template-columns: repeat(2, 1fr); }
+            .search-bar { width: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-left">
+        <a href="index.html">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            Home
+        </a>
+        <h1>Catalogo Prodotti</h1>
+    </div>
+    <div class="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search" placeholder="Cerca per nome, codice o famiglia...">
+    </div>
+</header>
+
+<div class="container">
+    <div class="breadcrumb" id="breadcrumb">
+        <span class="current">Macrofamiglie</span>
+    </div>
+    <div class="results-count" id="results-count"></div>
+    <div id="catalog-content"></div>
+</div>
+
+<script>
+    let catalog = [];
+    let allFamilies = []; // [fam, items[]]
+    let currentView = 'macro'; // 'macro' | 'family'
+    let currentMacro = null;
+    let searchQuery = '';
+
+    // === MACROFAMIGLIE (da Classificazione Generale Prodotti DECA 2025) ===
+    const MACROFAMIGLIE = [
+        {
+            id: 'isole_asservimento',
+            nome: 'IAS - Isole di Asservimento',
+            sottotitolo: 'Sistemi completi: tramoggia + base vibrante circolare + base vibrante lineare + quadro elettrico + sostegno',
+            famiglie: ['IAS'],
+        },
+        {
+            id: 'basi_vibranti_circolari',
+            nome: 'Basi Vibranti Circolari',
+            sottotitolo: 'Basi vibranti circolari a 2-3-4 elettromagneti. Taglie da 150 a 1000 mm. Fe verniciato, alluminio sabbiato o acciaio inox',
+            famiglie: ['BVC'],
+        },
+        {
+            id: 'basi_vibranti_lineari',
+            nome: 'Basi Vibranti Lineari',
+            sottotitolo: 'Basi vibranti lineari a 1-2-3-4 elettromagneti. Taglie da 300 a 1000 mm. Fe verniciato, alluminio sabbiato o acciaio inox',
+            famiglie: ['BVL'],
+        },
+        {
+            id: 'presa_robotizzata',
+            nome: 'Dispositivi di Supporto alla Presa Robotizzata',
+            sottotitolo: 'Nastri e piattaforme vibranti per la presa robot, orientamento e singolarizzazione pezzi in automazione',
+            famiglie: ['BLF01', 'PLF01'],
+        },
+        {
+            id: 'componenti_isole',
+            nome: 'Componenti per Isole di Asservimento',
+            sottotitolo: 'Contenitori cilindrici, conici, a gradini, canali lineari di polmonatura e canali ad aria',
+            famiglie: ['CCI', 'CCO', 'CGP', 'CCP', 'CCOP', 'CNL'],
+        },
+        {
+            id: 'tramogge',
+            nome: 'TRM - Tramogge a Vibrazione e a Tappeto',
+            sottotitolo: 'Tramogge a vibrazione e a tappeto motorizzato. Fe verniciato o inox AISI 304/316. Da 5L a 200L',
+            famiglie: ['MTR01', 'MTR03', 'TRC01', 'TRC02'],
+        },
+        {
+            id: 'elevatori',
+            nome: 'Elevatori di Carico',
+            sottotitolo: 'Elevatori a bocca semplice, a sedia superiore, a sedia inferiore e a doppia sedia. Tappeto in tela, table top o tapparella',
+            famiglie: ['ELC02', 'ESS01', 'ELP01'],
+        },
+        {
+            id: 'alimentatori',
+            nome: 'ALM - Alimentatori Meccanici / Centrifughi / Doppio Disco',
+            sottotitolo: 'Selezione e orientamento con aria, trappole meccaniche o movimentazione magnetica. Ambiente beverage, pharma e cosmetico',
+            famiglie: ['ALM01'],
+        },
+        {
+            id: 'nastri_trasportatori',
+            nome: 'Nastri Trasportatori',
+            sottotitolo: 'Nastri rettilinei, a sedia superiore/inferiore, a doppia sedia. Tappeto in tela, table top, tapparella metallica o modulare',
+            famiglie: ['NDS01', 'NDS03', 'NDS04', 'NRA01', 'NRC01', 'NRC03', 'NRC04', 'NCA'],
+        },
+        {
+            id: 'rulliere',
+            nome: 'Rulliere',
+            sottotitolo: 'Rulliere folli a gravita, motorizzate con fermi pneumatici e di calibramento per cernita dimensionale',
+            famiglie: ['RUL-02', 'RUL-01'],
+        },
+        {
+            id: 'sistemi_carico_dosaggio',
+            nome: 'Sistemi di Carico e Dosaggio',
+            sottotitolo: 'Canali vibranti su base lineare, con elettromagnete appeso e tramogge chiuse per polmonatura e dosaggio',
+            famiglie: ['CVE01', 'CVE02'],
+        },
+        {
+            id: 'vibrovagli',
+            nome: 'Vibrovagli e Canali Vibranti a Masse Eccentriche',
+            sottotitolo: 'Canali vibranti unidirezionali, bidirezionali e vibrovagli per vagliatura e trasferimento pezzi',
+            famiglie: ['CVM01'],
+        },
+        {
+            id: 'singolarizzazione',
+            nome: 'Dispositivi di Singolarizzazione',
+            sottotitolo: 'Scassettatori, traslatori, cadenzatori pneumatici e stazioni fisse di prelievo',
+            famiglie: ['SCS', 'TRA01', 'CDZ01', 'SFP'],
+        },
+        {
+            id: 'strutture_colonne',
+            nome: 'Strutture e Colonne di Sostegno',
+            sottotitolo: 'Banchi, strutture portanti e colonne regolabili ad altezza fissa per impianti vibranti',
+            famiglie: ['STR', 'COL', 'CSO01'],
+        },
+        {
+            id: 'apparecchiature_elettriche',
+            nome: 'Apparecchiature Elettriche',
+            sottotitolo: 'Apparecchiature elettriche, quadri elettrici e componentistica per il controllo e la regolazione degli impianti',
+            famiglie: ['APE', 'CRC', 'QEL'],
+        },
+        {
+            id: 'accessori_componenti',
+            nome: 'Accessori e Componenti',
+            sottotitolo: 'Componenti per alimentatori, fondi canale, mandrini, piattaforme elevatrici, tastatori di livello e avvitatori',
+            famiglie: ['CALM', 'FCC', 'MNR', 'PEP', 'TLM01', 'AVV-02'],
+        },
+    ];
+
+    const PRD_DESCRIPTIONS = {
+        'CCP': 'Contenitore cilindrico (piatto circolare)',
+        'CNL': 'Canale lineare di polmonatura',
+        'CVE01': 'Canale vibrante su base lineare',
+        'COL': 'Colonna di sostegno',
+        'STR': 'Struttura / banco di sostegno',
+        'NRA01': 'Nastro trasportatore rettilineo',
+        'CVE02': 'Canale vibrante con elettromagnete',
+        'SCS': 'Scassettatore',
+        'CDZ01': 'Cadenzatore',
+        'CVM01': 'Canale vibrante a masse eccentriche',
+        'CALM': 'Componenti alimentatore',
+        'CCOP': 'Coperchio per contenitore',
+        'MTR01': 'Mototramoggia',
+        'BLF01': 'Nastro vibrante per presa robot',
+        'IAS': 'Isola di asservimento',
+        'ELP01': 'Elevatore a piastre',
+        'NDS03': 'Nastro a doppia sedia',
+        'NDS01': 'Nastro a doppia sedia',
+        'NCA': 'Nastro a passo a catena',
+        'MNR': 'Mandrino',
+        'ALM01': 'Alimentatore meccanico',
+        'CCI': 'Contenitore cilindrico inox',
+        'CCO': 'Contenitore conico',
+        'CSO01': 'Colonna di sostegno fissa',
+        'ESS01': 'Elevatore a sedia superiore',
+        'ELC02': 'Elevatore a bocca semplice',
+        'BVC': 'Base vibrante circolare',
+        'FCC': 'Fondo canale curvo',
+        'CGP': 'Contenitore a gradini personalizzato',
+        'AVV-02': 'Avvitatore',
+        'NRC01': 'Nastro a catena rettilineo',
+        'NRC03': 'Nastro a catena',
+        'NRC04': 'Nastro a catena modulare',
+        'NDS04': 'Nastro a doppia sedia modulare',
+        'RUL-01': 'Rulliera folle',
+        'RUL-02': 'Rulliera motorizzata',
+        'PEP': 'Piattaforma elevatrice',
+        'SFP': 'Stazione fissa di prelievo',
+        'TLM01': 'Tastatore di livello meccanico',
+        'TRA01': 'Traslatore',
+        'TRC01': 'Tramoggia chiusa su base lineare',
+        'TRC02': 'Tramoggia chiusa appesa',
+        'MTR03': 'Mototramoggia speciale',
+        'BVL': 'Base vibrante lineare',
+        'PLF01': 'Piattaforma vibrante per presa robot',
+    };
+
+    // Carica catalogo
+    fetch('catalog.json').then(r => r.json()).then(data => {
+        catalog = data;
+        const byFamily = {};
+        catalog.forEach(c => {
+            const fam = c.family || (c.folder ? c.folder.split('/')[1] : '?') || '?';
+            if (!byFamily[fam]) byFamily[fam] = [];
+            byFamily[fam].push(c);
+        });
+        allFamilies = Object.entries(byFamily).sort((a, b) => b[1].length - a[1].length);
+        render();
+    });
+
+    // === Trova un prodotto rappresentativo per una macrofamiglia ===
+    function getRepresentativeGlb(macro) {
+        // Prende il primo prodotto della prima famiglia con prodotti
+        for (const fam of macro.famiglie) {
+            const entry = allFamilies.find(([f]) => f === fam);
+            if (entry && entry[1].length > 0) {
+                return entry[1][0].glb;
+            }
+        }
+        return null;
+    }
+
+    // Conta totale prodotti in una macro
+    function getMacroCount(macro) {
+        let count = 0;
+        macro.famiglie.forEach(fam => {
+            const entry = allFamilies.find(([f]) => f === fam);
+            if (entry) count += entry[1].length;
+        });
+        return count;
+    }
+
+    // === RENDER ===
+    function render() {
+        if (searchQuery) {
+            renderSearch();
+        } else if (currentView === 'macro') {
+            renderMacro();
+        } else {
+            renderFamilyView();
+        }
+    }
+
+    // --- Vista Macrofamiglie ---
+    function renderMacro() {
+        const content = document.getElementById('catalog-content');
+        document.getElementById('breadcrumb').innerHTML = '<span class="current">Macrofamiglie</span>';
+        document.getElementById('results-count').textContent = `${MACROFAMIGLIE.length} macrofamiglie \u2014 ${catalog.length} prodotti totali`;
+
+        content.innerHTML = '<div class="macro-grid">' + MACROFAMIGLIE.map(macro => {
+            const glb = getRepresentativeGlb(macro);
+            const count = getMacroCount(macro);
+            const familyTags = macro.famiglie
+                .filter(f => allFamilies.find(([ff]) => ff === f))
+                .map(f => `<span class="macro-fam-tag">${f}</span>`)
+                .join('');
+
+            return `<div class="macro-card" onclick="openMacro('${macro.id}')">
+                <div class="macro-thumb">
+                    ${glb ? `<model-viewer src="db/${glb}" auto-rotate camera-controls interaction-prompt="none" environment-image="neutral"></model-viewer>` : '<div style="color:var(--text3);font-size:48px;opacity:.3;">&#9881;</div>'}
+                    <span class="macro-count">${count} prodotti</span>
+                </div>
+                <div class="macro-body">
+                    <div class="macro-title">${macro.nome}</div>
+                    <div class="macro-subtitle">${macro.sottotitolo}</div>
+                    <div class="macro-families-tags">${familyTags}</div>
+                </div>
+            </div>`;
+        }).join('') + '</div>';
+    }
+
+    // --- Click su macrofamiglia ---
+    function openMacro(macroId) {
+        currentMacro = MACROFAMIGLIE.find(m => m.id === macroId);
+        if (!currentMacro) return;
+        currentView = 'family';
+        render();
+        window.scrollTo(0, 0);
+    }
+
+    // --- Vista prodotti dentro una macrofamiglia ---
+    function renderFamilyView() {
+        if (!currentMacro) { currentView = 'macro'; renderMacro(); return; }
+
+        const content = document.getElementById('catalog-content');
+        document.getElementById('breadcrumb').innerHTML =
+            `<a onclick="goBack()">Macrofamiglie</a>
+             <span class="sep">/</span>
+             <span class="current">${currentMacro.nome}</span>`;
+
+        // Filtra famiglie di questa macro
+        const macroFamilies = allFamilies.filter(([fam]) => currentMacro.famiglie.includes(fam));
+        const totalCount = macroFamilies.reduce((s, [, items]) => s + items.length, 0);
+        document.getElementById('results-count').textContent = `${totalCount} prodotti in ${currentMacro.nome}`;
+
+        content.innerHTML = macroFamilies.map(([fam, items]) => {
+            const desc = PRD_DESCRIPTIONS[fam] || '';
+            return `<div class="family-section">
+                <div class="family-header" onclick="this.querySelector('.toggle').classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+                    <h2>${fam} ${desc ? `<span style="font-weight:600;color:var(--text);font-size:13px;">\u2014 ${desc}</span>` : ''} <span class="count">(${items.length})</span></h2>
+                    <span class="toggle">&#9660;</span>
+                </div>
+                <div class="family-grid">
+                    ${items.slice(0, 30).map(c => renderProductCard(c)).join('')}
+                    ${items.length > 30 ? `<div style="grid-column:1/-1;text-align:center;padding:12px;color:var(--text3);font-size:12px;">...e altri ${items.length - 30} modelli. Usa la ricerca per trovarli.</div>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // --- Vista ricerca (attraverso tutte le famiglie) ---
+    function renderSearch() {
+        const content = document.getElementById('catalog-content');
+        const q = searchQuery.toLowerCase();
+
+        document.getElementById('breadcrumb').innerHTML =
+            `<a onclick="goBack()">Macrofamiglie</a>
+             <span class="sep">/</span>
+             <span class="current">Ricerca: "${searchQuery}"</span>`;
+
+        const filtered = allFamilies.map(([fam, items]) => {
+            const filteredItems = items.filter(c =>
+                (c.name || '').toLowerCase().includes(q) ||
+                (c.code || '').toLowerCase().includes(q) ||
+                fam.toLowerCase().includes(q) ||
+                (PRD_DESCRIPTIONS[fam] || '').toLowerCase().includes(q)
+            );
+            if (filteredItems.length === 0) return null;
+            return [fam, filteredItems];
+        }).filter(Boolean);
+
+        const totalCount = filtered.reduce((s, [, items]) => s + items.length, 0);
+        document.getElementById('results-count').textContent = `${totalCount} risultati per "${searchQuery}"`;
+
+        if (totalCount === 0) {
+            content.innerHTML = '<div style="text-align:center;padding:60px;color:var(--text3);font-size:14px;">Nessun risultato trovato.</div>';
+            return;
+        }
+
+        content.innerHTML = filtered.map(([fam, items]) => {
+            const desc = PRD_DESCRIPTIONS[fam] || '';
+            return `<div class="family-section">
+                <div class="family-header" onclick="this.querySelector('.toggle').classList.toggle('collapsed');this.nextElementSibling.classList.toggle('collapsed');">
+                    <h2>${fam} ${desc ? `<span style="font-weight:600;color:var(--text);font-size:13px;">\u2014 ${desc}</span>` : ''} <span class="count">(${items.length})</span></h2>
+                    <span class="toggle">&#9660;</span>
+                </div>
+                <div class="family-grid">
+                    ${items.slice(0, 20).map(c => renderProductCard(c)).join('')}
+                    ${items.length > 20 ? `<div style="grid-column:1/-1;text-align:center;padding:12px;color:var(--text3);font-size:12px;">...e altri ${items.length - 20} modelli.</div>` : ''}
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    // --- Product card HTML ---
+    function renderProductCard(c) {
+        const name = (c.name || '').replace(/-x$/i, '').toUpperCase().replace(/-/g, ' ');
+        const hasPdf = c.pdf ? '<span class="product-badge pdf">PDF</span>' : '';
+        const hasXls = c.xls ? '<span class="product-badge xls">XLS</span>' : '';
+        return `<div class="product-card" onclick="window.location.href='glb_editor.html?load=${encodeURIComponent(c.glb)}&name=${encodeURIComponent(c.name)}&code=${encodeURIComponent(c.code||'')}'">
+            <div class="product-thumb">
+                <model-viewer src="db/${c.glb}" auto-rotate camera-controls interaction-prompt="none" environment-image="neutral" style="width:100%;height:100%;background:transparent;--poster-color:transparent;"></model-viewer>
+            </div>
+            <div class="product-body">
+                <div class="product-name">${name}</div>
+                <div class="product-meta">
+                    ${c.code ? `<span class="product-code">${c.code}</span>` : ''}
+                    ${hasPdf}${hasXls}
+                </div>
+            </div>
+        </div>`;
+    }
+
+    // --- Navigazione ---
+    function goBack() {
+        searchQuery = '';
+        document.getElementById('search').value = '';
+        currentView = 'macro';
+        currentMacro = null;
+        render();
+        window.scrollTo(0, 0);
+    }
+
+    // Ricerca
+    document.getElementById('search').addEventListener('input', e => {
+        searchQuery = e.target.value.trim();
+        if (!searchQuery) {
+            // Torna alla vista corrente senza search
+            if (currentMacro) { currentView = 'family'; }
+            else { currentView = 'macro'; }
+        }
+        render();
+    });
+
+    // Gestione back browser
+    window.addEventListener('popstate', () => {
+        if (currentView === 'family') {
+            goBack();
+        }
+    });
+</script>
+</body>
+</html>

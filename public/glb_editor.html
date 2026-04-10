@@ -897,61 +897,6 @@
         }
         #decai-fab img { width: 70px; height: 70px; object-fit: contain; }
         #decai-fab.hidden { display: none; }
-
-        /* Tutorial panel (affiancato alla chat) */
-        #decai-tutorial-panel {
-            display: none;
-            position: fixed;
-            top: 48px;
-            bottom: 0;
-            width: 340px;
-            background: var(--bg-primary);
-            border-right: 2px solid var(--border);
-            z-index: 149;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        #decai-tutorial-panel.open { display: flex; }
-        #decai-tutorial-panel .tutorial-header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border);
-            background: var(--bg-secondary);
-        }
-        #decai-tutorial-panel .tutorial-header h3 {
-            margin: 0; font-size: 14px; color: var(--accent); font-weight: 600;
-        }
-        #decai-tutorial-panel .tutorial-close {
-            background: none; border: none; color: var(--text-secondary); font-size: 18px; cursor: pointer; padding: 0 4px;
-        }
-        #decai-tutorial-panel .tutorial-close:hover { color: var(--text-primary); }
-        #decai-tutorial-panel .tutorial-body {
-            flex: 1; overflow-y: auto; padding: 16px;
-            font-size: 12px; line-height: 1.6; color: var(--text-secondary);
-        }
-        #decai-tutorial-panel .tutorial-body h4 {
-            color: var(--accent); font-size: 13px; margin: 18px 0 8px 0; font-weight: 600;
-        }
-        #decai-tutorial-panel .tutorial-body h4:first-child { margin-top: 0; }
-        #decai-tutorial-panel .tutorial-body code {
-            background: var(--bg-tertiary); color: var(--accent); padding: 2px 6px; border-radius: 3px; font-size: 11px;
-        }
-        #decai-tutorial-panel .tutorial-body pre {
-            background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: var(--radius);
-            padding: 10px; overflow-x: auto; margin: 8px 0; font-size: 11px; color: var(--text-primary);
-        }
-        #decai-tutorial-panel .tutorial-body .step {
-            display: flex; gap: 10px; margin: 10px 0; align-items: flex-start;
-        }
-        #decai-tutorial-panel .tutorial-body .step-num {
-            background: var(--accent); color: var(--bg-primary); width: 22px; height: 22px; min-width: 22px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 11px;
-        }
-        #decai-tutorial-panel .tutorial-body .step-text { flex: 1; }
-        #decai-tutorial-panel .tutorial-body .note {
-            background: var(--accent-dim); border-left: 3px solid var(--accent); padding: 8px 12px; border-radius: 0 var(--radius) var(--radius) 0; margin: 12px 0;
-        }
     </style>
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -989,17 +934,8 @@
             }
         }
 
-        // AUTH TEMPORANEAMENTE DISABILITATA — rimuovere questo blocco per riattivare
-        {
-            const overlay = document.getElementById('auth-overlay');
-            if (overlay) overlay.style.display = 'none';
-            chatSessionId = db.collection('chat_sessions').doc().id;
-            chatMessages = [];
-            console.log('[Auth] Autenticazione disabilitata temporaneamente');
-        }
-
-        // Listener auth state (TEMPORANEAMENTE DISABILITATO)
-        false && auth.onAuthStateChanged(user => {
+        // Listener auth state
+        auth.onAuthStateChanged(user => {
             currentUser = user;
             const overlay = document.getElementById('auth-overlay');
             const avatarImg = document.getElementById('user-avatar-img');
@@ -1099,8 +1035,7 @@
 </head>
 <body>
     <!-- Overlay Login -->
-    <!-- AUTH TEMPORANEAMENTE DISABILITATA — rimettere display:flex per riattivare -->
-    <div id="auth-overlay" style="position:fixed;inset:0;z-index:99999;background:var(--bg-primary);display:none;align-items:center;justify-content:center;">
+    <div id="auth-overlay" style="position:fixed;inset:0;z-index:99999;background:var(--bg-primary);display:flex;align-items:center;justify-content:center;">
         <div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px;padding:48px 40px;max-width:420px;width:90%;text-align:center;box-shadow:var(--shadow-lg);">
             <img src="icons/icon-192x192.png" alt="DECA" style="width:64px;height:64px;margin-bottom:16px;border-radius:12px;" onerror="this.style.display='none'">
             <h1 style="color:var(--text-primary);font-family:var(--font);font-size:24px;margin:0 0 8px;">DECA 3D Viewer</h1>
@@ -1124,6 +1059,7 @@
     </div>
 
     <div id="toolbar">
+        <a href="index.html" style="display:flex;align-items:center;gap:4px;text-decoration:none;color:var(--text);font-size:12px;font-weight:600;padding:6px 10px;border-radius:4px;background:rgba(78,204,163,0.1);border:1px solid rgba(78,204,163,0.3);" title="Torna alla Home">&#127968; Home</a>
         <label for="file-input" style="margin: 0;">Apri GLB</label>
         <input type="file" id="file-input" accept=".glb,.gltf" style="display:none">
         <button id="btn-library" title="Libreria modelli">Libreria</button>
@@ -1147,6 +1083,7 @@
         </select>
         <div class="separator"></div>
         <button id="btn-measure" title="Misura (M)">Misura</button>
+        <button id="btn-quotatura" title="Quotatura Tecnica (Q)">Quotatura</button>
         <button id="btn-edges" class="active" title="Mostra/nascondi bordi (stile SolidWorks)">Bordi</button>
         <div class="separator"></div>
         <select id="export-format" style="margin-left: auto;" title="Formato esportazione">
@@ -1154,6 +1091,7 @@
             <option value="obj">OBJ</option>
             <option value="stl">STL</option>
         </select>
+        <button id="btn-save-project" style="background:#e8a838;color:#0c0e14;font-weight:600;" title="Salva progetto">&#128190; Salva</button>
         <button id="btn-export" class="primary">Esporta</button>
         <div id="user-avatar" style="margin-left:8px;cursor:pointer;position:relative;" title="Account">
             <img id="user-avatar-img" src="" alt="" style="width:32px;height:32px;border-radius:50%;border:2px solid var(--border);display:none;object-fit:cover;">
@@ -1181,6 +1119,11 @@
     </div>
 
     <div id="viewport"></div>
+    <!-- ViewCube: canvas 3D + label HTML dritte -->
+    <div id="viewcube-wrap" style="position:fixed;top:56px;right:calc(var(--sidebar-w) + 8px);z-index:50;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none;">
+        <canvas id="viewcube-canvas" width="120" height="120" style="pointer-events:auto;cursor:pointer;border-radius:8px;"></canvas>
+        <button data-view="iso" style="pointer-events:auto;font:bold 10px Inter,Arial,sans-serif;color:#555;background:rgba(220,225,235,0.9);border:1px solid rgba(100,110,130,0.4);border-radius:4px;padding:3px 10px;cursor:pointer;transition:background .15s;">Isometrica</button>
+    </div>
 
     <div id="sidebar">
         <div id="sidebar-resize-handle"></div>
@@ -1346,17 +1289,20 @@
             <div class="header-actions">
                 <span id="decai-status" style="font-size:10px;color:var(--text-muted);margin-right:2px;cursor:pointer;" title="Clicca per configurare server AI">●</span>
                 <button id="decai-settings-btn" title="Configura URL server AI" style="font-size:10px;padding:2px 5px;border-radius:8px;background:var(--bg-elevated);color:var(--text-muted);border:1px solid var(--border);cursor:pointer;margin-right:2px;">⚙</button>
-                <button id="decai-tutorial-btn" title="Come attivare DecAI" style="font-size:10px;padding:2px 5px;border-radius:8px;background:var(--bg-elevated);color:var(--text-muted);border:1px solid var(--border);cursor:pointer;margin-right:2px;">?</button>
+                <button id="decai-mode-toggle" title="Passa a modalita comandi" style="font-size:10px;padding:3px 8px;border-radius:12px;background:var(--bg-elevated);color:var(--text-primary);border:1px solid var(--border);cursor:pointer;">AI</button>
                 <button id="decai-minimize" title="Minimizza">&#8722;</button>
                 <button id="decai-close" title="Chiudi">&times;</button>
             </div>
         </div>
         <div id="decai-messages">
-            <div class="decai-msg bot">Ciao! Sono <b>DecAI</b>, l'assistente DECA con intelligenza artificiale.<br>Posso aiutarti a visualizzare i prodotti Deca, le distinte base e i disegni tecnici e rispondere alle tue esigenze tecniche specifiche in linguaggio naturale.</div>
+            <div class="decai-msg bot">Ciao! Sono <b>DecAI</b>, l'assistente DECA con intelligenza artificiale.<br>Posso aiutarti a visualizzare i prodotti Deca, le distinte base e i disegni tecnici e rispondere alle tue esigenze tecniche specifiche in linguaggio naturale.<br>Digita <b>aiuto</b> per la lista comandi.</div>
         </div>
         <div id="decai-input-bar">
             <input type="text" id="decai-input" placeholder="Chiedi a DecAI..." autocomplete="off">
             <div class="input-tools">
+                <button id="decai-mode-toggle-2" title="Modalita AI/Comandi" style="font-size:11px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M9 18h6"/><path d="M12 18v4"/><circle cx="12" cy="14" r="1"/></svg>
+                </button>
                 <button id="decai-reset-chat" title="Ripristina chat" style="font-size:11px;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
                 </button>
@@ -1370,94 +1316,6 @@
         <img src="deca.png" alt="DECA" onerror="this.parentElement.textContent='DECA'">
     </button>
 
-    <!-- Tutorial DecAI (pannello laterale) -->
-    <div id="decai-tutorial-panel">
-        <div class="tutorial-header">
-            <h3>Come attivare DecAI</h3>
-            <button class="tutorial-close" id="decai-tutorial-close">&times;</button>
-        </div>
-        <div class="tutorial-body">
-            <h4>Prerequisiti</h4>
-            <p>DecAI gira sul PC <b>UFFTEC10</b> (Marco Redaelli) tramite WSL2 Ubuntu. Servono:</p>
-            <ul>
-                <li>Terminale Ubuntu/WSL aperto</li>
-                <li>Ambiente Python <code>decai-env</code></li>
-                <li>Modello addestrato nella cartella <code>lora_model/</code></li>
-            </ul>
-
-            <h4>Avvio del server AI</h4>
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-text">Apri il terminale Ubuntu e vai nella cartella del progetto:<pre>cd ~/decai-finetune</pre></div>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-text">Attiva l'ambiente Python:<pre>source ~/decai-env/bin/activate</pre></div>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-text">Avvia il server FastAPI (porta 8000):<pre>python app_server.py</pre></div>
-            </div>
-
-            <h4>Esporre il server tramite Cloudflare Tunnel</h4>
-            <div class="step">
-                <div class="step-num">4</div>
-                <div class="step-text">Apri un <b>secondo terminale</b> Ubuntu e lancia il tunnel:<pre>cd ~/decai-finetune
-./cloudflared tunnel --url http://localhost:8000</pre></div>
-            </div>
-            <div class="step">
-                <div class="step-num">5</div>
-                <div class="step-text">Copia il link generato dal tunnel (es. <code>https://xxxxx.trycloudflare.com</code>)</div>
-            </div>
-            <div class="note">
-                <b>Nota:</b> Ogni volta che rilanci il server, il link del tunnel cambia. Dovrai aggiornarlo nel passaggio successivo.
-            </div>
-
-            <h4>Collegare DecAI al sito</h4>
-            <div class="step">
-                <div class="step-num">6</div>
-                <div class="step-text">Nell'header della chat, clicca sull'icona <b>⚙</b> (ingranaggio)</div>
-            </div>
-            <div class="step">
-                <div class="step-num">7</div>
-                <div class="step-text">Incolla l'URL del tunnel Cloudflare e conferma</div>
-            </div>
-            <div class="step">
-                <div class="step-num">8</div>
-                <div class="step-text">Il pallino di stato diventa <span style="color:var(--accent);">verde</span> = DecAI connessa e pronta</div>
-            </div>
-
-            <h4>Riaddestrare il modello</h4>
-            <p>Se vuoi aggiornare il modello con nuovi dati di training:</p>
-            <div class="step">
-                <div class="step-num">1</div>
-                <div class="step-text">Modifica il dataset in <code>TRAINING VARI/TrainingUfficiale_integrato.json</code></div>
-            </div>
-            <div class="step">
-                <div class="step-num">2</div>
-                <div class="step-text">Lancia il training:<pre>cd ~/decai-finetune
-source ~/decai-env/bin/activate
-python train.py</pre></div>
-            </div>
-            <div class="step">
-                <div class="step-num">3</div>
-                <div class="step-text">Dopo il training, esegui la pipeline post-training (merge + GGUF + Ollama):<pre>python post_training.py</pre></div>
-            </div>
-            <div class="note">
-                <b>Monitoraggio:</b> Durante il training osserva la <b>Loss</b> nel terminale. Deve scendere gradualmente (es. 2.0 &rarr; 1.2 &rarr; 0.8). Se scende troppo verso 0 c'e' overfitting.
-            </div>
-
-            <h4>Architettura</h4>
-            <p>
-                <b>Modello base:</b> LLama 3 8B (4-bit via Unsloth)<br>
-                <b>Tecnica:</b> LoRA (r=32, alpha=64)<br>
-                <b>Training:</b> 10 epoche, SFTTrainer, AdamW 8-bit<br>
-                <b>Formato prompt:</b> Alpaca-style (Sistema/Domanda/Risposta)<br>
-                <b>HuggingFace:</b> Marco20262026/DECAAI-merged
-            </p>
-        </div>
-    </div>
-
     <div id="info-bar">
         <span id="info-file">Nessun file</span>
         <span id="info-verts">Vertici: -</span>
@@ -1465,9 +1323,6 @@ python train.py</pre></div>
         <span id="info-size">Dim: -</span>
         <span id="info-api" style="margin-left:auto; color:#4ecca3;">API attiva</span>
     </div>
-
-    <!-- Model Viewer per thumbnail 3D inline -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 
     <!-- SheetJS per visualizzare XLS inline -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -1983,14 +1838,12 @@ python train.py</pre></div>
         // ---- Layout: pannelli sinistra spostano il viewport ----
         function updateViewportBounds() {
             const chat = document.getElementById('decai-chat');
-            const tutPanel = document.getElementById('decai-tutorial-panel');
             const pdf = document.getElementById('pdf-panel');
             const drawing = document.getElementById('drawing-overlay');
             const sidebar = document.getElementById('sidebar');
 
             const bom = document.getElementById('bom-panel');
             const chatOpen = chat && !chat.classList.contains('minimized');
-            const tutOpen = tutPanel && tutPanel.classList.contains('open');
             const pdfOpen = pdf && pdf.style.display !== 'none';
             const drawOpen = drawing && drawing.style.display !== 'none';
             const bomOpen = bom && bom.style.display !== 'none';
@@ -1999,10 +1852,6 @@ python train.py</pre></div>
             if (chatOpen) {
                 chat.style.left = '0';
                 leftW += chat.offsetWidth;
-            }
-            if (tutOpen) {
-                tutPanel.style.left = leftW + 'px';
-                leftW += tutPanel.offsetWidth;
             }
             if (bomOpen) {
                 bom.style.left = leftW + 'px';
@@ -2087,19 +1936,227 @@ python train.py</pre></div>
             const vp = document.getElementById('viewport');
             const w = vp.clientWidth;
             const h = vp.clientHeight;
-            if (w <= 0 || h <= 0) return;
             camera.aspect = w / h;
             camera.updateProjectionMatrix();
             renderer.setSize(w, h);
             if (labelRenderer) labelRenderer.setSize(w, h);
         }
 
-        // ResizeObserver per ricalcolare il renderer quando il viewport cambia dimensione
-        new ResizeObserver(() => onResize()).observe(document.getElementById('viewport'));
+        // === CARICAMENTO DA URL (?load=path&name=nome&code=codice) ===
+        {
+            const urlParams = new URLSearchParams(window.location.search);
+            const loadPath = urlParams.get('load');
+            if (loadPath) {
+                const loadName = urlParams.get('name') || loadPath.split('/').pop().replace('.glb', '');
+                const loadCode = urlParams.get('code') || '';
+                setTimeout(() => {
+                    loadGLBFromURL('db/' + loadPath, loadName, loadCode);
+                    document.getElementById('drop-zone').classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // === QUOTATURA TECNICA ===
+        let quotaturaActive = false, quotaturaGroup = null, _savedBg = null, _savedGrid = null, _savedAxes = null;
+        function createDimLine(start, end, offset, label, color) {
+            const group = new THREE.Group(), len = start.distanceTo(end), c = color || 0xcc0000;
+            const gap = offset.clone().normalize().multiplyScalar(len * 0.03);
+            const extMat = new THREE.LineBasicMaterial({ color: c, transparent: true, opacity: 0.6 });
+            group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([start.clone().add(gap), start.clone().add(offset)]), extMat));
+            group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([end.clone().add(gap), end.clone().add(offset)]), extMat));
+            const ds = start.clone().add(offset), de = end.clone().add(offset);
+            group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([ds, de]), new THREE.LineBasicMaterial({ color: c })));
+            const ad = new THREE.Vector3().subVectors(de, ds).normalize(), al = len * 0.04, ap = offset.clone().normalize().multiplyScalar(al * 0.5);
+            const am = new THREE.MeshBasicMaterial({ color: c, side: THREE.DoubleSide });
+            [ds, de].forEach((tip, i) => {
+                const s = i === 0 ? 1 : -1;
+                const g = new THREE.BufferGeometry().setFromPoints([tip.clone(), tip.clone().add(ad.clone().multiplyScalar(al*s)).add(ap), tip.clone().add(ad.clone().multiplyScalar(al*s)).sub(ap)]);
+                g.setIndex([0,1,2]); group.add(new THREE.Mesh(g, am));
+            });
+            const mid = new THREE.Vector3().lerpVectors(ds, de, 0.5).add(offset.clone().normalize().multiplyScalar(len * 0.12));
+            const cv = document.createElement('canvas'); cv.width = 512; cv.height = 128;
+            const cx = cv.getContext('2d');
+            cx.fillStyle = 'rgba(255,255,255,0.92)'; cx.beginPath(); cx.roundRect(40,16,432,96,16); cx.fill();
+            cx.strokeStyle = 'rgba(0,0,0,0.15)'; cx.lineWidth = 2; cx.beginPath(); cx.roundRect(40,16,432,96,16); cx.stroke();
+            cx.font = 'bold 56px Arial,sans-serif'; cx.fillStyle = '#'+c.toString(16).padStart(6,'0'); cx.textAlign = 'center'; cx.textBaseline = 'middle'; cx.fillText(label, 256, 64);
+            const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(cv), depthTest: false, transparent: true }));
+            sp.position.copy(mid); const sc = len * 0.35; sp.scale.set(sc, sc*0.25, 1); group.add(sp);
+            return group;
+        }
+        function activateQuotatura() {
+            if (quotaturaActive) { deactivateQuotatura(); return; }
+            quotaturaActive = true; document.getElementById('btn-quotatura').classList.add('active');
+            const box = new THREE.Box3(); loadedObjects.forEach(o => box.expandByObject(o)); if (box.isEmpty()) return;
+            const min = box.min, max = box.max, size = new THREE.Vector3(); box.getSize(size);
+            const center = new THREE.Vector3(); box.getCenter(center);
+            const mm = [Math.round(size.x*1000), Math.round(size.y*1000), Math.round(size.z*1000)];
+            const margin = Math.max(size.x, size.y, size.z) * 0.35;
+            quotaturaGroup = new THREE.Group(); quotaturaGroup.name = '__quotatura__';
+            const bl = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(size.x,size.y,size.z)), new THREE.LineBasicMaterial({color:0x1a3a5c,transparent:true,opacity:0.5}));
+            bl.position.copy(center); quotaturaGroup.add(bl);
+            quotaturaGroup.add(createDimLine(new THREE.Vector3(min.x,min.y,max.z), new THREE.Vector3(max.x,min.y,max.z), new THREE.Vector3(0,0,margin), mm[0]+' mm', 0xcc0000));
+            quotaturaGroup.add(createDimLine(new THREE.Vector3(max.x,min.y,min.z), new THREE.Vector3(max.x,min.y,max.z), new THREE.Vector3(margin,0,0), mm[2]+' mm', 0x0066cc));
+            quotaturaGroup.add(createDimLine(new THREE.Vector3(max.x+margin*0.6,min.y,max.z), new THREE.Vector3(max.x+margin*0.6,max.y,max.z), new THREE.Vector3(margin*0.5,0,0), mm[1]+' mm', 0x008833));
+            scene.add(quotaturaGroup);
+            _savedBg = scene.background; _savedGrid = gridHelper.visible; _savedAxes = axesHelper.visible;
+            scene.background = new THREE.Color(0xf0f0f0); gridHelper.visible = false; axesHelper.visible = false;
+            document.getElementById('show-grid').checked = false; document.getElementById('show-axes').checked = false;
+        }
+        function deactivateQuotatura() {
+            quotaturaActive = false; document.getElementById('btn-quotatura').classList.remove('active');
+            if (quotaturaGroup) { scene.remove(quotaturaGroup); quotaturaGroup = null; }
+            if (_savedBg) scene.background = _savedBg;
+            gridHelper.visible = _savedGrid !== null ? _savedGrid : true; axesHelper.visible = _savedAxes !== null ? _savedAxes : true;
+            document.getElementById('show-grid').checked = gridHelper.visible; document.getElementById('show-axes').checked = axesHelper.visible;
+        }
+        document.getElementById('btn-quotatura').addEventListener('click', activateQuotatura);
+        document.addEventListener('keydown', (e) => { if (e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return; if (e.key==='q'||e.key==='Q') activateQuotatura(); });
+
+        // === SALVA PROGETTO ===
+        document.getElementById('btn-save-project').addEventListener('click', () => {
+            if (loadedObjects.length === 0) { alert('Carica almeno un modello prima di salvare.'); return; }
+            const name = prompt('Nome del progetto:', currentFileName.replace('.glb','').replace(/-/g,' ').toUpperCase());
+            if (!name) return;
+            const objects = loadedObjects.map(obj => ({
+                name: obj.name || 'model',
+                glb: obj.userData._srcGlb || '',
+                code: obj.userData.drawingCode || '',
+                position: [obj.position.x, obj.position.y, obj.position.z],
+                rotation: [obj.rotation.x, obj.rotation.y, obj.rotation.z],
+                scale: [obj.scale.x, obj.scale.y, obj.scale.z]
+            }));
+            const project = { name, objects, timestamp: Date.now(), glb: objects[0]?.glb || '' };
+            try {
+                const projects = JSON.parse(localStorage.getItem('deca_saved_projects') || '[]');
+                projects.unshift(project);
+                if (projects.length > 20) projects.length = 20;
+                localStorage.setItem('deca_saved_projects', JSON.stringify(projects));
+                alert('Progetto "' + name + '" salvato!');
+            } catch(e) { alert('Errore nel salvataggio.'); }
+        });
+
+        // === VIEWCUBE (Canvas 2D) ===
+        const vcCanvas = document.getElementById('viewcube-canvas');
+        const vcCtx = vcCanvas.getContext('2d');
+        const vcSize = 120, vcHalf = vcSize / 2, vcR = 28;
+        const vcFaces = [
+            { name: 'Fronte', normal: [0, 0, 1] },
+            { name: 'Retro',  normal: [0, 0, -1] },
+            { name: 'Dx',     normal: [1, 0, 0] },
+            { name: 'Sx',     normal: [-1, 0, 0] },
+            { name: 'Alto',   normal: [0, 1, 0] },
+            { name: 'Basso',  normal: [0, -1, 0] },
+        ];
+        // Cube vertices
+        const vcVerts = [[-1,-1,-1],[-1,-1,1],[-1,1,-1],[-1,1,1],[1,-1,-1],[1,-1,1],[1,1,-1],[1,1,1]];
+        const vcEdges = [[0,1],[0,2],[0,4],[1,3],[1,5],[2,3],[2,6],[3,7],[4,5],[4,6],[5,7],[6,7]];
+
+        function vcProject(v, mat) {
+            const x = v[0]*mat[0]+v[1]*mat[4]+v[2]*mat[8];
+            const y = v[0]*mat[1]+v[1]*mat[5]+v[2]*mat[9];
+            return [vcHalf + x * vcR, vcHalf - y * vcR];
+        }
+
+        let _vcHover = -1;
+        function drawViewCube() {
+            const q = camera.quaternion.clone().invert();
+            const m = new THREE.Matrix4().makeRotationFromQuaternion(q);
+            const me = m.elements;
+
+            vcCtx.clearRect(0, 0, vcSize, vcSize);
+
+            // Draw edges
+            vcCtx.strokeStyle = 'rgba(100,110,130,0.5)';
+            vcCtx.lineWidth = 1;
+            vcEdges.forEach(([a, b]) => {
+                const pa = vcProject(vcVerts[a], me), pb = vcProject(vcVerts[b], me);
+                vcCtx.beginPath(); vcCtx.moveTo(pa[0], pa[1]); vcCtx.lineTo(pb[0], pb[1]); vcCtx.stroke();
+            });
+
+            // Sort faces by depth (furthest first)
+            const projected = vcFaces.map((f, i) => {
+                const n = f.normal;
+                const z = n[0]*me[2] + n[1]*me[6] + n[2]*me[10]; // depth
+                const p = vcProject(n, me);
+                return { ...f, idx: i, x: p[0], y: p[1], z };
+            }).sort((a, b) => a.z - b.z);
+
+            // Draw faces (back to front)
+            projected.forEach(f => {
+                if (f.z < -0.1) return; // back-facing, skip
+                const alpha = 0.3 + f.z * 0.6;
+                const isHover = f.idx === _vcHover;
+                vcCtx.fillStyle = isHover ? 'rgba(78,204,163,0.9)' : `rgba(210,215,225,${alpha})`;
+                vcCtx.beginPath(); vcCtx.arc(f.x, f.y, 18, 0, Math.PI * 2); vcCtx.fill();
+                vcCtx.strokeStyle = isHover ? 'rgba(78,204,163,1)' : `rgba(80,90,110,${alpha})`;
+                vcCtx.lineWidth = 1.5; vcCtx.stroke();
+                // Label — always upright and readable
+                vcCtx.font = 'bold 9px Inter,Arial,sans-serif';
+                vcCtx.fillStyle = isHover ? '#fff' : `rgba(50,50,60,${0.5 + f.z * 0.5})`;
+                vcCtx.textAlign = 'center'; vcCtx.textBaseline = 'middle';
+                vcCtx.fillText(f.name, f.x, f.y);
+            });
+        }
+
+        function vcHitTest(mx, my) {
+            const q = camera.quaternion.clone().invert();
+            const m = new THREE.Matrix4().makeRotationFromQuaternion(q);
+            const me = m.elements;
+            let best = -1, bestDist = 20;
+            vcFaces.forEach((f, i) => {
+                const z = f.normal[0]*me[2] + f.normal[1]*me[6] + f.normal[2]*me[10];
+                if (z < -0.1) return;
+                const p = vcProject(f.normal, me);
+                const d = Math.hypot(p[0] - mx, p[1] - my);
+                if (d < bestDist) { bestDist = d; best = i; }
+            });
+            return best;
+        }
+
+        vcCanvas.addEventListener('mousemove', (e) => {
+            const r = vcCanvas.getBoundingClientRect();
+            _vcHover = vcHitTest(e.clientX - r.left, e.clientY - r.top);
+            vcCanvas.style.cursor = _vcHover >= 0 ? 'pointer' : 'default';
+        });
+        vcCanvas.addEventListener('mouseleave', () => { _vcHover = -1; });
+
+        const viewPresets = {
+            0: new THREE.Vector3(0,0,1),   // Fronte
+            1: new THREE.Vector3(0,0,-1),  // Retro
+            2: new THREE.Vector3(1,0,0),   // Dx
+            3: new THREE.Vector3(-1,0,0),  // Sx
+            4: new THREE.Vector3(0,1,0.001), // Alto
+            5: new THREE.Vector3(0,-1,0.001), // Basso
+            iso: new THREE.Vector3(1,1,1).normalize(), // Isometrica
+        };
+
+        function animateToView(dir) {
+            const dist = camera.position.distanceTo(orbitControls.target);
+            const endPos = orbitControls.target.clone().add(dir.clone().normalize().multiplyScalar(dist));
+            const startPos = camera.position.clone(), startT = performance.now();
+            (function step(t) {
+                const p = Math.min((t - startT) / 400, 1), ease = p < 0.5 ? 4*p*p*p : 1 - Math.pow(-2*p+2,3)/2;
+                camera.position.lerpVectors(startPos, endPos, ease);
+                camera.lookAt(orbitControls.target); orbitControls.update();
+                if (p < 1) requestAnimationFrame(step);
+            })(startT);
+        }
+
+        vcCanvas.addEventListener('click', (e) => {
+            const r = vcCanvas.getBoundingClientRect();
+            const hit = vcHitTest(e.clientX - r.left, e.clientY - r.top);
+            if (hit >= 0 && viewPresets[hit]) animateToView(viewPresets[hit]);
+        });
+
+        // Isometrica button
+        document.querySelector('[data-view="iso"]').addEventListener('click', () => animateToView(viewPresets.iso));
+
+        function updateViewCube() { drawViewCube(); }
 
         function animate() {
             requestAnimationFrame(animate);
             orbitControls.update();
+            updateViewCube();
             renderer.render(scene, camera);
             if (labelRenderer) labelRenderer.render(scene, camera);
         }
@@ -2176,6 +2233,7 @@ python train.py</pre></div>
                 const model = gltf.scene;
                 model.name = filename || 'model';
                 model.userData.drawingCode = code || '';
+                model.userData._srcGlb = url.replace('db/', '');
                 currentFileName = filename || 'model.glb';
 
                 let meshCount = 0;
@@ -2208,22 +2266,14 @@ python train.py</pre></div>
                 updateInfoBar();
                 pushUndo();
 
-                // Aggiorna ultimo messaggio chat: "in corso" -> "caricato" con miniatura e suggerimento
-                const msgs = document.getElementById('decai-messages');
-                if (msgs) {
-                    const lastMsg = msgs.lastElementChild;
-                    if (lastMsg && lastMsg.innerHTML.includes('in corso')) {
-                        const suggestions = [
-                            'Prova a scrivere <b>distinta</b> o <b>disegno</b> per esplorare i documenti tecnici.',
-                            'Vuoi vedere la <b>distinta 3D</b>? Oppure cerca un altro prodotto!',
-                            'Puoi usare <b>sposta</b>, <b>ruota</b> o <b>colore</b> per modificarlo.',
-                            'Scrivi <b>disegno</b> per aprire il PDF tecnico, o cerca un altro prodotto.',
-                            'Prova <b>distinta 3d</b> per vedere i componenti, oppure continua a esplorare il catalogo.'
-                        ];
-                        const tip = suggestions[Math.floor(Math.random() * suggestions.length)];
-                        lastMsg.innerHTML = `<div style="display:flex;align-items:center;gap:10px;"><model-viewer src="${url}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer><div><b style="color:var(--accent);">${filename}</b>${code ? ' <span style="color:#888;font-size:10px;">[' + code + ']</span>' : ''} caricato!<br><span style="font-size:11px;color:var(--text-secondary);margin-top:4px;display:inline-block;">${tip}</span></div></div>`;
-                    }
-                }
+                // Salva ultimo progetto per la home
+                try {
+                    const glbPath = url.replace('db/', '');
+                    localStorage.setItem('deca_last_project', JSON.stringify({
+                        glb: glbPath, name: filename, code: code || '',
+                        timestamp: Date.now()
+                    }));
+                } catch(e) {}
             }, undefined, (err) => {
                 console.error('Errore caricamento da libreria:', err);
                 alert('Errore nel caricamento del modello dalla libreria.');
@@ -3048,7 +3098,7 @@ python train.py</pre></div>
             initDecAI();
         }
 
-        // ---- DecAI Chatbot (LLM-powered via DECAAI) ----
+        // ---- DecAI Chatbot (LLM-powered via LM Studio) ----
         let libraryCatalog = []; // catalog.json entries: {name, glb, pdf, xls, code, folder}
         let bomDB = null;       // bom_database.json (per ricerca descrizioni)
         let distinta3DGroup = null; // Gruppo Three.js con callout distinta 3D
@@ -3058,7 +3108,18 @@ python train.py</pre></div>
         let distinteIndex = null; // distinte_index.json: codice distinta -> path XLS in db/
         let partEditSession = null; // { obj, originalState, code, desc }
         let decaiChatHistory = [];
-        let decaiLLMForced = false; // sempre AI mode
+        let decaiLLMAvailable = false;
+        let decaiLLMForced = false; // false = auto, true = forzato off (solo comandi)
+        // Prova piu' endpoint: proxy locale (serve_editor.py) poi diretto a LM Studio
+        const LMSTUDIO_CANDIDATES = [
+            'https://compliance-atom-hamburg-versus.trycloudflare.com', // Cloudflare Tunnel HTTPS
+            window.location.origin + '/api/lmstudio',  // Proxy via serve_editor.py (funziona sempre)
+            'http://localhost:1234',                     // Diretto (solo da HTTP o localhost)
+            'http://127.0.0.1:1234',
+            'http://172.17.66.82:1234'
+        ];
+        let LMSTUDIO_BASE = LMSTUDIO_CANDIDATES[0];
+        let LMSTUDIO_URL = LMSTUDIO_BASE + '/v1/chat/completions';
 
         // ---- DECAAI Endpoint ----
         let DECAAI_ENDPOINT = localStorage.getItem('decaai_endpoint') || "https://juvenile-sheets-selection-feb.trycloudflare.com/chat";
@@ -3086,25 +3147,11 @@ python train.py</pre></div>
                 if (!response.ok) throw new Error("Errore API");
 
                 const data = await response.json();
-                return deloopResponse(data.response);
+                return data.response;
             } catch (error) {
                 console.error("Errore DECAAI:", error);
                 return "Errore: impossibile raggiungere il server DECAAI.";
             }
-        }
-
-        // Rileva e tronca risposte in loop dal LLM
-        function deloopResponse(text) {
-            if (!text) return text;
-            // Cerca frasi ripetute (min 8 caratteri) che appaiono 3+ volte di fila
-            const match = text.match(/(.{8,}?)\1{2,}/);
-            if (match) {
-                const idx = text.indexOf(match[0]);
-                // Tronca al punto in cui inizia il loop, tenendo la prima occorrenza
-                const clean = text.substring(0, idx + match[1].length).trim();
-                return clean || text.substring(0, 500);
-            }
-            return text;
         }
 
         function getSceneContext() {
@@ -3164,17 +3211,8 @@ FAMIGLIE PRODOTTO DECA:
 - CMP/CALM: Componenti alimentatori meccanici (16 modelli)`;
             }
 
-            let prompt = `Sei DecAI, l'assistente commerciale e tecnico di DECA S.r.l. (Monte Marenzo, LC), integrato in un editor 3D GLB.
-Rispondi SEMPRE in italiano. Sei un consulente esperto e proattivo: il tuo obiettivo è capire le esigenze del cliente, proporre la soluzione DECA più adatta e invogliarlo a esplorare i prodotti.
-
-REGOLE DI COMUNICAZIONE:
-- Quando il cliente nomina un prodotto o una categoria (es. "nastri", "elevatore", "contenitore"), NON dare una risposta generica. Chiedi SEMPRE per cosa gli serve, che tipo di pezzi deve movimentare, in che settore lavora, che cadenze ha bisogno.
-- Proponi i prodotti DECA specifici per la sua esigenza, spiegando vantaggi e differenze tra le opzioni.
-- Offri SEMPRE di visualizzare il modello 3D: "Vuoi che te lo mostri in 3D?" o usa l'azione search_catalog.
-- Se hai abbastanza informazioni, carica direttamente il modello 3D più pertinente con l'azione load.
-- Sii entusiasta ma professionale. DECA realizza soluzioni su misura — sottolinealo.
-- Per domande troppo specifiche su prezzi o tempi, invita a contattare l'ufficio tecnico: +39 0341 63 20 80, info@decasrl.biz
-- I referenti commerciali sono: andrea.decapitani@decasrl.biz e andrea.spreafico@decasrl.biz
+            let prompt = `Sei DecAI, l'assistente AI aziendale di DECA S.r.l., integrato in un editor 3D GLB per ingegneria meccanica.
+Rispondi SEMPRE in italiano. Sii conciso e utile.
 
 Hai accesso alla scena 3D, al database distinte base (BOM) e al catalogo DATABASE1 con ${libraryCatalog.length} modelli 3D di prodotti DECA.
 L'utente può chiederti di manipolare oggetti 3D, consultare dati tecnici, cercare e caricare modelli dal catalogo.
@@ -3210,55 +3248,7 @@ AZIONI DISPONIBILI (array "actions"):
 
 Se l'utente fa una domanda conversazionale o tecnica generica, rispondi solo con "text" e "actions" vuoto [].
 Per il testo HTML puoi usare <b>, <br>, <i>, <span>.
-NON inventare dati tecnici: usa solo informazioni dal contesto scena o dal catalogo DECA fornito.
-
-CATALOGO PRODOTTI DECA 2025:
-- IAS01-04: Isole di asservimento (vibratore circolare + lineare/nastro/aria/rulliera + piastra)
-- BVC: Base vibrante circolare, 7 taglie (Ø150-Ø650): 061,161,261,361,462,532,634
-- BVL: Base vibrante lineare, 7 taglie: 101,201,201Inox,301,401,401TR,501
-- CCI: Contenitore cilindrico, diametri 150-750mm, Inox Aisi 304/316
-- CCO: Contenitore conico, diametri 200/300 - 600/1000, Inox Aisi 304/316
-- CGR: Contenitore a gradini, diametri 200/300 - 550/800, Inox Aisi 304/316
-- CNL: Canale lineare di polmonatura, lunghezze standard 300-1000mm + speciali
-- CNA: Canale lineare ad aria, sezioni e lunghezze da definire
-- APE: Apparecchiatura controllo vibrazione, gestione da PLC
-- CRC: Circuito di controllo vibrazione
-- QEL: Quadri elettrici per isole complete con PLC e touch screen
-- STR01/02/03: Banchi di sostegno (acciaio verniciato / alluminio / inox)
-- PST01/02: Piastre di appoggio
-- CSO01/02: Colonne di sostegno (fissa / regolabile ±150mm)
-- RIV: Rivestimenti (Vulkollan, Chiorino, Remathan, Brushlon, Teflon, ecc.)
-- CPP01/02/03: Cappe afoniche (parallelepipedo/tonde/goccia)
-- TLM01: Tastatore livello meccanico
-- SVI01: Sensore visione per controllo orientamento
-- AVV01: Avvitatore doppio
-- SCS01: Scassettatore
-- TRA01: Traslatore
-- CDZ01: Cadenzatore
-- SFP01: Stazione fissa di prelievo
-- ALM01: Alimentatore meccanico (aria+trappole, Aisi 304)
-- ALM02: Alimentatore meccanico magnetico (Aisi 304)
-- ALC: Alimentatore centrifugo (alte cadenze, Aisi 304)
-- ALD: Alimentatore doppio disco
-- ELC01-04: Elevatore a bocca semplice (tela/table top/tapparella/plastica), 70-200L, H 1350-3000mm
-- ESI01-04: Elevatore a sedia inferiore
-- ESS01-04: Elevatore a sedia superiore
-- EDS01-04: Elevatore a doppia sedia
-- MTR01-04: Mototramoggia, 60-120L, H scarico 1100-1600mm
-- ELP01/02: Elevatore a piastre (pneumatico/elettrico), 300-700mm, 30-120L
-- NRA01-04: Nastro trasportatore rettilineo
-- NDS01-04: Nastro trasportatore a doppia sedia
-- NSI01-04: Nastro trasportatore a sedia inferiore
-- RUL01/02/03: Rulliere (folli/motorizzate/calibramento)
-- CVE01: Canale vibrante su base vibrante, 10-80L
-- CVE02: Canale vibrante con elettromagnete appeso
-- TRC01/02: Tramoggia chiusa (su base/appesa)
-- CVM01/02/03: Canali vibranti a masse eccentriche / vibrovagli
-- BLF01: Nastro vibrante per supporto presa robot (300-500mm)
-- PLF01: Piano vibrante per presa robot (750x450mm)
-- ISR01-03: Isole robotizzate
-- BPK01: Bin picking (presa da cassone con visione 3D)`;
-
+NON inventare dati tecnici: usa solo informazioni dal contesto scena o dal catalogo DECA fornito.`;
 
             if (decaCatalogText) {
                 prompt += `\n\n--- CATALOGO PRODOTTI DECA S.r.l. (2019) ---\n${decaCatalogText}\n--- FINE CATALOGO ---`;
@@ -3289,19 +3279,54 @@ CATALOGO PRODOTTI DECA 2025:
 
         async function checkLMStudioConnection() {
             const statusEl = document.getElementById('decai-status');
-            const modelNameEl = document.getElementById('decai-model-name');
 
-            // Controlla il server DECAAI
+            // 1. Controlla prima il server DECAAI (ngrok)
             const decaaiOk = await checkDecAAIConnection();
 
+            // 2. Controlla LM Studio
+            let lmStudioOk = false;
+            for (const base of LMSTUDIO_CANDIDATES) {
+                try {
+                    const resp = await fetch(base + '/v1/models', {
+                        signal: AbortSignal.timeout(3000),
+                        mode: 'cors'
+                    });
+                    if (resp.ok) {
+                        const data = await resp.json();
+                        LMSTUDIO_BASE = base;
+                        LMSTUDIO_URL = base + '/v1/chat/completions';
+                        decaiLLMAvailable = true;
+                        lmStudioOk = true;
+                        console.log('[DecAI] LM Studio connesso via', base, ':', data.data?.[0]?.id);
+                        break;
+                    }
+                } catch (e) {
+                    console.log('[DecAI] Tentativo', base, 'fallito:', e.message);
+                }
+            }
+            if (!lmStudioOk) {
+                decaiLLMAvailable = false;
+            }
+
+            // 3. Aggiorna UI in base a quale server è attivo
+            const modelNameEl = document.getElementById('decai-model-name');
             if (decaaiOk) {
                 statusEl.style.color = '#4ecca3';
-                statusEl.title = 'DECAAI server connesso (decaiv2)';
-                modelNameEl.textContent = 'decaiv2 integrato';
+                statusEl.title = 'DECAAI server connesso (llama-3-8b.Q4_K_M)';
+                modelNameEl.textContent = 'llama-3-8b.Q4_K_M integrato';
                 modelNameEl.style.color = '#4ecca3';
                 if (decaiPrevLLMState !== 'decaai') {
                     decaiPrevLLMState = 'decaai';
-                    addDecAIMsg('<b style="color:#4ecca3;">decaiv2 integrato</b> — parla pure in linguaggio naturale!', false);
+                    addDecAIMsg('<b style="color:#4ecca3;">llama-3-8b.Q4_K_M integrato</b> — parla pure in linguaggio naturale!', false);
+                }
+            } else if (lmStudioOk) {
+                statusEl.style.color = '#4ecca3';
+                statusEl.title = 'LM Studio connesso (Cosmos-Reason2-2B)';
+                modelNameEl.textContent = 'Cosmos-Reason2-2B integrato';
+                modelNameEl.style.color = '#4ecca3';
+                if (decaiPrevLLMState !== 'lmstudio') {
+                    decaiPrevLLMState = 'lmstudio';
+                    addDecAIMsg('<b style="color:#4ecca3;">Cosmos-Reason2-2B integrato</b> — parla pure in linguaggio naturale!', false);
                 }
             } else {
                 statusEl.style.color = '#ff6b6b';
@@ -3311,13 +3336,17 @@ CATALOGO PRODOTTI DECA 2025:
                 console.warn('[DecAI] Nessun server AI disponibile');
                 if (decaiPrevLLMState !== false) {
                     decaiPrevLLMState = false;
-                    addDecAIMsg('<span style="color:#ff6b6b;">Nessun server AI raggiungibile</span> — Avvia il server DECAAI per usare l\'intelligenza artificiale.', false);
+                    const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+                    const hint = isLocal
+                        ? 'Verifica che LM Studio sia avviato con Cosmos-Reason2-2B sulla porta 1234.'
+                        : 'Per usare Cosmos, avvia il server locale: <b>python tools/serve_editor.py</b> e apri <a href="http://localhost:3000/glb_editor.html" target="_blank" style="color:var(--accent);">localhost:3000</a>';
+                    addDecAIMsg('<span style="color:#ff6b6b;">Nessun server AI raggiungibile</span> — ' + hint, false);
                 }
             }
         }
 
         function initDecAI() {
-            // Verifica connessione DECAAI
+            // Verifica connessione LM Studio
             checkLMStudioConnection();
             // Ricontrolla ogni 30 secondi
             setInterval(checkLMStudioConnection, 30000);
@@ -3390,16 +3419,6 @@ CATALOGO PRODOTTI DECA 2025:
                 }
             });
 
-            // Tutorial (pannello affiancato)
-            document.getElementById('decai-tutorial-btn').addEventListener('click', () => {
-                document.getElementById('decai-tutorial-panel').classList.toggle('open');
-                updateViewportBounds();
-            });
-            document.getElementById('decai-tutorial-close').addEventListener('click', () => {
-                document.getElementById('decai-tutorial-panel').classList.remove('open');
-                updateViewportBounds();
-            });
-
             sendBtn.addEventListener('click', () => sendDecAI());
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') { e.preventDefault(); sendDecAI(); }
@@ -3413,8 +3432,21 @@ CATALOGO PRODOTTI DECA 2025:
                 msgs.innerHTML = '';
                 decaiChatHistory = [];
                 catalogWizardState = null;
-                addDecAIMsg('Ciao! Sono <b>DecAI</b>, l\'assistente DECA con intelligenza artificiale.<br>Posso aiutarti a visualizzare i prodotti Deca, le distinte base e i disegni tecnici e rispondere alle tue esigenze tecniche specifiche in linguaggio naturale.', false);
+                addDecAIMsg('Ciao! Sono <b>DecAI</b>, l\'assistente DECA con intelligenza artificiale.<br>Posso aiutarti a visualizzare i prodotti Deca, le distinte base e i disegni tecnici e rispondere alle tue esigenze tecniche specifiche in linguaggio naturale.<br>Digita <b>aiuto</b> per la lista comandi.', false);
             });
+
+            // Toggle AI / Comandi
+            const modeToggle = document.getElementById('decai-mode-toggle');
+            const modeToggle2 = document.getElementById('decai-mode-toggle-2');
+            function toggleDecAIMode() {
+                decaiLLMForced = !decaiLLMForced;
+                updateDecAIModeUI();
+                const mode = decaiLLMForced ? 'Comandi locali' : 'AI (Cosmos)';
+                addDecAIMsg(`Modalità cambiata: <b>${mode}</b>`, false);
+            }
+            modeToggle.addEventListener('click', toggleDecAIMode);
+            if (modeToggle2) modeToggle2.addEventListener('click', toggleDecAIMode);
+            updateDecAIModeUI();
 
             minimizeBtn.addEventListener('click', () => {
                 chat.classList.add('minimized');
@@ -3503,6 +3535,27 @@ CATALOGO PRODOTTI DECA 2025:
                     return;
                 }
             });
+        }
+
+        function updateDecAIModeUI() {
+            const btn = document.getElementById('decai-mode-toggle');
+            if (decaiLLMForced) {
+                // AI disattivata, solo comandi
+                btn.textContent = 'CMD';
+                btn.style.background = 'var(--bg-primary)';
+                btn.style.color = 'var(--danger)';
+                btn.style.borderColor = 'var(--danger)';
+                btn.title = 'Modalità comandi — clicca per attivare AI';
+                document.getElementById('decai-input').placeholder = 'Digita un comando (aiuto per la lista)...';
+            } else {
+                // AI attiva (se disponibile)
+                btn.textContent = 'AI';
+                btn.style.background = 'var(--bg-elevated)';
+                btn.style.color = 'var(--text-primary)';
+                btn.style.borderColor = 'var(--border)';
+                btn.title = 'Modalità AI (Cosmos) — clicca per usare solo comandi';
+                document.getElementById('decai-input').placeholder = 'Chiedi a DecAI...';
+            }
         }
 
         function addDecAIMsg(text, isUser) {
@@ -3676,6 +3729,63 @@ CATALOGO PRODOTTI DECA 2025:
             return ctx;
         }
 
+        async function sendToLMStudio(query) {
+            const sceneCtx = getSceneContext();
+            const catalogCtx = preCatalogSearch(query);
+            decaiChatHistory.push({
+                role: 'user',
+                content: `[Contesto scena: ${JSON.stringify(sceneCtx)}]\n${catalogCtx}\nUtente: ${query}`
+            });
+
+            // Mantieni solo le ultime 20 coppie di messaggi per non superare il contesto
+            if (decaiChatHistory.length > 40) {
+                decaiChatHistory = decaiChatHistory.slice(-40);
+            }
+
+            const messages = [
+                { role: 'system', content: buildSystemPrompt() },
+                ...decaiChatHistory
+            ];
+
+            const resp = await fetch(LMSTUDIO_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    messages,
+                    temperature: 0.3,
+                    max_tokens: 1024,
+                    stream: false
+                }),
+                signal: AbortSignal.timeout(30000)
+            });
+
+            if (!resp.ok) throw new Error(`LM Studio errore: ${resp.status}`);
+
+            const data = await resp.json();
+            const rawContent = data.choices?.[0]?.message?.content || '';
+
+            // Cerca di estrarre JSON dalla risposta
+            let parsed;
+            try {
+                // Prova parsing diretto
+                parsed = JSON.parse(rawContent);
+            } catch {
+                // Cerca un blocco JSON nella risposta
+                const jsonMatch = rawContent.match(/\{[\s\S]*"text"[\s\S]*\}/);
+                if (jsonMatch) {
+                    try { parsed = JSON.parse(jsonMatch[0]); } catch {}
+                }
+            }
+
+            if (!parsed || !parsed.text) {
+                // Fallback: usa la risposta raw come testo
+                parsed = { text: rawContent.replace(/</g, '&lt;').replace(/>/g, '&gt;'), actions: [] };
+            }
+
+            decaiChatHistory.push({ role: 'assistant', content: rawContent });
+
+            return parsed;
+        }
 
         // Knowledge base: descrizioni serie per famiglia (dati da catalogo DECA)
         const SERIES_DESCRIPTIONS = {
@@ -3718,67 +3828,32 @@ CATALOGO PRODOTTI DECA 2025:
                 '0001': 'Cadenzatore standard — distribuzione pezzi a cadenza controllata',
             },
             'BLF01': {
-                '0001': 'Nastro vibrante 300mm — favorisce la presa robot tramite sistema di visione',
-                '0002': 'Nastro vibrante 500mm — favorisce la presa robot tramite sistema di visione',
-                '0003': 'Nastro vibrante grande — configurazione personalizzata',
-            },
-            'ALM01': {
-                'M': 'Alimentatore meccanico — selezione e orientamento con aria e trappole meccaniche, Aisi 304',
-            },
-            'CVE01': {
-                'D': 'Canale vibrante su base vibrante lineare — taglie 10L/25L/50L/80L',
-            },
-            'CVE02': {
-                'D': 'Canale vibrante con elettromagnete appeso — 400-1000mm larghezza',
-            },
-            'ELC': {
-                '01': 'Elevatore a bocca semplice, tappeto in tela',
-                '02': 'Elevatore a bocca semplice, tappeto in table top',
-            },
-            'MTR01': {
-                '0001': 'Mototramoggia a bocca semplice — tappeto in tela, 60-120L',
-            },
-            'TRC01': {
-                '0001': 'Tramoggia chiusa su base vibrante lineare — 5-80L',
+                '0001': 'Base vibrante lineare piccola — per carichi leggeri e canali corti',
+                '0002': 'Base vibrante lineare media — uso generale',
+                '0003': 'Base vibrante lineare grande — per carichi pesanti e canali lunghi',
             },
         };
 
         // Mappa nomi comuni italiani → famiglia catalogo + descrizione
         const PRODUCT_FAMILIES = {
-            'base vibrante':          { code: 'blf', label: 'Nastro vibrante per presa robot', family: 'BLF01' },
-            'base vibrante lineare':  { code: 'blf', label: 'Nastro vibrante per presa robot', family: 'BLF01' },
+            'base vibrante':          { code: 'blf', label: 'Base vibrante lineare', family: 'BLF01' },
+            'base vibrante lineare':  { code: 'blf', label: 'Base vibrante lineare', family: 'BLF01' },
             'base vibrante circolare':{ code: 'cci', label: 'Cernitrice circolare', family: 'CCI' },
-            'nastro vibrante':        { code: 'blf', label: 'Nastro vibrante per presa robot', family: 'BLF01' },
+            'base vibrante ellittica':{ code: 'blf', label: 'Base vibrante lineare', family: 'BLF01' },
             'alimentatore':           { code: 'alm', label: 'Alimentatore meccanico', family: 'ALM01' },
             'alimentatore meccanico': { code: 'alm', label: 'Alimentatore meccanico', family: 'ALM01' },
-            'alimentatore centrifugo':{ code: 'alm', label: 'Alimentatore centrifugo', family: 'ALM01' },
-            'canale':                 { code: 'cnl', label: 'Canale lineare di polmonatura', family: 'CNL' },
+            'canale':                 { code: 'cnl', label: 'Canale vibrante / guida lineare', family: 'CNL' },
             'canale vibrante':        { code: 'cnl', label: 'Canale vibrante', family: 'CNL' },
-            'canale lineare':         { code: 'cnl', label: 'Canale lineare di polmonatura', family: 'CNL' },
-            'canale di polmonatura':  { code: 'cnl', label: 'Canale lineare di polmonatura', family: 'CNL' },
-            'guida lineare':          { code: 'cnl', label: 'Canale lineare', family: 'CNL' },
-            'cernitrice':             { code: 'cci', label: 'Contenitore cilindrico (cernitrice)', family: 'CCI' },
-            'cernitrice circolare':   { code: 'cci', label: 'Contenitore cilindrico (cernitrice)', family: 'CCI' },
+            'canale lineare':         { code: 'cnl', label: 'Canale lineare', family: 'CNL' },
+            'guida lineare':          { code: 'cnl', label: 'Guida lineare', family: 'CNL' },
+            'cernitrice':             { code: 'cci', label: 'Cernitrice circolare', family: 'CCI' },
+            'cernitrice circolare':   { code: 'cci', label: 'Cernitrice circolare', family: 'CCI' },
             'coperchio':              { code: 'ccop', label: 'Coperchio', family: 'CCOP' },
             'cadenzatore':            { code: 'cdz', label: 'Cadenzatore', family: 'CDZ01' },
-            'avvitatore':             { code: 'avv', label: 'Avvitatore', family: 'AVV-02' },
-            'feeder':                 { code: 'blf', label: 'Nastro vibrante (feeder)', family: 'BLF01' },
-            'feeder lineare':         { code: 'blf', label: 'Nastro vibrante (feeder)', family: 'BLF01' },
-            'vibratore':              { code: 'blf', label: 'Nastro vibrante', family: 'BLF01' },
-            'isola':                  { code: 'ias', label: 'Isola di asservimento', family: 'IAS' },
-            'isola di asservimento':  { code: 'ias', label: 'Isola di asservimento', family: 'IAS' },
-            'nastro':                 { code: 'nds', label: 'Nastro trasportatore', family: 'NDS01' },
-            'nastro trasportatore':   { code: 'nds', label: 'Nastro trasportatore', family: 'NDS01' },
-            'nastro a catena':        { code: 'nca', label: 'Nastro a passo a catena', family: 'NCA' },
-            'nastro a passo':         { code: 'nca', label: 'Nastro a passo a catena', family: 'NCA' },
-            'rulliera':               { code: 'rul', label: 'Rulliera', family: 'RUL-01-02' },
-            'scassettatore':          { code: 'scs', label: 'Scassettatore', family: 'SCS' },
-            'traslatore':             { code: 'tra', label: 'Traslatore', family: 'TRA01' },
-            'mototramoggia':          { code: 'mtr', label: 'Mototramoggia', family: 'MTR01' },
-            'cappa':                  { code: 'cpp', label: 'Cappa afonica', family: 'CPP01' },
-            'cappa afonica':          { code: 'cpp', label: 'Cappa afonica', family: 'CPP01' },
-            'struttura':              { code: 'str', label: 'Banco di sostegno', family: 'STR' },
-            'banco':                  { code: 'str', label: 'Banco di sostegno', family: 'STR' },
+            'avvolgitore':            { code: 'avv', label: 'Avvolgitore', family: 'AVV-02' },
+            'feeder':                 { code: 'blf', label: 'Base vibrante lineare (feeder)', family: 'BLF01' },
+            'feeder lineare':         { code: 'blf', label: 'Base vibrante lineare (feeder)', family: 'BLF01' },
+            'vibratore':              { code: 'blf', label: 'Base vibrante lineare', family: 'BLF01' },
             'contenitore a gradini conico':   { code: 'ccp', label: 'Contenitore conico a gradini', family: 'CCP', seriesHint: ['0003'] },
             'contenitore a gradini conica':   { code: 'ccp', label: 'Contenitore conico a gradini', family: 'CCP', seriesHint: ['0003'] },
             'contenitore conico a gradini':   { code: 'ccp', label: 'Contenitore conico a gradini', family: 'CCP', seriesHint: ['0003'] },
@@ -3925,7 +4000,7 @@ CATALOGO PRODOTTI DECA 2025:
 
             // Se nessun alias, estrai termini e cerca direttamente
             if (!matchedFamily) {
-                const stopWords = new Set(['visualizzare','visualizza','visualizzo','caricare','carica','caricami','mostrare','mostra','mostrami','aprire','apri','vedere','vedi','voglio','fammi','cerco','cerca','nel','catalogo','un','una','uno','il','la','lo','le','gli','dei','delle','del','di','da','in','con','per','ok','prego','3d','modello','modelli','si','sì','certo','tutti','tutto','tutte','cosa','come','quali','quale','vorrei','puoi']);
+                const stopWords = new Set(['visualizzare','visualizza','visualizzo','caricare','carica','caricami','mostrare','mostra','mostrami','aprire','apri','vedere','vedi','voglio','fammi','cerco','cerca','nel','catalogo','un','una','il','la','lo','le','gli','dei','delle','del','di','da','in','con','per','ok','prego','3d','modello']);
                 const words = q.replace(/[^\w\sàèéìòù-]/g, '').split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w));
                 if (words.length === 0) return false;
                 const searchTerm = words.join(' ');
@@ -4003,6 +4078,8 @@ CATALOGO PRODOTTI DECA 2025:
                 const tipo = TYPE_LABELS[m.type] || '';
                 const specs = m.specs || null;
 
+                html += `<span class="decai-load-link" data-file="${m.glb}" data-name="${m.name}" data-code="${m.code || ''}" style="color:#4ecca3;cursor:pointer;text-decoration:underline;display:inline-block;margin:2px 0;">${displayName}</span>`;
+                // Info aggiuntive
                 let info = [];
                 if (m.code) info.push(m.code);
                 if (tipo) info.push(tipo);
@@ -4013,11 +4090,10 @@ CATALOGO PRODOTTI DECA 2025:
                     if (specs.materiale) info.push(specs.materiale);
                     if (specs.parts) info.push(specs.parts + ' parti');
                 }
-                html += `<div class="decai-load-link" data-file="${m.glb}" data-name="${m.name}" data-code="${m.code || ''}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;">`;
-                html += `<model-viewer src="db/${m.glb}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
-                html += `<div><b style="color:var(--accent);">${displayName}</b>`;
-                if (info.length > 0) html += `<br><span style="color:#888;font-size:11px;">${info.join(' · ')}</span>`;
-                html += `</div></div>`;
+                if (info.length > 0) {
+                    html += ` <span style="color:#888;font-size:11px;">${info.join(' · ')}</span>`;
+                }
+                html += `<br>`;
             });
 
             if (hasOthers) {
@@ -4081,14 +4157,11 @@ CATALOGO PRODOTTI DECA 2025:
                         const seriesDescs = SERIES_DESCRIPTIONS[familyInfo.family] || {};
                         let html = `Per i <b>${familyInfo.label}</b> abbiamo queste tipologie:<br><br>`;
                         for (const [sub, items] of Object.entries(filteredSubs).sort()) {
+                            const acCount = items.filter(m => m.type === 'ac').length;
                             const desc = seriesDescs[sub] || '';
-                            const thumbItem = items.find(m => m.type === 'ac') || items[0];
-                            const thumbGlb = thumbItem ? 'db/' + thumbItem.glb : '';
-                            html += `<div class="decai-wizard-option" data-value="${sub}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;">`;
-                            if (thumbGlb) html += `<model-viewer src="${thumbGlb}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
-                            html += `<div><b style="color:#4ecca3;">Serie ${sub}`;
+                            html += `<b style="color:#4ecca3;cursor:pointer;" class="decai-wizard-option" data-value="${sub}">Serie ${sub}</b>`;
                             if (desc) html += ` — ${desc}`;
-                            html += `</b></div></div>`;
+                            html += ` <span style="color:#888;font-size:11px;">(${acCount} assemblaggi)</span><br>`;
                         }
                         html += `<br>Quale serie vuoi visualizzare?`;
                         catalogWizardState = { family: familyInfo, step: 'select_sub', profiles, matches: filteredMatches, subCategories: filteredSubs };
@@ -4129,17 +4202,9 @@ CATALOGO PRODOTTI DECA 2025:
                     if (vlNum === '201') desc = 'compatta, per carichi leggeri';
                     else if (vlNum === '301') desc = 'media, uso generale';
                     else if (vlNum === '401') desc = 'grande, per carichi pesanti e lunghezze elevate';
-                    // Trova un GLB di esempio per questa VL
-                    const vlExample = matches.find(m => {
-                        const n = m.name.toLowerCase();
-                        return n.includes(vlNum) && m.type === 'ac';
-                    }) || matches.find(m => m.name.toLowerCase().includes(vlNum));
-                    const thumbSrc = vlExample ? 'db/' + vlExample.glb : '';
-                    html += `<div class="decai-wizard-option" data-value="${vl}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;">`;
-                    if (thumbSrc) html += `<model-viewer src="${thumbSrc}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
-                    html += `<div><b style="color:#4ecca3;">${vl}`;
+                    html += `<b style="color:#4ecca3;cursor:pointer;" class="decai-wizard-option" data-value="${vl}">${vl}</b>`;
                     if (desc) html += ` — ${desc}`;
-                    html += `</b></div></div>`;
+                    html += `<br>`;
                 });
                 html += `<br>Quale modello di base vibrante ti serve? Scrivi ad esempio "<b>VL301</b>".`;
 
@@ -4181,17 +4246,9 @@ CATALOGO PRODOTTI DECA 2025:
                         }
                     }
 
-                    // Trova il primo GLB AC di questa sottocategoria per la thumbnail
-                    const thumbItem = items.find(m => m.type === 'ac') || items[0];
-                    const thumbGlb = thumbItem ? 'db/' + thumbItem.glb : '';
-
-                    html += `<div class="decai-wizard-option" data-value="${sub}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;">`;
-                    if (thumbGlb) {
-                        html += `<model-viewer src="${thumbGlb}" auto-rotate camera-controls style="width:100px;height:100px;min-width:100px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
-                    }
-                    html += `<div><b style="color:#4ecca3;">Serie ${sub}`;
+                    html += `<b style="color:#4ecca3;cursor:pointer;" class="decai-wizard-option" data-value="${sub}">Serie ${sub}</b>`;
                     if (desc) html += ` — ${desc}`;
-                    html += `</b></div></div>`;
+                    html += ` <span style="color:#888;font-size:11px;">(${acCount} assemblaggi, ${subVariants.size} varianti)</span><br>`;
                 }
                 const exampleSub = Object.keys(subCategories).sort()[0];
                 html += `<br>Quale serie ti interessa? Scrivi ad esempio "<b>${exampleSub}</b>".`;
@@ -4314,27 +4371,9 @@ CATALOGO PRODOTTI DECA 2025:
                 if (availLengths.size > 1) {
                     const sortedLens = [...availLengths].sort((a,b) => a - b);
                     let html = `Ottimo, <b>${vlModel}</b>. Ora, che lunghezza deve avere il canale?<br><br>`;
-                    html += `Lunghezze disponibili:<br>`;
-                    sortedLens.forEach(l => {
-                        // Trova il GLB corrispondente a questa lunghezza per la miniatura
-                        const lenMatch = filtered.find(m => {
-                            const n = m.name.toLowerCase();
-                            return n.includes('-' + l + '-') || n.includes('-' + l.toString().padStart(3,'0') + '-') || (m.specs && m.specs.lunghezza == l);
-                        }) || filtered.find(m => {
-                            if (!state.profiles) return false;
-                            for (const [sub, prof] of Object.entries(state.profiles)) {
-                                if (prof.vlModels.has(vlModel) && prof.lengths.has(l)) {
-                                    return m.folder.includes(sub);
-                                }
-                            }
-                            return false;
-                        });
-                        const thumbSrc = lenMatch ? 'db/' + lenMatch.glb : '';
-                        html += `<div class="decai-wizard-option" data-value="${l}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;">`;
-                        if (thumbSrc) html += `<model-viewer src="${thumbSrc}" auto-rotate style="width:60px;height:60px;min-width:60px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
-                        html += `<b style="color:#4ecca3;">${l} mm</b></div>`;
-                    });
-                    html += `<br>Oppure scrivi la lunghezza in mm.`;
+                    html += `Lunghezze disponibili: `;
+                    html += sortedLens.map(l => `<b style="color:#4ecca3;">${l} mm</b>`).join(', ');
+                    html += `<br><br>Scrivi la lunghezza in mm (es. "<b>500</b>").`;
 
                     catalogWizardState = {
                         ...state,
@@ -4447,6 +4486,7 @@ CATALOGO PRODOTTI DECA 2025:
             input.value = '';
 
             addDecAIMsg(query, true);
+            console.log('[CMD] sendDecAI chiamata, decaiLLMForced=' + decaiLLMForced);
 
             // --- INTERCETTORE LOCALE: gestisci richieste di caricamento/visualizzazione dal catalogo ---
             if (libraryCatalog.length > 0) {
@@ -4454,11 +4494,8 @@ CATALOGO PRODOTTI DECA 2025:
                 if (catalogHandled) return;
             }
 
-            // --- COMANDI LOCALI: sempre attivi (aiuto, sposta, ruota, distinta, ecc.) ---
-            if (tryLocalCommand(query)) return;
-
-            // --- AI: linguaggio naturale ---
-            {
+            // Se non forzato a comandi, usa AI
+            if (!decaiLLMForced) {
                 addDecAIMsg('<i style="color:#888;">DecAI sta pensando...</i>', false);
 
                 const removePensando = () => {
@@ -4469,7 +4506,7 @@ CATALOGO PRODOTTI DECA 2025:
                     }
                 };
 
-                // Prova DECAAI
+                // Prova prima DECAAI, poi LM Studio come fallback
                 let aiRisposto = false;
 
                 // 1. Prova DECAAI
@@ -4532,17 +4569,42 @@ CATALOGO PRODOTTI DECA 2025:
                     }
                 }
 
-                // 2. Nessun backend AI disponibile
+                // 2. Fallback: LM Studio
+                if (!aiRisposto && decaiLLMAvailable) {
+                    try {
+                        removePensando();
+                        addDecAIMsg('<i style="color:#888;">DecAI sta pensando (LM Studio)...</i>', false);
+                        const result = await sendToLMStudio(query);
+                        removePensando();
+                        addDecAIMsg(result.text, false);
+                        if (result.actions && Array.isArray(result.actions)) {
+                            for (const action of result.actions) {
+                                executeDecAIAction(action);
+                            }
+                        }
+                        aiRisposto = true;
+                    } catch (err) {
+                        console.warn('[DecAI] LM Studio fallito:', err.message);
+                        removePensando();
+                    }
+                }
+
+                // 3. Nessun backend AI disponibile
                 if (!aiRisposto) {
                     removePensando();
                     addDecAIMsg('<i style="color:#ff6b6b;font-size:11px;">Nessun server AI disponibile, uso modalità locale.</i>', false);
                     sendDecAILocal(query);
                 }
+                return;
             }
+
+            // Fallback: modalità rule-based (quando LM Studio non è attivo)
+            sendDecAILocal(query);
         }
 
-        // Comandi locali — ritorna true se gestito, false se non matchato
-        function tryLocalCommand(query) {
+        // Modalità rule-based originale (fallback)
+        function sendDecAILocal(query) {
+            console.log('[CMD] sendDecAILocal chiamata con:', query);
             const q = query.toLowerCase().trim();
 
             // Help
@@ -4565,116 +4627,41 @@ CATALOGO PRODOTTI DECA 2025:
                     - <b>accoppia</b> — avvia il modo accoppiamento<br>
                     - <b>rimuovi [nome]</b> — rimuovi un oggetto dalla scena<br>
                     - <b>sistema</b> — disponi tutti gli oggetti in griglia ordinata<br><br>
-                    <i style="color:var(--text-muted);">Per domande in linguaggio naturale basta scrivere normalmente: DecAI risponderà tramite intelligenza artificiale.</i>`, false);
-                return true;
+                    <b>Progetto e Visualizzazione:</b><br>
+                    - <b>salva</b> — salva il progetto corrente<br>
+                    - <b>quotatura</b> — attiva/disattiva quotatura tecnica con ingombri in mm (shortcut: Q)<br>`, false);
+                return;
             }
 
-            // Aggiungi modello dalla libreria
-            const addMatch = q.match(/^(?:aggiungi|carica|inserisci|add|load)\s+(.+)/);
-            if (addMatch) {
-                addDecAIMsg(loadModelFromDecAI(addMatch[1].trim()), false);
-                return true;
+            // Salva progetto
+            if (q === 'salva' || q === 'salva progetto' || q === 'save') {
+                document.getElementById('btn-save-project').click();
+                return;
             }
 
-            // Seleziona oggetto per nome
-            const selMatch = q.match(/^(?:seleziona|select)\s+(.+)/);
-            if (selMatch) {
-                addDecAIMsg(decaiSelectObject(selMatch[1].trim()), false);
-                return true;
+            // Quotatura
+            if (q === 'quotatura' || q === 'quote' || q === 'ingombri' || q === 'dimensioni') {
+                activateQuotatura();
+                addDecAIMsg(quotaturaActive ?
+                    '<b>Quotatura attivata.</b> Ingombri in mm, bounding box wireframe, sfondo neutro. Scrivi <b>quotatura</b> o premi <b>Q</b> per disattivare.' :
+                    '<b>Quotatura disattivata.</b> Vista normale ripristinata.', false);
+                return;
             }
 
-            // Sposta oggetto
-            const moveMatch = q.match(/^(?:sposta|muovi|move)\s+(.+)/);
-            if (moveMatch) {
-                addDecAIMsg(decaiMove(moveMatch[1].trim()), false);
-                return true;
-            }
-
-            // Ruota oggetto
-            const rotMatch = q.match(/^(?:ruota|rotate)\s+(.+)/);
-            if (rotMatch) {
-                addDecAIMsg(decaiRotate(rotMatch[1].trim()), false);
-                return true;
-            }
-
-            // Cambia colore
-            const colorMatch = q.match(/^(?:colore|colora|color)\s+(.+)/);
-            if (colorMatch) {
-                addDecAIMsg(decaiColor(colorMatch[1].trim()), false);
-                return true;
-            }
-
-            // Accoppia
-            if (q === 'accoppia' || q === 'mate') {
-                addDecAIMsg(decaiMate(), false);
-                return true;
-            }
-
-            // Rimuovi oggetto
-            const removeMatch = q.match(/^(?:rimuovi|elimina|togli|remove|delete)\s*(.*)/);
-            if (removeMatch) {
-                addDecAIMsg(decaiRemove(removeMatch[1].trim()), false);
-                return true;
-            }
-
-            // Sistema/disponi oggetti
-            if (q === 'sistema' || q === 'disponi' || q === 'arrange' || q === 'layout') {
-                addDecAIMsg(decaiArrange(), false);
-                return true;
-            }
-
-            // Disegno PDF
-            const drawMatch = q.match(/^(?:disegno|drawing)(?:\s+(.+))?$/);
-            if (drawMatch) {
-                let searchTerm = drawMatch[1] ? drawMatch[1].trim() : null;
-                if (!searchTerm) {
-                    const obj = selectedObject || (loadedObjects.length > 0 ? loadedObjects[0] : null);
-                    if (!obj) { addDecAIMsg('Specifica un nome (es. <b>disegno prd-alm01</b>).', false); return true; }
-                    searchTerm = (obj.name || '').replace(/\.glb$/i, '');
-                }
-                addDecAIMsg(openDrawingFromCatalog(searchTerm), false);
-                return true;
-            }
-
-            // Chiudi distinta 3D
-            if (q === 'chiudi distinta 3d' || q === 'chiudi distinta3d' || q === 'rimuovi distinta 3d') {
-                closeBomPanel();
-                addDecAIMsg('Distinta 3D chiusa.', false);
-                return true;
-            }
-
-            // Distinta 3D
-            const d3dMatch = q.match(/^distinta\s+3d?(?:\s+(.+))?$/i);
-            if (d3dMatch) {
-                showDistinta3D(d3dMatch[1] ? d3dMatch[1].trim() : null).then(msg => addDecAIMsg(msg, false));
-                return true;
-            }
-
-            // Distinta XLS
-            const distinMatch = q.match(/^(?:distinta|distinta di|xls)(?:\s+(.+))?$/);
-            if (distinMatch) {
-                let searchTerm = distinMatch[1] ? distinMatch[1].trim() : null;
-                if (!searchTerm) {
-                    const obj = selectedObject || (loadedObjects.length > 0 ? loadedObjects[0] : null);
-                    if (!obj) { addDecAIMsg('Specifica un nome (es. <b>distinta prd-alm01</b>).', false); return true; }
-                    searchTerm = (obj.name || '').replace(/\.glb$/i, '');
-                }
-                addDecAIMsg(openDistintaFromCatalog(searchTerm), false);
-                return true;
-            }
-
-            // Cerca per descrizione prodotto — solo con verbo esplicito (apri, mostra, cerca, trova...)
-            const prodCmdMatch = q.match(/^(?:apri|mostra|cerca|trova|show|open|list|vedi|visualizza)\s+(.+)/i);
-            if (prodCmdMatch) {
-                const sq = prodCmdMatch[1].replace(/^(?:un|una|uno|il|la|lo|i|gli|le|dei|delle|degli)\s+/i, '').trim();
+            // Cerca per descrizione prodotto (alimentatore, nastro, tramoggia, ecc.)
+            {
+                const sq = q.replace(/^(?:apri|mostra|cerca|trova|show|open|list)\s+/i, '').replace(/^(?:un|una|uno|il|la|lo|i|gli|le|dei|delle|degli)\s+/i, '').trim();
+                console.log('[CMD] Ricerca prodotto sq="' + sq + '" PRD_DESC=' + (typeof window.PRD_DESCRIPTIONS) + ' dbTree keys=' + (window.dbTree ? Object.keys(window.dbTree) : 'null'));
                 if (sq.length >= 2 && window.PRD_DESCRIPTIONS && window.dbTree) {
                     const prdMatches = [];
                     for (const [folder, desc] of Object.entries(window.PRD_DESCRIPTIONS)) {
+                        // Match fuzzy: ogni parola della query deve essere contenuta (anche parzialmente) nella descrizione o nel nome cartella
                         const sqWords = sq.split(/\s+/).filter(w => w.length >= 2);
                         const descLow = desc.toLowerCase();
                         const folderLow = folder.toLowerCase();
                         const matchesDesc = sqWords.length > 0 && sqWords.every(w => descLow.includes(w.substring(0, Math.min(w.length, 4))) || folderLow.includes(w.substring(0, Math.min(w.length, 4))));
                         if (matchesDesc || descLow.includes(sq) || folderLow.includes(sq)) {
+                            // Conta file ricorsivamente nel nodo dbTree
                             let treeNode = window.dbTree;
                             ['PRD', folder].forEach(p => { if (treeNode && treeNode[p]) treeNode = treeNode[p]; else treeNode = null; });
                             const countFn = (nd) => {
@@ -4705,39 +4692,126 @@ CATALOGO PRODOTTI DECA 2025:
                                 const catItem = window.catalogByGlb[f.path];
                                 const displayName = catItem ? catItem.name : f.name;
                                 const code = catItem && catItem.code && catItem.code !== '__PDF_NO_CODE__' ? ` <span style="color:var(--accent);font-size:10px;">${catItem.code}</span>` : '';
-                                html += `<a href="#" class="decai-glb-link" data-glb="${f.path}" data-name="${displayName}" data-code="${catItem ? catItem.code || '' : ''}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;color:var(--text-primary);text-decoration:none;font-size:12px;cursor:pointer;"><model-viewer src="db/${f.path}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer><div><b style="color:var(--accent);">${displayName}</b>${code}</div></a>`;
+                                html += `<a href="#" class="decai-glb-link" data-glb="${f.path}" data-name="${displayName}" data-code="${catItem ? catItem.code || '' : ''}" style="display:block;padding:4px 8px;margin:2px 0;background:var(--bg-elevated);border-radius:6px;color:var(--text-primary);text-decoration:none;font-size:12px;cursor:pointer;">&#128196; ${displayName}${code}</a>`;
                             });
                             if (m.count > 5) html += `<span style="font-size:10px;color:var(--text-muted);padding:4px 8px;display:block;">...e altri ${m.count - 5}. Vai in Libreria / PRD / ${m.folder}</span>`;
                             html += '</div>';
                             addDecAIMsg(html, false);
-                            return true;
+                            return;
                         } else {
                             addDecAIMsg(`La categoria "<b>${m.desc}</b>" (${m.folder}) esiste ma non contiene ancora modelli .glb.`, false);
-                            return true;
+                            return;
                         }
                     } else if (prdMatches.length > 1) {
                         let html = `Ho trovato <b>${prdMatches.length}</b> categorie corrispondenti:<br><br>`;
                         prdMatches.forEach(m => { html += `&#128193; <b>${m.folder}</b> — ${m.desc} — <b>${m.count}</b> modelli<br>`; });
                         addDecAIMsg(html, false);
-                        return true;
+                        return;
                     }
                 }
             }
 
-            // Parole generiche (nastri, elevatori, ecc.) → lasciale all'AI
-            return false;
-        }
-
-        // Wrapper legacy per fallback
-        function sendDecAILocal(query) {
-            if (!tryLocalCommand(query)) {
-                if (bomDB) {
-                    const response = processDecAIQuery(query);
-                    addDecAIMsg(response, false);
-                } else {
-                    addDecAIMsg('Non ho capito. Digita <b>aiuto</b> per la lista comandi.', false);
-                }
+            // Aggiungi modello dalla libreria
+            const addMatch = q.match(/^(?:aggiungi|carica|inserisci|add|load)\s+(.+)/);
+            if (addMatch) {
+                addDecAIMsg(loadModelFromDecAI(addMatch[1].trim()), false);
+                return;
             }
+
+            // Seleziona oggetto per nome
+            const selMatch = q.match(/^(?:seleziona|select)\s+(.+)/);
+            if (selMatch) {
+                addDecAIMsg(decaiSelectObject(selMatch[1].trim()), false);
+                return;
+            }
+
+            // Sposta oggetto
+            const moveMatch = q.match(/^(?:sposta|muovi|move)\s+(.+)/);
+            if (moveMatch) {
+                addDecAIMsg(decaiMove(moveMatch[1].trim()), false);
+                return;
+            }
+
+            // Ruota oggetto
+            const rotMatch = q.match(/^(?:ruota|rotate)\s+(.+)/);
+            if (rotMatch) {
+                addDecAIMsg(decaiRotate(rotMatch[1].trim()), false);
+                return;
+            }
+
+            // Cambia colore
+            const colorMatch = q.match(/^(?:colore|colora|color)\s+(.+)/);
+            if (colorMatch) {
+                addDecAIMsg(decaiColor(colorMatch[1].trim()), false);
+                return;
+            }
+
+            // Accoppia
+            if (q === 'accoppia' || q === 'mate') {
+                addDecAIMsg(decaiMate(), false);
+                return;
+            }
+
+            // Rimuovi oggetto
+            const removeMatch = q.match(/^(?:rimuovi|elimina|togli|remove|delete)\s*(.*)/);
+            if (removeMatch) {
+                addDecAIMsg(decaiRemove(removeMatch[1].trim()), false);
+                return;
+            }
+
+            // Sistema/disponi oggetti
+            if (q === 'sistema' || q === 'disponi' || q === 'arrange' || q === 'layout') {
+                addDecAIMsg(decaiArrange(), false);
+                return;
+            }
+
+            // Disegno PDF
+            const drawMatch = q.match(/^(?:disegno|drawing)(?:\s+(.+))?$/);
+            if (drawMatch) {
+                let searchTerm = drawMatch[1] ? drawMatch[1].trim() : null;
+                if (!searchTerm) {
+                    const obj = selectedObject || (loadedObjects.length > 0 ? loadedObjects[0] : null);
+                    if (!obj) { addDecAIMsg('Specifica un nome (es. <b>disegno prd-alm01</b>).', false); return; }
+                    searchTerm = (obj.name || '').replace(/\.glb$/i, '');
+                }
+                addDecAIMsg(openDrawingFromCatalog(searchTerm), false);
+                return;
+            }
+
+            // Chiudi distinta 3D
+            if (q === 'chiudi distinta 3d' || q === 'chiudi distinta3d' || q === 'rimuovi distinta 3d') {
+                closeBomPanel();
+                addDecAIMsg('Distinta 3D chiusa.', false);
+                return;
+            }
+
+            // Distinta 3D
+            const d3dMatch = q.match(/^distinta\s+3d?(?:\s+(.+))?$/i);
+            if (d3dMatch) {
+                showDistinta3D(d3dMatch[1] ? d3dMatch[1].trim() : null).then(msg => addDecAIMsg(msg, false));
+                return;
+            }
+
+            // Distinta XLS
+            const distinMatch = q.match(/^(?:distinta|distinta di|xls)(?:\s+(.+))?$/);
+            if (distinMatch) {
+                let searchTerm = distinMatch[1] ? distinMatch[1].trim() : null;
+                if (!searchTerm) {
+                    const obj = selectedObject || (loadedObjects.length > 0 ? loadedObjects[0] : null);
+                    if (!obj) { addDecAIMsg('Specifica un nome (es. <b>distinta prd-alm01</b>).', false); return; }
+                    searchTerm = (obj.name || '').replace(/\.glb$/i, '');
+                }
+                addDecAIMsg(openDistintaFromCatalog(searchTerm), false);
+                return;
+            }
+
+            if (!bomDB) {
+                addDecAIMsg('Database BOM non ancora caricato. Riprova tra poco.', false);
+                return;
+            }
+
+            const response = processDecAIQuery(query);
+            addDecAIMsg(response, false);
         }
 
         // Raccoglie tutti i file .glb ricorsivamente da un nodo db_tree, con path relativo
@@ -4807,7 +4881,7 @@ CATALOGO PRODOTTI DECA 2025:
                         const catItem = window.catalogByGlb[f.path];
                         const displayName = catItem ? catItem.name : f.name;
                         const code = catItem && catItem.code && catItem.code !== '__PDF_NO_CODE__' ? ` <span style="color:var(--accent);font-size:10px;">${catItem.code}</span>` : '';
-                        html += `<a href="#" class="decai-glb-link" data-glb="${f.path}" data-name="${displayName}" data-code="${catItem ? catItem.code || '' : ''}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;color:var(--text-primary);text-decoration:none;font-size:12px;cursor:pointer;transition:background 0.12s;"><model-viewer src="db/${f.path}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer><div><b style="color:var(--accent);">${displayName}</b>${code}</div></a>`;
+                        html += `<a href="#" class="decai-glb-link" data-glb="${f.path}" data-name="${displayName}" data-code="${catItem ? catItem.code || '' : ''}" style="display:block;padding:4px 8px;margin:2px 0;background:var(--bg-elevated);border-radius:6px;color:var(--text-primary);text-decoration:none;font-size:12px;cursor:pointer;transition:background 0.12s;">&#128196; ${displayName}${code}</a>`;
                     });
                     if (m.count > 5) {
                         html += `<span style="font-size:10px;color:var(--text-muted);padding:4px 8px;display:block;">...e altri ${m.count - 5}. Vai in Libreria / PRD / ${m.folder}</span>`;
@@ -4879,7 +4953,7 @@ CATALOGO PRODOTTI DECA 2025:
             const shown = matches.slice(0, MAX_SHOW);
             let html = `Trovati <b>${matches.length}</b> modelli per "<b>${searchTerm}</b>". Clicca per caricare:<br>`;
             shown.forEach(m => {
-                html += `<div class="decai-load-link" data-file="${m.glb}" data-name="${m.name}" data-code="${m.code || ''}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;"><model-viewer src="db/${m.glb}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer><div><b style="color:var(--accent);">${m.name}</b>${m.code ? ' <span style="color:#888;font-size:10px;">' + m.code + '</span>' : ''}</div></div>`;
+                html += `<span class="decai-load-link" data-file="${m.glb}" data-name="${m.name}" data-code="${m.code || ''}" style="color:#4ecca3;cursor:pointer;text-decoration:underline;display:inline-block;margin:2px 0;">${m.name}${m.code ? ' [' + m.code + ']' : ''}</span><br>`;
             });
             if (matches.length > MAX_SHOW) {
                 html += `<i>...e altri ${matches.length - MAX_SHOW} risultati. Specifica meglio la ricerca.</i>`;
@@ -4901,7 +4975,7 @@ CATALOGO PRODOTTI DECA 2025:
             if (matches.length > 1) {
                 let html = `Trovati <b>${matches.length}</b> modelli per "<b>${searchTerm}</b>":<br>`;
                 matches.forEach(m => {
-                    html += `<div class="decai-load-link" data-file="${m.glb}" data-name="${m.name}" data-code="${m.code || ''}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;"><model-viewer src="db/${m.glb}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer><div><b style="color:var(--accent);">${m.name}</b>${m.code ? ' <span style="color:#888;font-size:10px;">' + m.code + '</span>' : ''}</div></div>`;
+                    html += `<span class="decai-load-link" data-file="${m.glb}" data-name="${m.name}" data-code="${m.code || ''}" style="color:#4ecca3;cursor:pointer;text-decoration:underline;">${m.name}${m.code ? ' [' + m.code + ']' : ''}</span><br>`;
                 });
                 return html;
             }
@@ -4913,10 +4987,7 @@ CATALOGO PRODOTTI DECA 2025:
             const matches = catalogSearch(searchTerm);
             if (matches.length === 0) return `Disegno non disponibile per "<b>${searchTerm}</b>".`;
             const m = matches.length === 1 ? matches[0] : matches.find(x => x.pdf) || matches[0];
-            if (!m.pdf) {
-                const hasXls = (Array.isArray(m.xls) ? m.xls[0] : m.xls) ? true : false;
-                return `Disegno non disponibile per "<b>${m.name}</b>".${hasXls ? ' Pero\' e\' disponibile la <b>distinta</b>: scrivi <b>distinta</b> per aprirla.' : ''}`;
-            }
+            if (!m.pdf) return `Disegno non disponibile per "<b>${m.name}</b>".`;
             openDrawingViewer('db/' + m.pdf, m.name);
             return `Disegno <b>${m.name}</b>${m.code ? ' [' + m.code + ']' : ''} aperto.`;
         }
@@ -4926,11 +4997,7 @@ CATALOGO PRODOTTI DECA 2025:
             const matches = catalogSearch(searchTerm);
             if (matches.length === 0) return `Distinta non disponibile per "<b>${searchTerm}</b>".`;
             const m = matches.length === 1 ? matches[0] : matches.find(x => x.xls) || matches[0];
-            const xlsPath = Array.isArray(m.xls) ? m.xls[0] : m.xls;
-            if (!xlsPath) {
-                const hasPdf = m.pdf ? true : false;
-                return `Distinta non disponibile per "<b>${m.name}</b>".${hasPdf ? ' Pero\' e\' disponibile il <b>disegno</b>: scrivi <b>disegno</b> per aprirlo.' : ''}`;
-            }
+            if (!m.xls || m.xls.length === 0) return `Distinta non disponibile per "<b>${m.name}</b>".`;
 
             // Conta componenti dalla BOM se disponibile
             let partsCount = 0;
@@ -4944,7 +5011,7 @@ CATALOGO PRODOTTI DECA 2025:
                 }
             }
 
-            openXlsViewer('db/' + xlsPath, m.name, partsCount);
+            openXlsViewer('db/' + m.xls[0], m.name, partsCount);
             return `Distinta <b>${m.name}</b>${m.code ? ' [' + m.code + ']' : ''} — <b>${partsCount || '?'}</b> componenti.`;
         }
 

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DECA Analytics Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0c0e14;
+            --bg-secondary: #141620;
+            --bg-tertiary: #1c1f2e;
+            --bg-elevated: #232738;
+            --border: #2a2e42;
+            --text-primary: #eaedf3;
+            --text-secondary: #8b90a0;
+            --text-muted: #555a6e;
+            --accent: #4ecca3;
+            --accent-hover: #3ba88c;
+            --accent-dim: rgba(78,204,163,0.12);
+            --danger: #e94560;
+            --warning: #e8a838;
+            --blue: #4a9eff;
+            --radius: 6px;
+            --radius-lg: 10px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.5);
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header h1 { font-size: 18px; font-weight: 700; }
+        .header h1 span { color: var(--accent); }
+        .header-actions { display: flex; gap: 8px; align-items: center; }
+        .header-actions a, .header-actions button {
+            background: var(--bg-tertiary); color: var(--text-primary);
+            border: 1px solid var(--border); padding: 8px 16px;
+            border-radius: var(--radius); font-size: 12px; font-weight: 500;
+            text-decoration: none; cursor: pointer; font-family: var(--font);
+            transition: all 0.15s;
+        }
+        .header-actions a:hover, .header-actions button:hover {
+            border-color: var(--accent); color: var(--accent);
+        }
+        .header-actions .btn-accent {
+            background: var(--accent); border-color: var(--accent);
+            color: var(--bg-primary); font-weight: 600;
+        }
+
+        /* Stats row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 24px 32px;
+        }
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+        .stat-card.accent::before { background: var(--accent); }
+        .stat-card.blue::before { background: var(--blue); }
+        .stat-card.warning::before { background: var(--warning); }
+        .stat-card.danger::before { background: var(--danger); }
+        .stat-card.purple::before { background: #a855f7; }
+        .stat-value {
+            font-size: 32px; font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .stat-card.accent .stat-value { color: var(--accent); }
+        .stat-card.blue .stat-value { color: var(--blue); }
+        .stat-card.warning .stat-value { color: var(--warning); }
+        .stat-card.danger .stat-value { color: var(--danger); }
+        .stat-card.purple .stat-value { color: #a855f7; }
+        .stat-label {
+            font-size: 11px; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--text-muted);
+            font-weight: 600;
+        }
+        .stat-sub {
+            font-size: 11px; color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* Grid layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 0 32px 32px;
+        }
+        .panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            overflow: hidden;
+        }
+        .panel.full { grid-column: 1 / -1; }
+        .panel h2 {
+            font-size: 13px; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--accent);
+            font-weight: 600; margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        .chart-container {
+            position: relative;
+            height: 280px;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 8px 12px;
+            color: var(--text-muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        .data-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(42,46,66,0.5);
+            color: var(--text-primary);
+        }
+        .data-table tr:hover td { background: var(--bg-tertiary); }
+
+        /* Tags */
+        .tag {
+            display: inline-block; font-size: 9px; font-weight: 600;
+            padding: 2px 6px; border-radius: 3px; text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tag-positivo { background: rgba(76,175,80,0.2); color: #66bb6a; }
+        .tag-problema { background: rgba(233,69,96,0.2); color: #e94560; }
+        .tag-suggerimento { background: rgba(245,158,11,0.2); color: #f59e0b; }
+        .tag-prezzo { background: rgba(168,85,247,0.2); color: #a855f7; }
+        .tag-materiali { background: rgba(59,130,246,0.2); color: #3b82f6; }
+        .tag-design { background: rgba(236,72,153,0.2); color: #ec4899; }
+        .tag-logistica { background: rgba(234,179,8,0.2); color: #eab308; }
+
+        /* Vote bar */
+        .vote-bar {
+            display: flex; align-items: center; gap: 8px;
+        }
+        .vote-bar-fill {
+            flex: 1; height: 6px;
+            background: var(--bg-primary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .vote-bar-fill div {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+        .vote-score {
+            font-size: 14px; font-weight: 700;
+            min-width: 30px; text-align: right;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            width: 100%; height: 8px;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .progress-bar div {
+            height: 100%; border-radius: 4px;
+        }
+
+        /* Funnel */
+        .funnel-step {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(42,46,66,0.3);
+        }
+        .funnel-step:last-child { border-bottom: none; }
+        .funnel-num {
+            font-size: 24px; font-weight: 700;
+            min-width: 60px; text-align: right;
+        }
+        .funnel-label { font-size: 13px; color: var(--text-secondary); flex: 1; }
+        .funnel-pct { font-size: 12px; font-weight: 600; }
+
+        /* Loading */
+        .loading {
+            text-align: center; padding: 40px;
+            color: var(--text-muted); font-size: 13px;
+        }
+        .loading::before {
+            content: '';
+            display: block;
+            width: 32px; height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Revenue card */
+        .revenue-big {
+            font-size: 42px; font-weight: 700;
+            color: var(--accent);
+            margin: 12px 0;
+        }
+        .revenue-sub { font-size: 12px; color: var(--text-secondary); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1><span>DECA</span> Analytics Dashboard</h1>
+    <div class="header-actions">
+        <span id="file-indicator" style="font-size:11px;color:var(--text-muted);"></span>
+        <button onclick="loadAllData()" class="btn-accent">Aggiorna Dati</button>
+        <a href="glb_editor.html">Torna all'Editor</a>
+        <a href="index.html">Home</a>
+    </div>
+</div>
+
+<!-- Stats Row -->
+<div class="stats-row">
+    <div class="stat-card accent">
+        <div class="stat-value" id="stat-sessions">-</div>
+        <div class="stat-label">Sessioni totali</div>
+        <div class="stat-sub" id="stat-sessions-sub"></div>
+    </div>
+    <div class="stat-card blue">
+        <div class="stat-value" id="stat-interactions">-</div>
+        <div class="stat-label">Interazioni totali</div>
+        <div class="stat-sub" id="stat-interactions-sub"></div>
+    </div>
+    <div class="stat-card warning">
+        <div class="stat-value" id="stat-avg-depth">-</div>
+        <div class="stat-label">Profondita media</div>
+        <div class="stat-sub">Pannelli visitati per sessione</div>
+    </div>
+    <div class="stat-card danger">
+        <div class="stat-value" id="stat-avg-duration">-</div>
+        <div class="stat-label">Durata media sessione</div>
+        <div class="stat-sub" id="stat-duration-sub"></div>
+    </div>
+    <div class="stat-card purple">
+        <div class="stat-value" id="stat-revenue">-</div>
+        <div class="stat-label">Valore medio configurazione</div>
+        <div class="stat-sub">Proiezione basata su componenti</div>
+    </div>
+</div>
+
+<!-- Dashboard Grid -->
+<div class="dashboard-grid">
+
+    <!-- 1. Configuration Popularity -->
+    <div class="panel">
+        <h2>Indice di Popolarita Configurazioni</h2>
+        <div class="chart-container">
+            <canvas id="chart-popularity"></canvas>
+        </div>
+    </div>
+
+    <!-- 2. Material Preferences -->
+    <div class="panel">
+        <h2>Preferenze Materiali & Finiture</h2>
+        <div class="chart-container">
+            <canvas id="chart-materials"></canvas>
+        </div>
+    </div>
+
+    <!-- 3. Abandonment Funnel -->
+    <div class="panel">
+        <h2>Analisi Abbandono (Funnel)</h2>
+        <div id="funnel-container">
+            <div class="loading">Caricamento dati...</div>
+        </div>
+    </div>
+
+    <!-- 4. Interaction Depth -->
+    <div class="panel">
+        <h2>Profondita di Interazione</h2>
+        <div class="chart-container">
+            <canvas id="chart-depth"></canvas>
+        </div>
+    </div>
+
+    <!-- 5. Sentiment by Category -->
+    <div class="panel full">
+        <h2>Analisi Semantica & Sentiment per Categoria</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="chart-container">
+                <canvas id="chart-sentiment-cat"></canvas>
+            </div>
+            <div id="category-breakdown">
+                <div class="loading">Caricamento...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Feature Request Ranking -->
+    <div class="panel full">
+        <h2>Feature Request Ranking (per voti)</h2>
+        <div id="fr-ranking-container">
+            <div class="loading">Caricamento...</div>
+        </div>
+    </div>
+
+    <!-- 7. Revenue Projection -->
+    <div class="panel">
+        <h2>Simulazione di Vendita</h2>
+        <div id="revenue-container">
+            <div class="loading">Caricamento...</div>
+        </div>
+    </div>
+
+    <!-- 8. Heatmap Top Zones -->
+    <div class="panel">
+        <h2>Zone di Maggiore Interazione (Top Click)</h2>
+        <div id="heatmap-zones-container">
+            <div class="loading">Caricamento...</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDAIP5BiNwbwvCYE5Dc2l8vlTbUVRCV3R4",
+        authDomain: "glb-3d-editor.firebaseapp.com",
+        projectId: "glb-3d-editor",
+        storageBucket: "glb-3d-editor.firebasestorage.app",
+        messagingSenderId: "1080250067495",
+        appId: "1:1080250067495:web:cdcd2dbfe2a81867c87c02"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // --- State ---
+    let sessions = [];
+    let feedbackData = { annotations: [], featureRequests: [] };
+    const urlParams = new URLSearchParams(window.location.search);
+    const filterFile = urlParams.get('file') || '';
+
+    document.getElementById('file-indicator').textContent = filterFile
+        ? 'Modello: ' + filterFile
+        : 'Tutti i modelli';
+
+    // --- Component Prices (configurabile) ---
+    const COMPONENT_PRICES = {
+        color: { default: 0, '#ff0000': 15, '#0000ff': 15, '#ffffff': 5, '#000000': 5 },
+        metalness: { base: 0, premium: 25 }, // >0.7 = premium
+        roughness: { base: 0, lucido: 20 },  // <0.3 = lucido
+        opacity: { base: 0, trasparente: 30 }, // <0.8 = trasparente
+        wireframe: { base: 0, active: 10 }
+    };
+
+    function estimateConfigValue(configChanges) {
+        let value = 50; // base price
+        const lastValues = {};
+        configChanges.forEach(c => {
+            lastValues[c.property] = c.value;
+        });
+        if (lastValues.color) {
+            value += COMPONENT_PRICES.color[lastValues.color] || 10;
+        }
+        if (lastValues.metalness > 0.7) value += COMPONENT_PRICES.metalness.premium;
+        if (lastValues.roughness < 0.3) value += COMPONENT_PRICES.roughness.lucido;
+        if (lastValues.opacity < 0.8) value += COMPONENT_PRICES.opacity.trasparente;
+        if (lastValues.wireframe) value += COMPONENT_PRICES.wireframe.active;
+        return value;
+    }
+
+    // --- Load All Data ---
+    async function loadAllData() {
+        try {
+            // Load analytics sessions
+            let query = db.collection('analytics_sessions').orderBy('updatedAt', 'desc').limit(200);
+            const sessSnap = await query.get();
+            sessions = [];
+            sessSnap.forEach(doc => sessions.push(doc.data()));
+
+            if (filterFile) {
+                sessions = sessions.filter(s => s.fileName === filterFile);
+            }
+
+            // Load feedback data
+            const fbSnap = await db.collection('model_feedback').limit(100).get();
+            feedbackData = { annotations: [], featureRequests: [] };
+            fbSnap.forEach(doc => {
+                const d = doc.data();
+                if (filterFile && d.fileName !== filterFile) return;
+                if (d.annotations) feedbackData.annotations.push(...d.annotations);
+                if (d.featureRequests) feedbackData.featureRequests.push(...d.featureRequests);
+            });
+
+            renderAll();
+        } catch (e) {
+            console.error('Error loading data:', e);
+            document.querySelectorAll('.loading').forEach(el => {
+                el.textContent = 'Errore caricamento: ' + e.message;
+            });
+        }
+    }
+
+    // --- Render Everything ---
+    function renderAll() {
+        renderStats();
+        renderPopularityChart();
+        renderMaterialsChart();
+        renderFunnel();
+        renderDepthChart();
+        renderSentimentCategory();
+        renderFeatureRanking();
+        renderRevenue();
+        renderHeatmapZones();
+    }
+
+    // --- 1. Stats ---
+    function renderStats() {
+        const totalSessions = sessions.length;
+        const totalInteractions = sessions.reduce((a, s) => a + (s.interactionCount || 0), 0);
+        const avgDepth = totalSessions > 0
+            ? (sessions.reduce((a, s) => a + (s.maxDepth || 0), 0) / totalSessions).toFixed(1)
+            : '0';
+        const avgDuration = totalSessions > 0
+            ? sessions.reduce((a, s) => a + (s.sessionDuration || 0), 0) / totalSessions
+            : 0;
+        const avgDurMin = (avgDuration / 60000).toFixed(1);
+
+        document.getElementById('stat-sessions').textContent = totalSessions;
+        document.getElementById('stat-sessions-sub').textContent =
+            sessions.length > 0 ? 'Ultimo: ' + new Date(sessions[0].updatedAt).toLocaleDateString('it') : '';
+        document.getElementById('stat-interactions').textContent = totalInteractions;
+        document.getElementById('stat-interactions-sub').textContent =
+            totalSessions > 0 ? 'Media: ' + (totalInteractions / totalSessions).toFixed(0) + ' per sessione' : '';
+        document.getElementById('stat-avg-depth').textContent = avgDepth;
+        document.getElementById('stat-avg-duration').textContent = avgDurMin + ' min';
+        document.getElementById('stat-duration-sub').textContent =
+            totalSessions > 0 ? 'Max: ' + (Math.max(...sessions.map(s => s.sessionDuration || 0)) / 60000).toFixed(1) + ' min' : '';
+
+        // Revenue
+        let totalRevenue = 0;
+        let revenueCount = 0;
+        sessions.forEach(s => {
+            if (s.configChanges && s.configChanges.length > 0) {
+                totalRevenue += estimateConfigValue(s.configChanges);
+                revenueCount++;
+            }
+        });
+        const avgRevenue = revenueCount > 0 ? (totalRevenue / revenueCount).toFixed(0) : '0';
+        document.getElementById('stat-revenue').textContent = avgRevenue + ' EUR';
+    }
+
+    // --- 2. Popularity Chart ---
+    function renderPopularityChart() {
+        const propCounts = {};
+        sessions.forEach(s => {
+            (s.configChanges || []).forEach(c => {
+                const key = c.property + ': ' + c.value;
+                propCounts[key] = (propCounts[key] || 0) + 1;
+            });
+        });
+
+        const sorted = Object.entries(propCounts).sort((a, b) => b[1] - a[1]).slice(0, 12);
+        const labels = sorted.map(([k]) => k.length > 25 ? k.substring(0, 25) + '...' : k);
+        const values = sorted.map(([, v]) => v);
+
+        const ctx = document.getElementById('chart-popularity').getContext('2d');
+        if (window._chartPop) window._chartPop.destroy();
+        window._chartPop = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels,
+                datasets: [{
+                    label: 'Frequenza',
+                    data: values,
+                    backgroundColor: 'rgba(78,204,163,0.6)',
+                    borderColor: '#4ecca3',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { color: 'rgba(42,46,66,0.5)' }, ticks: { color: '#8b90a0' } },
+                    y: { grid: { display: false }, ticks: { color: '#eaedf3', font: { size: 10 } } }
+                }
+            }
+        });
+    }
+
+    // --- 3. Materials Preferences ---
+    function renderMaterialsChart() {
+        const matStats = { colori: {}, metalness: { basso: 0, medio: 0, alto: 0 }, rugosita: { opaco: 0, satinato: 0, lucido: 0 } };
+        sessions.forEach(s => {
+            (s.configChanges || []).forEach(c => {
+                if (c.property === 'color') {
+                    matStats.colori[c.value] = (matStats.colori[c.value] || 0) + 1;
+                }
+                if (c.property === 'metalness') {
+                    const v = parseFloat(c.value);
+                    if (v < 0.3) matStats.metalness.basso++;
+                    else if (v < 0.7) matStats.metalness.medio++;
+                    else matStats.metalness.alto++;
+                }
+                if (c.property === 'roughness') {
+                    const v = parseFloat(c.value);
+                    if (v < 0.3) matStats.rugosita.lucido++;
+                    else if (v < 0.7) matStats.rugosita.satinato++;
+                    else matStats.rugosita.opaco++;
+                }
+            });
+        });
+
+        const ctx = document.getElementById('chart-materials').getContext('2d');
+        if (window._chartMat) window._chartMat.destroy();
+        window._chartMat = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Opaco', 'Satinato', 'Lucido', 'Metalness Basso', 'Metalness Medio', 'Metalness Alto'],
+                datasets: [{
+                    data: [
+                        matStats.rugosita.opaco, matStats.rugosita.satinato, matStats.rugosita.lucido,
+                        matStats.metalness.basso, matStats.metalness.medio, matStats.metalness.alto
+                    ],
+                    backgroundColor: [
+                        '#4ecca3', '#3ba88c', '#2d8a6e',
+                        '#4a9eff', '#3b82f6', '#2563eb'
+                    ],
+                    borderColor: '#141620',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#8b90a0', font: { size: 11 }, padding: 12 }
+                    }
+                }
+            }
+        });
+    }
+
+    // --- 4. Abandonment Funnel ---
+    function renderFunnel() {
+        const container = document.getElementById('funnel-container');
+        const total = sessions.length;
+        if (total === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);font-size:12px;">Nessuna sessione registrata.</p>';
+            return;
+        }
+
+        const opened = total;
+        const interacted = sessions.filter(s => (s.interactionCount || 0) > 0).length;
+        const configured = sessions.filter(s => (s.configChanges || []).length > 0).length;
+        const deepEngaged = sessions.filter(s => (s.maxDepth || 0) >= 3).length;
+        const longSession = sessions.filter(s => (s.sessionDuration || 0) > 120000).length; // >2min
+
+        const steps = [
+            { label: 'Aperto il viewer', count: opened, color: '#4ecca3' },
+            { label: 'Interazione (click/selezione)', count: interacted, color: '#4a9eff' },
+            { label: 'Configurazione (materiale/colore)', count: configured, color: '#e8a838' },
+            { label: 'Engagement profondo (3+ pannelli)', count: deepEngaged, color: '#a855f7' },
+            { label: 'Sessione >2 min', count: longSession, color: '#e94560' }
+        ];
+
+        container.innerHTML = steps.map((s, i) => {
+            const pct = ((s.count / opened) * 100).toFixed(0);
+            const dropoff = i > 0 ? (((steps[i - 1].count - s.count) / steps[i - 1].count) * 100).toFixed(0) : 0;
+            return `
+                <div class="funnel-step">
+                    <div class="funnel-num" style="color:${s.color}">${s.count}</div>
+                    <div style="flex:1;">
+                        <div class="funnel-label">${s.label}</div>
+                        <div class="progress-bar"><div style="width:${pct}%;background:${s.color};"></div></div>
+                    </div>
+                    <div class="funnel-pct" style="color:${s.color}">${pct}%</div>
+                    ${i > 0 ? `<div style="font-size:10px;color:var(--danger);min-width:50px;text-align:right;">-${dropoff}%</div>` : '<div style="min-width:50px;"></div>'}
+                </div>`;
+        }).join('');
+    }
+
+    // --- 5. Interaction Depth ---
+    function renderDepthChart() {
+        const depthBuckets = { '1': 0, '2': 0, '3': 0, '4': 0, '5+': 0 };
+        sessions.forEach(s => {
+            const d = s.maxDepth || 0;
+            if (d <= 1) depthBuckets['1']++;
+            else if (d === 2) depthBuckets['2']++;
+            else if (d === 3) depthBuckets['3']++;
+            else if (d === 4) depthBuckets['4']++;
+            else depthBuckets['5+']++;
+        });
+
+        const ctx = document.getElementById('chart-depth').getContext('2d');
+        if (window._chartDepth) window._chartDepth.destroy();
+        window._chartDepth = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(depthBuckets).map(k => k + ' pannelli'),
+                datasets: [{
+                    label: 'Sessioni',
+                    data: Object.values(depthBuckets),
+                    backgroundColor: ['#2563eb', '#4a9eff', '#4ecca3', '#e8a838', '#e94560'],
+                    borderRadius: 6,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#8b90a0' } },
+                    y: { grid: { color: 'rgba(42,46,66,0.5)' }, ticks: { color: '#8b90a0' } }
+                }
+            }
+        });
+    }
+
+    // --- 6. Sentiment & Category Analysis ---
+    function renderSentimentCategory() {
+        const allItems = [
+            ...feedbackData.annotations.map(a => ({
+                text: a.text, sentiment: a.sentiment,
+                category: a.category || classifyCategory(a.text)
+            })),
+            ...feedbackData.featureRequests.map(f => ({
+                text: f.title + ' ' + (f.desc || ''), sentiment: f.sentiment,
+                category: f.category || classifyCategory(f.title + ' ' + (f.desc || ''))
+            }))
+        ];
+
+        // Chart: sentiment per category
+        const catSentiment = {};
+        ['prezzo', 'materiali', 'design', 'logistica'].forEach(cat => {
+            catSentiment[cat] = { positivo: 0, problema: 0, suggerimento: 0 };
+        });
+        allItems.forEach(item => {
+            const cat = item.category || 'design';
+            const sent = item.sentiment || 'suggerimento';
+            if (catSentiment[cat]) catSentiment[cat][sent]++;
+        });
+
+        const ctx = document.getElementById('chart-sentiment-cat').getContext('2d');
+        if (window._chartSentCat) window._chartSentCat.destroy();
+        window._chartSentCat = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Prezzo', 'Materiali', 'Design', 'Logistica'],
+                datasets: [
+                    {
+                        label: 'Positivo',
+                        data: ['prezzo', 'materiali', 'design', 'logistica'].map(c => catSentiment[c].positivo),
+                        backgroundColor: 'rgba(76,175,80,0.7)',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Problema',
+                        data: ['prezzo', 'materiali', 'design', 'logistica'].map(c => catSentiment[c].problema),
+                        backgroundColor: 'rgba(233,69,96,0.7)',
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Suggerimento',
+                        data: ['prezzo', 'materiali', 'design', 'logistica'].map(c => catSentiment[c].suggerimento),
+                        backgroundColor: 'rgba(245,158,11,0.7)',
+                        borderRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#8b90a0', font: { size: 11 } } }
+                },
+                scales: {
+                    x: { stacked: true, grid: { display: false }, ticks: { color: '#8b90a0' } },
+                    y: { stacked: true, grid: { color: 'rgba(42,46,66,0.5)' }, ticks: { color: '#8b90a0' } }
+                }
+            }
+        });
+
+        // Category breakdown table
+        const breakdown = document.getElementById('category-breakdown');
+        const cats = ['prezzo', 'materiali', 'design', 'logistica'];
+        const catLabels = { prezzo: 'Prezzo', materiali: 'Materiali', design: 'Design', logistica: 'Logistica' };
+        const catColors = { prezzo: '#a855f7', materiali: '#3b82f6', design: '#ec4899', logistica: '#eab308' };
+
+        breakdown.innerHTML = `
+            <table class="data-table">
+                <thead><tr>
+                    <th>Categoria</th><th>Totale</th><th>Positivo %</th><th>Problema %</th><th>Sentiment</th>
+                </tr></thead>
+                <tbody>
+                ${cats.map(cat => {
+                    const s = catSentiment[cat];
+                    const total = s.positivo + s.problema + s.suggerimento;
+                    const posPct = total > 0 ? ((s.positivo / total) * 100).toFixed(0) : 0;
+                    const negPct = total > 0 ? ((s.problema / total) * 100).toFixed(0) : 0;
+                    const sentimentIcon = parseInt(negPct) > 50 ? '&#9888;' : parseInt(posPct) > 50 ? '&#10003;' : '&#8776;';
+                    const sentimentColor = parseInt(negPct) > 50 ? 'var(--danger)' : parseInt(posPct) > 50 ? 'var(--accent)' : 'var(--warning)';
+                    return `<tr>
+                        <td><span class="tag tag-${cat}">${catLabels[cat]}</span></td>
+                        <td>${total}</td>
+                        <td style="color:#66bb6a;">${posPct}%</td>
+                        <td style="color:#e94560;">${negPct}%</td>
+                        <td style="color:${sentimentColor};font-size:16px;">${sentimentIcon}</td>
+                    </tr>`;
+                }).join('')}
+                </tbody>
+            </table>`;
+    }
+
+    // --- 7. Feature Request Ranking ---
+    function renderFeatureRanking() {
+        const container = document.getElementById('fr-ranking-container');
+        const frs = feedbackData.featureRequests.sort((a, b) => (b.score || 0) - (a.score || 0));
+
+        if (frs.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);font-size:12px;">Nessuna feature request registrata.</p>';
+            return;
+        }
+
+        const maxScore = Math.max(...frs.map(f => Math.abs(f.score || 0)), 1);
+
+        container.innerHTML = `
+            <table class="data-table">
+                <thead><tr>
+                    <th>Voti</th><th>Titolo</th><th>Sentiment</th><th>Categoria</th><th>Autore</th>
+                </tr></thead>
+                <tbody>
+                ${frs.slice(0, 20).map(fr => {
+                    const cat = fr.category || classifyCategory(fr.title + ' ' + (fr.desc || ''));
+                    const pct = ((Math.abs(fr.score || 0) / maxScore) * 100).toFixed(0);
+                    const barColor = (fr.score || 0) >= 0 ? '#4ecca3' : '#e94560';
+                    return `<tr>
+                        <td>
+                            <div class="vote-bar">
+                                <span class="vote-score" style="color:${barColor}">${fr.score || 0}</span>
+                                <div class="vote-bar-fill"><div style="width:${pct}%;background:${barColor};"></div></div>
+                            </div>
+                        </td>
+                        <td>
+                            <strong>${fr.title}</strong>
+                            ${fr.desc ? '<br><span style="font-size:10px;color:var(--text-secondary);">' + fr.desc.substring(0, 80) + '</span>' : ''}
+                        </td>
+                        <td><span class="tag tag-${fr.sentiment || 'suggerimento'}">${fr.sentiment || 'N/A'}</span></td>
+                        <td><span class="tag tag-${cat}">${catLabel(cat)}</span></td>
+                        <td style="font-size:11px;color:var(--text-muted);">${fr.author || '-'}</td>
+                    </tr>`;
+                }).join('')}
+                </tbody>
+            </table>`;
+    }
+
+    // --- 8. Revenue Projection ---
+    function renderRevenue() {
+        const container = document.getElementById('revenue-container');
+        let values = [];
+        sessions.forEach(s => {
+            if (s.configChanges && s.configChanges.length > 0) {
+                values.push(estimateConfigValue(s.configChanges));
+            }
+        });
+
+        if (values.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);font-size:12px;">Nessuna configurazione registrata.</p>';
+            return;
+        }
+
+        const avg = (values.reduce((a, b) => a + b, 0) / values.length).toFixed(0);
+        const max = Math.max(...values);
+        const min = Math.min(...values);
+        const total = values.reduce((a, b) => a + b, 0);
+
+        container.innerHTML = `
+            <div class="revenue-big">${avg} EUR</div>
+            <div class="revenue-sub">Valore medio configurazione (${values.length} sessioni)</div>
+            <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+                <div>
+                    <div style="font-size:20px;font-weight:700;color:var(--accent);">${total} EUR</div>
+                    <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Totale stimato</div>
+                </div>
+                <div>
+                    <div style="font-size:20px;font-weight:700;color:var(--blue);">${min} EUR</div>
+                    <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Minimo</div>
+                </div>
+                <div>
+                    <div style="font-size:20px;font-weight:700;color:var(--warning);">${max} EUR</div>
+                    <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Massimo</div>
+                </div>
+            </div>`;
+    }
+
+    // --- 9. Heatmap Top Zones ---
+    function renderHeatmapZones() {
+        const container = document.getElementById('heatmap-zones-container');
+        const objCounts = {};
+        sessions.forEach(s => {
+            (s.clickPositions || []).forEach(p => {
+                const name = p.objectName || 'unknown';
+                objCounts[name] = (objCounts[name] || 0) + 1;
+            });
+        });
+
+        const sorted = Object.entries(objCounts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+        if (sorted.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);font-size:12px;">Nessun dato di click registrato.</p>';
+            return;
+        }
+
+        const maxClicks = sorted[0][1];
+        container.innerHTML = `
+            <table class="data-table">
+                <thead><tr><th>Componente</th><th>Click</th><th>Distribuzione</th></tr></thead>
+                <tbody>
+                ${sorted.map(([name, count]) => {
+                    const pct = ((count / maxClicks) * 100).toFixed(0);
+                    const hue = 120 - (count / maxClicks) * 120; // green to red
+                    return `<tr>
+                        <td style="font-weight:500;">${name}</td>
+                        <td style="font-weight:700;color:hsl(${hue},70%,55%);">${count}</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div style="width:${pct}%;background:hsl(${hue},70%,50%);"></div>
+                            </div>
+                        </td>
+                    </tr>`;
+                }).join('')}
+                </tbody>
+            </table>`;
+    }
+
+    // --- NLP helpers (mirror of editor) ---
+    const CATEGORY_KEYWORDS = {
+        prezzo: ['prezzo','costo','costoso','economico','budget','risparmio','sconto','euro','spesa','conveniente','caro','price','cost','cheap','expensive'],
+        materiali: ['materiale','plastica','metallo','legno','acciaio','alluminio','vetro','gomma','tessuto','pelle','finitura','verniciatura','material','plastic','metal','wood','steel','glass','finish'],
+        design: ['design','forma','stile','estetica','colore','dimensione','proporzione','moderno','classico','minimale','ergonomico','elegante','shape','style','aesthetic','color','size'],
+        logistica: ['spedizione','consegna','imballaggio','trasporto','magazzino','disponibilita','tempi','ritardo','montaggio','assemblaggio','shipping','delivery','packaging','assembly','stock']
+    };
+
+    function classifyCategory(text) {
+        const lower = (text || '').toLowerCase();
+        let scores = { prezzo: 0, materiali: 0, design: 0, logistica: 0 };
+        for (const [cat, words] of Object.entries(CATEGORY_KEYWORDS)) {
+            for (const w of words) { if (lower.includes(w)) scores[cat]++; }
+        }
+        const max = Math.max(...Object.values(scores));
+        if (max === 0) return 'design';
+        return Object.entries(scores).find(([, v]) => v === max)[0];
+    }
+
+    function catLabel(c) {
+        return { prezzo: 'Prezzo', materiali: 'Materiali', design: 'Design', logistica: 'Logistica' }[c] || c;
+    }
+
+    // --- Init ---
+    loadAllData();
+</script>
+
+</body>
+</html>
