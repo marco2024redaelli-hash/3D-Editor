@@ -43,7 +43,8 @@ REGOLE:
 3. SE LA DOMANDA RIGUARDA DETTAGLI TECNICI NON PRESENTI, non inventare. Spiega che DECA realizza soluzioni su misura e invita a richiedere un preventivo tramite il pulsante dedicato.
 4. Quando descrivi un prodotto con modello 3D disponibile, aggiungi il tag [AZIONE: APRI_VIEWER_3D codice_prodotto] alla fine.
 5. Se l'utente chiede un consiglio, analizza le esigenze e suggerisci i prodotti DECA più adatti dal contesto.
-6. DECA produce MOLTI tipi di prodotti diversi — NON dire mai "esclusivamente" o negare l'esistenza di categorie di prodotti.`
+6. DECA produce MOLTI tipi di prodotti diversi — NON dire mai "esclusivamente" o negare l'esistenza di categorie di prodotti.
+7. NON includere mai nelle risposte numeri di telefono, indirizzi email o URL di contatto (es. 0341 63 20 80, info@decasrl.biz, www.decasrl.biz). Per contatti, invita l'utente a usare il pulsante preventivo.`
     };
 
     // ── Stato ──
