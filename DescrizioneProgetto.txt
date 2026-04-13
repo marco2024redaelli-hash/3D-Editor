@@ -63,6 +63,9 @@ Funzionalita' principali
 - Analytics dashboard custom con pannelli Richieste Preventivo, Visite, Visitatori,
   Funnel, Sentiment, Feature Requests. Accesso riservato all'email admin
   (Google Sign-In + regole Firestore isAdmin())
+- Modal di autenticazione nella home con Google Sign-In e link-email passwordless
+  (Firebase Auth). Pulsante "Accedi / Registrati" nell'header; avatar utente
+  cliccabile per logout dopo accesso
 
 
 Libreria prodotti

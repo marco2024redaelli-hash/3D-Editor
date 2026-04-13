@@ -8,6 +8,15 @@ Permette di visualizzare, assemblare e gestire modelli 3D di alimentatori vibran
 
 ---
 
+## Autenticazione
+
+Accesso opzionale per salvare progetti su Firestore e ricevere contenuti personalizzati. Pulsante **"Accedi / Registrati"** nell'header della home apre un modal con due metodi:
+
+- **Google Sign-In** (popup Firebase)
+- **Link email passwordless** (Firebase `sendSignInLinkToEmail`)
+
+L'utente con email `marco2024redaelli@gmail.com` è riconosciuto come admin e vede in home una card "Analytics" (nascosta a tutti gli altri). Stesso controllo a livello UI sulla dashboard (`analytics_dashboard.html`) e a livello di regole Firestore (`isAdmin()`).
+
 ## DecAI — Assistente AI aziendale
 
 Il cuore del progetto è **DecAI**, un LLM basato su Meta Llama 3 (8B, Q4_K_M), fine-tuned con Unsloth + QLoRA sui dati tecnici DECA (catalogo prodotti, distinte base, nomenclatura componenti).
