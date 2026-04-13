@@ -1424,6 +1424,8 @@
     </div>
 
     <div id="toolbar">
+        <button id="btn-home" title="Torna alla Home" style="font-size:16px;padding:4px 10px;">&#8962;</button>
+        <div class="separator"></div>
         <label for="file-input" style="margin: 0;">Apri GLB</label>
         <input type="file" id="file-input" accept=".glb,.gltf" style="display:none">
         <button id="btn-library" title="Libreria modelli">Libreria</button>
@@ -1451,7 +1453,9 @@
         <button id="btn-annotate" title="Annota sul modello 3D (N)">Annota</button>
         <button id="btn-feedback-panel" title="Pannello Feedback & Annotazioni">Feedback</button>
         <div class="separator"></div>
-        <select id="export-format" style="margin-left: auto;" title="Formato esportazione">
+        <button id="btn-save-project" class="primary" title="Salva progetto" style="margin-left: auto;">Salva</button>
+        <div class="separator"></div>
+        <select id="export-format" title="Formato esportazione">
             <option value="glb">GLB</option>
             <option value="obj">OBJ</option>
             <option value="stl">STL</option>
@@ -2571,6 +2575,7 @@ python train.py</pre></div>
                 const model = gltf.scene;
                 model.name = filename || 'model';
                 model.userData.drawingCode = code || '';
+                model.userData._sourceUrl = url || '';
                 currentFileName = filename || 'model.glb';
 
                 let meshCount = 0;
@@ -3033,11 +3038,14 @@ python train.py</pre></div>
                 });
                 console.log('[DecAI] Catalogo caricato:', catalog.length, 'modelli');
                 renderLibraryFolder();
-                // Preload demo model
-                const demoItem = catalog.find(c => c.code === 'ALM0000041');
-                if (demoItem && loadedObjects.length === 0) {
-                    loadGLBFromURL('db/' + demoItem.glb, demoItem.name, demoItem.code);
-                    document.getElementById('drop-zone').classList.add('hidden');
+                // Preload demo model solo se non c'è un parametro ?load= nell'URL
+                const hasUrlLoad = new URLSearchParams(window.location.search).has('load');
+                if (!hasUrlLoad) {
+                    const demoItem = catalog.find(c => c.code === 'ALM0000041');
+                    if (demoItem && loadedObjects.length === 0) {
+                        loadGLBFromURL('db/' + demoItem.glb, demoItem.name, demoItem.code);
+                        document.getElementById('drop-zone').classList.add('hidden');
+                    }
                 }
             }).catch(err => console.warn('Catalogo modelli non disponibile:', err));
 
@@ -7582,6 +7590,48 @@ CATALOGO PRODOTTI DECA 2025:
             });
         }
 
+        // ---- Home button ----
+        document.getElementById('btn-home').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        // ---- Save Project ----
+        document.getElementById('btn-save-project').addEventListener('click', saveProject);
+
+        function saveProject() {
+            const projectData = {
+                version: 1,
+                timestamp: new Date().toISOString(),
+                objects: loadedObjects.map(obj => ({
+                    name: obj.name,
+                    url: obj.userData._sourceUrl || '',
+                    code: obj.userData.drawingCode || '',
+                    position: { x: obj.position.x, y: obj.position.y, z: obj.position.z },
+                    rotation: { x: obj.rotation.x, y: obj.rotation.y, z: obj.rotation.z },
+                    scale: { x: obj.scale.x, y: obj.scale.y, z: obj.scale.z },
+                    visible: obj.visible
+                })),
+                camera: {
+                    position: { x: camera.position.x, y: camera.position.y, z: camera.position.z },
+                    target: { x: orbitControls.target.x, y: orbitControls.target.y, z: orbitControls.target.z }
+                }
+            };
+            const json = JSON.stringify(projectData, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (currentFileName || 'progetto').replace(/\.glb$/i, '') + '_progetto.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            // Toast
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--accent);color:var(--bg-primary);padding:10px 24px;border-radius:var(--radius-lg);font-size:13px;font-weight:600;font-family:var(--font);z-index:9999;box-shadow:var(--shadow-lg);';
+            toast.textContent = 'Progetto salvato!';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
         // ---- Start ----
         init();
         setupEvents();
@@ -7592,6 +7642,28 @@ CATALOGO PRODOTTI DECA 2025:
         // Carica dati da Firestore dopo init
         loadAnnotationsFromFirestore();
         loadFeatureRequestsFromFirestore();
+
+        // ---- Caricamento da URL params (es. ?load=PRD/IAS/ias01.glb&name=ias01&code=050201036) ----
+        (function loadFromUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const loadPath = params.get('load');
+            if (loadPath) {
+                const name = params.get('name') || loadPath.split('/').pop().replace('.glb', '');
+                const code = params.get('code') || '';
+                const url = 'db/' + loadPath;
+                // Aspetta che il catalogo sia caricato, poi carica il modello
+                const waitAndLoad = () => {
+                    loadGLBFromURL(url, name, code);
+                    document.getElementById('drop-zone').classList.add('hidden');
+                };
+                // Se il catalogo è già caricato, vai subito; altrimenti aspetta un attimo
+                if (libraryCatalog && libraryCatalog.length > 0) {
+                    waitAndLoad();
+                } else {
+                    setTimeout(waitAndLoad, 500);
+                }
+            }
+        })();
     </script>
 
     <!-- Annotation Popup -->

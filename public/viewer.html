@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>DECA 3D Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="DECA 3D Viewer — modello 3D prodotto">
+    <meta property="og:description" content="Visualizza il modello 3D del prodotto configurato nel DECA 3D Editor.">
+    <meta property="og:image" content="https://glb-3d-editor.web.app/og-default.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <style>
+        :root { --bg: #0c0e14; --bg2: #141720; --text: #f0f2f5; --text2: #a5abb7; --accent: #4ecca3; --border: #2a2e3a; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        header { padding: 12px 20px; background: var(--bg2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; }
+        header h1 { font-size: 14px; font-weight: 600; flex: 1; }
+        header .code { font-size: 12px; color: var(--accent); font-family: monospace; }
+        header a { color: var(--text2); text-decoration: none; font-size: 12px; padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; transition: all .15s; }
+        header a:hover { color: var(--text); border-color: var(--accent); }
+        main { flex: 1; position: relative; }
+        model-viewer { width: 100%; height: 100%; background: var(--bg); --poster-color: transparent; }
+        #loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--text2); font-size: 14px; }
+        #error { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; color: #e94560; text-align: center; padding: 20px; }
+        footer { padding: 8px 20px; background: var(--bg2); border-top: 1px solid var(--border); font-size: 11px; color: var(--text2); text-align: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="prod-name">Caricamento modello...</h1>
+        <span class="code" id="prod-code"></span>
+        <a id="dl-glb" href="#" download>&#8595; Scarica GLB</a>
+    </header>
+    <main>
+        <div id="loading">Caricamento GLB in corso...</div>
+        <div id="error">Impossibile caricare il modello 3D.</div>
+        <model-viewer id="mv" camera-controls touch-action="pan-y" auto-rotate interaction-prompt="none" environment-image="neutral" shadow-intensity="1" exposure="1"></model-viewer>
+    </main>
+    <footer>DECA 3D Editor &mdash; vista interattiva modello prodotto</footer>
+
+    <script>
+        const params = new URLSearchParams(location.search);
+        const glb = params.get('glb');
+        const name = params.get('name') || '';
+        const code = params.get('code') || '';
+        const thumb = params.get('thumb') || '';
+
+        if (name) {
+            document.getElementById('prod-name').textContent = name.toUpperCase();
+            document.title = 'DECA 3D Viewer — ' + name;
+        }
+        if (code) document.getElementById('prod-code').textContent = code;
+
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        const ogImg = document.querySelector('meta[property="og:image"]');
+        if (name || code) ogTitle.setAttribute('content', 'DECA 3D Viewer — ' + (name || code));
+        if (thumb) ogImg.setAttribute('content', thumb);
+
+        const mv = document.getElementById('mv');
+        const loading = document.getElementById('loading');
+        const errorEl = document.getElementById('error');
+        const dlBtn = document.getElementById('dl-glb');
+
+        if (glb) {
+            const glbUrl = glb.startsWith('http') ? glb : '/db/' + glb.split('/').map(encodeURIComponent).join('/');
+            mv.src = glbUrl;
+            dlBtn.href = glbUrl;
+            mv.addEventListener('load', () => { loading.style.display = 'none'; });
+            mv.addEventListener('error', () => { loading.style.display = 'none'; errorEl.style.display = 'flex'; });
+        } else {
+            loading.style.display = 'none';
+            errorEl.textContent = 'Nessun modello specificato.';
+            errorEl.style.display = 'flex';
+            dlBtn.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

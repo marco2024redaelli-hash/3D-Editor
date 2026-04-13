@@ -284,6 +284,18 @@
             document.getElementById('modal-preventivo').style.display = 'flex';
         });
 
+        const PUBLIC_HOSTING_ORIGIN = 'https://glb-3d-editor.web.app';
+        function hostingBase() {
+            return /^(localhost|127\.|0\.0\.0\.0)/.test(location.hostname) ? PUBLIC_HOSTING_ORIGIN : location.origin;
+        }
+        function publicGlbUrl(glbPath) {
+            return hostingBase() + '/db/' + glbPath.split('/').map(encodeURIComponent).join('/');
+        }
+        function viewerUrl(obj) {
+            const q = new URLSearchParams({ glb: obj.glb, name: obj.name || '', code: obj.code || '' });
+            return hostingBase() + '/viewer.html?' + q.toString();
+        }
+
         document.getElementById('btn-send-preventivo').addEventListener('click', () => {
             const projects = getSavedProjects();
             const idx = parseInt(document.getElementById('prev-project').value);
@@ -292,11 +304,18 @@
             const email = document.getElementById('prev-email').value.trim();
             const notes = document.getElementById('prev-notes').value.trim();
 
-            const objList = (proj.objects || []).map(o => '- ' + (o.name || 'modello').toUpperCase() + (o.code ? ' [' + o.code + ']' : '')).join('\n');
+            const objects = proj.objects || [];
+            const objList = objects.map(o => '- ' + (o.name || 'modello').toUpperCase() + (o.code ? ' [' + o.code + ']' : '')).join('\n');
+            const productBlocks = objects.filter(o => o.glb).map(o => {
+                const label = (o.code || o.name || 'modello').toUpperCase();
+                return label + '\nVista 3D interattiva: ' + viewerUrl(o) + '\nScarica GLB: ' + publicGlbUrl(o.glb);
+            }).join('\n\n');
+
             const subject = 'Richiesta Preventivo: ' + proj.name;
             const body = 'Buongiorno,\n\nrichiedo un preventivo per il seguente progetto configurato nel DECA 3D Editor:\n\n' +
                 'PROGETTO: ' + proj.name + '\n' +
                 'OGGETTI:\n' + objList + '\n\n' +
+                (productBlocks ? 'DETTAGLIO PRODOTTI:\n\n' + productBlocks + '\n\n' : '') +
                 (notes ? 'NOTE:\n' + notes + '\n\n' : '') +
                 (email ? 'Email di contatto: ' + email + '\n\n' : '') +
                 'Cordiali saluti';
