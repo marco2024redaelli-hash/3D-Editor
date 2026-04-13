@@ -107,6 +107,114 @@
             .stats, .actions { grid-template-columns: 1fr 1fr; }
             .projects { grid-template-columns: 1fr; }
         }
+
+        /* ===== Tutorial Video ===== */
+        #tutorial-video { margin: 0 0 32px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+        #tutorial-video .tv-header { display:flex; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--border); }
+        #tutorial-video .tv-header h3 { font-size:14px; font-weight:600; color:var(--text); margin:0; }
+        #tutorial-video .tv-pulse { width:8px; height:8px; border-radius:50%; background:#e94560; animation: tvpulse 1.4s ease-in-out infinite; }
+        @keyframes tvpulse { 0%,100% { transform:scale(1); opacity:1;} 50% { transform:scale(1.5); opacity:.5;} }
+        #tutorial-video .tv-stage { position:relative; background: linear-gradient(135deg,#0a0c12,#141720); }
+        #tutorial-video .tv-browser-bar { display:flex; align-items:center; gap:6px; padding:8px 12px; background:#1c1f2a; border-bottom:1px solid #2a2e3a; }
+        #tutorial-video .tv-dot { width:10px; height:10px; border-radius:50%; }
+        #tutorial-video .tv-dot.r { background:#ff5f56;} #tutorial-video .tv-dot.y { background:#ffbd2e;} #tutorial-video .tv-dot.g { background:#27c93f;}
+        #tutorial-video .tv-url { margin-left:12px; font-size:11px; color:#8b90a0; background:#0c0e14; padding:4px 10px; border-radius:4px; flex:1; font-family:monospace; }
+        #tutorial-video .tv-scene-wrap { position:relative; height:360px; overflow:hidden; }
+        #tutorial-video .tv-scene { position:absolute; inset:0; opacity:0; transform:translateY(8px); transition: opacity .6s ease, transform .6s ease; display:flex; align-items:center; justify-content:center; padding:20px; pointer-events:none; }
+        #tutorial-video .tv-scene.active { opacity:1; transform:translateY(0); pointer-events:auto; }
+
+        /* cursor */
+        #tutorial-video .tv-cursor { position:absolute; width:22px; height:22px; top:50%; left:50%; pointer-events:none; z-index:10; transition: top 1.2s cubic-bezier(.4,0,.2,1), left 1.2s cubic-bezier(.4,0,.2,1); }
+        #tutorial-video .tv-cursor::before { content:''; position:absolute; inset:0; background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23ffffff' stroke='%23000000' stroke-width='1' d='M5 3l14 9-6 2-2 6z'/></svg>") no-repeat center/contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
+        #tutorial-video .tv-cursor.clicking::after { content:''; position:absolute; inset:-14px; border-radius:50%; border:2px solid var(--accent); animation: tvclick .5s ease-out; }
+        @keyframes tvclick { 0% { transform:scale(0); opacity:1;} 100% { transform:scale(1); opacity:0;} }
+
+        /* Scene 1 - Library */
+        #tutorial-video .tv-library { width:100%; max-width:720px; background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:16px; }
+        #tutorial-video .tv-lib-header { font-size:12px; font-weight:600; color:var(--text2); margin-bottom:12px; text-transform:uppercase; letter-spacing:.5px; }
+        #tutorial-video .tv-lib-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+        #tutorial-video .tv-card { background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:10px; text-align:center; transition: border-color .3s, transform .3s, box-shadow .3s; }
+        #tutorial-video .tv-card span { font-size:11px; font-weight:600; color:var(--text); }
+        #tutorial-video .tv-card-img { height:80px; border-radius:4px; margin-bottom:8px; background: radial-gradient(ellipse at center, #1c1f2a, #0a0c12); position:relative; overflow:hidden; }
+        #tutorial-video .tv-card-img model-viewer { width:100%; height:100%; background:transparent; --poster-color:transparent; pointer-events:none; }
+        #tutorial-video .tv-scene[data-scene="1"].active .tv-card.target { border-color:var(--accent); transform:scale(1.05); box-shadow:0 4px 20px rgba(78,204,163,.3); }
+
+        /* Scene 2 & 4 - Editor */
+        #tutorial-video .tv-editor { width:100%; max-width:720px; height:100%; background:var(--bg3); border:1px solid var(--border); border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+        #tutorial-video .tv-editor-toolbar { display:flex; gap:4px; padding:8px 12px; background:var(--bg2); border-bottom:1px solid var(--border); font-size:10px; }
+        #tutorial-video .tv-editor-toolbar span { padding:4px 10px; border-radius:4px; color:var(--text2); background:var(--bg3); }
+        #tutorial-video .tv-editor-toolbar span.active { background:var(--accent); color:#0c0e14; font-weight:600; }
+        #tutorial-video .tv-viewport { flex:1; position:relative; background: radial-gradient(ellipse at center, #1c1f2a, #0a0c12); overflow:hidden; }
+        #tutorial-video .tv-grid-floor { position:absolute; inset:0; background-image: linear-gradient(rgba(78,204,163,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(78,204,163,.1) 1px, transparent 1px); background-size: 40px 40px; transform: perspective(400px) rotateX(60deg); transform-origin: center bottom; opacity:.6; }
+        #tutorial-video .tv-mv-hero { position:absolute; inset:0; width:100%; height:100%; background:transparent; --poster-color:transparent; pointer-events:none; z-index:1; }
+        #tutorial-video .tv-mv-hero.small { width:65%; height:65%; top:18%; left:18%; inset:auto; }
+
+        /* Scene 3 - Chat */
+        #tutorial-video .tv-chat { width:100%; max-width:480px; background:var(--bg3); border:1px solid var(--border); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+        #tutorial-video .tv-chat-header { display:flex; align-items:center; gap:10px; padding:12px 16px; background:var(--bg2); border-bottom:1px solid var(--border); }
+        #tutorial-video .tv-chat-avatar { width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--accent),#3b82f6); display:flex; align-items:center; justify-content:center; font-weight:700; color:#0c0e14; font-size:12px; }
+        #tutorial-video .tv-chat-sub { font-size:10px; color:var(--text3); }
+        #tutorial-video .tv-chat-msgs { padding:14px; display:flex; flex-direction:column; gap:10px; min-height:200px; }
+        #tutorial-video .tv-msg { max-width:75%; padding:8px 12px; border-radius:10px; font-size:12px; line-height:1.4; }
+        #tutorial-video .tv-msg.bot { background:var(--bg2); color:var(--text); align-self:flex-start; border:1px solid var(--border); }
+        #tutorial-video .tv-msg.user { background:var(--accent); color:#0c0e14; align-self:flex-end; font-weight:500; }
+        #tutorial-video .tv-msg.tv-msg-a, #tutorial-video .tv-msg.tv-msg-b, #tutorial-video .tv-msg.tv-msg-c, #tutorial-video .tv-msg.tv-msg-d { opacity:0; transform:translateY(4px); transition: opacity .35s ease, transform .35s ease; }
+        #tutorial-video .tv-scene[data-scene="3"].active .tv-msg.tv-msg-a { opacity:1; transform:none; transition-delay:0.2s; }
+        #tutorial-video .tv-scene[data-scene="3"].active .tv-msg.tv-msg-b { opacity:1; transform:none; transition-delay:2.8s; }
+        #tutorial-video .tv-scene[data-scene="3"].active .tv-msg.tv-msg-c { opacity:1; transform:none; transition-delay:6.4s; }
+        #tutorial-video .tv-scene[data-scene="3"].active .tv-msg.tv-msg-d { opacity:1; transform:none; transition-delay:9.2s; }
+
+        /* Scene 4 - CTA */
+        #tutorial-video .tv-cta-btn { position:absolute; bottom:16px; right:16px; display:flex; align-items:center; gap:8px; background:linear-gradient(135deg,var(--accent),#3b82f6); color:#0c0e14; border:none; padding:10px 18px; border-radius:8px; font-weight:700; font-size:12px; cursor:pointer; box-shadow:0 4px 14px rgba(78,204,163,.4); }
+        #tutorial-video .tv-scene[data-scene="4"].active .tv-cta-btn { animation: tvglow 1.5s ease-in-out infinite; }
+        @keyframes tvglow { 0%,100% { box-shadow:0 4px 14px rgba(78,204,163,.4);} 50% { box-shadow:0 6px 28px rgba(78,204,163,.9), 0 0 0 8px rgba(78,204,163,.15);} }
+
+        /* Scene 5 - Mail */
+        #tutorial-video .tv-mail { width:100%; max-width:620px; background:#fff; color:#333; border-radius:8px; overflow:hidden; font-size:12px; max-height:320px; }
+        #tutorial-video .tv-mail-header { padding:12px 18px; background:#f3f4f6; border-bottom:1px solid #e5e7eb; color:#111; }
+        #tutorial-video .tv-mail-header > div { margin:3px 0; font-size:11px; }
+        #tutorial-video .tv-mail-body { padding:14px 18px; line-height:1.5; overflow-y:auto; max-height:200px; }
+        #tutorial-video .tv-mail-body p { margin:4px 0; }
+        #tutorial-video .tv-mail-prod { margin-top:8px; padding:8px 12px; background:#f9fafb; border-left:3px solid var(--accent); border-radius:4px; font-size:11px; }
+        #tutorial-video .tv-link { color:#1e40af; text-decoration:underline; word-break:break-all; }
+
+        /* Scene 7 - Finale */
+        #tutorial-video .tv-finale { width:100%; max-width:560px; text-align:center; padding:20px; display:flex; flex-direction:column; align-items:center; gap:14px; }
+        #tutorial-video .tv-finale-check { width:72px; height:72px; }
+        #tutorial-video .tv-finale-check svg { width:100%; height:100%; }
+        #tutorial-video .tv-check-circle { stroke:var(--accent); stroke-width:2.5; stroke-dasharray:166; stroke-dashoffset:166; }
+        #tutorial-video .tv-check-tick { stroke:var(--accent); stroke-width:3; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:48; stroke-dashoffset:48; }
+        #tutorial-video .tv-scene[data-scene="6"].active .tv-check-circle { animation: tv-draw-circle .6s ease-out .2s forwards; }
+        #tutorial-video .tv-scene[data-scene="6"].active .tv-check-tick { animation: tv-draw-tick .4s ease-out .7s forwards; }
+        @keyframes tv-draw-circle { to { stroke-dashoffset: 0; } }
+        @keyframes tv-draw-tick { to { stroke-dashoffset: 0; } }
+        #tutorial-video .tv-finale-title { font-size:28px; font-weight:700; color:var(--text); margin:0; background:linear-gradient(135deg,var(--accent),#3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        #tutorial-video .tv-finale-sub { font-size:14px; color:var(--text2); line-height:1.5; max-width:440px; margin:0; }
+        #tutorial-video .tv-finale-contacts { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:4px; }
+        #tutorial-video .tv-finale-chip { font-size:12px; color:var(--text); background:var(--bg3); border:1px solid var(--border); padding:6px 14px; border-radius:20px; }
+
+        /* Scene 6 - Viewer */
+        #tutorial-video .tv-viewer { width:100%; max-width:720px; height:100%; background:var(--bg3); border:1px solid var(--border); border-radius:8px; overflow:hidden; display:flex; flex-direction:column; }
+        #tutorial-video .tv-viewer-header { padding:10px 16px; background:var(--bg2); border-bottom:1px solid var(--border); font-size:12px; font-weight:600; color:var(--accent); }
+        #tutorial-video .tv-viewer-canvas { flex:1; position:relative; background: radial-gradient(ellipse at center, #1c1f2a, #0a0c12); overflow:hidden; }
+
+        /* Typewriter effect (scene 3) */
+        #tutorial-video .tv-tw-a::after, #tutorial-video .tv-tw-c::after { content:''; display:inline-block; width:6px; height:12px; background:#0c0e14; margin-left:2px; animation: tvblink 1s steps(2) infinite; vertical-align:-1px; }
+        @keyframes tvblink { 50% { opacity:0; } }
+
+        /* caption + progress */
+        #tutorial-video .tv-caption { display:flex; align-items:center; gap:14px; padding:14px 18px; background:rgba(12,14,20,.6); border-top:1px solid var(--border); }
+        #tutorial-video .tv-step-num { flex-shrink:0; width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--accent),#3b82f6); color:#0c0e14; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px; }
+        #tutorial-video .tv-step-text { font-size:14px; color:var(--text); line-height:1.5; }
+        #tutorial-video .tv-progress { display:flex; gap:8px; justify-content:center; padding:10px; background:var(--bg2); border-top:1px solid var(--border); }
+        #tutorial-video .tv-progress .dot { width:30px; height:4px; border-radius:2px; background:var(--border); transition: background .3s, width .3s; }
+        #tutorial-video .tv-progress .dot.active { background:var(--accent); width:50px; }
+
+        @media (max-width: 768px) {
+            #tutorial-video .tv-scene-wrap { height:320px; }
+            #tutorial-video .tv-lib-grid { grid-template-columns:repeat(2,1fr); }
+            #tutorial-video .tv-step-text { font-size:12px; }
+        }
     </style>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -171,6 +279,130 @@
         <h2 style="font-size:22px;font-weight:700;margin-bottom:6px;">Benvenuto nel configuratore 3D di DECA S.r.l.</h2>
         <p style="color:var(--text2);font-size:14px;line-height:1.6;max-width:720px;">Visualizza, assembla e gestisci i modelli 3D dei nostri prodotti per l'automazione industriale. Esplora il catalogo, consulta distinte e disegni tecnici, e chiedi supporto al nostro assistente AI.</p>
     </div>
+
+    <!-- Tutorial Video -->
+    <section id="tutorial-video" aria-label="Tutorial interattivo">
+        <div class="tv-header">
+            <span class="tv-pulse"></span>
+            <h3>Come funziona — dall'editor alla richiesta preventivo in 30 secondi</h3>
+        </div>
+        <div class="tv-stage">
+            <div class="tv-browser-bar">
+                <span class="tv-dot r"></span><span class="tv-dot y"></span><span class="tv-dot g"></span>
+                <span class="tv-url">glb-3d-editor.web.app</span>
+            </div>
+            <div class="tv-scene-wrap">
+                <!-- Scene 1: Libreria -->
+                <div class="tv-scene" data-scene="1">
+                    <div class="tv-library">
+                        <div class="tv-lib-header">Libreria Prodotti DECA</div>
+                        <div class="tv-lib-grid">
+                            <div class="tv-card" data-idx="0">
+                                <div class="tv-card-img"><model-viewer src="db/PRD/CVM01/0001/Costruttivi/prd-cvm01-0001-ac001-x.glb" interaction-prompt="none" auto-rotate loading="lazy" disable-zoom camera-orbit="0deg 75deg 105%" environment-image="neutral" exposure="1"></model-viewer></div>
+                                <span>CVM01 — Canale Vibrante</span>
+                            </div>
+                            <div class="tv-card target" data-idx="1">
+                                <div class="tv-card-img"><model-viewer src="db/PRD/BVC/TIPO_4a/bvc-431-dx-a000.glb" interaction-prompt="none" auto-rotate loading="lazy" disable-zoom camera-orbit="0deg 75deg 105%" environment-image="neutral" exposure="1"></model-viewer></div>
+                                <span>BVC — Base Vibrante</span>
+                            </div>
+                            <div class="tv-card" data-idx="2">
+                                <div class="tv-card-img"><model-viewer src="db/PRD/CDZ01/cdz-027-af001-m5_solo_per_ias.glb" interaction-prompt="none" auto-rotate loading="lazy" disable-zoom camera-orbit="0deg 75deg 105%" environment-image="neutral" exposure="1"></model-viewer></div>
+                                <span>CDZ01 — Cadenzatore</span>
+                            </div>
+                            <div class="tv-card" data-idx="3">
+                                <div class="tv-card-img"><model-viewer src="db/PRD/CVE01/D/025-D1/Costruttivi 25 litri/prd-cve-d-025-d1-ac001-x.glb" interaction-prompt="none" auto-rotate loading="lazy" disable-zoom camera-orbit="0deg 75deg 105%" environment-image="neutral" exposure="1"></model-viewer></div>
+                                <span>CVE01 — Canale Elettromagn.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scene 2: Editor 3D -->
+                <div class="tv-scene" data-scene="2">
+                    <div class="tv-editor">
+                        <div class="tv-editor-toolbar"><span>Apri GLB</span><span>Sposta</span><span>Ruota</span><span>Scala</span><span class="active">Misura</span></div>
+                        <div class="tv-viewport">
+                            <div class="tv-grid-floor"></div>
+                            <model-viewer class="tv-mv-hero" src="db/PRD/BVC/TIPO_4a/bvc-431-dx-a000.glb" interaction-prompt="none" auto-rotate rotation-per-second="45deg" loading="lazy" disable-zoom camera-orbit="0deg 75deg 110%" environment-image="neutral" exposure="1" shadow-intensity="1"></model-viewer>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scene 3: Chat DecAI -->
+                <div class="tv-scene" data-scene="3">
+                    <div class="tv-chat">
+                        <div class="tv-chat-header">
+                            <div class="tv-chat-avatar">AI</div>
+                            <div><b>DecAI</b><div class="tv-chat-sub">Assistente AI DECA</div></div>
+                        </div>
+                        <div class="tv-chat-msgs">
+                            <div class="tv-msg bot">Ciao! Come posso aiutarti sulla BVC?</div>
+                            <div class="tv-msg user tv-msg-a"><span class="tv-tw-a"></span></div>
+                            <div class="tv-msg bot tv-msg-b">Sì, la <b>Base Vibrante Circolare (BVC)</b> è disponibile in 4 tipi: <b>BVC-331</b> (Ø 330mm), <b>BVC-361</b> (Ø 360mm), <b>BVC-431</b> (Ø 430mm) e <b>BVC-532</b> (Ø 530mm). La scelta dipende dalla portata richiesta.</div>
+                            <div class="tv-msg user tv-msg-c"><span class="tv-tw-c"></span></div>
+                            <div class="tv-msg bot tv-msg-d">Ok, ti salvo l'attuale progetto e faccio il preventivo da mandare ai commerciali di Deca srl.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scene 4: Richiedi Preventivo button -->
+                <div class="tv-scene" data-scene="4">
+                    <div class="tv-editor">
+                        <div class="tv-editor-toolbar"><span>Apri GLB</span><span>Sposta</span><span>Ruota</span><span>Scala</span></div>
+                        <div class="tv-viewport">
+                            <div class="tv-grid-floor"></div>
+                            <model-viewer class="tv-mv-hero small" src="db/PRD/BVC/TIPO_4a/bvc-431-dx-a000.glb" interaction-prompt="none" auto-rotate rotation-per-second="30deg" loading="lazy" disable-zoom camera-orbit="0deg 75deg 115%" environment-image="neutral" exposure="1"></model-viewer>
+                            <button class="tv-cta-btn">&#9993; Richiedi Preventivo</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scene 5: Mail -->
+                <div class="tv-scene" data-scene="5">
+                    <div class="tv-mail">
+                        <div class="tv-mail-header">
+                            <div><b>A:</b> marco.redaelli@decasrl.biz</div>
+                            <div><b>Oggetto:</b> Richiesta Preventivo: Canale Vibrante</div>
+                        </div>
+                        <div class="tv-mail-body">
+                            <p>Buongiorno,</p>
+                            <p>richiedo un preventivo per il seguente progetto configurato nel DECA 3D Editor:</p>
+                            <p><b>PROGETTO:</b> Canale Vibrante<br><b>OGGETTI:</b><br>- PRD-CVE-D-025-A0002-X</p>
+                            <p><b>DETTAGLIO PRODOTTI:</b></p>
+                            <div class="tv-mail-prod">
+                                <b>PRD-CVE-D-025-A0002-X</b><br>
+                                <span class="tv-link">Vista 3D interattiva: https://glb-3d-editor.web.app/viewer.html?...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scene 6: Finale -->
+                <div class="tv-scene" data-scene="6">
+                    <div class="tv-finale">
+                        <div class="tv-finale-check">
+                            <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg"><circle class="tv-check-circle" cx="26" cy="26" r="24" fill="none"/><path class="tv-check-tick" fill="none" d="M14 27l8 8 16-16"/></svg>
+                        </div>
+                        <h3 class="tv-finale-title">Richiesta inviata!</h3>
+                        <p class="tv-finale-sub">A questo punto i nostri commerciali ti contatteranno nel più breve tempo possibile.</p>
+                        <div class="tv-finale-contacts">
+                            <span class="tv-finale-chip">&#9742; 0341 63 20 80</span>
+                            <span class="tv-finale-chip">&#9993; info@decasrl.biz</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tv-cursor"></div>
+            </div>
+            <div class="tv-caption">
+                <div class="tv-step-num">1/6</div>
+                <div class="tv-step-text">Scegli un prodotto dalla libreria del catalogo DECA.</div>
+            </div>
+        </div>
+        <div class="tv-progress">
+            <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+    </section>
 
     <!-- Progetti Salvati -->
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
@@ -265,6 +497,86 @@
             });
         }
         renderSavedProjects();
+
+        // === Tutorial Video (loop) ===
+        (function tutorialVideo() {
+            const tv = document.getElementById('tutorial-video');
+            if (!tv) return;
+            const scenes = tv.querySelectorAll('.tv-scene');
+            const dots = tv.querySelectorAll('.tv-progress .dot');
+            const captionNum = tv.querySelector('.tv-step-num');
+            const captionText = tv.querySelector('.tv-step-text');
+            const cursor = tv.querySelector('.tv-cursor');
+
+            const steps = [
+                { duration: 5000, text: 'Scegli un prodotto dalla libreria del catalogo DECA.',
+                  animate: () => setCursor('52%', '55%', 1800, true) },
+                { duration: 5000, text: 'Configura il modello 3D: ruota, zoom, applica materiali e assembla.',
+                  animate: () => setCursor('50%', '55%', 1500, false) },
+                { duration: 11000, text: 'Parla con DecAI: chiedi informazioni tecniche, poi richiedi un preventivo — tutto in linguaggio naturale.',
+                  animate: () => {
+                      setCursor('80%', '85%', 600, false);
+                      runTypewriterAt('.tv-tw-a', 'Ci sono altre taglie della BVC?', 600);
+                      runTypewriterAt('.tv-tw-c', 'Ok perfetto, mandami un preventivo', 6800);
+                  } },
+                { duration: 4500, text: 'Clicca "Richiedi Preventivo": DECA riceve il progetto configurato.',
+                  animate: () => setCursor('85%', '85%', 1600, true) },
+                { duration: 5500, text: 'Mail pronta per il commerciale DECA, con lista oggetti e link al visualizzatore 3D.',
+                  animate: () => setCursor('50%', '50%', 0, false) },
+                { duration: 5500, text: 'A questo punto i nostri commerciali ti contatteranno nel più breve tempo possibile.',
+                  animate: () => setCursor('50%', '50%', 0, false) }
+            ];
+
+            let current = 0;
+            function setCursor(left, top, delay, click) {
+                if (!cursor) return;
+                cursor.style.left = left;
+                cursor.style.top = top;
+                if (click) {
+                    setTimeout(() => {
+                        cursor.classList.add('clicking');
+                        setTimeout(() => cursor.classList.remove('clicking'), 500);
+                    }, delay);
+                }
+            }
+            function runTypewriterAt(selector, text, delay) {
+                const tw = tv.querySelector('.tv-scene[data-scene="3"] ' + selector);
+                if (!tw) return;
+                tw.textContent = '';
+                setTimeout(() => {
+                    let i = 0;
+                    const interval = setInterval(() => {
+                        tw.textContent = text.slice(0, ++i);
+                        if (i >= text.length) clearInterval(interval);
+                    }, 55);
+                }, delay);
+            }
+            function showStep(i) {
+                current = i;
+                scenes.forEach(s => s.classList.remove('active'));
+                scenes[i].classList.add('active');
+                dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+                captionNum.textContent = (i + 1) + '/' + steps.length;
+                captionText.textContent = steps[i].text;
+                if (cursor) {
+                    cursor.style.left = '50%';
+                    cursor.style.top = '50%';
+                }
+                setTimeout(() => steps[i].animate(), 400);
+            }
+            function loop() {
+                showStep(current);
+                setTimeout(() => {
+                    current = (current + 1) % steps.length;
+                    loop();
+                }, steps[current].duration);
+            }
+            // Pausa su hover
+            let paused = false;
+            tv.addEventListener('mouseenter', () => { paused = true; });
+            tv.addEventListener('mouseleave', () => { paused = false; });
+            loop();
+        })();
 
         // === Preventivo ===
         document.getElementById('btn-preventivo').addEventListener('click', () => {
