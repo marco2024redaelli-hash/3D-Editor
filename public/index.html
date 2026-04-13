@@ -510,7 +510,7 @@
 
             const steps = [
                 { duration: 5000, text: 'Scegli un prodotto dalla libreria del catalogo DECA.',
-                  animate: () => setCursor('52%', '55%', 1800, true) },
+                  animate: () => pointCursorAt(tv.querySelector('.tv-scene[data-scene="1"] .tv-card.target'), 1800, true) },
                 { duration: 5000, text: 'Configura il modello 3D: ruota, zoom, applica materiali e assembla.',
                   animate: () => setCursor('50%', '55%', 1500, false) },
                 { duration: 11000, text: 'Parla con DecAI: chiedi informazioni tecniche, poi richiedi un preventivo — tutto in linguaggio naturale.',
@@ -520,7 +520,7 @@
                       runTypewriterAt('.tv-tw-c', 'Ok perfetto, mandami un preventivo', 6800);
                   } },
                 { duration: 4500, text: 'Clicca "Richiedi Preventivo": DECA riceve il progetto configurato.',
-                  animate: () => setCursor('85%', '85%', 1600, true) },
+                  animate: () => pointCursorAt(tv.querySelector('.tv-scene[data-scene="4"] .tv-cta-btn'), 1600, true) },
                 { duration: 5500, text: 'Mail pronta per il commerciale DECA, con lista oggetti e link al visualizzatore 3D.',
                   animate: () => setCursor('50%', '50%', 0, false) },
                 { duration: 5500, text: 'A questo punto i nostri commerciali ti contatteranno nel più breve tempo possibile.',
@@ -538,6 +538,15 @@
                         setTimeout(() => cursor.classList.remove('clicking'), 500);
                     }, delay);
                 }
+            }
+            function pointCursorAt(el, delay, click) {
+                const wrap = tv.querySelector('.tv-scene-wrap');
+                if (!el || !wrap || !cursor) return;
+                const w = wrap.getBoundingClientRect();
+                const r = el.getBoundingClientRect();
+                const leftPct = ((r.left + r.width/2) - w.left) / w.width * 100;
+                const topPct = ((r.top + r.height/2) - w.top) / w.height * 100;
+                setCursor(leftPct.toFixed(1) + '%', topPct.toFixed(1) + '%', delay, click);
             }
             function runTypewriterAt(selector, text, delay) {
                 const tw = tv.querySelector('.tv-scene[data-scene="3"] ' + selector);
@@ -684,22 +693,7 @@
     </script>
 
     <!-- Quick actions -->
-    <div class="actions">
-        <a class="action-card" href="glb_editor.html">
-            <div class="action-icon editor">&#9998;</div>
-            <div class="info"><h3>Editor 3D</h3><span>Apri l'editor di modelli</span></div>
-            <span class="arrow">&rarr;</span>
-        </a>
-        <a class="action-card" href="chat_history.html">
-            <div class="action-icon ai">&#10024;</div>
-            <div class="info"><h3>Assistente AI</h3><span>Chat recenti DecAI</span></div>
-            <span class="arrow">&rarr;</span>
-        </a>
-        <a class="action-card" href="catalog_page.html">
-            <div class="action-icon assembly">&#9881;</div>
-            <div class="info"><h3>Libreria</h3><span>Sfoglia il catalogo</span></div>
-            <span class="arrow">&rarr;</span>
-        </a>
+    <div class="actions" id="actions-admin" style="display:none;">
         <a class="action-card" href="analytics_dashboard.html">
             <div class="action-icon" style="background:linear-gradient(135deg,#a855f7,#4a9eff);">&#128202;</div>
             <div class="info"><h3>Analytics</h3><span>Dashboard configurazioni e feedback</span></div>
@@ -756,6 +750,8 @@
     let currentUser = null;
     let projects = [];
 
+    const ADMIN_EMAIL = 'marco2024redaelli@gmail.com';
+
     // Auth
     auth.onAuthStateChanged(user => {
         currentUser = user;
@@ -769,6 +765,8 @@
             // window.location.href = 'glb_editor.html';
             loadDemoProjects();
         }
+        const adminActions = document.getElementById('actions-admin');
+        if (adminActions) adminActions.style.display = (user && user.email === ADMIN_EMAIL) ? 'grid' : 'none';
         recordSiteVisitOnce(user);
     });
 

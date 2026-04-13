@@ -386,10 +386,23 @@
 
 </div>
 
+<!-- Auth gate overlay -->
+<div id="auth-gate" style="display:none;position:fixed;inset:0;background:var(--bg-primary);z-index:9999;align-items:center;justify-content:center;flex-direction:column;padding:20px;text-align:center;">
+    <h2 style="font-size:24px;font-weight:700;margin-bottom:12px;">DECA Analytics Dashboard</h2>
+    <p id="auth-gate-msg" style="color:var(--text-secondary);font-size:14px;margin-bottom:28px;max-width:460px;line-height:1.5;">Accesso riservato. Esegui l'accesso con il tuo account Google per continuare.</p>
+    <button id="btn-google-signin" style="display:flex;align-items:center;gap:10px;background:#fff;color:#0c0e14;border:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;font-family:var(--font);box-shadow:0 4px 16px rgba(0,0,0,0.4);">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09 0-.73.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Accedi con Google
+    </button>
+    <a href="index.html" style="margin-top:20px;color:var(--text-muted);font-size:12px;text-decoration:none;">&larr; Torna alla home</a>
+</div>
+
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <script>
+    const ADMIN_EMAIL = 'marco2024redaelli@gmail.com';
     const firebaseConfig = {
         apiKey: "AIzaSyDAIP5BiNwbwvCYE5Dc2l8vlTbUVRCV3R4",
         authDomain: "glb-3d-editor.firebaseapp.com",
@@ -400,6 +413,45 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+    const auth = firebase.auth();
+
+    // --- Auth gate ---
+    const authGate = document.getElementById('auth-gate');
+    const authGateMsg = document.getElementById('auth-gate-msg');
+    function showGate(msg) {
+        authGateMsg.textContent = msg;
+        authGate.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    function hideGate() {
+        authGate.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    document.getElementById('btn-google-signin').addEventListener('click', async () => {
+        try {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            await auth.signInWithPopup(provider);
+        } catch (e) {
+            showGate('Errore durante il login: ' + (e.message || e));
+        }
+    });
+    let authResolved = false;
+    auth.onAuthStateChanged(user => {
+        authResolved = true;
+        if (!user) {
+            showGate('Accesso riservato. Esegui l\'accesso con il tuo account Google per continuare.');
+            return;
+        }
+        if (user.email !== ADMIN_EMAIL) {
+            showGate('Accesso non autorizzato per l\'account ' + (user.email || '') + '. Questa area è riservata all\'amministratore.');
+            setTimeout(() => auth.signOut(), 100);
+            return;
+        }
+        hideGate();
+        loadAllData();
+    });
+    // Mostra gate se auth non risolto entro 2s (caso offline/errore)
+    setTimeout(() => { if (!authResolved) showGate('Accesso riservato. Esegui l\'accesso con il tuo account Google per continuare.'); }, 2000);
 
     // --- State ---
     let sessions = [];
@@ -1038,8 +1090,7 @@
         return { prezzo: 'Prezzo', materiali: 'Materiali', design: 'Design', logistica: 'Logistica' }[c] || c;
     }
 
-    // --- Init ---
-    loadAllData();
+    // --- Init: loadAllData is called by the auth gate when user === ADMIN_EMAIL ---
 </script>
 
 </body>
