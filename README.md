@@ -2,7 +2,7 @@
 
 Editor 3D professionale per file GLB/GLTF con intelligenza artificiale integrata, sviluppato per **DECA S.r.l.**
 
-Permette di visualizzare, assemblare e gestire modelli 3D di alimentatori vibranti, nastri trasportatori, tramogge, cappe afoniche e componenti industriali per l'automazione.
+Permette di visualizzare, assemblare e gestire modelli 3D di alimentatori vibranti, nastri trasportatori, tramogge, cappe afoniche e componenti industriali per l'automazione direttamente al cliente.
 
 **Live:** [glb-3d-editor.web.app](https://glb-3d-editor.web.app)
 
