@@ -4,7 +4,13 @@ GLB 3D Editor — DECA 3D Viewer
 Editor 3D professionale per file GLB/GLTF con intelligenza artificiale integrata,
 sviluppato per DECA S.r.l. Permette di visualizzare, assemblare e gestire modelli 3D
 di alimentatori vibranti, nastri trasportatori, tramogge, cappe afoniche e componenti
-industriali per l'automazione.
+industriali per l'automazione direttamente al cliente.
+
+L'esperienza e' rivolta al cliente finale: dalla homepage sceglie un prodotto
+configurabile dal catalogo, lo apre nell'editor 3D, puo' chiedere informazioni tecniche
+a DecAI in linguaggio naturale e con un click invia una richiesta di preventivo ai
+commerciali DECA. Il tutto con tema visivo corporate DECA (rosso #c41e3a, blu #004a99,
+bianco, font Inter).
 
 Il cuore del progetto e' DecAI, l'assistente AI aziendale di DECA. Si tratta di un
 modello linguistico (LLM) basato su Meta Llama, addestrato (fine-tuning) sui dati
@@ -50,6 +56,13 @@ Funzionalita' principali
 - Badge di sentiment (positivo/problema/suggerimento) e sorgente (AI/locale)
 - Feedback thumbs up/down sui messaggi del chatbot
 - Toast notification per caricamento modelli
+- Richiesta preventivo end-to-end dall'editor alla mail commerciale DECA
+- Viewer 3D condivisibile (viewer.html) via link pubblico, con preview Open Graph
+- Tutorial video auto-loop in homepage (6 scene animate, ~40 secondi) che mostra
+  dal catalogo all'invio della richiesta preventivo
+- Analytics dashboard custom con pannelli Richieste Preventivo, Visite, Visitatori,
+  Funnel, Sentiment, Feature Requests. Accesso riservato all'email admin
+  (Google Sign-In + regole Firestore isAdmin())
 
 
 Libreria prodotti

@@ -33,13 +33,15 @@ Il cuore del progetto è **DecAI**, un LLM basato su Meta Llama 3 (8B, Q4_K_M), 
 - Autenticazione Google / email (Firebase Auth)
 - **Richiesta preventivo**: flusso end-to-end dall'editor alla mail commerciale DECA
 - **Viewer 3D condivisibile** (`viewer.html`) via link pubblico, con preview Open Graph
-- **Analytics dashboard** custom per visite, visitatori, richieste preventivo, sessioni e feedback
+- **Analytics dashboard** custom per visite, visitatori, richieste preventivo, sessioni e feedback — accesso riservato all'email admin (Google Sign-In + regole Firestore)
+- **Tutorial video auto-loop** in homepage che mostra il flusso end-to-end in 6 scene animate (~40 secondi)
+- **Identità visiva DECA** — tema light con rosso corporate `#c41e3a`, blu `#004a99` e sfondo bianco, applicato uniformemente a home, editor, catalogo e analytics
 
 ## Sistema preventivi
 
 Il cliente può inviare una richiesta di preventivo a DECA in due modi:
 
-1. **Pulsante "Richiedi Preventivo"** — presente sia nella home sia nell'editor (in basso a destra, gradient verde→blu). Nell'editor costruisce il preventivo dagli oggetti attualmente in scena.
+1. **Pulsante "Richiedi Preventivo"** — presente sia nella home sia nell'editor (in basso a destra, gradient rosso→blu DECA). Nell'editor costruisce il preventivo dagli oggetti attualmente in scena.
 2. **Tramite DecAI** — se l'utente scrive in chat "voglio un preventivo", "vorrei fare un preventivo", ecc., l'intent viene intercettato localmente: DecAI conferma ("Ok, ti salvo l'attuale progetto e faccio il preventivo...") e apre la mail.
 
 In entrambi i casi:
@@ -48,11 +50,30 @@ In entrambi i casi:
 - Viene scritto un documento nella collection Firestore `preventivi` con: `createdAt` (timestamp), `projectName`, `objectCodes`, `contactEmail`, `notes`, `hasConversation`, `conversation` (trascrizione chat DecAI, se presente), `origin` (`decai_chat` o `modal`), `userId`, `userEmail`, `userAgent`
 - Si apre il client di posta precompilato con oggetto, lista prodotti e **un link `viewer.html` per ogni prodotto** — il destinatario clicca e vede il modello 3D ruotabile nel browser senza scaricare niente
 
+Accanto al pulsante Preventivo c'è anche un pulsante secondario **"Contatta l'Ufficio Tecnico DECA"** (blu) che apre una mail precompilata verso l'ufficio tecnico.
+
 **Nota**: la conversazione DecAI è visibile solo lato analytics (per comprendere le esigenze del cliente) — non viene inclusa nella mail inviata a DECA.
+
+## Tutorial video (homepage)
+
+Sezione "Come funziona — dall'editor alla richiesta preventivo in 30 secondi" sotto al benvenuto. Loop auto-play in 6 scene animate:
+
+1. **Libreria prodotti**: card con 3D reali (CVM01, BVC, CDZ01, CVE01), la BVC target si illumina al passaggio del cursore
+2. **Editor 3D**: modello BVC-431 con auto-rotazione nel viewport mock
+3. **Chat DecAI**: l'utente chiede "Ci sono altre taglie della BVC?" — DecAI elenca BVC-331/361/431/532 — l'utente risponde "Ok perfetto, mandami un preventivo" — DecAI conferma
+4. **CTA Richiedi Preventivo** con glow
+5. **Mail precompilata** con link al viewer 3D
+6. **Finale**: checkmark animato + "I nostri commerciali ti contatteranno nel più breve tempo possibile" + contatti
+
+Implementazione self-contained (zero dipendenze, solo CSS+JS inline), cursore animato che si posiziona sugli elementi target, effetto typewriter sui messaggi chat, progress bar con 6 step.
 
 ## Analytics Dashboard (`analytics_dashboard.html`)
 
-Dashboard custom (nessuna dipendenza da Google Analytics) che legge collezioni Firestore. Pannelli:
+Dashboard custom (nessuna dipendenza da Google Analytics) che legge collezioni Firestore.
+
+**Accesso riservato**: gate con Google Sign-In, consentito solo a `marco2024redaelli@gmail.com`. Utenti con altre email vengono automaticamente disconnessi. A livello di sicurezza, le regole Firestore (`isAdmin()`) limitano anche la lettura delle collection sensibili alla stessa email — la UI non è bypassabile da DevTools.
+
+Pannelli:
 
 - **Richieste Preventivo** (in cima, full-width): totali, % con conversazione DecAI, ultimi 7 giorni; lista espandibile con data/ora, email utente, codici prodotti, origine (DecAI/modal) e trascrizione chat
 - **Visite al Sito**: totali, unici, ultimi 7 giorni + grafico linea 14 giorni
@@ -158,11 +179,13 @@ firestore.rules             Regole sicurezza Firestore
 
 ## Stack tecnologico
 
-- **Frontend**: Three.js, MeshPhysicalMaterial (PBR), CSS2DRenderer
+- **Frontend**: Three.js, MeshPhysicalMaterial (PBR), CSS2DRenderer, Google `<model-viewer>` per anteprime 3D
 - **AI**: Meta Llama 3 8B (QLoRA fine-tuned), LM Studio
-- **Hosting**: Firebase Hosting + Firestore
+- **Hosting**: Firebase Hosting + Firestore (piano Spark, no Cloud Functions)
 - **Auth**: Firebase Authentication (Google / email)
-- **GPU**: NVIDIA RTX 4000 Ada (20 GB VRAM), inferenza locale
+- **Analytics**: tracking lato browser su collezioni Firestore (`site_visits`, `preventivi`, `chat_sessions`, ecc.), dashboard custom HTML+Chart.js
+- **Identità visiva**: rosso DECA `#c41e3a`, blu `#004a99`, bianco, font Inter
+- **GPU**: NVIDIA RTX 4000 Ada (20 GB VRAM), inferenza locale DecAI
 
 ## Note
 
