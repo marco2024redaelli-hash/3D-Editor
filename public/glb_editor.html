@@ -1270,6 +1270,36 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
+        // --- Site visit tracking (one per browser session, attende stato auth) ---
+        (function trackEditorVisit() {
+            const FLAG = 'site_visit_recorded_v3';
+            if (sessionStorage.getItem(FLAG) === '1') return;
+            let sid = sessionStorage.getItem('site_visit_sid');
+            if (!sid) {
+                sid = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,10);
+                sessionStorage.setItem('site_visit_sid', sid);
+            }
+            const unsubscribe = auth.onAuthStateChanged(u => {
+                unsubscribe();
+                if (sessionStorage.getItem(FLAG) === '1') return;
+                sessionStorage.setItem(FLAG, '1');
+                db.collection('site_visits').add({
+                    sessionId: sid,
+                    userId: u ? u.uid : null,
+                    userEmail: u ? (u.email || null) : null,
+                    userName: u ? (u.displayName || null) : null,
+                    page: 'glb_editor',
+                    referrer: document.referrer || null,
+                    userAgent: navigator.userAgent || '',
+                    language: navigator.language || '',
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).catch(e => {
+                    console.warn('[visit] record failed', e);
+                    sessionStorage.removeItem(FLAG);
+                });
+            });
+        })();
+
         // --- Stato utente globale ---
         let currentUser = null;
         let chatSessionId = null;
@@ -1728,6 +1758,11 @@
     </div>
     <button id="decai-fab" class="hidden" title="Apri DecAI">
         <img src="deca.png" alt="DECA" onerror="this.parentElement.textContent='DECA'">
+    </button>
+    <button id="btn-preventivo-editor" title="Richiedi preventivo per gli oggetti in scena"
+        style="position:fixed;bottom:24px;right:calc(var(--sidebar-w) + 16px);z-index:200;display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#4ecca3 0%,#3b82f6 100%);color:#0c0e14;border:none;padding:12px 22px;border-radius:10px;font-weight:700;font-size:13px;letter-spacing:.2px;cursor:pointer;font-family:var(--font);box-shadow:0 6px 20px rgba(78,204,163,0.45), 0 2px 8px rgba(59,130,246,0.35);transition:transform .15s, box-shadow .15s, filter .15s;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Richiedi Preventivo
     </button>
 
     <!-- Tutorial DecAI (pannello laterale) -->
@@ -3612,7 +3647,19 @@ python train.py</pre></div>
         let drawingsIndex = null; // drawings_index.json: codice disegno -> path PDF in db/
         let distinteIndex = null; // distinte_index.json: codice distinta -> path XLS in db/
         let partEditSession = null; // { obj, originalState, code, desc }
+        const DECAI_HISTORY_KEY = 'decai_chat_history_v1';
         let decaiChatHistory = [];
+        try { decaiChatHistory = JSON.parse(localStorage.getItem(DECAI_HISTORY_KEY) || '[]'); } catch(e) { decaiChatHistory = []; }
+        function persistDecaiHistory() {
+            try { localStorage.setItem(DECAI_HISTORY_KEY, JSON.stringify(decaiChatHistory.slice(-40))); } catch(e) {}
+        }
+        function recordDecAITurn(role, rawText) {
+            if (!rawText) return;
+            const text = String(rawText).replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+            if (!text) return;
+            decaiChatHistory.push({ role, content: text, ts: Date.now() });
+            persistDecaiHistory();
+        }
         let decaiLLMForced = false; // sempre AI mode
 
         // ---- DECAAI Endpoint ----
@@ -3956,6 +4003,21 @@ CATALOGO PRODOTTI DECA 2025:
             });
 
             sendBtn.addEventListener('click', () => sendDecAI());
+
+            const btnPrevEditor = document.getElementById('btn-preventivo-editor');
+            if (btnPrevEditor) {
+                btnPrevEditor.addEventListener('mouseenter', () => {
+                    btnPrevEditor.style.transform = 'translateY(-2px) scale(1.03)';
+                    btnPrevEditor.style.boxShadow = '0 10px 28px rgba(78,204,163,0.55), 0 4px 14px rgba(59,130,246,0.45)';
+                    btnPrevEditor.style.filter = 'brightness(1.05)';
+                });
+                btnPrevEditor.addEventListener('mouseleave', () => {
+                    btnPrevEditor.style.transform = '';
+                    btnPrevEditor.style.boxShadow = '0 6px 20px rgba(78,204,163,0.45), 0 2px 8px rgba(59,130,246,0.35)';
+                    btnPrevEditor.style.filter = '';
+                });
+                btnPrevEditor.addEventListener('click', () => handlePreventivoIntent());
+            }
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') { e.preventDefault(); sendDecAI(); }
                 e.stopPropagation();
@@ -3967,6 +4029,7 @@ CATALOGO PRODOTTI DECA 2025:
                 const msgs = document.getElementById('decai-messages');
                 msgs.innerHTML = '';
                 decaiChatHistory = [];
+                persistDecaiHistory();
                 catalogWizardState = null;
                 addDecAIMsg('Ciao! Sono <b>DecAI</b>, l\'assistente DECA con intelligenza artificiale.<br>Posso aiutarti a visualizzare i prodotti Deca, le distinte base e i disegni tecnici e rispondere alle tue esigenze tecniche specifiche in linguaggio naturale.', false);
             });
@@ -5002,6 +5065,7 @@ CATALOGO PRODOTTI DECA 2025:
             input.value = '';
 
             addDecAIMsg(query, true);
+            recordDecAITurn('user', query);
 
             // --- INTERCETTORE LOCALE: gestisci richieste di caricamento/visualizzazione dal catalogo ---
             if (libraryCatalog.length > 0) {
@@ -5059,6 +5123,7 @@ CATALOGO PRODOTTI DECA 2025:
                                 // Formato standard: {"text":"...", "actions":[...]}
                                 if (parsed.text) {
                                     addDecAIMsg(parsed.text, false);
+                                    recordDecAITurn('assistant', parsed.text);
                                     if (parsed.actions && Array.isArray(parsed.actions)) {
                                         for (const act of parsed.actions) {
                                             executeDecAIAction(act);
@@ -5069,16 +5134,20 @@ CATALOGO PRODOTTI DECA 2025:
                                 else if (parsed.action || parsed.type) {
                                     const act = { type: parsed.action || parsed.type, ...parsed };
                                     delete act.action;
+                                    const actMsg = `Eseguo: ${act.type}` + (act.target ? ` su ${act.target}` : '') + (act.search ? ` → ${act.search}` : '');
                                     addDecAIMsg(`Eseguo: <b>${act.type}</b>` + (act.target ? ` su <b>${act.target}</b>` : '') + (act.search ? ` → <b>${act.search}</b>` : ''), false);
+                                    recordDecAITurn('assistant', actMsg);
                                     executeDecAIAction(act);
                                 } else {
                                     addDecAIMsg(risposta, false);
+                                    recordDecAITurn('assistant', risposta);
                                 }
                             } else {
                                 // Pulisci JSON residuo dalla risposta prima di mostrarla
                                 let displayText = risposta.replace(/\{[^{}]*\}/g, '').replace(/\|end\b.*$/gis, '').replace(/###.*$/gis, '').trim();
                                 if (!displayText || displayText.length < 5) displayText = 'Non ho capito la richiesta. Prova a riformulare.';
                                 addDecAIMsg(displayText, false);
+                                recordDecAITurn('assistant', displayText);
                             }
                             aiRisposto = true;
                         }
@@ -5096,9 +5165,113 @@ CATALOGO PRODOTTI DECA 2025:
             }
         }
 
+        // --- Preventivo via DecAI ---
+        function buildPreventivoFromScene() {
+            const projectName = (currentFileName || 'Progetto DECA').replace(/\.glb$/i, '');
+            const objects = loadedObjects.map(obj => {
+                const sourceUrl = (obj.userData && obj.userData._sourceUrl) || '';
+                const glbPath = sourceUrl.replace(/^db\//, '').replace(/^\//, '');
+                return {
+                    name: obj.name || 'modello',
+                    code: (obj.userData && obj.userData.drawingCode) || '',
+                    glb: glbPath
+                };
+            }).filter(o => o.glb);
+            return { name: projectName, objects, timestamp: Date.now() };
+        }
+
+        function saveProjectToLocalStore(project) {
+            try {
+                const arr = JSON.parse(localStorage.getItem('deca_saved_projects') || '[]');
+                arr.unshift(project);
+                localStorage.setItem('deca_saved_projects', JSON.stringify(arr.slice(0, 30)));
+            } catch (e) { console.warn('[preventivo] save failed', e); }
+        }
+
+        function preventivoHostingBase() {
+            return /^(localhost|127\.|0\.0\.0\.0)/.test(location.hostname) ? 'https://glb-3d-editor.web.app' : location.origin;
+        }
+        function preventivoViewerUrl(obj) {
+            const q = new URLSearchParams({ glb: obj.glb, name: obj.name || '', code: obj.code || '' });
+            return preventivoHostingBase() + '/viewer.html?' + q.toString();
+        }
+
+        async function logPreventivoFromChat(project, transcript) {
+            try {
+                if (typeof firebase === 'undefined' || !firebase.firestore) return;
+                const fdb = firebase.firestore();
+                const user = firebase.auth && firebase.auth().currentUser;
+                await fdb.collection('preventivi').add({
+                    projectName: project.name,
+                    objectCodes: project.objects.map(o => o.code || o.name || '').filter(Boolean),
+                    objectCount: project.objects.length,
+                    contactEmail: user ? (user.email || null) : null,
+                    notes: null,
+                    hasConversation: transcript.length > 0,
+                    conversationTurns: transcript.length,
+                    conversation: transcript,
+                    origin: 'decai_chat',
+                    userId: user ? user.uid : null,
+                    userEmail: user ? user.email : null,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    userAgent: navigator.userAgent || ''
+                });
+            } catch (e) {
+                console.warn('[preventivo] analytics log failed', e);
+            }
+        }
+
+        function handlePreventivoIntent() {
+            const project = buildPreventivoFromScene();
+            if (project.objects.length === 0) {
+                const msg = 'Per fare un preventivo devi prima caricare almeno un prodotto nella scena. Aggiungi un modello dal catalogo e poi richiedi di nuovo il preventivo.';
+                addDecAIMsg(msg, false);
+                recordDecAITurn('assistant', msg);
+                return;
+            }
+
+            const confirmMsg = 'Ok, ti salvo l\'attuale progetto e faccio il preventivo da mandare ai commerciali di Deca srl.';
+            addDecAIMsg(confirmMsg, false);
+            recordDecAITurn('assistant', confirmMsg);
+
+            saveProjectToLocalStore(project);
+
+            const transcript = (decaiChatHistory || []).slice(-40);
+
+            const objList = project.objects.map(o => '- ' + (o.name || 'modello').toUpperCase() + (o.code ? ' [' + o.code + ']' : '')).join('\n');
+            const productBlocks = project.objects.map(o => {
+                const label = (o.code || o.name || 'modello').toUpperCase();
+                return label + '\nVista 3D interattiva: ' + preventivoViewerUrl(o);
+            }).join('\n\n');
+
+            const user = (typeof firebase !== 'undefined' && firebase.auth) ? firebase.auth().currentUser : null;
+            const userEmail = user ? user.email : '';
+
+            const subject = 'Richiesta Preventivo: ' + project.name;
+            const body = 'Buongiorno,\n\nrichiedo un preventivo per il seguente progetto configurato nel DECA 3D Editor:\n\n' +
+                'PROGETTO: ' + project.name + '\n' +
+                'OGGETTI:\n' + objList + '\n\n' +
+                (productBlocks ? 'DETTAGLIO PRODOTTI:\n\n' + productBlocks + '\n\n' : '') +
+                (userEmail ? 'Email di contatto: ' + userEmail + '\n\n' : '') +
+                'Cordiali saluti';
+
+            logPreventivoFromChat(project, transcript);
+
+            setTimeout(() => {
+                window.location.href = 'mailto:marco.redaelli@decasrl.biz?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            }, 300);
+        }
+
         // Comandi locali — ritorna true se gestito, false se non matchato
         function tryLocalCommand(query) {
             const q = query.toLowerCase().trim();
+
+            // Preventivo intent
+            if (/\b(preventivo|quotazione|offerta\s+commerciale)\b/.test(q) ||
+                /vorrei\s+un\s+preventivo|voglio.*preventivo|richied(?:o|ere)\s+(?:un\s+)?preventivo|fammi\s+un?\s+preventivo/.test(q)) {
+                handlePreventivoIntent();
+                return true;
+            }
 
             // Help
             if (q === 'aiuto' || q === 'help') {

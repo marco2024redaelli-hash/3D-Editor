@@ -297,19 +297,37 @@
 <!-- Dashboard Grid -->
 <div class="dashboard-grid">
 
-    <!-- 1. Configuration Popularity -->
-    <div class="panel">
-        <h2>Indice di Popolarita Configurazioni</h2>
-        <div class="chart-container">
-            <canvas id="chart-popularity"></canvas>
+    <!-- 0. Preventivi (in cima) -->
+    <div class="panel full">
+        <h2>Richieste Preventivo</h2>
+        <div id="preventivi-stats" style="display:flex;gap:24px;margin-bottom:12px;font-size:12px;color:var(--text-secondary);">
+            <span>Totali: <b id="prev-total" style="color:var(--accent);font-size:16px;">0</b></span>
+            <span>Con conversazione DecAI: <b id="prev-with-chat" style="color:var(--blue);font-size:16px;">0</b></span>
+            <span>Ultimi 7gg: <b id="prev-7d" style="color:var(--warning);font-size:16px;">0</b></span>
+        </div>
+        <div id="preventivi-list" style="max-height:560px;overflow-y:auto;font-size:12px;">
+            <p style="color:var(--text-muted);">Caricamento...</p>
         </div>
     </div>
 
-    <!-- 2. Material Preferences -->
+    <!-- 1. Site Visits -->
     <div class="panel">
-        <h2>Preferenze Materiali & Finiture</h2>
+        <h2>Visite al Sito</h2>
+        <div id="visits-stats" style="display:flex;gap:24px;margin-bottom:12px;font-size:12px;color:var(--text-secondary);">
+            <span>Totali: <b id="visits-total" style="color:var(--accent);font-size:16px;">0</b></span>
+            <span>Unici: <b id="visits-unique" style="color:var(--blue);font-size:16px;">0</b></span>
+            <span>Ultimi 7gg: <b id="visits-7d" style="color:var(--warning);font-size:16px;">0</b></span>
+        </div>
         <div class="chart-container">
-            <canvas id="chart-materials"></canvas>
+            <canvas id="chart-visits"></canvas>
+        </div>
+    </div>
+
+    <!-- 2. Visitors List -->
+    <div class="panel">
+        <h2>Chi ha Visitato il Sito</h2>
+        <div id="visitors-list" style="max-height:360px;overflow-y:auto;font-size:12px;">
+            <p style="color:var(--text-muted);">Caricamento...</p>
         </div>
     </div>
 
@@ -385,6 +403,8 @@
 
     // --- State ---
     let sessions = [];
+    let visits = [];
+    let preventivi = [];
     let feedbackData = { annotations: [], featureRequests: [] };
     const urlParams = new URLSearchParams(window.location.search);
     const filterFile = urlParams.get('file') || '';
@@ -431,6 +451,26 @@
                 sessions = sessions.filter(s => s.fileName === filterFile);
             }
 
+            // Load site visits (no orderBy — docs with pending serverTimestamp would be excluded)
+            try {
+                const visitsSnap = await db.collection('site_visits').limit(500).get();
+                visits = [];
+                visitsSnap.forEach(doc => visits.push(doc.data()));
+            } catch (e) {
+                console.warn('site_visits load failed', e);
+                visits = [];
+            }
+
+            // Load preventivi
+            try {
+                const prevSnap = await db.collection('preventivi').orderBy('createdAt', 'desc').limit(200).get();
+                preventivi = [];
+                prevSnap.forEach(doc => preventivi.push({ id: doc.id, ...doc.data() }));
+            } catch (e) {
+                console.warn('preventivi load failed', e);
+                preventivi = [];
+            }
+
             // Load feedback data
             const fbSnap = await db.collection('model_feedback').limit(100).get();
             feedbackData = { annotations: [], featureRequests: [] };
@@ -453,8 +493,9 @@
     // --- Render Everything ---
     function renderAll() {
         renderStats();
-        renderPopularityChart();
-        renderMaterialsChart();
+        renderVisitsChart();
+        renderVisitorsList();
+        renderPreventivi();
         renderFunnel();
         renderDepthChart();
         renderSentimentCategory();
@@ -499,100 +540,186 @@
         document.getElementById('stat-revenue').textContent = avgRevenue + ' EUR';
     }
 
-    // --- 2. Popularity Chart ---
-    function renderPopularityChart() {
-        const propCounts = {};
-        sessions.forEach(s => {
-            (s.configChanges || []).forEach(c => {
-                const key = c.property + ': ' + c.value;
-                propCounts[key] = (propCounts[key] || 0) + 1;
-            });
+    // --- 2. Visits Chart (last 14 days) ---
+    function visitTs(v) {
+        const t = v.timestamp;
+        if (!t) return 0;
+        if (typeof t === 'number') return t;
+        if (t.toMillis) return t.toMillis();
+        if (t.seconds) return t.seconds * 1000;
+        return new Date(t).getTime() || 0;
+    }
+    function renderVisitsChart() {
+        const days = 14;
+        const now = new Date();
+        now.setHours(0,0,0,0);
+        const buckets = [];
+        for (let i = days - 1; i >= 0; i--) {
+            const d = new Date(now); d.setDate(now.getDate() - i);
+            buckets.push({ date: d, label: d.toLocaleDateString('it', { day:'2-digit', month:'2-digit' }), count: 0 });
+        }
+        visits.forEach(v => {
+            const ts = visitTs(v);
+            if (!ts) return;
+            const d = new Date(ts); d.setHours(0,0,0,0);
+            const idx = buckets.findIndex(b => b.date.getTime() === d.getTime());
+            if (idx >= 0) buckets[idx].count++;
         });
 
-        const sorted = Object.entries(propCounts).sort((a, b) => b[1] - a[1]).slice(0, 12);
-        const labels = sorted.map(([k]) => k.length > 25 ? k.substring(0, 25) + '...' : k);
-        const values = sorted.map(([, v]) => v);
+        const total = visits.length;
+        const uniqueKey = v => v.userId || v.userEmail || v.sessionId || 'anon';
+        const unique = new Set(visits.map(uniqueKey)).size;
+        const sevenDaysAgo = Date.now() - 7 * 86400000;
+        const last7 = visits.filter(v => visitTs(v) >= sevenDaysAgo).length;
+        document.getElementById('visits-total').textContent = total;
+        document.getElementById('visits-unique').textContent = unique;
+        document.getElementById('visits-7d').textContent = last7;
 
-        const ctx = document.getElementById('chart-popularity').getContext('2d');
-        if (window._chartPop) window._chartPop.destroy();
-        window._chartPop = new Chart(ctx, {
-            type: 'bar',
+        const ctx = document.getElementById('chart-visits').getContext('2d');
+        if (window._chartVisits) window._chartVisits.destroy();
+        window._chartVisits = new Chart(ctx, {
+            type: 'line',
             data: {
-                labels,
+                labels: buckets.map(b => b.label),
                 datasets: [{
-                    label: 'Frequenza',
-                    data: values,
-                    backgroundColor: 'rgba(78,204,163,0.6)',
+                    label: 'Visite',
+                    data: buckets.map(b => b.count),
                     borderColor: '#4ecca3',
-                    borderWidth: 1,
-                    borderRadius: 4
+                    backgroundColor: 'rgba(78,204,163,0.18)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#4ecca3'
                 }]
             },
             options: {
-                indexAxis: 'y',
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
                 scales: {
-                    x: { grid: { color: 'rgba(42,46,66,0.5)' }, ticks: { color: '#8b90a0' } },
-                    y: { grid: { display: false }, ticks: { color: '#eaedf3', font: { size: 10 } } }
+                    x: { grid: { color: 'rgba(42,46,66,0.5)' }, ticks: { color: '#8b90a0', font: { size: 10 } } },
+                    y: { beginAtZero: true, grid: { color: 'rgba(42,46,66,0.5)' }, ticks: { color: '#8b90a0', stepSize: 1, precision: 0 } }
                 }
             }
         });
     }
 
-    // --- 3. Materials Preferences ---
-    function renderMaterialsChart() {
-        const matStats = { colori: {}, metalness: { basso: 0, medio: 0, alto: 0 }, rugosita: { opaco: 0, satinato: 0, lucido: 0 } };
-        sessions.forEach(s => {
-            (s.configChanges || []).forEach(c => {
-                if (c.property === 'color') {
-                    matStats.colori[c.value] = (matStats.colori[c.value] || 0) + 1;
-                }
-                if (c.property === 'metalness') {
-                    const v = parseFloat(c.value);
-                    if (v < 0.3) matStats.metalness.basso++;
-                    else if (v < 0.7) matStats.metalness.medio++;
-                    else matStats.metalness.alto++;
-                }
-                if (c.property === 'roughness') {
-                    const v = parseFloat(c.value);
-                    if (v < 0.3) matStats.rugosita.lucido++;
-                    else if (v < 0.7) matStats.rugosita.satinato++;
-                    else matStats.rugosita.opaco++;
-                }
-            });
+    // --- 3. Visitors List ---
+    function renderVisitorsList() {
+        const container = document.getElementById('visitors-list');
+        if (visits.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);">Nessuna visita registrata.</p>';
+            return;
+        }
+        const byUser = new Map();
+        visits.forEach(v => {
+            const key = v.userId || v.userEmail || v.sessionId || 'anon-' + (v.userAgent || '').slice(0,30);
+            const entry = byUser.get(key) || { label: '', email: '', count: 0, lastVisit: 0, anonymous: !v.userEmail };
+            if (v.userEmail) { entry.label = v.userName || v.userEmail; entry.email = v.userEmail; entry.anonymous = false; }
+            else if (!entry.label) { entry.label = 'Visitatore anonimo'; entry.anonymous = true; }
+            entry.count++;
+            const ts = visitTs(v);
+            if (ts > entry.lastVisit) entry.lastVisit = ts;
+            byUser.set(key, entry);
         });
+        const rows = [...byUser.values()].sort((a, b) => b.lastVisit - a.lastVisit);
+        container.innerHTML = rows.map(r => {
+            const when = r.lastVisit ? new Date(r.lastVisit).toLocaleString('it', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '-';
+            const dotColor = r.anonymous ? 'var(--text-muted)' : 'var(--accent)';
+            const label = r.anonymous ? 'Visitatore anonimo' : r.label;
+            const subtitle = r.anonymous ? '' : (r.email && r.email !== r.label ? r.email : '');
+            return '<div style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-bottom:1px solid var(--border);">' +
+                '<span style="width:8px;height:8px;border-radius:50%;background:' + dotColor + ';flex-shrink:0;"></span>' +
+                '<div style="flex:1;min-width:0;">' +
+                  '<div style="color:var(--text-primary);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + label + '</div>' +
+                  (subtitle ? '<div style="color:var(--text-muted);font-size:11px;">' + subtitle + '</div>' : '') +
+                '</div>' +
+                '<div style="text-align:right;flex-shrink:0;">' +
+                  '<div style="color:var(--text-secondary);">' + r.count + ' visit' + (r.count===1?'a':'e') + '</div>' +
+                  '<div style="color:var(--text-muted);font-size:10px;">' + when + '</div>' +
+                '</div>' +
+                '</div>';
+        }).join('');
+    }
 
-        const ctx = document.getElementById('chart-materials').getContext('2d');
-        if (window._chartMat) window._chartMat.destroy();
-        window._chartMat = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Opaco', 'Satinato', 'Lucido', 'Metalness Basso', 'Metalness Medio', 'Metalness Alto'],
-                datasets: [{
-                    data: [
-                        matStats.rugosita.opaco, matStats.rugosita.satinato, matStats.rugosita.lucido,
-                        matStats.metalness.basso, matStats.metalness.medio, matStats.metalness.alto
-                    ],
-                    backgroundColor: [
-                        '#4ecca3', '#3ba88c', '#2d8a6e',
-                        '#4a9eff', '#3b82f6', '#2563eb'
-                    ],
-                    borderColor: '#141620',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                        labels: { color: '#8b90a0', font: { size: 11 }, padding: 12 }
-                    }
-                }
-            }
+    // --- Preventivi ---
+    function prevTs(p) {
+        const t = p.createdAt;
+        if (!t) return 0;
+        if (typeof t === 'number') return t;
+        if (t.toMillis) return t.toMillis();
+        if (t.seconds) return t.seconds * 1000;
+        return new Date(t).getTime() || 0;
+    }
+    function escapeHtml(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function renderPreventivi() {
+        const container = document.getElementById('preventivi-list');
+        document.getElementById('prev-total').textContent = preventivi.length;
+        document.getElementById('prev-with-chat').textContent = preventivi.filter(p => p.hasConversation).length;
+        const sevenDaysAgo = Date.now() - 7 * 86400000;
+        document.getElementById('prev-7d').textContent = preventivi.filter(p => prevTs(p) >= sevenDaysAgo).length;
+
+        if (preventivi.length === 0) {
+            container.innerHTML = '<p style="color:var(--text-muted);">Nessuna richiesta preventivo registrata.</p>';
+            return;
+        }
+
+        container.innerHTML = preventivi.map((p, idx) => {
+            const ts = prevTs(p);
+            const when = ts ? new Date(ts).toLocaleString('it', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '-';
+            const codes = (p.objectCodes || []).slice(0, 6);
+            const codesHtml = codes.map(c => '<span style="background:var(--bg-elevated);padding:2px 8px;border-radius:10px;font-family:monospace;font-size:10px;color:var(--text-primary);">' + escapeHtml(c) + '</span>').join(' ');
+            const more = (p.objectCodes || []).length > 6 ? '<span style="color:var(--text-muted);font-size:10px;">+' + ((p.objectCodes || []).length - 6) + '</span>' : '';
+            const originBadge = p.origin === 'decai_chat'
+                ? '<span style="background:rgba(59,130,246,0.18);color:var(--blue);padding:2px 8px;border-radius:10px;font-size:10px;">via DecAI</span>'
+                : '<span style="background:rgba(78,204,163,0.15);color:var(--accent);padding:2px 8px;border-radius:10px;font-size:10px;">via modal</span>';
+            const userLine = p.userEmail || p.contactEmail || 'Anonimo';
+            const chatBadge = p.hasConversation
+                ? '<span style="background:rgba(232,168,56,0.18);color:var(--warning);padding:2px 8px;border-radius:10px;font-size:10px;">💬 ' + (p.conversationTurns || (p.conversation || []).length) + ' turni</span>'
+                : '<span style="color:var(--text-muted);font-size:10px;">senza chat</span>';
+            const convId = 'prev-conv-' + idx;
+
+            const transcriptHtml = (p.conversation && p.conversation.length > 0)
+                ? p.conversation.map(m => {
+                    const role = m.role === 'user' ? 'UTENTE' : 'DECAI';
+                    const color = m.role === 'user' ? 'var(--accent)' : 'var(--blue)';
+                    return '<div style="margin:6px 0;padding:8px 10px;background:var(--bg-primary);border-left:2px solid ' + color + ';border-radius:4px;">' +
+                           '<div style="font-size:10px;font-weight:600;color:' + color + ';margin-bottom:2px;">' + role + '</div>' +
+                           '<div style="font-size:11px;color:var(--text-primary);white-space:pre-wrap;">' + escapeHtml(m.content || '') + '</div>' +
+                           '</div>';
+                }).join('')
+                : '<p style="color:var(--text-muted);font-size:11px;font-style:italic;">Nessuna conversazione registrata.</p>';
+
+            const notesHtml = p.notes
+                ? '<div style="margin-top:8px;padding:8px 10px;background:var(--bg-primary);border-radius:4px;font-size:11px;"><b style="color:var(--warning);">Note:</b> ' + escapeHtml(p.notes) + '</div>'
+                : '';
+
+            return '<div style="border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px;background:var(--bg-tertiary);">' +
+                '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">' +
+                  '<div style="flex:1;min-width:220px;">' +
+                    '<div style="font-weight:600;color:var(--text-primary);margin-bottom:4px;">' + escapeHtml(p.projectName || 'Progetto') + '</div>' +
+                    '<div style="font-size:11px;color:var(--text-secondary);">' + escapeHtml(userLine) + ' &middot; ' + escapeHtml(when) + '</div>' +
+                  '</div>' +
+                  '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">' + originBadge + chatBadge + '</div>' +
+                '</div>' +
+                (codesHtml ? '<div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap;align-items:center;">' + codesHtml + ' ' + more + '</div>' : '') +
+                notesHtml +
+                '<button data-target="' + convId + '" class="prev-toggle" style="margin-top:10px;background:none;border:1px solid var(--border);color:var(--text-secondary);padding:4px 10px;border-radius:var(--radius);font-size:10px;cursor:pointer;font-family:var(--font);">Mostra conversazione &darr;</button>' +
+                '<div id="' + convId + '" style="display:none;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">' + transcriptHtml + '</div>' +
+                '</div>';
+        }).join('');
+
+        container.querySelectorAll('.prev-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = document.getElementById(btn.dataset.target);
+                if (!target) return;
+                const open = target.style.display !== 'none';
+                target.style.display = open ? 'none' : 'block';
+                btn.innerHTML = open ? 'Mostra conversazione &darr;' : 'Nascondi conversazione &uarr;';
+            });
         });
     }
 

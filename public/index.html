@@ -296,7 +296,39 @@
             return hostingBase() + '/viewer.html?' + q.toString();
         }
 
-        document.getElementById('btn-send-preventivo').addEventListener('click', () => {
+        function loadDecaiHistory() {
+            try {
+                const raw = localStorage.getItem('decai_chat_history_v1');
+                const arr = raw ? JSON.parse(raw) : [];
+                return Array.isArray(arr) ? arr : [];
+            } catch (e) { return []; }
+        }
+        function formatDecaiTranscript(history, maxTurns) {
+            const recent = history.slice(-(maxTurns || 20));
+            return recent.map(m => {
+                const who = m.role === 'user' ? 'UTENTE' : 'DECAI';
+                const text = (m.content || '').replace(/\s+/g, ' ').trim();
+                const truncated = text.length > 500 ? text.slice(0, 500) + '...' : text;
+                return who + ': ' + truncated;
+            }).join('\n\n');
+        }
+        async function logPreventivoAnalytics(payload) {
+            try {
+                const fdb = firebase.firestore();
+                const user = firebase.auth().currentUser;
+                await fdb.collection('preventivi').add({
+                    ...payload,
+                    userId: user ? user.uid : null,
+                    userEmail: user ? user.email : null,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    userAgent: navigator.userAgent || ''
+                });
+            } catch (e) {
+                console.warn('[preventivo] analytics log failed', e);
+            }
+        }
+
+        document.getElementById('btn-send-preventivo').addEventListener('click', async () => {
             const projects = getSavedProjects();
             const idx = parseInt(document.getElementById('prev-project').value);
             const proj = projects[idx];
@@ -308,8 +340,11 @@
             const objList = objects.map(o => '- ' + (o.name || 'modello').toUpperCase() + (o.code ? ' [' + o.code + ']' : '')).join('\n');
             const productBlocks = objects.filter(o => o.glb).map(o => {
                 const label = (o.code || o.name || 'modello').toUpperCase();
-                return label + '\nVista 3D interattiva: ' + viewerUrl(o) + '\nScarica GLB: ' + publicGlbUrl(o.glb);
+                return label + '\nVista 3D interattiva: ' + viewerUrl(o);
             }).join('\n\n');
+
+            const decaiHistory = loadDecaiHistory();
+            const hasConversation = decaiHistory.length > 0;
 
             const subject = 'Richiesta Preventivo: ' + proj.name;
             const body = 'Buongiorno,\n\nrichiedo un preventivo per il seguente progetto configurato nel DECA 3D Editor:\n\n' +
@@ -319,6 +354,17 @@
                 (notes ? 'NOTE:\n' + notes + '\n\n' : '') +
                 (email ? 'Email di contatto: ' + email + '\n\n' : '') +
                 'Cordiali saluti';
+
+            logPreventivoAnalytics({
+                projectName: proj.name || '',
+                objectCodes: objects.map(o => o.code || o.name || '').filter(Boolean),
+                objectCount: objects.length,
+                contactEmail: email || null,
+                notes: notes || null,
+                hasConversation,
+                conversationTurns: decaiHistory.length,
+                conversation: decaiHistory
+            });
 
             window.location.href = 'mailto:marco.redaelli@decasrl.biz?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
             document.getElementById('modal-preventivo').style.display = 'none';
@@ -411,7 +457,39 @@
             // window.location.href = 'glb_editor.html';
             loadDemoProjects();
         }
+        recordSiteVisitOnce(user);
     });
+
+    // --- Site Visit tracking (one per browser session) ---
+    function getOrCreateVisitSessionId() {
+        let sid = sessionStorage.getItem('site_visit_sid');
+        if (!sid) {
+            sid = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+            sessionStorage.setItem('site_visit_sid', sid);
+        }
+        return sid;
+    }
+    async function recordSiteVisitOnce(user) {
+        const FLAG = 'site_visit_recorded_v3';
+        if (sessionStorage.getItem(FLAG) === '1') return;
+        sessionStorage.setItem(FLAG, '1');
+        try {
+            await db.collection('site_visits').add({
+                sessionId: getOrCreateVisitSessionId(),
+                userId: user ? user.uid : null,
+                userEmail: user ? (user.email || null) : null,
+                userName: user ? (user.displayName || null) : null,
+                page: 'index',
+                referrer: document.referrer || null,
+                userAgent: navigator.userAgent || '',
+                language: navigator.language || '',
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        } catch (e) {
+            console.warn('[visit] record failed', e);
+            sessionStorage.removeItem(FLAG);
+        }
+    }
 
     // Load projects from Firestore
     async function loadProjects() {
