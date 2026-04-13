@@ -334,7 +334,15 @@
     });
 
     // === Trova un prodotto rappresentativo per una macrofamiglia ===
+    // Override manuali: id macrofamiglia -> path glb relativo a db/
+    const MACRO_REPRESENTATIVE_OVERRIDE = {
+        basi_vibranti_lineari: 'PRD/BVL/VL201/bvl-vl201-xx-a000.glb',
+        alimentatori: 'PRD/ALM01/M/0001/prd-alm01-m-0001-ac001-x.glb'
+    };
     function getRepresentativeGlb(macro) {
+        if (MACRO_REPRESENTATIVE_OVERRIDE[macro.id]) {
+            return MACRO_REPRESENTATIVE_OVERRIDE[macro.id];
+        }
         // Prende il primo prodotto della prima famiglia con prodotti
         for (const fam of macro.famiglie) {
             const entry = allFamilies.find(([f]) => f === fam);

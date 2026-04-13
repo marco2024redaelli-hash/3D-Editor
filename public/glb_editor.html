@@ -10,25 +10,26 @@
         :root {
             --sidebar-w: 300px;
             --left-w: 0px;
-            --bg-primary: #0c0e14;
-            --bg-secondary: #141620;
-            --bg-tertiary: #1c1f2e;
-            --bg-elevated: #232738;
-            --border: #2a2e42;
-            --border-active: #4ecca3;
-            --text-primary: #eaedf3;
-            --text-secondary: #8b90a0;
-            --text-muted: #555a6e;
-            --accent: #4ecca3;
-            --accent-hover: #3ba88c;
-            --accent-dim: rgba(78,204,163,0.12);
-            --danger: #e94560;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f4f7fb;
+            --bg-tertiary: #e9eef6;
+            --bg-elevated: #dde4ef;
+            --border: #d1d9e6;
+            --border-active: #c41e3a;
+            --text-primary: #0b1a30;
+            --text-secondary: #4a5875;
+            --text-muted: #7d8aa3;
+            --accent: #c41e3a;
+            --accent-hover: #9f1830;
+            --accent-dim: rgba(196,30,58,0.10);
+            --danger: #c41e3a;
             --warning: #e8a838;
-            --blue: #4a9eff;
+            --blue: #004a99;
+            --blue-hover: #003876;
             --radius: 6px;
             --radius-lg: 10px;
-            --shadow: 0 4px 24px rgba(0,0,0,0.5);
-            --shadow-lg: 0 12px 48px rgba(0,0,0,0.7);
+            --shadow: 0 4px 24px rgba(11,26,48,0.10);
+            --shadow-lg: 0 12px 48px rgba(11,26,48,0.18);
             --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -80,7 +81,7 @@
         #toolbar .mode-btn.active {
             background: var(--accent);
             border-color: var(--accent);
-            color: var(--bg-primary);
+            color: #fff;
             font-weight: 600;
         }
         #library-panel {
@@ -143,7 +144,7 @@
         }
         .macro-cat:hover {
             border-color: var(--accent); transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(78,204,163,0.12);
+            box-shadow: 0 6px 20px rgba(196,30,58,0.12);
         }
         .macro-cat .mc-icon {
             font-size: 28px; min-width: 40px; text-align: center;
@@ -208,7 +209,7 @@
         }
         .library-card:hover {
             border-color: var(--accent); transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(78,204,163,0.15);
+            box-shadow: 0 8px 24px rgba(196,30,58,0.15);
         }
         .card-thumb {
             width: 100%; height: 180px; background: var(--bg-primary);
@@ -232,18 +233,18 @@
         #btn-library.active {
             background: var(--accent);
             border-color: var(--accent);
-            color: var(--bg-primary);
+            color: #fff;
             font-weight: 600;
         }
         #toolbar #btn-measure.active {
             background: var(--warning);
             border-color: var(--warning);
-            color: var(--bg-primary);
+            color: #fff;
         }
         #toolbar #btn-edges.active {
             background: var(--accent);
             border-color: var(--accent);
-            color: var(--bg-primary);
+            color: #fff;
         }
         #toolbar select {
             background: var(--bg-tertiary);
@@ -257,7 +258,7 @@
         #toolbar button.primary {
             background: var(--accent);
             border-color: var(--accent);
-            color: var(--bg-primary);
+            color: #fff;
             font-weight: 600;
         }
         #toolbar button.primary:hover {
@@ -366,7 +367,7 @@
         .sidebar-btn:hover { background: var(--bg-elevated); border-color: var(--text-muted); }
         .sidebar-btn.danger { border-color: var(--danger); color: var(--danger); }
         .sidebar-btn.danger:hover { background: var(--danger); color: #fff; }
-        .sidebar-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg-primary); font-weight: 600; }
+        .sidebar-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
         .sidebar-btn.primary:hover { background: var(--accent-hover); }
         .sidebar-btn.mate { background: var(--danger); border-color: var(--danger); color: #fff; font-weight: 600; }
         .sidebar-btn.mate:hover { background: #c0392b; }
@@ -720,7 +721,7 @@
         }
         .decai-msg.user {
             background: var(--accent-dim);
-            border: 1px solid rgba(78,204,163,0.25);
+            border: 1px solid rgba(196,30,58,0.25);
             color: var(--text-primary);
             margin-left: auto;
             text-align: right;
@@ -758,7 +759,7 @@
         }
         #decai-input-bar:focus-within {
             border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(78,204,163,0.15);
+            box-shadow: 0 0 0 2px rgba(196,30,58,0.15);
         }
         #decai-input {
             flex: 1;
@@ -773,7 +774,7 @@
         #decai-input::placeholder { color: var(--text-muted); }
         #decai-send {
             background: var(--accent);
-            color: var(--bg-primary);
+            color: #fff;
             border: none;
             width: 36px;
             height: 36px;
@@ -955,7 +956,7 @@
         }
         #decai-fab:hover {
             border-color: var(--accent);
-            box-shadow: 0 4px 20px rgba(78,204,163,0.3);
+            box-shadow: 0 4px 20px rgba(196,30,58,0.3);
             transform: scale(1.08);
         }
         #decai-fab img { width: 70px; height: 70px; object-fit: contain; }
@@ -1007,7 +1008,7 @@
             display: flex; gap: 10px; margin: 10px 0; align-items: flex-start;
         }
         #decai-tutorial-panel .tutorial-body .step-num {
-            background: var(--accent); color: var(--bg-primary); width: 22px; height: 22px; min-width: 22px;
+            background: var(--accent); color: #fff; width: 22px; height: 22px; min-width: 22px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-weight: 700; font-size: 11px;
         }
@@ -1022,7 +1023,7 @@
             border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
             cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.5);
             display: flex; align-items: center; justify-content: center;
-            font-size: 12px; font-weight: 700; color: var(--bg-primary);
+            font-size: 12px; font-weight: 700; color: #fff;
             transition: transform 0.15s, background 0.15s;
         }
         .annotation-pin span { transform: rotate(45deg); }
@@ -1055,7 +1056,7 @@
             padding: 6px 16px; border-radius: var(--radius); font-size: 12px;
             font-family: var(--font); font-weight: 500; cursor: pointer; border: 1px solid var(--border);
         }
-        #annotation-popup .btn-save { background: var(--accent); color: var(--bg-primary); border-color: var(--accent); font-weight: 600; }
+        #annotation-popup .btn-save { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
         #annotation-popup .btn-cancel { background: var(--bg-tertiary); color: var(--text-primary); }
         .sentiment-badge {
             display: inline-block; padding: 2px 8px; border-radius: 10px;
@@ -1114,7 +1115,7 @@
         }
         #feature-input-row input:focus { border-color: var(--accent); }
         #feature-input-row button {
-            background: var(--accent); color: var(--bg-primary); border: none;
+            background: var(--accent); color: #fff; border: none;
             border-radius: var(--radius); padding: 6px 12px; font-size: 12px;
             font-weight: 600; font-family: var(--font); cursor: pointer;
         }
@@ -1194,7 +1195,7 @@
             display: flex; align-items: center; gap: 6px;
         }
         .ann-item-enhanced .ann-num {
-            background: var(--warning); color: var(--bg-primary); font-size: 10px;
+            background: var(--warning); color: #fff; font-size: 10px;
             font-weight: 700; padding: 2px 6px; border-radius: 10px;
         }
         .ann-item-enhanced .ann-part {
@@ -1250,7 +1251,7 @@
         /* Toolbar feedback button active state */
         #btn-feedback-panel.active {
             background: var(--blue); border-color: var(--blue);
-            color: var(--bg-primary); font-weight: 600;
+            color: #fff; font-weight: 600;
         }
     </style>
     <!-- Firebase SDK -->
@@ -1454,7 +1455,7 @@
     </div>
 
     <div id="toolbar">
-        <button id="btn-home" title="Torna alla Home" style="font-size:16px;padding:4px 10px;">&#8962;</button>
+        <button id="btn-home" title="Torna alla Home" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:8px 16px;background:var(--blue);color:#fff;border:none;border-radius:var(--radius);cursor:pointer;box-shadow:0 2px 8px rgba(0,74,153,0.25);transition:background .15s, transform .15s, box-shadow .15s;" onmouseover="this.style.background='var(--blue-hover)';this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 14px rgba(0,74,153,0.40)';" onmouseout="this.style.background='var(--blue)';this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,74,153,0.25)';"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg>Home</button>
         <div class="separator"></div>
         <label for="file-input" style="margin: 0;">Apri GLB</label>
         <input type="file" id="file-input" accept=".glb,.gltf" style="display:none">
@@ -1760,7 +1761,7 @@
         <img src="deca.png" alt="DECA" onerror="this.parentElement.textContent='DECA'">
     </button>
     <button id="btn-preventivo-editor" title="Richiedi preventivo per gli oggetti in scena"
-        style="position:fixed;bottom:24px;right:calc(var(--sidebar-w) + 16px);z-index:200;display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#4ecca3 0%,#3b82f6 100%);color:#0c0e14;border:none;padding:12px 22px;border-radius:10px;font-weight:700;font-size:13px;letter-spacing:.2px;cursor:pointer;font-family:var(--font);box-shadow:0 6px 20px rgba(78,204,163,0.45), 0 2px 8px rgba(59,130,246,0.35);transition:transform .15s, box-shadow .15s, filter .15s;">
+        style="position:fixed;bottom:24px;right:calc(var(--sidebar-w) + 16px);z-index:200;display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent) 0%,var(--blue) 100%);color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:700;font-size:13px;letter-spacing:.2px;cursor:pointer;font-family:var(--font);box-shadow:0 6px 20px rgba(196,30,58,0.45), 0 2px 8px rgba(0,74,153,0.35);transition:transform .15s, box-shadow .15s, filter .15s;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         Richiedi Preventivo
     </button>
@@ -1858,7 +1859,7 @@ python train.py</pre></div>
         <span id="info-verts">Vertici: -</span>
         <span id="info-faces">Facce: -</span>
         <span id="info-size">Dim: -</span>
-        <span id="info-api" style="margin-left:auto; color:#4ecca3;">API attiva</span>
+        <span id="info-api" style="margin-left:auto; color:#c41e3a;">API attiva</span>
     </div>
 
     <!-- Model Viewer per thumbnail 3D inline -->
@@ -2845,7 +2846,7 @@ python train.py</pre></div>
                 const codeLabel = code === '__PDF_NO_CODE__'
                     ? '<span style="color:#e8a838;font-size:10px;margin-left:6px;">[pdf presente, ma non c\'e il codice nel cartiglio]</span>'
                     : code
-                        ? `<span style="color:#4ecca3;font-size:10px;margin-left:6px;">[${code}]</span>`
+                        ? `<span style="color:#c41e3a;font-size:10px;margin-left:6px;">[${code}]</span>`
                         : '<span style="color:#888;font-size:10px;margin-left:6px;">[codice non disponibile]</span>';
                 return `<div class="obj-item${sel}" data-idx="${i}">
                     <span class="icon">&#9649;</span> ${obj.name || 'Oggetto ' + i}${codeLabel}
@@ -3897,13 +3898,13 @@ CATALOGO PRODOTTI DECA 2025:
             const decaaiOk = await checkDecAAIConnection();
 
             if (decaaiOk) {
-                statusEl.style.color = '#4ecca3';
+                statusEl.style.color = '#c41e3a';
                 statusEl.title = 'DECAAI server connesso (decaiv2)';
                 modelNameEl.textContent = 'decaiv2 integrato';
-                modelNameEl.style.color = '#4ecca3';
+                modelNameEl.style.color = '#c41e3a';
                 if (decaiPrevLLMState !== 'decaai') {
                     decaiPrevLLMState = 'decaai';
-                    addDecAIMsg('<b style="color:#4ecca3;">decaiv2 integrato</b> — parla pure in linguaggio naturale!', false);
+                    addDecAIMsg('<b style="color:#c41e3a;">decaiv2 integrato</b> — parla pure in linguaggio naturale!', false);
                 }
             } else {
                 statusEl.style.color = '#ff6b6b';
@@ -4008,12 +4009,12 @@ CATALOGO PRODOTTI DECA 2025:
             if (btnPrevEditor) {
                 btnPrevEditor.addEventListener('mouseenter', () => {
                     btnPrevEditor.style.transform = 'translateY(-2px) scale(1.03)';
-                    btnPrevEditor.style.boxShadow = '0 10px 28px rgba(78,204,163,0.55), 0 4px 14px rgba(59,130,246,0.45)';
+                    btnPrevEditor.style.boxShadow = '0 10px 28px rgba(196,30,58,0.55), 0 4px 14px rgba(0,74,153,0.45)';
                     btnPrevEditor.style.filter = 'brightness(1.05)';
                 });
                 btnPrevEditor.addEventListener('mouseleave', () => {
                     btnPrevEditor.style.transform = '';
-                    btnPrevEditor.style.boxShadow = '0 6px 20px rgba(78,204,163,0.45), 0 2px 8px rgba(59,130,246,0.35)';
+                    btnPrevEditor.style.boxShadow = '0 6px 20px rgba(196,30,58,0.45), 0 2px 8px rgba(0,74,153,0.35)';
                     btnPrevEditor.style.filter = '';
                 });
                 btnPrevEditor.addEventListener('click', () => handlePreventivoIntent());
@@ -4704,7 +4705,7 @@ CATALOGO PRODOTTI DECA 2025:
                             const thumbGlb = thumbItem ? 'db/' + thumbItem.glb : '';
                             html += `<div class="decai-wizard-option" data-value="${sub}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;">`;
                             if (thumbGlb) html += `<model-viewer src="${thumbGlb}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
-                            html += `<div><b style="color:#4ecca3;">Serie ${sub}`;
+                            html += `<div><b style="color:#c41e3a;">Serie ${sub}`;
                             if (desc) html += ` — ${desc}`;
                             html += `</b></div></div>`;
                         }
@@ -4755,7 +4756,7 @@ CATALOGO PRODOTTI DECA 2025:
                     const thumbSrc = vlExample ? 'db/' + vlExample.glb : '';
                     html += `<div class="decai-wizard-option" data-value="${vl}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;">`;
                     if (thumbSrc) html += `<model-viewer src="${thumbSrc}" auto-rotate style="width:80px;height:80px;min-width:80px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
-                    html += `<div><b style="color:#4ecca3;">${vl}`;
+                    html += `<div><b style="color:#c41e3a;">${vl}`;
                     if (desc) html += ` — ${desc}`;
                     html += `</b></div></div>`;
                 });
@@ -4807,7 +4808,7 @@ CATALOGO PRODOTTI DECA 2025:
                     if (thumbGlb) {
                         html += `<model-viewer src="${thumbGlb}" auto-rotate camera-controls style="width:100px;height:100px;min-width:100px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
                     }
-                    html += `<div><b style="color:#4ecca3;">Serie ${sub}`;
+                    html += `<div><b style="color:#c41e3a;">Serie ${sub}`;
                     if (desc) html += ` — ${desc}`;
                     html += `</b></div></div>`;
                 }
@@ -4950,7 +4951,7 @@ CATALOGO PRODOTTI DECA 2025:
                         const thumbSrc = lenMatch ? 'db/' + lenMatch.glb : '';
                         html += `<div class="decai-wizard-option" data-value="${l}" style="display:flex;align-items:center;gap:10px;padding:6px 8px;margin:3px 0;background:var(--bg-elevated);border-radius:8px;cursor:pointer;">`;
                         if (thumbSrc) html += `<model-viewer src="${thumbSrc}" auto-rotate style="width:60px;height:60px;min-width:60px;background:transparent;--poster-color:transparent;" interaction-prompt="none" environment-image="neutral"></model-viewer>`;
-                        html += `<b style="color:#4ecca3;">${l} mm</b></div>`;
+                        html += `<b style="color:#c41e3a;">${l} mm</b></div>`;
                     });
                     html += `<br>Oppure scrivi la lunghezza in mm.`;
 
@@ -6333,7 +6334,7 @@ CATALOGO PRODOTTI DECA 2025:
                 const distinteMatches = Object.keys(distinteIndex).filter(k => k.includes(fkUpper) || fkUpper.includes(k));
                 if (distinteMatches.length > 0) {
                     productActions += distinteMatches.map(k =>
-                        `<a href="db/${distinteIndex[k]}" download class="decai-action-btn" style="display:inline-block;margin:2px 4px 2px 0;padding:3px 8px;background:#1a3a4e;border:1px solid #4ecca3;border-radius:4px;color:#4ecca3;text-decoration:none;font-size:11px;" title="Scarica distinta XLS">&#128196; Distinta ${k.length > 40 ? k.substring(0,40)+'...' : k}</a>`
+                        `<a href="db/${distinteIndex[k]}" download class="decai-action-btn" style="display:inline-block;margin:2px 4px 2px 0;padding:3px 8px;background:rgba(196,30,58,0.08);border:1px solid #c41e3a;border-radius:4px;color:#c41e3a;text-decoration:none;font-size:11px;" title="Scarica distinta XLS">&#128196; Distinta ${k.length > 40 ? k.substring(0,40)+'...' : k}</a>`
                     ).join('');
                 }
             }
@@ -6364,9 +6365,9 @@ CATALOGO PRODOTTI DECA 2025:
                     if (matchKey) { drawCode = matchKey; drawPath = 'db/' + drawingsIndex[matchKey]; }
                 }
                 const drawCell = drawCode && drawPath
-                    ? `<span class="decai-drawing-row" data-path="${drawPath}" data-code="${drawCode}" style="color:#4ecca3;cursor:pointer;text-decoration:underline;" title="Apri disegno PDF">${drawCode}</span>`
+                    ? `<span class="decai-drawing-row" data-path="${drawPath}" data-code="${drawCode}" style="color:#c41e3a;cursor:pointer;text-decoration:underline;" title="Apri disegno PDF">${drawCode}</span>`
                     : (drawCode || '');
-                html += `<tr class="decai-part-row" data-code="${p.code}" data-desc="${p.desc || ''}" style="cursor:pointer;" title="Clicca per caricare questo componente"><td>${p.num}</td><td style="white-space:nowrap;color:#4ecca3">${p.code}</td><td style="white-space:nowrap;font-size:11px;">${drawCell}</td><td>${p.desc || ''}</td><td>${p.material || '-'}</td></tr>`;
+                html += `<tr class="decai-part-row" data-code="${p.code}" data-desc="${p.desc || ''}" style="cursor:pointer;" title="Clicca per caricare questo componente"><td>${p.num}</td><td style="white-space:nowrap;color:#c41e3a">${p.code}</td><td style="white-space:nowrap;font-size:11px;">${drawCell}</td><td>${p.desc || ''}</td><td>${p.material || '-'}</td></tr>`;
             });
             html += '</table>';
             html += '<div style="font-size:10px;color:#888;margin-top:4px;">Clicca su una riga per caricare il componente</div>';
@@ -6458,7 +6459,7 @@ CATALOGO PRODOTTI DECA 2025:
             // 1) Corrispondenza esatta
             if (drawingsIndex[q]) {
                 openDrawingViewer('db/' + drawingsIndex[q], q);
-                return `<b>Disegno trovato:</b> <span style="color:#4ecca3">${q}</span><br>
+                return `<b>Disegno trovato:</b> <span style="color:#c41e3a">${q}</span><br>
                     <span style="font-size:11px;color:#888;">PDF aperto nel pannello laterale</span>`;
             }
 
@@ -6493,7 +6494,7 @@ CATALOGO PRODOTTI DECA 2025:
 
             if (matches.length === 1) {
                 openDrawingViewer('db/' + matches[0].file, matches[0].name);
-                return `<b>Disegno trovato:</b> <span style="color:#4ecca3">${matches[0].name}</span><br>
+                return `<b>Disegno trovato:</b> <span style="color:#c41e3a">${matches[0].name}</span><br>
                     <span style="font-size:11px;color:#888;">PDF aperto nel pannello laterale</span>`;
             }
 
@@ -6501,7 +6502,7 @@ CATALOGO PRODOTTI DECA 2025:
             html += '<table><tr><th>Nome Disegno</th></tr>';
             const shown = matches.slice(0, 20);
             shown.forEach(d => {
-                html += `<tr class="decai-drawing-row" data-path="db/${d.file}" data-code="${d.name}" style="cursor:pointer;" title="Clicca per aprire il PDF"><td style="color:#4ecca3">${d.name}</td></tr>`;
+                html += `<tr class="decai-drawing-row" data-path="db/${d.file}" data-code="${d.name}" style="cursor:pointer;" title="Clicca per aprire il PDF"><td style="color:#c41e3a">${d.name}</td></tr>`;
             });
             html += '</table>';
             if (matches.length > 20) {
@@ -6578,12 +6579,12 @@ CATALOGO PRODOTTI DECA 2025:
             results.forEach(r => {
                 let actions = '';
                 if (r.drawingKey && drawingsIndex[r.drawingKey]) {
-                    actions += `<span class="decai-drawing-row" data-path="db/${drawingsIndex[r.drawingKey]}" data-code="${r.drawingKey}" style="color:#4ecca3;cursor:pointer;text-decoration:underline;margin-right:6px;" title="Apri disegno PDF">Disegno</span>`;
+                    actions += `<span class="decai-drawing-row" data-path="db/${drawingsIndex[r.drawingKey]}" data-code="${r.drawingKey}" style="color:#c41e3a;cursor:pointer;text-decoration:underline;margin-right:6px;" title="Apri disegno PDF">Disegno</span>`;
                 }
                 if (r.distinteKey && distinteIndex[r.distinteKey]) {
                     actions += `<span class="decai-distinta-link" data-file="db/${distinteIndex[r.distinteKey]}" data-name="${r.distinteKey}" style="color:#e8a838;cursor:pointer;text-decoration:underline;" title="Scarica distinta XLS">Distinta</span>`;
                 }
-                html += `<tr><td style="color:#4ecca3;white-space:nowrap;">${r.part.code}</td><td>${r.part.desc || ''}${r.part.descExtra ? ' <span style=\"color:#888;\">' + r.part.descExtra + '</span>' : ''}</td><td style="font-size:10px;color:#888;">${r.product}</td><td style="white-space:nowrap;">${actions || '-'}</td></tr>`;
+                html += `<tr><td style="color:#c41e3a;white-space:nowrap;">${r.part.code}</td><td>${r.part.desc || ''}${r.part.descExtra ? ' <span style=\"color:#888;\">' + r.part.descExtra + '</span>' : ''}</td><td style="font-size:10px;color:#888;">${r.product}</td><td style="white-space:nowrap;">${actions || '-'}</td></tr>`;
             });
             html += '</table>';
             html += '<div style="font-size:10px;color:#888;margin-top:4px;">Clicca su "Disegno" per aprire il PDF o "Distinta" per scaricare la BOM</div>';
@@ -6647,9 +6648,9 @@ CATALOGO PRODOTTI DECA 2025:
             // Corrispondenza esatta
             if (distinteIndex[q]) {
                 window.open('db/' + distinteIndex[q], '_blank');
-                return `<b>Distinta trovata:</b> <span style="color:#4ecca3">${q}</span><br>
+                return `<b>Distinta trovata:</b> <span style="color:#c41e3a">${q}</span><br>
                     <span style="font-size:11px;color:#888;">File aperto in una nuova scheda</span><br>
-                    <a href="db/${distinteIndex[q]}" download style="color:#4ecca3;font-size:12px;">Scarica ${distinteIndex[q]}</a>`;
+                    <a href="db/${distinteIndex[q]}" download style="color:#c41e3a;font-size:12px;">Scarica ${distinteIndex[q]}</a>`;
             }
 
             // Cerca parziale
@@ -6666,16 +6667,16 @@ CATALOGO PRODOTTI DECA 2025:
             if (matches.length === 1) {
                 const d = matches[0];
                 window.open('db/' + d.file, '_blank');
-                return `<b>Distinta trovata:</b> <span style="color:#4ecca3">${d.name}</span><br>
+                return `<b>Distinta trovata:</b> <span style="color:#c41e3a">${d.name}</span><br>
                     <span style="font-size:11px;color:#888;">File aperto in una nuova scheda</span><br>
-                    <a href="db/${d.file}" download style="color:#4ecca3;font-size:12px;">Scarica ${d.file}</a>`;
+                    <a href="db/${d.file}" download style="color:#c41e3a;font-size:12px;">Scarica ${d.file}</a>`;
             }
 
             let html = `<b>${matches.length}</b> distinte trovate per "<b>${query}</b>":<br>`;
             html += '<table><tr><th>Nome</th><th>Azione</th></tr>';
             const shown = matches.slice(0, 20);
             shown.forEach(d => {
-                html += `<tr class="decai-distinta-row" data-file="${d.file}" data-name="${d.name}" style="cursor:pointer;" title="Clicca per scaricare"><td style="color:#4ecca3">${d.name}</td><td><a href="db/${d.file}" download style="color:#4ecca3;font-size:11px;">Scarica</a></td></tr>`;
+                html += `<tr class="decai-distinta-row" data-file="${d.file}" data-name="${d.name}" style="cursor:pointer;" title="Clicca per scaricare"><td style="color:#c41e3a">${d.name}</td><td><a href="db/${d.file}" download style="color:#c41e3a;font-size:11px;">Scarica</a></td></tr>`;
             });
             html += '</table>';
             if (matches.length > 20) {
